@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-06",
+  "purpose": "显式描述自然语言公式查询中的输入、输出及依赖边；不包含 benchmark 题目或题目 ID。",
+  "dependencies": [
+    {
+      "id": "formula.player.supply_remaining",
+      "expression": "player.food_cap - player.food_used = player.supply_remaining",
+      "inputs": [
+        "player.food_cap",
+        "player.food_used"
+      ],
+      "outputs": [
+        "player.supply_remaining"
+      ],
+      "all_groups": [
+        [
+          "补给",
+          "人口",
+          "food"
+        ],
+        [
+          "剩余",
+          "可用",
+          "还能",
+          "余量",
+          "减去",
+          "差值"
+        ]
+      ],
+      "variable_ids": [
+        "player.food_cap",
+        "player.food_used",
+        "player.supply_remaining"
+      ]
+    },
+    {
+      "id": "formula.raw.health_ratio",
+      "expression": "raw health ratio is the encoded normalized health field used by STORM",
+      "inputs": [
+        "raw_unit.health"
+      ],
+      "outputs": [
+        "raw_unit.health_ratio"
+      ],
+      "all_groups": [
+        [
+          "生命",
+          "血量",
+          "health"
+        ],
+        [
+          "比例",
+          "归一",
+          "ratio"
+        ],
+        [
+          "绝对量",
+          "接口值",
+          "输入",
+          "计算",
+          "公式",
+          "如何对应",
+          "同时返回"
+        ]
+      ],
+      "any_terms": [
+        "raw",
+        "rawunit",
+        "原始观测",
+        "绝对量",
+        "绝对值"
+      ],
+      "variable_ids": [
+        "raw_unit.health",
+        "raw_unit.health_ratio"
+      ]
+    },
+    {
+      "id": "formula.raw.shield_ratio",
+      "expression": "raw shield ratio is the encoded normalized shield field used by STORM",
+      "inputs": [
+        "raw_unit.shield"
+      ],
+      "outputs": [
+        "raw_unit.shield_ratio"
+      ],
+      "all_groups": [
+        [
+          "护盾",
+          "盾值",
+          "shield"
+        ],
+        [
+          "比例",
+          "归一",
+          "ratio"
+        ],
+        [
+          "绝对量",
+          "接口值",
+          "输入",
+          "计算",
+          "公式",
+          "如何对应",
+          "同时返回"
+        ]
+      ],
+      "any_terms": [
+        "raw",
+        "rawunit",
+        "原始观测",
+        "绝对量",
+        "绝对值"
+      ],
+      "variable_ids": [
+        "raw_unit.shield",
+        "raw_unit.shield_ratio"
+      ]
+    },
+    {
+      "id": "formula.tactical.force_ratio",
+      "expression": "friendly_count and enemy_count are the operands of force_ratio",
+      "inputs": [
+        "derived.tactical.friendly_count",
+        "derived.tactical.enemy_count"
+      ],
+      "outputs": [
+        "derived.tactical.force_ratio"
+      ],
+      "all_groups": [
+        [
+          "兵力比",
+          "数量比",
+          "force ratio",
+          "双方数量"
+        ],
+        [
+          "我方",
+          "友方",
+          "friendly"
+        ],
+        [
+          "敌方",
+          "enemy"
+        ],
+        [
+          "构成",
+          "组成",
+          "输入",
+          "公式",
+          "计算"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_count",
+        "derived.tactical.enemy_count",
+        "derived.tactical.force_ratio"
+      ]
+    },
+    {
+      "id": "formula.metric.avg_tokens_per_decision",
+      "expression": "metric.llm.total_tokens / metric.llm.decision_calls = metric.llm.avg_tokens_per_decision",
+      "inputs": [
+        "metric.llm.total_tokens",
+        "metric.llm.decision_calls"
+      ],
+      "outputs": [
+        "metric.llm.avg_tokens_per_decision"
+      ],
+      "all_groups": [
+        [
+          "平均 token",
+          "平均token",
+          "每次平均",
+          "avg tokens"
+        ],
+        [
+          "决策",
+          "decision"
+        ],
+        [
+          "总 token",
+          "总token",
+          "除以",
+          "构成",
+          "解释",
+          "输入"
+        ]
+      ],
+      "variable_ids": [
+        "metric.llm.total_tokens",
+        "metric.llm.decision_calls",
+        "metric.llm.avg_tokens_per_decision"
+      ]
+    }
+  ]
+}

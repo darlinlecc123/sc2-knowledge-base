@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this knowledge base, please cite this release and the STORM project."
+title: "STORM PySC2 Raw API Variable Knowledge Base"
+type: software
+version: 0.1.0
+date-released: 2026-09-07
+authors:
+  - name: "STORM project contributors"
+abstract: >-
+  A source-grounded knowledge base for the PySC2 Raw API variables and directly
+  derived quantities used by the current STORM tactical-agent pipeline.
+keywords:
+  - StarCraft II
+  - PySC2
+  - Raw API
+  - knowledge base
+  - LLM agent
+repository-code: "https://github.com/darlinlecc123/sc2-knowledge-base"
+license: "Apache-2.0"

@@ -1,0 +1,199 @@
+schema_version: "1.0"
+scope_id: "storm-sc2kb-v1-raw"
+name_zh: "STORM PySC2 Raw API 变量知识库第一版"
+version: "0.1.0"
+reviewed_at: "2026-09-03"
+repository: "storm111"
+status: "scope_defined_static_only"
+runtime_verification:
+  sc2_executed: false
+  external_llm_called: false
+  unit_tests_executed: false
+  note: "本步骤仅审查当前源码、配置、测试定义和已有实验产物。"
+objective:
+  - "根据自然语言定位当前 STORM 中的对应变量。"
+  - "给出物理或业务含义、接口形式、源码位置、转换过程、限制和证据。"
+  - "支持论文写作、代码开发、LLM Agent 检索和自动化评测。"
+core_pipeline:
+  - "sc2env_config"
+  - "timestep_raw_observation"
+  - "raw_unit_and_player"
+  - "tbox"
+  - "abox"
+  - "derived_tactical_state"
+  - "llm_action_schema"
+  - "response_parser"
+  - "pysc2_raw_function_call"
+  - "next_observation"
+swm_pipeline:
+  enabled_in_current_design: true
+  stages:
+    - "candidate_actions"
+    - "current_abox"
+    - "swm_prediction"
+    - "llm_reevaluation"
+    - "final_actions"
+    - "trajectory_and_prediction_error"
+variable_admission_rules:
+  include_if:
+    - "当前代码从 PySC2 TimeStep 或 observation 读取。"
+    - "当前代码将其转换或写入 RawUnit、ABox、关系图或 Prompt。"
+    - "当前 TBox 属性或关系被加载、查询、实例化或序列化。"
+    - "当前代码直接计算并供决策、校验、执行或实验统计使用。"
+    - "当前 LLM/SWM 接口字段被解析、校验、归一化或消费。"
+    - "当前代码将其映射为 PySC2 Raw FunctionCall 函数或参数。"
+    - "当前实验脚本实际计算、聚合或写出该指标。"
+  exclude_if_only:
+    - "只存在于完整 PySC2 API，但当前 STORM 未读取。"
+    - "只存在于 README、注释或旧说明文档。"
+    - "只属于一般 StarCraft II 背景知识。"
+    - "只存在于无法追踪生成逻辑的历史结果列。"
+    - "只来自分析者常识推断。"
+record_granularity:
+  separate_raw_and_transformed: true
+  separate_same_name_different_semantics: true
+  separate_container_and_consumed_fields: true
+  declared_but_unused_status: "declared_not_effective"
+included_domains:
+  - id: "environment_config"
+    priority: "P0"
+    boundary: "当前入口和实验脚本实际传给 SC2Env 或 RawAgent 的配置。"
+    examples: ["map_name", "use_raw_units", "use_raw_actions", "raw_resolution", "step_mul", "game_steps_per_episode", "visualize", "decision_interval"]
+    evidence: ["main.py", "examples/llm_agent_example.py", "examples/ablation_experiment.py", "examples/swm_experiment.py"]
+  - id: "timestep_player_score"
+    priority: "P0"
+    boundary: "当前代码读取的 TimeStep 状态、player 容器/实际索引、score_cumulative 和派生 reward。"
+    examples: ["raw_units", "player", "score_cumulative", "reward", "is_last"]
+    evidence: ["agents/raw_agent.py", "main.py"]
+  - id: "raw_unit"
+    priority: "P0"
+    boundary: "仅 RawAgent.parse_raw_units 实际解析的字段。"
+    fields: ["tag", "unit_type", "alliance", "x", "y", "health", "health_ratio", "shield", "shield_ratio", "weapon_cooldown"]
+    evidence: ["agents/raw_agent.py::RawAgent.parse_raw_units"]
+  - id: "tbox_static"
+    priority: "P0"
+    boundary: "当前 marine_ontology 节点、边及被 loader/bridge/prompt 使用的静态属性和关系。"
+    evidence: ["ontology/data/marine_ontology.py", "ontology/loader.py", "ontology/builder.py", "ontology/bridge.py"]
+  - id: "abox_dynamic"
+    priority: "P0"
+    boundary: "BattlefieldGraph 中实例节点、tag 映射、静态属性副本、动态状态、关系和未知实体 fallback。"
+    fields: ["node_type", "tag", "unit_type_id", "unit_class", "alliance", "is_unknown", "race", "category", "attack_damage", "attack_range", "attack_speed", "movement_speed", "hp", "hp_ratio", "armor", "armor_ratio", "position", "weapon_cooldown", "description"]
+    evidence: ["ontology/bridge.py::BattlefieldGraph"]
+  - id: "derived_tactical_state"
+    priority: "P0"
+    boundary: "当前代码从 ABox/player 直接计算的资源、计数、均值、质心、距离、阈值分类、冷却比例和序列化表示。"
+    examples: ["Force_Ratio", "Health_Status", "Critical_Units", "Formation_Distance", "Engagement_Type", "Fire_Readiness"]
+    evidence: ["ontology/bridge.py::BattlefieldGraph.generate_tactical_summary", "ontology/bridge.py::BattlefieldGraph.serialize_for_llm"]
+  - id: "action_schema_and_scheduling"
+    priority: "P0"
+    boundary: "当前 Prompt、Parser 和 RawAgent 调度中出现并可追踪的动作字段。"
+    fields: ["reasoning", "plan", "actions", "action", "units", "target_type", "target", "delay_steps", "subtype"]
+    actions: ["MOVE", "ATTACK", "BUILD", "TRAIN"]
+    target_types: ["unit", "pos", "none"]
+    evidence: ["ontology/prompt_template.py", "agents/response_parser.py", "agents/raw_agent.py"]
+  - id: "pysc2_function_call"
+    priority: "P0"
+    boundary: "ActionExecutor 实际构造的 Raw FunctionCall、参数、资源/位置校验和执行统计。"
+    evidence: ["agents/action_executor.py::ActionExecutor"]
+  - id: "swm"
+    priority: "P1"
+    boundary: "SWM 输入、预测输出、再评估、轨迹、误差和统计；必须标记为预测层而非 PySC2 真值。"
+    examples: ["prediction_steps", "predicted_unit_states", "predicted_relations", "confidence", "health_rmse", "position_rmse", "relation_accuracy", "overall_error"]
+    evidence: ["ontology/swm_predictor.py", "ontology/swm_trainer.py", "agents/raw_agent.py"]
+  - id: "experiment_metric"
+    priority: "P1"
+    boundary: "当前实验脚本实际计算、聚合或写出的指标与必要运行元数据。"
+    examples: ["avg_score", "avg_decisions_per_episode", "avg_prompt_tokens_per_decision", "avg_total_tokens_per_decision", "avg_decision_time_s", "action_failure_rate", "swm_prediction_success_rate"]
+    evidence: ["examples/ablation_experiment.py", "examples/swm_experiment.py", "examples/ood_matrix_experiment.py", "examples/adaptive_ontology_experiment.py", "data/record"]
+partially_included_domains:
+  - id: "heuristic_and_rl_baselines"
+    include: "共享 Raw API 输入、动作输出和比较实验最终指标。"
+    exclude: "神经网络内部权重、梯度、replay 全部张量和完整训练超参数。"
+    evidence: ["agents/heuristic_agent.py", "agents/rl_agent.py", "examples/ood_baseline_heuristic.py", "examples/ood_baseline_rl.py"]
+  - id: "unknown_ontology_extension"
+    include: "未知实体 fallback、unknown_units.jsonl 字段及其对 ABox 的影响。"
+    exclude: "LLM 自动生成 TBox patch 的完整知识生成工作流。"
+    evidence: ["ontology/bridge.py", "ontology/auto_extender.py", "tests/test_unknown_unit_fallback.py", "tests/test_auto_extender.py"]
+excluded_domains:
+  - id: "complete_pysc2_api"
+    reason: "当前 STORM 未读取全部 observation 或 RawUnit 字段。"
+  - id: "feature_layer_rgb"
+    reason: "当前主链使用 raw units 和 raw actions。"
+  - id: "complete_sc2_encyclopedia"
+    reason: "超出当前 TBox 和代码消费范围。"
+  - id: "engine_hidden_truth"
+    reason: "当前 PySC2 observation 未直接提供。"
+  - id: "pure_tactical_guides"
+    reason: "不是变量接口知识。"
+  - id: "all_client_parameters"
+    reason: "只纳入当前代码配置或实际消费的参数。"
+  - id: "rl_internal_training_state"
+    reason: "属于独立基线扩展，不是第一版核心 Raw-to-LLM 链。"
+  - id: "plot_style_parameters"
+    reason: "不影响环境、Agent 接口或指标含义。"
+  - id: "documentation_only_unimplemented_fields"
+    reason: "低优先级文档不能替代代码使用证据。"
+fact_statuses:
+  - "code_reality"
+  - "runtime_observation"
+  - "design_intent"
+  - "derived_runtime"
+  - "needs_verification"
+evidence_levels:
+  E1:
+    name: "current_executable_code"
+    description: "当前源码中的真实读写和控制流。"
+  E2:
+    name: "current_test_or_reproducible_run"
+    description: "当前测试或可复现运行结果。"
+  E3:
+    name: "current_schema_config_static_data"
+    description: "当前配置、Schema 和静态本体数据。"
+  E4:
+    name: "committed_experiment_artifact"
+    description: "历史或当前实验 CSV/JSON，只证明对应运行产物。"
+  E5:
+    name: "repository_documentation"
+    description: "README、注释和用户说明文档，用于设计意图和候选术语。"
+  E6:
+    name: "external_official_reference"
+    description: "外部官方 PySC2/SC2 资料，需要版本核验。"
+evidence_policy:
+  minimum_for_core_variable: "E1"
+  conflict_resolution: "低等级来源与当前代码冲突时，保留 design_intent 与 code_reality 两条断言，以 E1 为当前实现依据。"
+  line_number_policy: "记录文件和 symbol；只有稳定获得时才附行号，不伪造精确行号。"
+known_boundary_notes:
+  - id: "rawunit_doc_mismatch"
+    note: "parse_raw_units 文档提到 health_max，但当前返回字典没有该字段。"
+  - id: "abox_armor_from_shield"
+    note: "当前 ABox 动态 armor/armor_ratio 来自 RawUnit shield/shield_ratio。"
+  - id: "unknown_static_vs_dynamic_hp"
+    note: "未知单位有静态占位 hp，但 ABox 动态 hp 使用当前 health。"
+  - id: "parser_effective_constraints"
+    note: "坐标、未知动作、priority 和主动作 confidence 的约束强度需在步骤 09 审计。"
+  - id: "build_train_dual_forms"
+    note: "BUILD/TRAIN 存在基础动作和带 subtype 的富动作形式。"
+  - id: "function_id_versioning"
+    note: "Function ID 属于当前实现映射，需要依赖版本证据。"
+  - id: "swm_not_ground_truth"
+    note: "SWM 预测量必须与环境观测真值分开。"
+  - id: "historical_result_drift"
+    note: "历史实验列必须回指生成脚本，不默认代表当前代码。"
+  - id: "git_commit_unavailable"
+    note: "当前目录无法通过常规 git status 确认为有效工作树，未记录 commit hash。"
+acceptance_criteria:
+  - "每个正式变量有稳定 ID、规范名、中文解释和来源层级。"
+  - "每个核心变量至少有一个当前源码路径和 symbol 证据。"
+  - "接口类型、形状、单位、范围或未知状态明确。"
+  - "原始、静态、动态、派生、动作、预测和指标层不混淆。"
+  - "转换、阈值、归一化和聚合公式可追踪。"
+  - "design_intent 与 code_reality 分开。"
+  - "已知问题能链接到受影响变量。"
+  - "支持自然语言、代码名、类别和源码路径检索。"
+  - "存在标准问题集和离线数据质量测试。"
+  - "未执行的 SC2 或模型测试不标记为 runtime_verified。"
+next_step:
+  id: "02_build_source_registry"
+  outputs:
+    - "knowledge/manifests/source_registry.yaml"
+    - "knowledge/docs/02_source_registry.md"

@@ -1,0 +1,1595 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema: knowledge/schemas/variable.schema.json
+schema_version: 1.0.0
+generated_at: '2026-09-03'
+records:
+- schema_version: 1.0.0
+  id: metric.action.decision_failure_rate
+  canonical_name: decision_failure_rate
+  names:
+    zh: 决策动作失败率
+    en: Decision Action Failure Rate
+    code: decision_failure_rate
+  category: experiment_metric
+  aliases:
+  - 决策动作失败率
+  - Decision Action Failure Rate
+  - decision_failure_rate
+  definition: 当前代码计算或聚合的决策动作失败率。
+  intuitive_explanation: 当前代码计算或聚合的决策动作失败率。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: '1'
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.action.decision_failure_rate
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/ablation_experiment.py
+      symbol: run_variant
+      line_start: 146
+      line_end: 146
+    extraction_code:
+    - decision_failure_rate = float
+    transformation_formula:
+    - failure_stats.action_failure_rate
+  consumers:
+  - name: STORM 当前实现
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      decision_failure_rate: 按公式得到
+    explanation: 当前代码计算或聚合的决策动作失败率。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的决策动作失败率。
+    status: code_reality
+    evidence_ids:
+    - metric-action-decision-failure-rate-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-action-decision-failure-rate-code
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    line_start: 146
+    line_end: 146
+    evidence_type: E1
+    claim: 当前代码计算或聚合的决策动作失败率。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.action.delayed_failure_rate
+  canonical_name: delayed_failure_rate
+  names:
+    zh: 延迟动作失败率
+    en: Delayed Action Failure Rate
+    code: delayed_failure_rate
+  category: experiment_metric
+  aliases:
+  - 延迟动作失败率
+  - Delayed Action Failure Rate
+  - delayed_failure_rate
+  definition: 当前代码计算或聚合的延迟动作失败率。
+  intuitive_explanation: 当前代码计算或聚合的延迟动作失败率。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: '1'
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.action.delayed_failure_rate
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/ablation_experiment.py
+      symbol: run_variant
+      line_start: 147
+      line_end: 147
+    extraction_code:
+    - delayed_failure_rate = float
+    transformation_formula:
+    - failure_stats.delayed_failure_rate
+  consumers:
+  - name: STORM 当前实现
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      delayed_failure_rate: 按公式得到
+    explanation: 当前代码计算或聚合的延迟动作失败率。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的延迟动作失败率。
+    status: code_reality
+    evidence_ids:
+    - metric-action-delayed-failure-rate-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-action-delayed-failure-rate-code
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    line_start: 147
+    line_end: 147
+    evidence_type: E1
+    claim: 当前代码计算或聚合的延迟动作失败率。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.action.failure_rate
+  canonical_name: action_failure_rate
+  names:
+    zh: 动作失败率
+    en: Action Failure Rate
+    code: action_failure_rate
+  category: experiment_metric
+  aliases:
+  - 动作失败率
+  - Action Failure Rate
+  - action_failure_rate
+  definition: 当前代码计算或聚合的动作失败率。
+  intuitive_explanation: 当前代码计算或聚合的动作失败率。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: '1'
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.action.failure_rate
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/ablation_experiment.py
+      symbol: run_variant
+      line_start: 150
+      line_end: 150
+    extraction_code:
+    - action_failure_rate_list.append
+    transformation_formula:
+    - min(1,decision_failure_rate+delayed_failure_rate)
+  consumers:
+  - name: STORM 当前实现
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      action_failure_rate: 按公式得到
+    explanation: 当前代码计算或聚合的动作失败率。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的动作失败率。
+    status: code_reality
+    evidence_ids:
+    - metric-action-failure-rate-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-action-failure-rate-code
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    line_start: 150
+    line_end: 150
+    evidence_type: E1
+    claim: 当前代码计算或聚合的动作失败率。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.episode.final_score
+  canonical_name: final_score
+  names:
+    zh: 回合最终得分
+    en: Episode Final Score
+    code: final_score
+  category: experiment_metric
+  aliases:
+  - 回合最终得分
+  - Episode Final Score
+  - final_score
+  definition: 当前代码计算或聚合的回合最终得分。
+  intuitive_explanation: 当前代码计算或聚合的回合最终得分。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.episode.final_score
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/ablation_experiment.py
+      symbol: run_variant
+      line_start: 133
+      line_end: 133
+    extraction_code:
+    - final_score = float(score_cumulative[0])
+    transformation_formula:
+    - 终止步 score_cumulative[0]
+  consumers:
+  - name: STORM 当前实现
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      final_score: 按公式得到
+    explanation: 当前代码计算或聚合的回合最终得分。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的回合最终得分。
+    status: code_reality
+    evidence_ids:
+    - metric-episode-final-score-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-episode-final-score-code
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    line_start: 133
+    line_end: 133
+    evidence_type: E1
+    claim: 当前代码计算或聚合的回合最终得分。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.experiment.avg_score
+  canonical_name: avg_score
+  names:
+    zh: 平均回合得分
+    en: Average Episode Score
+    code: avg_score
+  category: experiment_metric
+  aliases:
+  - 平均回合得分
+  - Average Episode Score
+  - avg_score
+  definition: 当前代码计算或聚合的平均回合得分。
+  intuitive_explanation: 当前代码计算或聚合的平均回合得分。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.experiment.avg_score
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/ablation_experiment.py
+      symbol: run_variant
+      line_start: 178
+      line_end: 178
+    extraction_code:
+    - avg_score = sum(score_list)
+    transformation_formula:
+    - sum(score_list)/len(score_list)
+  consumers:
+  - name: STORM 当前实现
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      avg_score: 按公式得到
+    explanation: 当前代码计算或聚合的平均回合得分。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的平均回合得分。
+    status: code_reality
+    evidence_ids:
+    - metric-experiment-avg-score-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-experiment-avg-score-code
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    line_start: 178
+    line_end: 178
+    evidence_type: E1
+    claim: 当前代码计算或聚合的平均回合得分。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.llm.avg_decision_time
+  canonical_name: avg_decision_time
+  names:
+    zh: 平均决策耗时
+    en: Average Decision Time
+    code: avg_decision_time
+  category: experiment_metric
+  aliases:
+  - 平均决策耗时
+  - Average Decision Time
+  - avg_decision_time
+  definition: 当前代码计算或聚合的平均决策耗时。
+  intuitive_explanation: 当前代码计算或聚合的平均决策耗时。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: second
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.llm.avg_decision_time
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.step
+      line_start: 321
+      line_end: 321
+    extraction_code:
+    - self.avg_decision_time = self.total_decision_time / self.decision_calls
+    transformation_formula:
+    - total_decision_time/decision_calls
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.step
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      avg_decision_time: 按公式得到
+    explanation: 当前代码计算或聚合的平均决策耗时。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的平均决策耗时。
+    status: code_reality
+    evidence_ids:
+    - metric-llm-avg-decision-time-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-llm-avg-decision-time-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.step
+    line_start: 321
+    line_end: 321
+    evidence_type: E1
+    claim: 当前代码计算或聚合的平均决策耗时。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.llm.avg_tokens_per_decision
+  canonical_name: avg_total_tokens_per_decision
+  names:
+    zh: 每决策平均 Token
+    en: Average Tokens per Decision
+    code: avg_total_tokens_per_decision
+  category: experiment_metric
+  aliases:
+  - 每决策平均 Token
+  - Average Tokens per Decision
+  - avg_total_tokens_per_decision
+  definition: 当前代码计算或聚合的每决策平均 Token。
+  intuitive_explanation: 当前代码计算或聚合的每决策平均 Token。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.llm.avg_tokens_per_decision
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/ablation_experiment.py
+      symbol: run_variant
+      line_start: 172
+      line_end: 172
+    extraction_code:
+    - avg_total_tokens_per_decision = total_tokens / total_decision_calls
+    transformation_formula:
+    - total_tokens/decision_calls；零调用为 0
+  consumers:
+  - name: STORM 当前实现
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      avg_total_tokens_per_decision: 按公式得到
+    explanation: 当前代码计算或聚合的每决策平均 Token。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的每决策平均 Token。
+    status: code_reality
+    evidence_ids:
+    - metric-llm-avg-tokens-per-decision-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-llm-avg-tokens-per-decision-code
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    line_start: 172
+    line_end: 172
+    evidence_type: E1
+    claim: 当前代码计算或聚合的每决策平均 Token。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.llm.completion_tokens
+  canonical_name: completion_tokens
+  names:
+    zh: 补全 Token 数
+    en: Completion Tokens
+    code: completion_tokens
+  category: experiment_metric
+  aliases:
+  - 补全 Token 数
+  - Completion Tokens
+  - completion_tokens
+  definition: 当前代码计算或聚合的补全 Token 数。
+  intuitive_explanation: 当前代码计算或聚合的补全 Token 数。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.llm.completion_tokens
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/ablation_experiment.py
+      symbol: run_variant
+      line_start: 154
+      line_end: 154
+    extraction_code:
+    - total_completion_tokens +=
+    transformation_formula:
+    - 各决策 completion_tokens 求和
+  consumers:
+  - name: STORM 当前实现
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      completion_tokens: 按公式得到
+    explanation: 当前代码计算或聚合的补全 Token 数。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的补全 Token 数。
+    status: code_reality
+    evidence_ids:
+    - metric-llm-completion-tokens-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-llm-completion-tokens-code
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    line_start: 154
+    line_end: 154
+    evidence_type: E1
+    claim: 当前代码计算或聚合的补全 Token 数。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.llm.decision_calls
+  canonical_name: decision_calls
+  names:
+    zh: 决策调用次数
+    en: Decision Calls
+    code: decision_calls
+  category: experiment_metric
+  aliases:
+  - 决策调用次数
+  - Decision Calls
+  - decision_calls
+  definition: 当前代码计算或聚合的决策调用次数。
+  intuitive_explanation: 当前代码计算或聚合的决策调用次数。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.llm.decision_calls
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/ablation_experiment.py
+      symbol: run_variant
+      line_start: 156
+      line_end: 156
+    extraction_code:
+    - total_decision_calls +=
+    transformation_formula:
+    - 决策调用次数求和
+  consumers:
+  - name: STORM 当前实现
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      decision_calls: 按公式得到
+    explanation: 当前代码计算或聚合的决策调用次数。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的决策调用次数。
+    status: code_reality
+    evidence_ids:
+    - metric-llm-decision-calls-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-llm-decision-calls-code
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    line_start: 156
+    line_end: 156
+    evidence_type: E1
+    claim: 当前代码计算或聚合的决策调用次数。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.llm.prompt_tokens
+  canonical_name: prompt_tokens
+  names:
+    zh: 提示 Token 数
+    en: Prompt Tokens
+    code: prompt_tokens
+  category: experiment_metric
+  aliases:
+  - 提示 Token 数
+  - Prompt Tokens
+  - prompt_tokens
+  definition: 当前代码计算或聚合的提示 Token 数。
+  intuitive_explanation: 当前代码计算或聚合的提示 Token 数。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.llm.prompt_tokens
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/ablation_experiment.py
+      symbol: run_variant
+      line_start: 153
+      line_end: 153
+    extraction_code:
+    - total_prompt_tokens +=
+    transformation_formula:
+    - 各决策 prompt_tokens 求和
+  consumers:
+  - name: STORM 当前实现
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      prompt_tokens: 按公式得到
+    explanation: 当前代码计算或聚合的提示 Token 数。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的提示 Token 数。
+    status: code_reality
+    evidence_ids:
+    - metric-llm-prompt-tokens-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-llm-prompt-tokens-code
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    line_start: 153
+    line_end: 153
+    evidence_type: E1
+    claim: 当前代码计算或聚合的提示 Token 数。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.llm.total_tokens
+  canonical_name: total_tokens
+  names:
+    zh: 总 Token 数
+    en: Total Tokens
+    code: total_tokens
+  category: experiment_metric
+  aliases:
+  - 总 Token 数
+  - Total Tokens
+  - total_tokens
+  definition: 当前代码计算或聚合的总 Token 数。
+  intuitive_explanation: 当前代码计算或聚合的总 Token 数。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.llm.total_tokens
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/ablation_experiment.py
+      symbol: run_variant
+      line_start: 155
+      line_end: 155
+    extraction_code:
+    - total_tokens +=
+    transformation_formula:
+    - 各决策 total_tokens 求和
+  consumers:
+  - name: STORM 当前实现
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      total_tokens: 按公式得到
+    explanation: 当前代码计算或聚合的总 Token 数。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的总 Token 数。
+    status: code_reality
+    evidence_ids:
+    - metric-llm-total-tokens-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-llm-total-tokens-code
+    path: examples/ablation_experiment.py
+    symbol: run_variant
+    line_start: 155
+    line_end: 155
+    evidence_type: E1
+    claim: 当前代码计算或聚合的总 Token 数。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.swm.health_rmse
+  canonical_name: health_rmse
+  names:
+    zh: 生命预测均方根误差
+    en: Health RMSE
+    code: health_rmse
+  category: experiment_metric
+  aliases:
+  - 生命预测均方根误差
+  - Health RMSE
+  - health_rmse
+  definition: 当前代码计算或聚合的生命预测均方根误差。
+  intuitive_explanation: 当前代码计算或聚合的生命预测均方根误差。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.swm.health_rmse
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.compute_prediction_error
+      line_start: 288
+      line_end: 288
+    extraction_code:
+    - health_rmse = float
+    transformation_formula:
+    - sqrt(mean((pred_hp-actual_hp)^2))
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      health_rmse: 按公式得到
+    explanation: 当前代码计算或聚合的生命预测均方根误差。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的生命预测均方根误差。
+    status: code_reality
+    evidence_ids:
+    - metric-swm-health-rmse-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-swm-health-rmse-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.compute_prediction_error
+    line_start: 288
+    line_end: 288
+    evidence_type: E1
+    claim: 当前代码计算或聚合的生命预测均方根误差。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.swm.overall_error
+  canonical_name: overall_error
+  names:
+    zh: SWM 综合误差
+    en: SWM Overall Error
+    code: overall_error
+  category: experiment_metric
+  aliases:
+  - SWM 综合误差
+  - SWM Overall Error
+  - overall_error
+  definition: 当前代码计算或聚合的SWM 综合误差。
+  intuitive_explanation: 当前代码计算或聚合的SWM 综合误差。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.swm.overall_error
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.compute_prediction_error
+      line_start: 311
+      line_end: 311
+    extraction_code:
+    - overall = 0.4 * health_rmse
+    transformation_formula:
+    - 0.4*health_rmse+0.3*position_rmse+0.3*(1-relation_accuracy)
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      overall_error: 按公式得到
+    explanation: 当前代码计算或聚合的SWM 综合误差。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的SWM 综合误差。
+    status: code_reality
+    evidence_ids:
+    - metric-swm-overall-error-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-swm-overall-error-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.compute_prediction_error
+    line_start: 311
+    line_end: 311
+    evidence_type: E1
+    claim: 当前代码计算或聚合的SWM 综合误差。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.swm.position_rmse
+  canonical_name: position_rmse
+  names:
+    zh: 位置预测均方根误差
+    en: Position RMSE
+    code: position_rmse
+  category: experiment_metric
+  aliases:
+  - 位置预测均方根误差
+  - Position RMSE
+  - position_rmse
+  definition: 当前代码计算或聚合的位置预测均方根误差。
+  intuitive_explanation: 当前代码计算或聚合的位置预测均方根误差。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.swm.position_rmse
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.compute_prediction_error
+      line_start: 289
+      line_end: 289
+    extraction_code:
+    - position_rmse = float
+    transformation_formula:
+    - sqrt(mean(dx^2+dy^2))
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      position_rmse: 按公式得到
+    explanation: 当前代码计算或聚合的位置预测均方根误差。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的位置预测均方根误差。
+    status: code_reality
+    evidence_ids:
+    - metric-swm-position-rmse-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-swm-position-rmse-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.compute_prediction_error
+    line_start: 289
+    line_end: 289
+    evidence_type: E1
+    claim: 当前代码计算或聚合的位置预测均方根误差。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: metric.swm.relation_accuracy
+  canonical_name: relation_accuracy
+  names:
+    zh: 关系预测准确率
+    en: Relation Accuracy
+    code: relation_accuracy
+  category: experiment_metric
+  aliases:
+  - 关系预测准确率
+  - Relation Accuracy
+  - relation_accuracy
+  definition: 当前代码计算或聚合的关系预测准确率。
+  intuitive_explanation: 当前代码计算或聚合的关系预测准确率。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: '1'
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - metric.swm.relation_accuracy
+  provenance:
+    source_layer: experiment_aggregate
+    derivation_kind: aggregated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.compute_prediction_error
+      line_start: 309
+      line_end: 309
+    extraction_code:
+    - relation_accuracy = relation_correct / relation_total
+    transformation_formula:
+    - correct/total；total=0 时为 1
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_experiment
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      relation_accuracy: 按公式得到
+    explanation: 当前代码计算或聚合的关系预测准确率。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码计算或聚合的关系预测准确率。
+    status: code_reality
+    evidence_ids:
+    - metric-swm-relation-accuracy-code
+  limitations:
+  - 本步骤未重跑实验，只确认定义和计算代码；不能把历史数值当作本次结果。
+  known_issues: []
+  evidence:
+  - id: metric-swm-relation-accuracy-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.compute_prediction_error
+    line_start: 309
+    line_end: 309
+    evidence_type: E1
+    claim: 当前代码计算或聚合的关系预测准确率。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。

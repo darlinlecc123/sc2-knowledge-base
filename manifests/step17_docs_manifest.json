@@ -1,0 +1,95 @@
+{
+  "generated_at": "2026-09-07",
+  "generator": "knowledge/scripts/generate_step17_docs.py",
+  "inputs": [
+    {
+      "path": "knowledge/known_issues.yaml",
+      "sha256": "2f368e6968be121f9be0cd6f9ba4fe9bdf515d984392f384e5555516c332383e"
+    },
+    {
+      "path": "knowledge/relations/variable_relations.jsonl",
+      "sha256": "d0bfafbb92b92457aef3ceb8fbcec09761f1505926680198adfc0f1ebb1e9fac"
+    },
+    {
+      "path": "knowledge/retrieval/aliases.yaml",
+      "sha256": "2cb5e12249fe8d6bb0c896bcd13678d11d787fbc3ee6880a039fe55aae72b76d"
+    },
+    {
+      "path": "knowledge/taxonomy/categories.yaml",
+      "sha256": "6332269c3bd8366c0f6558e07026c4a654e4dc6e203bad068cddc8fb7ecdbc0e"
+    },
+    {
+      "path": "knowledge/taxonomy/source_layers.yaml",
+      "sha256": "b7f7adcd3b2694226802a797e99ab1ea62b24f73f1b6694858a8be7ca6609a75"
+    },
+    {
+      "path": "knowledge/variables/abox.yaml",
+      "sha256": "97e652f3692106441f3466c8099fc25e1215b4762dc55f6f4af9b4f55e049638"
+    },
+    {
+      "path": "knowledge/variables/actions.yaml",
+      "sha256": "46c63e6a8e1fcb73a13e7330fa51d44b0cbe0b56d562714a491fd92a7043e44f"
+    },
+    {
+      "path": "knowledge/variables/derived.yaml",
+      "sha256": "9cbc11c8ad2df97d40678bce1c165767fb2e66da5633a686ab64d60f0ef14017"
+    },
+    {
+      "path": "knowledge/variables/examples.yaml",
+      "sha256": "bbd49ddbd18962960882caa1b037ae81d139890354cbf428cf3f2c8fae74a453"
+    },
+    {
+      "path": "knowledge/variables/metrics.yaml",
+      "sha256": "087c6b646267d022a773a90eb33ed8691e90a824db3ce50dbcb10871e77279d2"
+    },
+    {
+      "path": "knowledge/variables/raw_api.yaml",
+      "sha256": "30bd5b76a58bc13dfc3ea6cd3573fb3ed2e432d102cc1983803f0e2a3fec7aba"
+    },
+    {
+      "path": "knowledge/variables/swm.yaml",
+      "sha256": "32aca8ea88faf8c80e3a6ebd6320fae067a779d316fbabf4fb767d0ace04a06c"
+    },
+    {
+      "path": "knowledge/variables/tbox.yaml",
+      "sha256": "d4f796ee1527f141a6e739769f6b39d9d81c6c415f879d8a06386e10f6894127"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 11498,
+      "path": "knowledge/docs/dataflow.md",
+      "sha256": "d20d94b99126c593f3a7b24b9f0c51de44951c0555e79453deb57f3bde8698c7"
+    },
+    {
+      "bytes": 6541,
+      "path": "knowledge/docs/glossary.md",
+      "sha256": "83a7a648dae6b033dc820964a0e680be1a7ab762784405f085492b45e08b1d0b"
+    },
+    {
+      "bytes": 4731,
+      "path": "knowledge/docs/index.md",
+      "sha256": "955e57d49e5daac4cd5f1319aab09c93c303bd64d0717699b0ed570da88810aa"
+    },
+    {
+      "bytes": 6465,
+      "path": "knowledge/docs/query_cookbook.md",
+      "sha256": "802e0a9ab77dff713c03df91dcf92d0e7fabb4f032633833189d4cd231a988b1"
+    },
+    {
+      "bytes": 261503,
+      "path": "knowledge/docs/variable_catalog.md",
+      "sha256": "dded3d8deb76b2624a29f94167ad59ad0888c44369cf7b977300c17cc2aeed61"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "scope": {
+    "external_model_called": false,
+    "formal_variable_count": 135,
+    "knowledge_base": "storm-sc2kb-v1-raw",
+    "known_issue_count": 11,
+    "relation_count": 1430,
+    "sc2_executed": false
+  },
+  "step": 17
+}

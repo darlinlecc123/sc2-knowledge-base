@@ -1,0 +1,3612 @@
+{
+  "rules": [
+    {
+      "all_groups": [
+        [
+          "类型",
+          "种类",
+          "枪兵",
+          "蟑螂"
+        ],
+        [
+          "编号",
+          "id",
+          "哪种"
+        ]
+      ],
+      "any_terms": [
+        "观测",
+        "raw",
+        "单位"
+      ],
+      "id": "raw-unit-type-identity",
+      "none_terms": [
+        "追踪",
+        "逐个",
+        "稳定编号",
+        "abox",
+        "实例节点"
+      ],
+      "variable_ids": [
+        "raw_unit.unit_type"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "追踪",
+          "唯一",
+          "逐个",
+          "稳定编号"
+        ],
+        [
+          "raw",
+          "观测",
+          "同类型",
+          "实例"
+        ]
+      ],
+      "id": "raw-unit-instance-identity",
+      "variable_ids": [
+        "raw_unit.tag"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "血条",
+          "血量",
+          "生命"
+        ],
+        [
+          "盾",
+          "护盾"
+        ]
+      ],
+      "any_terms": [
+        "当前",
+        "绝对",
+        "rawunit",
+        "raw unit",
+        "原始"
+      ],
+      "id": "raw-current-health-shield",
+      "variable_ids": [
+        "raw_unit.health",
+        "raw_unit.shield"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "血量",
+          "生命",
+          "受伤"
+        ],
+        [
+          "比例",
+          "归一",
+          "除以",
+          "上限"
+        ]
+      ],
+      "id": "raw-health-ratio",
+      "variable_ids": [
+        "raw_unit.health_ratio"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "坐标",
+          "格子",
+          "横纵",
+          "位置"
+        ],
+        [
+          "raw",
+          "原始",
+          "64×64",
+          "64x64"
+        ]
+      ],
+      "id": "raw-grid-coordinates",
+      "variable_ids": [
+        "raw_unit.x",
+        "raw_unit.y"
+      ],
+      "none_terms": [
+        "分辨率",
+        "resolution"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "weapon",
+          "武器",
+          "开火"
+        ],
+        [
+          "ready",
+          "准备",
+          "冷却"
+        ]
+      ],
+      "any_terms": [
+        "rawunit",
+        "raw unit",
+        "scalar",
+        "原始"
+      ],
+      "id": "raw-weapon-readiness",
+      "variable_ids": [
+        "raw_unit.weapon_cooldown"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "abox"
+        ],
+        [
+          "类型",
+          "type"
+        ],
+        [
+          "id",
+          "编号",
+          "数字"
+        ]
+      ],
+      "id": "abox-unit-type-id",
+      "variable_ids": [
+        "abox.unit.unit_type_id"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "position",
+          "位置"
+        ],
+        [
+          "上游",
+          "原始",
+          "raw",
+          "横纵",
+          "怎样从"
+        ]
+      ],
+      "any_terms": [
+        "abox",
+        "图节点",
+        "节点"
+      ],
+      "id": "abox-position-lineage",
+      "variable_ids": [
+        "abox.unit.position",
+        "raw_unit.x",
+        "raw_unit.y"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "abox"
+        ],
+        [
+          "未知",
+          "unknown",
+          "回退"
+        ],
+        [
+          "标记",
+          "布尔",
+          "flag"
+        ]
+      ],
+      "id": "abox-unknown-flag",
+      "variable_ids": [
+        "abox.unit.is_unknown"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "成本",
+          "cost"
+        ],
+        [
+          "矿",
+          "mineral",
+          "晶体"
+        ],
+        [
+          "瓦斯",
+          "gas",
+          "vespene"
+        ]
+      ],
+      "any_terms": [
+        "tbox",
+        "本体",
+        "静态",
+        "建造",
+        "训练"
+      ],
+      "id": "tbox-resource-costs",
+      "variable_ids": [
+        "tbox.entity.mineral_cost",
+        "tbox.entity.gas_cost"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "人口",
+          "supply"
+        ],
+        [
+          "占",
+          "成本",
+          "cost"
+        ]
+      ],
+      "any_terms": [
+        "tbox",
+        "本体",
+        "静态"
+      ],
+      "id": "tbox-supply-cost",
+      "variable_ids": [
+        "tbox.entity.supply_cost"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "兵力",
+          "部队",
+          "force"
+        ],
+        [
+          "比例",
+          "相对",
+          "对比",
+          "ratio"
+        ]
+      ],
+      "any_terms": [
+        "战术",
+        "派生",
+        "摘要"
+      ],
+      "id": "tactical-force-ratio",
+      "variable_ids": [
+        "derived.tactical.force_ratio"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "敌我",
+          "双方",
+          "敌人",
+          "友军"
+        ],
+        [
+          "中心",
+          "质心",
+          "centroid"
+        ]
+      ],
+      "any_terms": [
+        "战术",
+        "派生",
+        "单位群"
+      ],
+      "id": "tactical-centroids",
+      "variable_ids": [
+        "derived.tactical.friendly_centroid",
+        "derived.tactical.enemy_centroid"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "开火",
+          "fire"
+        ],
+        [
+          "准备",
+          "ready"
+        ],
+        [
+          "数量",
+          "多少",
+          "count"
+        ]
+      ],
+      "any_terms": [
+        "整体",
+        "战术",
+        "摘要"
+      ],
+      "id": "tactical-fire-readiness-count",
+      "variable_ids": [
+        "derived.tactical.fire_readiness",
+        "derived.tactical.ready_to_fire_count"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "生命",
+          "血量",
+          "health"
+        ],
+        [
+          "状态",
+          "标签",
+          "归纳"
+        ]
+      ],
+      "any_terms": [
+        "总体",
+        "战术",
+        "提示",
+        "摘要"
+      ],
+      "id": "tactical-health-status",
+      "variable_ids": [
+        "derived.tactical.health_status"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "谁",
+          "单位",
+          "actors"
+        ],
+        [
+          "执行",
+          "操作"
+        ],
+        [
+          "目标",
+          "target"
+        ],
+        [
+          "类型",
+          "kind",
+          "type"
+        ]
+      ],
+      "any_terms": [
+        "动作",
+        "计划",
+        "action"
+      ],
+      "id": "action-actors-target-kind",
+      "variable_ids": [
+        "action.units",
+        "action.target_type"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "失败",
+          "无效",
+          "invalid"
+        ],
+        [
+          "原因",
+          "reason"
+        ],
+        [
+          "统计",
+          "几次",
+          "次数",
+          "count"
+        ]
+      ],
+      "any_terms": [
+        "动作",
+        "计划",
+        "校验"
+      ],
+      "id": "action-invalid-reason-counts",
+      "variable_ids": [
+        "action.invalid_reason_counts"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "游戏循环",
+          "game loop",
+          "推进"
+        ],
+        [
+          "决策间隔",
+          "decision interval",
+          "常规决策"
+        ],
+        [
+          "动作延迟",
+          "延迟步数",
+          "delay"
+        ]
+      ],
+      "id": "three-timing-controls",
+      "variable_ids": [
+        "environment.step_mul",
+        "environment.decision_interval",
+        "action.delay_steps"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "functioncall",
+          "function call",
+          "函数调用"
+        ],
+        [
+          "单位列表",
+          "unit list",
+          "被操作单位"
+        ],
+        [
+          "目标",
+          "target"
+        ]
+      ],
+      "id": "function-call-arguments",
+      "variable_ids": [
+        "pysc2.function.unit_tags",
+        "pysc2.function.target"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "build",
+          "建造"
+        ],
+        [
+          "train",
+          "训练"
+        ],
+        [
+          "function",
+          "函数",
+          "调用"
+        ]
+      ],
+      "id": "build-train-function-ids",
+      "variable_ids": [
+        "pysc2.build.function_id",
+        "pysc2.train.function_id"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "人口",
+          "supply"
+        ],
+        [
+          "上限",
+          "cap"
+        ],
+        [
+          "已用",
+          "used"
+        ],
+        [
+          "剩余",
+          "还剩",
+          "差值"
+        ]
+      ],
+      "id": "supply-equation-components",
+      "variable_ids": [
+        "player.food_cap",
+        "player.food_used",
+        "player.supply_remaining"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "奖励",
+          "reward"
+        ],
+        [
+          "得分",
+          "score"
+        ],
+        [
+          "本步",
+          "变化",
+          "累计"
+        ]
+      ],
+      "id": "reward-versus-score",
+      "variable_ids": [
+        "timestep.reward_delta",
+        "timestep.score_cumulative_0"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "世界模型",
+          "swm"
+        ],
+        [
+          "动作计划",
+          "候选动作",
+          "planned action"
+        ],
+        [
+          "单位状态",
+          "unit state"
+        ],
+        [
+          "输入",
+          "接收"
+        ],
+        [
+          "输出",
+          "预测"
+        ]
+      ],
+      "id": "swm-actions-to-states",
+      "variable_ids": [
+        "swm.input.planned_actions",
+        "swm.predicted_unit_states"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "位置",
+          "position"
+        ],
+        [
+          "增量",
+          "变化量",
+          "delta"
+        ],
+        [
+          "rmse",
+          "误差"
+        ]
+      ],
+      "id": "swm-position-delta-rmse",
+      "variable_ids": [
+        "swm.unit.position_delta",
+        "metric.swm.position_rmse"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "token"
+        ],
+        [
+          "输入",
+          "prompt"
+        ],
+        [
+          "输出",
+          "completion"
+        ],
+        [
+          "总和",
+          "total"
+        ]
+      ],
+      "id": "llm-token-accounting",
+      "variable_ids": [
+        "metric.llm.prompt_tokens",
+        "metric.llm.completion_tokens",
+        "metric.llm.total_tokens"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "tag"
+        ],
+        [
+          "raw"
+        ],
+        [
+          "abox"
+        ]
+      ],
+      "ambiguous": true,
+      "id": "cross-layer-tag-ambiguity",
+      "variable_ids": [
+        "raw_unit.tag",
+        "abox.unit.tag"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "哪种兵",
+          "单位类型",
+          "类型数字",
+          "种类"
+        ],
+        [
+          "具体对象",
+          "独立单位",
+          "实例标识",
+          "去重"
+        ],
+        [
+          "raw",
+          "原始单位",
+          "观测数组"
+        ]
+      ],
+      "id": "raw-type-and-instance-identity",
+      "variable_ids": [
+        "raw_unit.unit_type",
+        "raw_unit.tag"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "阵营码",
+          "阵营",
+          "某一方",
+          "所属方"
+        ],
+        [
+          "实例标识",
+          "具体对象",
+          "独立单位",
+          "唯一对象"
+        ],
+        [
+          "原始单位",
+          "raw",
+          "观测"
+        ]
+      ],
+      "id": "raw-alliance-and-instance",
+      "variable_ids": [
+        "raw_unit.alliance",
+        "raw_unit.tag"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "生命",
+          "血"
+        ],
+        [
+          "护盾",
+          "盾"
+        ],
+        [
+          "归一",
+          "比例",
+          "零到一",
+          "0到1"
+        ]
+      ],
+      "id": "raw-normalized-health-shield",
+      "variable_ids": [
+        "raw_unit.health_ratio",
+        "raw_unit.shield_ratio"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "生命点数",
+          "血量原值",
+          "现有生命",
+          "绝对生命"
+        ],
+        [
+          "生命占比",
+          "生命比例",
+          "health ratio",
+          "比例"
+        ]
+      ],
+      "any_terms": [
+        "raw",
+        "原始单位",
+        "同一个单位"
+      ],
+      "id": "raw-health-value-and-ratio",
+      "variable_ids": [
+        "raw_unit.health",
+        "raw_unit.health_ratio"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "观测数组",
+          "raw",
+          "原始"
+        ],
+        [
+          "平面分量",
+          "横纵",
+          "x/y",
+          "两个坐标"
+        ],
+        [
+          "图实例",
+          "节点位置",
+          "位置属性",
+          "abox"
+        ]
+      ],
+      "id": "raw-abox-position-chain",
+      "variable_ids": [
+        "raw_unit.x",
+        "raw_unit.y",
+        "abox.unit.position"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "武器",
+          "开火"
+        ],
+        [
+          "等待量",
+          "冷却",
+          "再次可用"
+        ],
+        [
+          "rawunit",
+          "raw",
+          "源字段"
+        ],
+        [
+          "abox",
+          "节点字段",
+          "图节点"
+        ]
+      ],
+      "id": "raw-abox-cooldown-chain",
+      "variable_ids": [
+        "raw_unit.weapon_cooldown",
+        "abox.unit.weapon_cooldown"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "单位类型",
+          "类型数字",
+          "类型id"
+        ],
+        [
+          "原始观测",
+          "raw"
+        ],
+        [
+          "实例图",
+          "abox",
+          "图实例"
+        ],
+        [
+          "静态本体",
+          "tbox",
+          "本体类型"
+        ]
+      ],
+      "id": "unit-type-three-layer-chain",
+      "variable_ids": [
+        "raw_unit.unit_type",
+        "abox.unit.unit_type_id",
+        "tbox.entity.unit_type_id"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "未知类型",
+          "未知单位"
+        ],
+        [
+          "回退",
+          "默认值"
+        ],
+        [
+          "实时生命",
+          "当前生命",
+          "abox"
+        ],
+        [
+          "静态生命",
+          "静态hp",
+          "tbox"
+        ]
+      ],
+      "id": "unknown-fallback-live-static-hp",
+      "variable_ids": [
+        "abox.unit.is_unknown",
+        "abox.unit.hp",
+        "tbox.entity.hp"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "armor_ratio",
+          "armor ratio"
+        ],
+        [
+          "护盾比例",
+          "shield ratio"
+        ],
+        [
+          "来源",
+          "承接",
+          "源字段"
+        ]
+      ],
+      "id": "abox-armor-ratio-shield-source",
+      "variable_ids": [
+        "abox.unit.armor_ratio",
+        "raw_unit.shield_ratio"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "敌方节点数",
+          "敌军数量",
+          "敌方数量"
+        ],
+        [
+          "图对象",
+          "图级",
+          "abox"
+        ],
+        [
+          "战术摘要",
+          "重新汇总",
+          "派生"
+        ]
+      ],
+      "id": "enemy-count-abox-derived",
+      "variable_ids": [
+        "abox.graph.enemy_count",
+        "derived.tactical.enemy_count"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "攻击能打多远",
+          "攻击距离",
+          "射程",
+          "attack range"
+        ],
+        [
+          "能看多远",
+          "视野",
+          "sight"
+        ],
+        [
+          "静态",
+          "tbox",
+          "单位卡"
+        ]
+      ],
+      "id": "tbox-range-and-sight",
+      "variable_ids": [
+        "tbox.entity.attack_range",
+        "tbox.entity.sight"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "攻击频率",
+          "攻击速度",
+          "attack speed"
+        ],
+        [
+          "每秒伤害",
+          "dps"
+        ],
+        [
+          "静态",
+          "tbox",
+          "单位卡"
+        ]
+      ],
+      "id": "tbox-speed-and-dps",
+      "variable_ids": [
+        "tbox.entity.attack_speed",
+        "tbox.entity.dps"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "矿",
+          "mineral"
+        ],
+        [
+          "气",
+          "瓦斯",
+          "gas",
+          "vespene"
+        ],
+        [
+          "人口占用",
+          "人口成本",
+          "supply"
+        ],
+        [
+          "成本",
+          "生产负担",
+          "代价"
+        ]
+      ],
+      "id": "tbox-three-production-costs",
+      "variable_ids": [
+        "tbox.entity.mineral_cost",
+        "tbox.entity.gas_cost",
+        "tbox.entity.supply_cost"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "资源"
+        ],
+        [
+          "具体种类",
+          "资源类型",
+          "resource type"
+        ],
+        [
+          "所属大类",
+          "实体类别",
+          "category"
+        ],
+        [
+          "静态本体",
+          "tbox",
+          "本体"
+        ]
+      ],
+      "id": "tbox-resource-classification",
+      "variable_ids": [
+        "tbox.entity.resource_type",
+        "tbox.entity.category"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "平均生命",
+          "平均血",
+          "avg hp"
+        ],
+        [
+          "友军",
+          "我方",
+          "friendly"
+        ],
+        [
+          "敌军",
+          "敌方",
+          "enemy"
+        ],
+        [
+          "战术摘要",
+          "双方队伍",
+          "聚合量"
+        ]
+      ],
+      "id": "tactical-both-side-average-hp",
+      "variable_ids": [
+        "derived.tactical.friendly_avg_hp",
+        "derived.tactical.enemy_avg_hp"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "队形间距",
+          "阵型距离",
+          "formation"
+        ],
+        [
+          "交战类型",
+          "接战类型",
+          "engagement"
+        ],
+        [
+          "战术摘要",
+          "摘要",
+          "派生"
+        ]
+      ],
+      "id": "tactical-formation-engagement",
+      "variable_ids": [
+        "derived.tactical.formation_distance",
+        "derived.tactical.engagement_type"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "健康标签",
+          "总体健康",
+          "health status"
+        ],
+        [
+          "危险单位",
+          "危急单位",
+          "critical units"
+        ],
+        [
+          "战术提示",
+          "战术摘要",
+          "输出"
+        ]
+      ],
+      "id": "tactical-health-label-critical-list",
+      "variable_ids": [
+        "derived.tactical.health_status",
+        "derived.tactical.critical_units"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "主动作计划",
+          "动作计划对象",
+          "action plan"
+        ],
+        [
+          "延迟队列",
+          "计划动作集合",
+          "planned actions"
+        ],
+        [
+          "同一个变量",
+          "两者",
+          "区别"
+        ]
+      ],
+      "id": "action-plan-versus-planned-actions",
+      "none_terms": [
+        "世界模型",
+        "swm"
+      ],
+      "variable_ids": [
+        "action.plan",
+        "action.planned_actions"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "build",
+          "train",
+          "建造",
+          "训练"
+        ],
+        [
+          "顶层动作类别",
+          "动作类别",
+          "action type"
+        ],
+        [
+          "子类",
+          "subtype",
+          "具体类型"
+        ]
+      ],
+      "id": "action-type-and-subtype",
+      "variable_ids": [
+        "action.type",
+        "action.subtype"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "由谁执行",
+          "执行对象",
+          "选择单位"
+        ],
+        [
+          "位置还是单位",
+          "目标类型",
+          "target type"
+        ],
+        [
+          "目标值",
+          "目标本身",
+          "target value"
+        ],
+        [
+          "schema",
+          "动作"
+        ]
+      ],
+      "id": "action-selection-target-contract",
+      "variable_ids": [
+        "action.units",
+        "action.target_type",
+        "action.target"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "无效动作",
+          "invalid action"
+        ],
+        [
+          "明细",
+          "列表",
+          "逐条"
+        ],
+        [
+          "失败原因",
+          "原因"
+        ],
+        [
+          "计数",
+          "统计",
+          "次数"
+        ]
+      ],
+      "id": "invalid-actions-detail-and-counts",
+      "variable_ids": [
+        "action.invalid_actions",
+        "action.invalid_reason_counts"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "环境步长倍率",
+          "步长倍率",
+          "step_mul",
+          "step mul"
+        ],
+        [
+          "决策间隔",
+          "decision interval"
+        ],
+        [
+          "动作延迟",
+          "延迟次数",
+          "delay steps"
+        ]
+      ],
+      "id": "timing-control-chain",
+      "variable_ids": [
+        "environment.step_mul",
+        "environment.decision_interval",
+        "action.delay_steps"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "执行对象列表",
+          "单位列表",
+          "unit tags",
+          "被操作单位"
+        ],
+        [
+          "目标",
+          "target"
+        ],
+        [
+          "functioncall",
+          "pysc2调用",
+          "pysc2 调用",
+          "函数调用"
+        ]
+      ],
+      "id": "functioncall-unit-tags-target",
+      "variable_ids": [
+        "pysc2.function.unit_tags",
+        "pysc2.function.target"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "人口上限",
+          "food cap",
+          "容量"
+        ],
+        [
+          "已使用人口",
+          "已用人口",
+          "food used"
+        ],
+        [
+          "剩余人口",
+          "还可用人口",
+          "supply remaining"
+        ],
+        [
+          "减去",
+          "差值",
+          "得到"
+        ]
+      ],
+      "id": "supply-cap-used-remaining",
+      "variable_ids": [
+        "player.food_cap",
+        "player.food_used",
+        "player.supply_remaining"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "累计分数",
+          "总分",
+          "cumulative score"
+        ],
+        [
+          "得分增量",
+          "相邻观测",
+          "本步变化",
+          "score increment"
+        ]
+      ],
+      "id": "score-cumulative-and-increment",
+      "variable_ids": [
+        "timestep.score_cumulative_0",
+        "timestep.reward_delta"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "token"
+        ],
+        [
+          "输入",
+          "prompt"
+        ],
+        [
+          "输出",
+          "completion"
+        ],
+        [
+          "合计",
+          "总计",
+          "total"
+        ]
+      ],
+      "id": "llm-three-token-counts",
+      "variable_ids": [
+        "metric.llm.prompt_tokens",
+        "metric.llm.completion_tokens",
+        "metric.llm.total_tokens"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "总体动作失败",
+          "总失败",
+          "overall action failure"
+        ],
+        [
+          "延迟动作失败",
+          "delayed failure"
+        ],
+        [
+          "决策阶段失败",
+          "decision failure"
+        ],
+        [
+          "失败率",
+          "failure rate",
+          "实验指标"
+        ]
+      ],
+      "id": "action-failure-rate-family",
+      "variable_ids": [
+        "metric.action.failure_rate",
+        "metric.action.delayed_failure_rate",
+        "metric.action.decision_failure_rate"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "世界模型",
+          "swm"
+        ],
+        [
+          "abox快照",
+          "abox 快照",
+          "当前abox",
+          "当前 abox"
+        ],
+        [
+          "计划动作",
+          "planned actions"
+        ],
+        [
+          "输入",
+          "接收"
+        ]
+      ],
+      "id": "swm-two-input-bundle",
+      "variable_ids": [
+        "swm.input.abox_state",
+        "swm.input.planned_actions"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "swm",
+          "世界模型"
+        ],
+        [
+          "未来状态",
+          "单位状态",
+          "predicted unit"
+        ],
+        [
+          "未来关系",
+          "预测关系",
+          "predicted relation"
+        ],
+        [
+          "置信度",
+          "confidence"
+        ],
+        [
+          "返回",
+          "输出",
+          "预测"
+        ]
+      ],
+      "id": "swm-output-state-relations-confidence",
+      "variable_ids": [
+        "swm.predicted_unit_states",
+        "swm.predicted_relations",
+        "swm.confidence"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "生命",
+          "health"
+        ],
+        [
+          "位置",
+          "position"
+        ],
+        [
+          "变化量",
+          "增量",
+          "delta"
+        ],
+        [
+          "rmse",
+          "误差"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "预测"
+      ],
+      "id": "swm-health-position-delta-rmse",
+      "variable_ids": [
+        "swm.unit.health_delta",
+        "swm.unit.position_delta",
+        "metric.swm.health_rmse",
+        "metric.swm.position_rmse"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "armor",
+          "护甲"
+        ],
+        [
+          "静态本体",
+          "tbox",
+          "静态"
+        ],
+        [
+          "运行时实例",
+          "abox",
+          "实例"
+        ],
+        [
+          "没有说明",
+          "未说明",
+          "两个候选",
+          "哪一层"
+        ]
+      ],
+      "ambiguous": true,
+      "id": "cross-layer-armor-ambiguity",
+      "variable_ids": [
+        "tbox.entity.armor",
+        "abox.unit.armor"
+      ]
+    },
+    {
+      "all_groups": [
+        [
+          "tag",
+          "标识"
+        ],
+        [
+          "观测数组",
+          "raw",
+          "原始观测"
+        ],
+        [
+          "图节点",
+          "abox",
+          "实例图"
+        ],
+        [
+          "没交代",
+          "没有说明",
+          "未说明",
+          "可能项"
+        ]
+      ],
+      "ambiguous": true,
+      "id": "cross-layer-tag-source-ambiguity",
+      "variable_ids": [
+        "raw_unit.tag",
+        "abox.unit.tag"
+      ]
+    },
+    {
+      "id": "slot.abox.edge-class",
+      "all_groups": [
+        [
+          "边类别",
+          "边的类别",
+          "哪类边",
+          "edge class"
+        ]
+      ],
+      "any_terms": [
+        "实例关系",
+        "关系边",
+        "abox",
+        "实例边"
+      ],
+      "variable_ids": [
+        "abox.relation.edge_class"
+      ]
+    },
+    {
+      "id": "slot.abox.edge-effectiveness",
+      "all_groups": [
+        [
+          "效果强度",
+          "效果有多强",
+          "有效程度",
+          "effectiveness"
+        ]
+      ],
+      "any_terms": [
+        "实例关系",
+        "关系边",
+        "边",
+        "abox"
+      ],
+      "variable_ids": [
+        "abox.relation.effectiveness"
+      ]
+    },
+    {
+      "id": "slot.abox.edge-reason",
+      "all_groups": [
+        [
+          "成立原因",
+          "为何成立",
+          "为什么成立",
+          "关系原因",
+          "reason"
+        ]
+      ],
+      "any_terms": [
+        "实例关系",
+        "关系边",
+        "边",
+        "abox"
+      ],
+      "variable_ids": [
+        "abox.relation.reason"
+      ]
+    },
+    {
+      "id": "slot.abox.unknown-marker",
+      "all_groups": [
+        [
+          "未知类型标记",
+          "未知标记",
+          "是否未知",
+          "unknown flag"
+        ]
+      ],
+      "any_terms": [
+        "实例节点",
+        "abox",
+        "节点"
+      ],
+      "variable_ids": [
+        "abox.unit.is_unknown"
+      ]
+    },
+    {
+      "id": "slot.abox.description",
+      "all_groups": [
+        [
+          "文本说明",
+          "实例说明",
+          "节点说明",
+          "description"
+        ]
+      ],
+      "any_terms": [
+        "实例节点",
+        "动态实例",
+        "abox",
+        "节点"
+      ],
+      "variable_ids": [
+        "abox.unit.description"
+      ]
+    },
+    {
+      "id": "slot.abox.category",
+      "all_groups": [
+        [
+          "静态类别映射",
+          "类别映射",
+          "单位类别",
+          "category"
+        ]
+      ],
+      "any_terms": [
+        "实例节点",
+        "动态实例",
+        "abox",
+        "节点"
+      ],
+      "variable_ids": [
+        "abox.unit.category"
+      ]
+    },
+    {
+      "id": "slot.tbox.mineral-cost",
+      "all_groups": [
+        [
+          "矿物成本",
+          "矿物花费",
+          "矿物"
+        ]
+      ],
+      "any_terms": [
+        "静态类型",
+        "tbox",
+        "建造",
+        "生产",
+        "类型画像"
+      ],
+      "variable_ids": [
+        "tbox.entity.mineral_cost"
+      ]
+    },
+    {
+      "id": "slot.tbox.gas-cost",
+      "all_groups": [
+        [
+          "气体成本",
+          "瓦斯成本",
+          "气体",
+          "瓦斯"
+        ]
+      ],
+      "any_terms": [
+        "静态类型",
+        "tbox",
+        "建造",
+        "生产",
+        "类型画像"
+      ],
+      "variable_ids": [
+        "tbox.entity.gas_cost"
+      ]
+    },
+    {
+      "id": "slot.tbox.build-time",
+      "all_groups": [
+        [
+          "建造时长",
+          "建造时间",
+          "生产时长",
+          "build time"
+        ]
+      ],
+      "any_terms": [
+        "静态类型",
+        "tbox",
+        "建造",
+        "生产",
+        "类型画像"
+      ],
+      "variable_ids": [
+        "tbox.entity.build_time"
+      ]
+    },
+    {
+      "id": "slot.tbox.unit-type-id",
+      "all_groups": [
+        [
+          "类型编号",
+          "兵种编号",
+          "unit type id"
+        ]
+      ],
+      "any_terms": [
+        "静态类型",
+        "tbox",
+        "类型画像",
+        "静态编号"
+      ],
+      "variable_ids": [
+        "tbox.entity.unit_type_id"
+      ]
+    },
+    {
+      "id": "slot.tactical.friendly-centroid",
+      "all_groups": [
+        [
+          "我方中心",
+          "友方中心",
+          "己方中心",
+          "friendly centroid"
+        ]
+      ],
+      "any_terms": [
+        "战术摘要",
+        "派生量",
+        "阵型",
+        "中心"
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_centroid"
+      ]
+    },
+    {
+      "id": "slot.tactical.enemy-centroid",
+      "all_groups": [
+        [
+          "敌方中心",
+          "敌军中心",
+          "enemy centroid"
+        ]
+      ],
+      "any_terms": [
+        "战术摘要",
+        "派生量",
+        "阵型",
+        "中心"
+      ],
+      "variable_ids": [
+        "derived.tactical.enemy_centroid"
+      ]
+    },
+    {
+      "id": "slot.tactical.formation-distance",
+      "all_groups": [
+        [
+          "阵型中心间距",
+          "两阵型中心间距",
+          "中心间距",
+          "formation distance"
+        ]
+      ],
+      "any_terms": [
+        "战术摘要",
+        "派生量",
+        "阵型",
+        "中心"
+      ],
+      "variable_ids": [
+        "derived.tactical.formation_distance"
+      ]
+    },
+    {
+      "id": "slot.tactical.friendly-count",
+      "all_groups": [
+        [
+          "我方数量",
+          "友方数量",
+          "己方数量",
+          "friendly count"
+        ]
+      ],
+      "any_terms": [
+        "双方数量",
+        "兵力",
+        "战术摘要",
+        "派生统计"
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_count"
+      ]
+    },
+    {
+      "id": "slot.tactical.enemy-count",
+      "all_groups": [
+        [
+          "敌方数量",
+          "敌军数量",
+          "enemy count"
+        ]
+      ],
+      "any_terms": [
+        "双方数量",
+        "兵力",
+        "战术摘要",
+        "派生统计"
+      ],
+      "variable_ids": [
+        "derived.tactical.enemy_count"
+      ]
+    },
+    {
+      "id": "slot.tactical.both-counts",
+      "all_groups": [
+        [
+          "双方数量",
+          "双方单位数",
+          "两边数量"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_count",
+        "derived.tactical.enemy_count"
+      ]
+    },
+    {
+      "id": "slot.tactical.force-ratio",
+      "all_groups": [
+        [
+          "兵力数量比",
+          "数量比",
+          "兵力比",
+          "force ratio"
+        ]
+      ],
+      "any_terms": [
+        "双方",
+        "战术摘要",
+        "派生统计",
+        "兵力"
+      ],
+      "variable_ids": [
+        "derived.tactical.force_ratio"
+      ]
+    },
+    {
+      "id": "slot.tactical.both-average-hp",
+      "all_groups": [
+        [
+          "双方平均生命",
+          "双方平均血量",
+          "两边平均生命"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_avg_hp",
+        "derived.tactical.enemy_avg_hp"
+      ]
+    },
+    {
+      "id": "slot.tactical.health-status",
+      "all_groups": [
+        [
+          "整体健康态势",
+          "健康态势",
+          "健康状态",
+          "health status"
+        ]
+      ],
+      "any_terms": [
+        "战术",
+        "双方",
+        "摘要",
+        "派生"
+      ],
+      "variable_ids": [
+        "derived.tactical.health_status"
+      ]
+    },
+    {
+      "id": "slot.tactical.fire-readiness",
+      "all_groups": [
+        [
+          "可开火程度",
+          "开火就绪程度",
+          "火力就绪度",
+          "fire readiness"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.fire_readiness"
+      ]
+    },
+    {
+      "id": "slot.tactical.ready-count",
+      "all_groups": [
+        [
+          "已就绪单位数",
+          "可开火单位数",
+          "就绪单位数量",
+          "ready to fire count"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.ready_to_fire_count"
+      ]
+    },
+    {
+      "id": "slot.tactical.critical-units",
+      "all_groups": [
+        [
+          "危险单位集合",
+          "危急单位集合",
+          "低血单位列表",
+          "critical units"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.critical_units"
+      ]
+    },
+    {
+      "id": "slot.tactical.engagement-type",
+      "all_groups": [
+        [
+          "交战类型",
+          "交战形态",
+          "engagement type"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.engagement_type"
+      ]
+    },
+    {
+      "id": "slot.player.minerals",
+      "all_groups": [
+        [
+          "矿物"
+        ]
+      ],
+      "any_terms": [
+        "一次决策",
+        "玩家",
+        "资源",
+        "补给",
+        "经济"
+      ],
+      "variable_ids": [
+        "player.minerals"
+      ]
+    },
+    {
+      "id": "slot.player.vespene",
+      "all_groups": [
+        [
+          "气体",
+          "瓦斯"
+        ]
+      ],
+      "any_terms": [
+        "一次决策",
+        "玩家",
+        "资源",
+        "补给",
+        "经济"
+      ],
+      "variable_ids": [
+        "player.vespene"
+      ]
+    },
+    {
+      "id": "slot.player.food-used",
+      "all_groups": [
+        [
+          "已用补给",
+          "已占补给",
+          "使用人口",
+          "food used"
+        ]
+      ],
+      "variable_ids": [
+        "player.food_used"
+      ]
+    },
+    {
+      "id": "slot.player.food-cap",
+      "all_groups": [
+        [
+          "补给上限",
+          "人口上限",
+          "food cap"
+        ]
+      ],
+      "variable_ids": [
+        "player.food_cap"
+      ]
+    },
+    {
+      "id": "slot.player.supply-remaining",
+      "all_groups": [
+        [
+          "剩余补给",
+          "剩余人口",
+          "可用人口",
+          "supply remaining"
+        ]
+      ],
+      "variable_ids": [
+        "player.supply_remaining"
+      ]
+    },
+    {
+      "id": "slot.metric.prompt-tokens",
+      "all_groups": [
+        [
+          "提示 token",
+          "输入 token",
+          "prompt token"
+        ]
+      ],
+      "any_terms": [
+        "llm",
+        "开销",
+        "token",
+        "用量"
+      ],
+      "variable_ids": [
+        "metric.llm.prompt_tokens"
+      ]
+    },
+    {
+      "id": "slot.metric.completion-tokens",
+      "all_groups": [
+        [
+          "补全 token",
+          "输出 token",
+          "completion token"
+        ]
+      ],
+      "any_terms": [
+        "llm",
+        "开销",
+        "token",
+        "用量"
+      ],
+      "variable_ids": [
+        "metric.llm.completion_tokens"
+      ]
+    },
+    {
+      "id": "slot.metric.total-tokens",
+      "all_groups": [
+        [
+          "总 token",
+          "token 总量",
+          "total token"
+        ]
+      ],
+      "any_terms": [
+        "llm",
+        "开销",
+        "token",
+        "用量"
+      ],
+      "variable_ids": [
+        "metric.llm.total_tokens"
+      ]
+    },
+    {
+      "id": "slot.metric.failure-rate",
+      "all_groups": [
+        [
+          "全部动作失败",
+          "总体动作失败",
+          "总失败率",
+          "overall action failure"
+        ]
+      ],
+      "variable_ids": [
+        "metric.action.failure_rate"
+      ]
+    },
+    {
+      "id": "slot.metric.decision-failure-rate",
+      "all_groups": [
+        [
+          "决策阶段失败",
+          "决策失败率",
+          "decision failure"
+        ]
+      ],
+      "variable_ids": [
+        "metric.action.decision_failure_rate"
+      ]
+    },
+    {
+      "id": "slot.metric.delayed-failure-rate",
+      "all_groups": [
+        [
+          "延迟执行失败",
+          "延迟动作失败",
+          "delayed failure"
+        ]
+      ],
+      "variable_ids": [
+        "metric.action.delayed_failure_rate"
+      ]
+    },
+    {
+      "id": "slot.metric.swm-position-rmse",
+      "all_groups": [
+        [
+          "位置预测误差",
+          "位置误差",
+          "position rmse"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "质量指标",
+        "预测"
+      ],
+      "variable_ids": [
+        "metric.swm.position_rmse"
+      ]
+    },
+    {
+      "id": "slot.metric.swm-health-rmse",
+      "all_groups": [
+        [
+          "生命预测误差",
+          "血量预测误差",
+          "health rmse"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "质量指标",
+        "预测"
+      ],
+      "variable_ids": [
+        "metric.swm.health_rmse"
+      ]
+    },
+    {
+      "id": "slot.metric.swm-relation-accuracy",
+      "all_groups": [
+        [
+          "关系预测准确",
+          "关系准确率",
+          "relation accuracy"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "质量指标",
+        "预测"
+      ],
+      "variable_ids": [
+        "metric.swm.relation_accuracy"
+      ]
+    },
+    {
+      "id": "slot.metric.swm-overall-error",
+      "all_groups": [
+        [
+          "总体误差",
+          "综合误差",
+          "overall error"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "质量指标",
+        "预测"
+      ],
+      "variable_ids": [
+        "metric.swm.overall_error"
+      ]
+    },
+    {
+      "id": "slot.swm.prediction-step",
+      "all_groups": [
+        [
+          "某个预测步",
+          "单个预测步",
+          "当前预测步",
+          "prediction step"
+        ]
+      ],
+      "variable_ids": [
+        "swm.prediction.step"
+      ]
+    },
+    {
+      "id": "slot.swm.confidence",
+      "all_groups": [
+        [
+          "置信度",
+          "置信程度",
+          "confidence"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "预测",
+        "审计"
+      ],
+      "variable_ids": [
+        "swm.confidence"
+      ]
+    },
+    {
+      "id": "slot.swm.position-delta",
+      "all_groups": [
+        [
+          "单位位置变化",
+          "位置变化量",
+          "位置增量",
+          "position delta"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "预测步"
+      ],
+      "variable_ids": [
+        "swm.unit.position_delta"
+      ]
+    },
+    {
+      "id": "slot.swm.health-delta",
+      "all_groups": [
+        [
+          "单位生命变化",
+          "生命变化量",
+          "血量增量",
+          "health delta"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "预测步"
+      ],
+      "variable_ids": [
+        "swm.unit.health_delta"
+      ]
+    },
+    {
+      "id": "slot.swm.raw-response",
+      "all_groups": [
+        [
+          "原始回复",
+          "原始响应",
+          "raw response"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "审计"
+      ],
+      "variable_ids": [
+        "swm.raw_response"
+      ]
+    },
+    {
+      "id": "slot.swm.token-usage",
+      "all_groups": [
+        [
+          "token 用量",
+          "token使用量",
+          "令牌用量",
+          "token usage"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "审计"
+      ],
+      "variable_ids": [
+        "swm.token_usage"
+      ]
+    },
+    {
+      "id": "ambiguity.unit-type-number",
+      "all_groups": [
+        [
+          "兵种编号",
+          "类型编号",
+          "unit type id"
+        ],
+        [
+          "没说",
+          "未说明",
+          "没有说明",
+          "只问",
+          "哪一层",
+          "哪些候选"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.unit_type",
+        "abox.unit.unit_type_id",
+        "tbox.entity.unit_type_id"
+      ],
+      "ambiguous": true
+    },
+    {
+      "id": "ambiguity.description-layer",
+      "all_groups": [
+        [
+          "description",
+          "文本说明",
+          "描述"
+        ],
+        [
+          "未说明",
+          "没有说明",
+          "只要求",
+          "哪一层",
+          "可能变量",
+          "请求澄清"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.description",
+        "abox.unit.description"
+      ],
+      "ambiguous": true
+    },
+    {
+      "id": "lineage.raw-abox-health-identity",
+      "all_groups": [
+        [
+          "生命值",
+          "血量",
+          "health"
+        ],
+        [
+          "比例",
+          "ratio"
+        ],
+        [
+          "tag",
+          "唯一标识"
+        ],
+        [
+          "前后两层",
+          "原始观测进入实例图",
+          "raw进入abox",
+          "raw 到 abox"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.health",
+        "raw_unit.health_ratio",
+        "raw_unit.tag",
+        "abox.unit.hp",
+        "abox.unit.hp_ratio",
+        "abox.unit.tag"
+      ]
+    },
+    {
+      "id": "lineage.raw-abox-armor-ratio",
+      "all_groups": [
+        [
+          "armor 与 armor_ratio",
+          "armor和armor_ratio",
+          "护甲及护甲比例"
+        ],
+        [
+          "raw",
+          "原始"
+        ],
+        [
+          "护盾字段",
+          "shield"
+        ],
+        [
+          "源端和目标端",
+          "源端与目标端",
+          "四个变量",
+          "两个护盾字段"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.shield",
+        "raw_unit.shield_ratio",
+        "abox.unit.armor",
+        "abox.unit.armor_ratio"
+      ]
+    },
+    {
+      "id": "slot.raw.survival-clock",
+      "all_groups": [
+        [
+          "当前血量",
+          "生命值",
+          "health"
+        ],
+        [
+          "护盾余量",
+          "护盾值",
+          "shield"
+        ],
+        [
+          "再次开火等待量",
+          "武器等待量",
+          "weapon cooldown"
+        ],
+        [
+          "raw",
+          "原始记录",
+          "原始观测"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.health",
+        "raw_unit.shield",
+        "raw_unit.weapon_cooldown"
+      ]
+    },
+    {
+      "id": "slot.raw.track-position",
+      "all_groups": [
+        [
+          "兵种编号",
+          "单位类型"
+        ],
+        [
+          "唯一对象标识",
+          "唯一标识",
+          "tag"
+        ],
+        [
+          "二维落点",
+          "二维坐标",
+          "横纵坐标"
+        ],
+        [
+          "raw",
+          "原始"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.unit_type",
+        "raw_unit.tag",
+        "raw_unit.x",
+        "raw_unit.y"
+      ]
+    },
+    {
+      "id": "slot.raw.normalized-side",
+      "all_groups": [
+        [
+          "生命比例",
+          "血量比例"
+        ],
+        [
+          "护盾比例"
+        ],
+        [
+          "所属方",
+          "阵营编码",
+          "alliance"
+        ],
+        [
+          "raw",
+          "原始"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.health_ratio",
+        "raw_unit.shield_ratio",
+        "raw_unit.alliance"
+      ]
+    },
+    {
+      "id": "slot.abox.combat-profile",
+      "all_groups": [
+        [
+          "单次攻击强度",
+          "攻击伤害"
+        ],
+        [
+          "攻击节奏",
+          "攻击速度"
+        ],
+        [
+          "射程",
+          "攻击距离"
+        ],
+        [
+          "移动速度"
+        ],
+        [
+          "abox",
+          "实例属性",
+          "实例节点"
+        ]
+      ],
+      "variable_ids": [
+        "abox.unit.attack_damage",
+        "abox.unit.attack_speed",
+        "abox.unit.attack_range",
+        "abox.unit.movement_speed"
+      ]
+    },
+    {
+      "id": "slot.abox.classification-profile",
+      "all_groups": [
+        [
+          "类别"
+        ],
+        [
+          "节点类型"
+        ],
+        [
+          "种族"
+        ],
+        [
+          "类名",
+          "单位类"
+        ],
+        [
+          "类型编号"
+        ],
+        [
+          "abox",
+          "实例"
+        ]
+      ],
+      "variable_ids": [
+        "abox.unit.category",
+        "abox.unit.node_type",
+        "abox.unit.race",
+        "abox.unit.unit_class",
+        "abox.unit.unit_type_id"
+      ]
+    },
+    {
+      "id": "slot.abox.edge-address",
+      "all_groups": [
+        [
+          "起点"
+        ],
+        [
+          "终点"
+        ],
+        [
+          "关系类型"
+        ],
+        [
+          "写入步号",
+          "时间步",
+          "timestamp"
+        ],
+        [
+          "关系边",
+          "动态abox关系边"
+        ]
+      ],
+      "variable_ids": [
+        "abox.relation.source_node",
+        "abox.relation.target_node",
+        "abox.relation.edge_type",
+        "abox.relation.timestamp"
+      ]
+    },
+    {
+      "id": "slot.abox.graph-progress",
+      "all_groups": [
+        [
+          "图级",
+          "观察图",
+          "graph"
+        ],
+        [
+          "更新进度",
+          "帧更新",
+          "步数",
+          "step"
+        ],
+        [
+          "敌方节点缓存",
+          "敌方节点数",
+          "enemy count"
+        ]
+      ],
+      "variable_ids": [
+        "abox.graph.step_count",
+        "abox.graph.enemy_count"
+      ]
+    },
+    {
+      "id": "slot.tbox.survival-perception",
+      "all_groups": [
+        [
+          "基础耐久",
+          "生命值"
+        ],
+        [
+          "防护",
+          "护甲"
+        ],
+        [
+          "移动能力",
+          "移动速度"
+        ],
+        [
+          "视野",
+          "sight"
+        ],
+        [
+          "静态类型",
+          "tbox",
+          "类型画像"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.hp",
+        "tbox.entity.armor",
+        "tbox.entity.movement_speed",
+        "tbox.entity.sight"
+      ]
+    },
+    {
+      "id": "slot.tbox.taxonomy-text",
+      "all_groups": [
+        [
+          "说明文字",
+          "文字说明",
+          "描述"
+        ],
+        [
+          "节点类型"
+        ],
+        [
+          "种族"
+        ],
+        [
+          "类别"
+        ],
+        [
+          "资源种类",
+          "资源分类",
+          "资源类型"
+        ],
+        [
+          "静态本体",
+          "静态类型",
+          "tbox"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.description",
+        "tbox.entity.node_type",
+        "tbox.entity.race",
+        "tbox.entity.category",
+        "tbox.entity.resource_type"
+      ]
+    },
+    {
+      "id": "slot.tbox.offense-edge",
+      "all_groups": [
+        [
+          "秒伤",
+          "dps"
+        ],
+        [
+          "攻击距离",
+          "射程"
+        ],
+        [
+          "静态关系边",
+          "关系边",
+          "edge"
+        ],
+        [
+          "tbox",
+          "静态类型",
+          "静态"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.dps",
+        "tbox.entity.attack_range",
+        "tbox.relation.edge"
+      ]
+    },
+    {
+      "id": "slot.tactical.engagement-centroids",
+      "all_groups": [
+        [
+          "交战类型"
+        ],
+        [
+          "敌我中心位置",
+          "双方中心",
+          "我方中心"
+        ],
+        [
+          "战术",
+          "摘要",
+          "派生"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.engagement_type",
+        "derived.tactical.friendly_centroid",
+        "derived.tactical.enemy_centroid"
+      ]
+    },
+    {
+      "id": "slot.action.semantic-envelope",
+      "all_groups": [
+        [
+          "主类型",
+          "动作类型"
+        ],
+        [
+          "子类型"
+        ],
+        [
+          "优先级"
+        ],
+        [
+          "理由说明",
+          "决策理由",
+          "reasoning"
+        ]
+      ],
+      "variable_ids": [
+        "action.type",
+        "action.subtype",
+        "action.priority",
+        "action.reasoning"
+      ]
+    },
+    {
+      "id": "slot.action.target-contract",
+      "all_groups": [
+        [
+          "执行单位集合",
+          "执行单位",
+          "单位集合",
+          "units"
+        ],
+        [
+          "目标种类",
+          "目标类型",
+          "target type"
+        ],
+        [
+          "目标值",
+          "目标内容",
+          "target"
+        ],
+        [
+          "动作",
+          "schema",
+          "指令"
+        ]
+      ],
+      "variable_ids": [
+        "action.units",
+        "action.target_type",
+        "action.target"
+      ]
+    },
+    {
+      "id": "slot.action.plan-schedule",
+      "all_groups": [
+        [
+          "完整计划",
+          "原始计划",
+          "动作计划",
+          "plan"
+        ],
+        [
+          "动作列表",
+          "规范化动作列表",
+          "planned actions"
+        ],
+        [
+          "每项延迟",
+          "延迟步数",
+          "delay"
+        ],
+        [
+          "优先级"
+        ]
+      ],
+      "variable_ids": [
+        "action.plan",
+        "action.planned_actions",
+        "action.delay_steps",
+        "action.priority"
+      ]
+    },
+    {
+      "id": "slot.action.invalid-diagnostics",
+      "all_groups": [
+        [
+          "无效条目",
+          "无效动作明细",
+          "无效动作"
+        ],
+        [
+          "按原因聚合",
+          "失败原因计数",
+          "原因聚合"
+        ],
+        [
+          "原动作类型",
+          "动作类型"
+        ]
+      ],
+      "variable_ids": [
+        "action.invalid_actions",
+        "action.invalid_reason_counts",
+        "action.type"
+      ]
+    },
+    {
+      "id": "slot.function.combat-ids",
+      "all_groups": [
+        [
+          "no_op",
+          "空操作"
+        ],
+        [
+          "move",
+          "移动"
+        ],
+        [
+          "attack",
+          "攻击"
+        ],
+        [
+          "function id",
+          "函数编号",
+          "编号"
+        ]
+      ],
+      "variable_ids": [
+        "pysc2.no_op.function_id",
+        "pysc2.move.function_id",
+        "pysc2.attack.function_id"
+      ]
+    },
+    {
+      "id": "slot.environment.raw-contract",
+      "all_groups": [
+        [
+          "raw 单位",
+          "raw units",
+          "原始单位"
+        ],
+        [
+          "raw 动作",
+          "raw actions",
+          "原始动作"
+        ],
+        [
+          "原始坐标分辨率",
+          "raw分辨率",
+          "raw resolution"
+        ]
+      ],
+      "variable_ids": [
+        "environment.use_raw_units",
+        "environment.use_raw_actions",
+        "environment.raw_resolution"
+      ]
+    },
+    {
+      "id": "slot.environment.time-controls",
+      "all_groups": [
+        [
+          "环境步长倍数",
+          "环境步长",
+          "step_mul"
+        ],
+        [
+          "agent 决策间隔",
+          "决策间隔",
+          "decision interval"
+        ],
+        [
+          "是否实时运行",
+          "实时运行",
+          "realtime"
+        ]
+      ],
+      "variable_ids": [
+        "environment.step_mul",
+        "environment.decision_interval",
+        "environment.realtime"
+      ]
+    },
+    {
+      "id": "slot.environment.scene-display",
+      "all_groups": [
+        [
+          "确定地图",
+          "地图",
+          "场景名",
+          "map name"
+        ],
+        [
+          "是否可视化",
+          "可视化",
+          "visualize"
+        ],
+        [
+          "实时模式",
+          "realtime"
+        ]
+      ],
+      "variable_ids": [
+        "environment.map_name",
+        "environment.realtime",
+        "environment.visualize"
+      ]
+    },
+    {
+      "id": "slot.metric.decision-efficiency",
+      "all_groups": [
+        [
+          "决策次数"
+        ],
+        [
+          "平均决策耗时",
+          "平均决策时间"
+        ],
+        [
+          "每次平均 token",
+          "平均token"
+        ]
+      ],
+      "any_terms": [
+        "llm",
+        "实验指标",
+        "效率"
+      ],
+      "variable_ids": [
+        "metric.llm.decision_calls",
+        "metric.llm.avg_decision_time",
+        "metric.llm.avg_tokens_per_decision"
+      ]
+    },
+    {
+      "id": "slot.metric.swm-quality-family",
+      "all_groups": [
+        [
+          "位置"
+        ],
+        [
+          "生命",
+          "血量"
+        ],
+        [
+          "关系预测"
+        ],
+        [
+          "总体误差"
+        ],
+        [
+          "世界模型",
+          "swm"
+        ]
+      ],
+      "variable_ids": [
+        "metric.swm.position_rmse",
+        "metric.swm.health_rmse",
+        "metric.swm.relation_accuracy",
+        "metric.swm.overall_error"
+      ]
+    },
+    {
+      "id": "slot.swm.step-deltas-family",
+      "all_groups": [
+        [
+          "预测步"
+        ],
+        [
+          "置信度",
+          "置信程度"
+        ],
+        [
+          "位置变化"
+        ],
+        [
+          "生命变化",
+          "血量变化"
+        ],
+        [
+          "世界模型",
+          "swm"
+        ]
+      ],
+      "variable_ids": [
+        "swm.prediction.step",
+        "swm.confidence",
+        "swm.unit.position_delta",
+        "swm.unit.health_delta"
+      ]
+    },
+    {
+      "id": "slot.swm.structured-output",
+      "all_groups": [
+        [
+          "总预测列表",
+          "预测结果"
+        ],
+        [
+          "单位状态"
+        ],
+        [
+          "关系"
+        ],
+        [
+          "单步",
+          "预测"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm"
+      ],
+      "variable_ids": [
+        "swm.predictions",
+        "swm.predicted_unit_states",
+        "swm.predicted_relations"
+      ]
+    },
+    {
+      "id": "slot.swm.request-envelope",
+      "all_groups": [
+        [
+          "输入状态"
+        ],
+        [
+          "候选动作"
+        ],
+        [
+          "未来步数"
+        ],
+        [
+          "候选序号"
+        ]
+      ],
+      "any_terms": [
+        "世界模型",
+        "swm",
+        "预测"
+      ],
+      "variable_ids": [
+        "swm.input.abox_state",
+        "swm.input.planned_actions",
+        "swm.prediction_steps",
+        "swm.candidate_index"
+      ]
+    },
+    {
+      "id": "devslot.raw.health-cooldown",
+      "all_groups": [
+        [
+          "当前生命",
+          "当前血量"
+        ],
+        [
+          "武器冷却",
+          "攻击冷却"
+        ],
+        [
+          "raw",
+          "原始"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.health",
+        "raw_unit.weapon_cooldown"
+      ]
+    },
+    {
+      "id": "devslot.raw.tag-position",
+      "all_groups": [
+        [
+          "tag",
+          "对象标识"
+        ],
+        [
+          "横纵坐标",
+          "平面位置"
+        ],
+        [
+          "原始观测",
+          "raw"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.tag",
+        "raw_unit.x",
+        "raw_unit.y"
+      ]
+    },
+    {
+      "id": "devslot.raw.ratio-alliance",
+      "all_groups": [
+        [
+          "血量比例"
+        ],
+        [
+          "盾量比例",
+          "护盾比例"
+        ],
+        [
+          "敌我归属",
+          "归属编码",
+          "alliance"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.health_ratio",
+        "raw_unit.shield_ratio",
+        "raw_unit.alliance"
+      ]
+    },
+    {
+      "id": "devslot.abox.edge-metadata",
+      "all_groups": [
+        [
+          "边分类"
+        ],
+        [
+          "边类型"
+        ],
+        [
+          "时间步",
+          "记录时间"
+        ],
+        [
+          "实例图边",
+          "abox边"
+        ]
+      ],
+      "variable_ids": [
+        "abox.relation.edge_class",
+        "abox.relation.edge_type",
+        "abox.relation.timestamp"
+      ]
+    },
+    {
+      "id": "devslot.abox.node-taxonomy",
+      "all_groups": [
+        [
+          "种族"
+        ],
+        [
+          "单位类"
+        ],
+        [
+          "节点类型"
+        ],
+        [
+          "动态单位节点",
+          "实例节点",
+          "abox"
+        ]
+      ],
+      "variable_ids": [
+        "abox.unit.race",
+        "abox.unit.unit_class",
+        "abox.unit.node_type"
+      ]
+    },
+    {
+      "id": "devslot.tbox.production-triplet",
+      "all_groups": [
+        [
+          "矿物成本"
+        ],
+        [
+          "瓦斯成本",
+          "气体成本"
+        ],
+        [
+          "生产时间",
+          "建造时间"
+        ],
+        [
+          "静态单位模板",
+          "tbox"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.mineral_cost",
+        "tbox.entity.gas_cost",
+        "tbox.entity.build_time"
+      ]
+    },
+    {
+      "id": "devslot.tactical.centroid-distance",
+      "all_groups": [
+        [
+          "友军中心",
+          "我方中心"
+        ],
+        [
+          "敌军中心",
+          "敌方中心"
+        ],
+        [
+          "二者距离",
+          "两者距离",
+          "中心距离"
+        ],
+        [
+          "战术摘要",
+          "派生"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_centroid",
+        "derived.tactical.enemy_centroid",
+        "derived.tactical.formation_distance"
+      ]
+    },
+    {
+      "id": "devslot.tactical.count-ratio",
+      "all_groups": [
+        [
+          "己方兵数",
+          "我方兵数"
+        ],
+        [
+          "敌方兵数",
+          "敌军兵数"
+        ],
+        [
+          "数量比",
+          "兵力比"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_count",
+        "derived.tactical.enemy_count",
+        "derived.tactical.force_ratio"
+      ]
+    },
+    {
+      "id": "devslot.tactical.fire-risk",
+      "all_groups": [
+        [
+          "火力准备程度",
+          "开火准备程度"
+        ],
+        [
+          "立即攻击的单位数",
+          "能立即攻击"
+        ],
+        [
+          "危急单位列表",
+          "危险单位列表"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.fire_readiness",
+        "derived.tactical.ready_to_fire_count",
+        "derived.tactical.critical_units"
+      ]
+    },
+    {
+      "id": "devslot.action.target-contract",
+      "all_groups": [
+        [
+          "执行对象集合",
+          "执行单位集合"
+        ],
+        [
+          "目标类别",
+          "目标种类"
+        ],
+        [
+          "目标内容",
+          "目标值"
+        ]
+      ],
+      "variable_ids": [
+        "action.units",
+        "action.target_type",
+        "action.target"
+      ]
+    },
+    {
+      "id": "devslot.action.queue",
+      "all_groups": [
+        [
+          "完整 plan",
+          "完整计划"
+        ],
+        [
+          "planned_actions",
+          "动作列表"
+        ],
+        [
+          "delay_steps",
+          "延迟步数"
+        ]
+      ],
+      "variable_ids": [
+        "action.plan",
+        "action.planned_actions",
+        "action.delay_steps"
+      ]
+    },
+    {
+      "id": "devslot.environment.scene-display",
+      "all_groups": [
+        [
+          "地图名称",
+          "地图"
+        ],
+        [
+          "显示开关",
+          "可视化"
+        ],
+        [
+          "realtime",
+          "实时"
+        ]
+      ],
+      "variable_ids": [
+        "environment.map_name",
+        "environment.visualize",
+        "environment.realtime"
+      ]
+    },
+    {
+      "id": "devslot.metric.failure-stages",
+      "all_groups": [
+        [
+          "动作失败指标",
+          "失败指标"
+        ],
+        [
+          "总体"
+        ],
+        [
+          "决策阶段"
+        ],
+        [
+          "延迟阶段"
+        ]
+      ],
+      "variable_ids": [
+        "metric.action.failure_rate",
+        "metric.action.decision_failure_rate",
+        "metric.action.delayed_failure_rate"
+      ]
+    },
+    {
+      "id": "devslot.swm.step-fields",
+      "all_groups": [
+        [
+          "step"
+        ],
+        [
+          "confidence"
+        ],
+        [
+          "position_delta"
+        ],
+        [
+          "health_delta"
+        ],
+        [
+          "世界模型",
+          "swm"
+        ]
+      ],
+      "variable_ids": [
+        "swm.prediction.step",
+        "swm.confidence",
+        "swm.unit.position_delta",
+        "swm.unit.health_delta"
+      ]
+    },
+    {
+      "id": "devslot.swm.request-fields",
+      "all_groups": [
+        [
+          "abox 状态",
+          "输入状态"
+        ],
+        [
+          "候选动作"
+        ],
+        [
+          "预测步数"
+        ],
+        [
+          "候选索引",
+          "候选序号"
+        ]
+      ],
+      "variable_ids": [
+        "swm.input.abox_state",
+        "swm.input.planned_actions",
+        "swm.prediction_steps",
+        "swm.candidate_index"
+      ]
+    },
+    {
+      "id": "ambiguity.unit-type-id-unspecified",
+      "all_groups": [
+        [
+          "unit type id",
+          "兵种编号"
+        ],
+        [
+          "没交代",
+          "没注明",
+          "未注明",
+          "未指定"
+        ],
+        [
+          "raw",
+          "abox",
+          "tbox"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.unit_type",
+        "abox.unit.unit_type_id",
+        "tbox.entity.unit_type_id"
+      ],
+      "ambiguous": true
+    },
+    {
+      "id": "ambiguity.description-unspecified",
+      "all_groups": [
+        [
+          "description",
+          "描述"
+        ],
+        [
+          "没注明",
+          "未注明",
+          "没交代",
+          "未指定"
+        ],
+        [
+          "静态模板",
+          "静态本体",
+          "tbox"
+        ],
+        [
+          "动态节点",
+          "实例节点",
+          "abox"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.description",
+        "abox.unit.description"
+      ],
+      "ambiguous": true
+    }
+  ],
+  "schema_version": "1.0",
+  "scope_exclusions": [
+    {
+      "all_groups": [
+        [
+          "rgb",
+          "feature-layer",
+          "feature layer",
+          "特征层"
+        ],
+        [
+          "镜头",
+          "camera",
+          "屏幕坐标",
+          "世界坐标",
+          "摄像机",
+          "缩放",
+          "视口"
+        ]
+      ],
+      "id": "feature-layer-camera-out-of-scope",
+      "reason": "V0.1 仅覆盖当前 STORM Raw API 主路径，不收录 RGB/feature-layer 镜头变量。"
+    },
+    {
+      "all_groups": [
+        [
+          "屏幕像素",
+          "小地图像素",
+          "screen feature",
+          "minimap feature",
+          "小地图",
+          "可见性掩码",
+          "visibility mask"
+        ],
+        [
+          "feature",
+          "特征层",
+          "rgb"
+        ]
+      ],
+      "id": "ui-screen-feature-out-of-scope",
+      "reason": "V0.1 不覆盖 feature-layer 或 RGB 观测变量。"
+    },
+    {
+      "id": "feature-screen-selection-out-of-scope",
+      "all_groups": [
+        [
+          "feature screen",
+          "feature_screen",
+          "特征屏幕",
+          "screen"
+        ],
+        [
+          "框选单位",
+          "选择面板",
+          "技能图标",
+          "单位面板"
+        ]
+      ],
+      "reason": "V0.1 仅覆盖当前 STORM Raw API 主路径，不收录 feature screen 选择面板或技能图标数组。"
+    },
+    {
+      "id": "feature-minimap-creep-out-of-scope",
+      "all_groups": [
+        [
+          "feature minimap",
+          "feature_minimap",
+          "特征小地图",
+          "minimap"
+        ],
+        [
+          "creep",
+          "菌毯",
+          "像素掩码",
+          "掩码"
+        ]
+      ],
+      "reason": "V0.1 不覆盖 feature minimap 的 creep 等像素掩码。"
+    },
+    {
+      "id": "feature-screen-any-field-out-of-scope",
+      "all_groups": [
+        [
+          "feature_screen",
+          "feature screen",
+          "特征屏幕"
+        ]
+      ],
+      "reason": "V0.1 仅覆盖 STORM 当前使用的 PySC2 Raw API 主路径，不收录 Feature Screen 字段。"
+    },
+    {
+      "id": "feature-minimap-any-field-out-of-scope",
+      "all_groups": [
+        [
+          "feature_minimap",
+          "feature minimap",
+          "特征小地图"
+        ]
+      ],
+      "reason": "V0.1 仅覆盖 STORM 当前使用的 PySC2 Raw API 主路径，不收录 Feature Minimap 字段。"
+    },
+    {
+      "id": "rgb-observation-out-of-scope",
+      "all_groups": [
+        [
+          "rgb observation",
+          "rgb screen",
+          "rgb shape",
+          "rgb channel",
+          "RGB观测",
+          "RGB屏幕",
+          "RGB通道",
+          "RGB尺寸"
+        ]
+      ],
+      "reason": "V0.1 不覆盖 RGB observation、屏幕形状或通道变量。"
+    },
+    {
+      "id": "replay-apm-out-of-scope",
+      "all_groups": [
+        [
+          "replay",
+          "回放",
+          "录像",
+          "APM",
+          "每分钟操作数"
+        ]
+      ],
+      "reason": "V0.1 不覆盖 Replay 元数据或 APM 统计。"
+    },
+    {
+      "id": "ui-control-groups-out-of-scope",
+      "all_groups": [
+        [
+          "control_groups",
+          "control groups",
+          "控制组",
+          "编队栏",
+          "UI控制组"
+        ]
+      ],
+      "reason": "V0.1 不覆盖 UI/control_groups 观测字段。"
+    }
+  ]
+}

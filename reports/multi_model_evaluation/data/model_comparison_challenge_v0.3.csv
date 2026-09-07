@@ -1,0 +1,7 @@
+﻿benchmark,question_count,condition,model,behavior_accuracy,variable_hit_rate,variable_precision,variable_exact_match_rate,evidence_hit_rate,refusal_accuracy,native_json_compliance_rate,tokens_total,latency_mean_ms,model_error_count
+challenge_v0.3,41,no-KB,GPT-5.4-mini*,0.097561,0.073171,0.073171,0.073171,0.0,0.292683,0.780488,198979,57584.406,9
+challenge_v0.3,41,no-KB,DeepSeek v4 Flash,0.146341,0.073171,0.073171,0.073171,0.0,0.390244,0.0,20301,2454.727,10
+challenge_v0.3,41,full-context,GPT-5.4-mini*,0.95122,0.96748,0.955285,0.926829,0.902439,0.97561,0.95122,1313524,29757.015,2
+challenge_v0.3,41,full-context,DeepSeek v4 Flash,0.902439,0.97561,0.951626,0.902439,0.902439,1.0,0.0,1214822,3466.257,1
+challenge_v0.3,41,RAG,GPT-5.4-mini*,0.439024,0.40935,0.59126,0.146341,0.639024,0.682927,0.653846,206724,25836.538,9
+challenge_v0.3,41,RAG,DeepSeek v4 Flash,0.585366,0.40935,0.59126,0.146341,0.639024,0.682927,0.923077,82502,2699.154,2

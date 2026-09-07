@@ -1,0 +1,2287 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema: knowledge/schemas/variable.schema.json
+schema_version: 1.0.0
+generated_at: '2026-09-03'
+records:
+- schema_version: 1.0.0
+  id: action.delay_steps
+  canonical_name: delay_steps
+  names:
+    zh: 延迟步数
+    en: Delay Steps
+    code: delay_steps
+  category: action_schema_and_scheduling
+  aliases:
+  - 延迟步数
+  - Delay Steps
+  - delay_steps
+  definition: 延迟的 STORM environment step 数；缺失为 0，并限制到 0..9。
+  intuitive_explanation: 延迟的 STORM environment step 数；缺失为 0，并限制到 0..9。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: environment step
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: 9
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.delay_steps
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 246
+      line_end: 246
+    extraction_code:
+    - if "delay_steps" not in action
+    transformation_formula:
+    - delay_steps=min(9,max(0,int(value or 0)))
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      delay_steps: 按公式得到
+    explanation: 延迟的 STORM environment step 数；缺失为 0，并限制到 0..9。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 延迟的 STORM environment step 数；缺失为 0，并限制到 0..9。
+    status: code_reality
+    evidence_ids:
+    - action-delay-steps-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  - 单位是 environment step，不是秒或 SC2 game loop。
+  known_issues: []
+  evidence:
+  - id: action-delay-steps-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 246
+    line_end: 246
+    evidence_type: E1
+    claim: 延迟的 STORM environment step 数；缺失为 0，并限制到 0..9。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.invalid_actions
+  canonical_name: invalid_actions
+  names:
+    zh: 无效动作数
+    en: Invalid Action Count
+    code: invalid_actions
+  category: action_schema_and_scheduling
+  aliases:
+  - 无效动作数
+  - Invalid Action Count
+  - invalid_actions
+  definition: 语义校验判为无效的动作数。
+  intuitive_explanation: 语义校验判为无效的动作数。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: not_applicable
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.invalid_actions
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 113
+      line_end: 113
+    extraction_code:
+    - invalid_actions = 0
+    transformation_formula:
+    - invalid_actions=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      invalid_actions: 按公式得到
+    explanation: 语义校验判为无效的动作数。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 语义校验判为无效的动作数。
+    status: code_reality
+    evidence_ids:
+    - action-invalid-actions-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-invalid-actions-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 113
+    line_end: 113
+    evidence_type: E1
+    claim: 语义校验判为无效的动作数。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.invalid_reason_counts
+  canonical_name: invalid_reason_counts
+  names:
+    zh: 无效原因计数
+    en: Invalid Reason Counts
+    code: invalid_reason_counts
+  category: action_schema_and_scheduling
+  aliases:
+  - 无效原因计数
+  - Invalid Reason Counts
+  - invalid_reason_counts
+  definition: 按原因代码聚合的无效动作数。
+  intuitive_explanation: 按原因代码聚合的无效动作数。
+  interface:
+    data_type: object
+    python_type: dict
+    shape:
+      kind: object
+      dimensions: []
+      description: 键值对象。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.invalid_reason_counts
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 114
+      line_end: 114
+    extraction_code:
+    - invalid_reason_counts = {}
+    transformation_formula:
+    - invalid_reason_counts=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      invalid_reason_counts: 按公式得到
+    explanation: 按原因代码聚合的无效动作数。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 按原因代码聚合的无效动作数。
+    status: code_reality
+    evidence_ids:
+    - action-invalid-reason-counts-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-invalid-reason-counts-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 114
+    line_end: 114
+    evidence_type: E1
+    claim: 按原因代码聚合的无效动作数。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.plan
+  canonical_name: plan
+  names:
+    zh: 计划文本
+    en: Plan Text
+    code: plan
+  category: action_schema_and_scheduling
+  aliases:
+  - 计划文本
+  - Plan Text
+  - plan
+  definition: LLM 返回并由解析器透传的计划文本。
+  intuitive_explanation: LLM 返回并由解析器透传的计划文本。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.plan
+  provenance:
+    source_layer: llm_output
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 120
+      line_end: 120
+    extraction_code:
+    - json_data.get("plan", "")
+    transformation_formula:
+    - plan=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      plan: 按公式得到
+    explanation: LLM 返回并由解析器透传的计划文本。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: LLM 返回并由解析器透传的计划文本。
+    status: code_reality
+    evidence_ids:
+    - action-plan-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-plan-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 120
+    line_end: 120
+    evidence_type: E1
+    claim: LLM 返回并由解析器透传的计划文本。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.planned_actions
+  canonical_name: planned_actions
+  names:
+    zh: 计划动作数
+    en: Planned Action Count
+    code: planned_actions
+  category: action_schema_and_scheduling
+  aliases:
+  - 计划动作数
+  - Planned Action Count
+  - planned_actions
+  definition: 语义过滤前的动作数量。
+  intuitive_explanation: 语义过滤前的动作数量。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: not_applicable
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.planned_actions
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 103
+      line_end: 103
+    extraction_code:
+    - planned_actions = len
+    transformation_formula:
+    - planned_actions=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      planned_actions: 按公式得到
+    explanation: 语义过滤前的动作数量。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 语义过滤前的动作数量。
+    status: code_reality
+    evidence_ids:
+    - action-planned-actions-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-planned-actions-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 103
+    line_end: 103
+    evidence_type: E1
+    claim: 语义过滤前的动作数量。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.priority
+  canonical_name: priority
+  names:
+    zh: 优先级
+    en: Priority
+    code: priority
+  category: action_schema_and_scheduling
+  aliases:
+  - 优先级
+  - Priority
+  - priority
+  definition: 只允许 high、medium、low。
+  intuitive_explanation: 只允许 high、medium、low。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: known
+      values:
+      - high
+      - medium
+      - low
+      description: 当前代码显式使用的枚举值。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.priority
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 37
+      line_end: 37
+    extraction_code:
+    - VALID_PRIORITIES =
+    transformation_formula:
+    - priority=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      priority: 按公式得到
+    explanation: 只允许 high、medium、low。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 只允许 high、medium、low。
+    status: code_reality
+    evidence_ids:
+    - action-priority-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-priority-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 37
+    line_end: 37
+    evidence_type: E1
+    claim: 只允许 high、medium、low。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.reasoning
+  canonical_name: reasoning
+  names:
+    zh: 战术推理文本
+    en: Tactical Reasoning
+    code: reasoning
+  category: action_schema_and_scheduling
+  aliases:
+  - 战术推理文本
+  - Tactical Reasoning
+  - reasoning
+  definition: LLM 返回并由解析器透传的推理文本。
+  intuitive_explanation: LLM 返回并由解析器透传的推理文本。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.reasoning
+  provenance:
+    source_layer: llm_output
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 119
+      line_end: 119
+    extraction_code:
+    - json_data.get("reasoning", "")
+    transformation_formula:
+    - reasoning=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      reasoning: 按公式得到
+    explanation: LLM 返回并由解析器透传的推理文本。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: LLM 返回并由解析器透传的推理文本。
+    status: code_reality
+    evidence_ids:
+    - action-reasoning-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-reasoning-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 119
+    line_end: 119
+    evidence_type: E1
+    claim: LLM 返回并由解析器透传的推理文本。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.subtype
+  canonical_name: subtype
+  names:
+    zh: 动作子类型
+    en: Action Subtype
+    code: subtype
+  category: action_schema_and_scheduling
+  aliases:
+  - 动作子类型
+  - Action Subtype
+  - subtype
+  definition: BUILD 的建筑类型或 TRAIN 的单位类型。
+  intuitive_explanation: BUILD 的建筑类型或 TRAIN 的单位类型。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.subtype
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 545
+      line_end: 545
+    extraction_code:
+    - sub_type = action.get("subtype", "")
+    transformation_formula:
+    - subtype=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      subtype: 按公式得到
+    explanation: BUILD 的建筑类型或 TRAIN 的单位类型。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: BUILD 的建筑类型或 TRAIN 的单位类型。
+    status: code_reality
+    evidence_ids:
+    - action-subtype-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-subtype-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 545
+    line_end: 545
+    evidence_type: E1
+    claim: BUILD 的建筑类型或 TRAIN 的单位类型。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.target
+  canonical_name: target
+  names:
+    zh: 动作目标
+    en: Action Target
+    code: target
+  category: action_schema_and_scheduling
+  aliases:
+  - 动作目标
+  - Action Target
+  - target
+  definition: 单位 ID、二维坐标或空目标，取决于 target_type。
+  intuitive_explanation: 单位 ID、二维坐标或空目标，取决于 target_type。
+  interface:
+    data_type: object
+    python_type: dict
+    shape:
+      kind: object
+      dimensions: []
+      description: 键值对象。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.target
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 298
+      line_end: 298
+    extraction_code:
+    - if "target" not in action
+    transformation_formula:
+    - target=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      target: 按公式得到
+    explanation: 单位 ID、二维坐标或空目标，取决于 target_type。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 单位 ID、二维坐标或空目标，取决于 target_type。
+    status: code_reality
+    evidence_ids:
+    - action-target-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-target-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 298
+    line_end: 298
+    evidence_type: E1
+    claim: 单位 ID、二维坐标或空目标，取决于 target_type。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.target_type
+  canonical_name: target_type
+  names:
+    zh: 目标类型
+    en: Target Type
+    code: target_type
+  category: action_schema_and_scheduling
+  aliases:
+  - 目标类型
+  - Target Type
+  - target_type
+  definition: 只允许 unit、pos、none。
+  intuitive_explanation: 只允许 unit、pos、none。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: known
+      values:
+      - unit
+      - pos
+      - none
+      description: 当前代码显式使用的枚举值。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.target_type
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 34
+      line_end: 34
+    extraction_code:
+    - VALID_TARGET_TYPES =
+    transformation_formula:
+    - target_type=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      target_type: 按公式得到
+    explanation: 只允许 unit、pos、none。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 只允许 unit、pos、none。
+    status: code_reality
+    evidence_ids:
+    - action-target-type-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-target-type-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 34
+    line_end: 34
+    evidence_type: E1
+    claim: 只允许 unit、pos、none。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.type
+  canonical_name: action
+  names:
+    zh: 动作类型
+    en: Action Type
+    code: action
+  category: action_schema_and_scheduling
+  aliases:
+  - 动作类型
+  - Action Type
+  - action
+  definition: 只允许 MOVE、ATTACK、BUILD、TRAIN。
+  intuitive_explanation: 只允许 MOVE、ATTACK、BUILD、TRAIN。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: known
+      values:
+      - MOVE
+      - ATTACK
+      - BUILD
+      - TRAIN
+      description: 当前代码显式使用的枚举值。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.action
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 26
+      line_end: 26
+    extraction_code:
+    - VALID_ACTIONS = {
+    transformation_formula:
+    - action=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      action: 按公式得到
+    explanation: 只允许 MOVE、ATTACK、BUILD、TRAIN。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 只允许 MOVE、ATTACK、BUILD、TRAIN。
+    status: code_reality
+    evidence_ids:
+    - action-type-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-type-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 26
+    line_end: 26
+    evidence_type: E1
+    claim: 只允许 MOVE、ATTACK、BUILD、TRAIN。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: action.units
+  canonical_name: units
+  names:
+    zh: 执行单位列表
+    en: Acting Units
+    code: units
+  category: action_schema_and_scheduling
+  aliases:
+  - 执行单位列表
+  - Acting Units
+  - units
+  definition: 动作涉及的 ABox 实例 ID 列表。
+  intuitive_explanation: 动作涉及的 ABox 实例 ID 列表。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: sequence
+      dimensions: []
+      description: 可变长度序列。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - validated_action.units
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/response_parser.py
+      symbol: ResponseParser.parse / validation
+      line_start: 227
+      line_end: 227
+    extraction_code:
+    - if "units" not in action
+    transformation_formula:
+    - units=parser output/validation result
+  consumers:
+  - name: STORM 当前实现
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      units: 按公式得到
+    explanation: 动作涉及的 ABox 实例 ID 列表。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 动作涉及的 ABox 实例 ID 列表。
+    status: code_reality
+    evidence_ids:
+    - action-units-code
+  limitations:
+  - 这是 STORM 动作约定，不是 PySC2 完整 ActionSpec。
+  known_issues: []
+  evidence:
+  - id: action-units-code
+    path: agents/response_parser.py
+    symbol: ResponseParser.parse / validation
+    line_start: 227
+    line_end: 227
+    evidence_type: E1
+    claim: 动作涉及的 ABox 实例 ID 列表。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: pysc2.attack.function_id
+  canonical_name: function_id
+  names:
+    zh: ATTACK 函数编号
+    en: ATTACK Function ID
+    code: function_id
+  category: pysc2_function_call
+  aliases:
+  - ATTACK 函数编号
+  - ATTACK Function ID
+  - function_id
+  definition: ATTACK 使用编号 3。
+  intuitive_explanation: ATTACK 使用编号 3。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - FunctionCall.function
+  provenance:
+    source_layer: executor_mapping
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/action_executor.py
+      symbol: ActionExecutor.execute
+      line_start: 162
+      line_end: 162
+    extraction_code:
+    - 3, arguments=args, raw=True
+    transformation_formula:
+    - ATTACK 使用编号 3。
+  consumers:
+  - name: STORM 当前实现
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      function_id: 按公式得到
+    explanation: ATTACK 使用编号 3。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: ATTACK 使用编号 3。
+    status: code_reality
+    evidence_ids:
+    - pysc2-attack-function-id-code
+  limitations:
+  - 硬编码编号和参数顺序尚未对安装中的 PySC2 ActionSpec 做运行时核验。
+  known_issues:
+  - id: pysc2_function_id_version
+    description: FunctionCall 编号可能受 PySC2 版本和动作表影响。
+    status: needs_verification
+    evidence_ids:
+    - pysc2-attack-function-id-code
+  evidence:
+  - id: pysc2-attack-function-id-code
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    line_start: 162
+    line_end: 162
+    evidence_type: E1
+    claim: ATTACK 使用编号 3。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: pysc2.build.function_id
+  canonical_name: function_id
+  names:
+    zh: BUILD 函数编号
+    en: BUILD Function ID
+    code: function_id
+  category: pysc2_function_call
+  aliases:
+  - BUILD 函数编号
+  - BUILD Function ID
+  - function_id
+  definition: BUILD 按 subtype 查询 BUILD_CALLS。
+  intuitive_explanation: BUILD 按 subtype 查询 BUILD_CALLS。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - FunctionCall.function
+  provenance:
+    source_layer: executor_mapping
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/action_executor.py
+      symbol: ActionExecutor.execute
+      line_start: 210
+      line_end: 210
+    extraction_code:
+    - BUILD_CALLS[subtype]
+    transformation_formula:
+    - BUILD 按 subtype 查询 BUILD_CALLS。
+  consumers:
+  - name: STORM 当前实现
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      function_id: 按公式得到
+    explanation: BUILD 按 subtype 查询 BUILD_CALLS。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: BUILD 按 subtype 查询 BUILD_CALLS。
+    status: code_reality
+    evidence_ids:
+    - pysc2-build-function-id-code
+  limitations:
+  - 硬编码编号和参数顺序尚未对安装中的 PySC2 ActionSpec 做运行时核验。
+  known_issues:
+  - id: pysc2_function_id_version
+    description: FunctionCall 编号可能受 PySC2 版本和动作表影响。
+    status: needs_verification
+    evidence_ids:
+    - pysc2-build-function-id-code
+  evidence:
+  - id: pysc2-build-function-id-code
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    line_start: 210
+    line_end: 210
+    evidence_type: E1
+    claim: BUILD 按 subtype 查询 BUILD_CALLS。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: pysc2.function.queued
+  canonical_name: queued
+  names:
+    zh: 排队标志
+    en: Queued Flag
+    code: queued
+  category: pysc2_function_call
+  aliases:
+  - 排队标志
+  - Queued Flag
+  - queued
+  definition: MOVE/ATTACK/BUILD 当前均传 [0]。
+  intuitive_explanation: MOVE/ATTACK/BUILD 当前均传 [0]。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - FunctionCall.function
+  provenance:
+    source_layer: executor_mapping
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/action_executor.py
+      symbol: ActionExecutor.execute
+      line_start: 160
+      line_end: 160
+    extraction_code:
+    - args = [[0], action["units"], action["target"]]
+    transformation_formula:
+    - MOVE/ATTACK/BUILD 当前均传 [0]。
+  consumers:
+  - name: STORM 当前实现
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      queued: 按公式得到
+    explanation: MOVE/ATTACK/BUILD 当前均传 [0]。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: MOVE/ATTACK/BUILD 当前均传 [0]。
+    status: code_reality
+    evidence_ids:
+    - pysc2-function-queued-code
+  limitations:
+  - 硬编码编号和参数顺序尚未对安装中的 PySC2 ActionSpec 做运行时核验。
+  known_issues:
+  - id: pysc2_function_id_version
+    description: FunctionCall 编号可能受 PySC2 版本和动作表影响。
+    status: needs_verification
+    evidence_ids:
+    - pysc2-function-queued-code
+  evidence:
+  - id: pysc2-function-queued-code
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    line_start: 160
+    line_end: 160
+    evidence_type: E1
+    claim: MOVE/ATTACK/BUILD 当前均传 [0]。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: pysc2.function.raw_flag
+  canonical_name: raw
+  names:
+    zh: Raw FunctionCall 标志
+    en: Raw FunctionCall Flag
+    code: raw
+  category: pysc2_function_call
+  aliases:
+  - Raw FunctionCall 标志
+  - Raw FunctionCall Flag
+  - raw
+  definition: FunctionCall 使用 Raw 参数。
+  intuitive_explanation: FunctionCall 使用 Raw 参数。
+  interface:
+    data_type: boolean
+    python_type: bool
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: boolean
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - FunctionCall.raw
+  provenance:
+    source_layer: executor_mapping
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/action_executor.py
+      symbol: ActionExecutor.execute
+      line_start: 139
+      line_end: 139
+    extraction_code:
+    - raw=True
+    transformation_formula:
+    - FunctionCall 使用 Raw 参数。
+  consumers:
+  - name: STORM 当前实现
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      raw: 按公式得到
+    explanation: FunctionCall 使用 Raw 参数。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: FunctionCall 使用 Raw 参数。
+    status: code_reality
+    evidence_ids:
+    - pysc2-function-raw-flag-code
+  limitations:
+  - 硬编码编号和参数顺序尚未对安装中的 PySC2 ActionSpec 做运行时核验。
+  known_issues:
+  - id: pysc2_function_id_version
+    description: FunctionCall 编号可能受 PySC2 版本和动作表影响。
+    status: needs_verification
+    evidence_ids:
+    - pysc2-function-raw-flag-code
+  evidence:
+  - id: pysc2-function-raw-flag-code
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    line_start: 139
+    line_end: 139
+    evidence_type: E1
+    claim: FunctionCall 使用 Raw 参数。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: pysc2.function.target
+  canonical_name: target
+  names:
+    zh: 目标参数
+    en: Target Argument
+    code: target
+  category: pysc2_function_call
+  aliases:
+  - 目标参数
+  - Target Argument
+  - target
+  definition: MOVE/BUILD 使用坐标；ATTACK 可使用目标 tag。
+  intuitive_explanation: MOVE/BUILD 使用坐标；ATTACK 可使用目标 tag。
+  interface:
+    data_type: object
+    python_type: dict
+    shape:
+      kind: object
+      dimensions: []
+      description: 键值对象。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - FunctionCall.arguments.target
+  provenance:
+    source_layer: executor_mapping
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/action_executor.py
+      symbol: ActionExecutor.execute
+      line_start: 160
+      line_end: 160
+    extraction_code:
+    - action["target"]
+    transformation_formula:
+    - MOVE/BUILD 使用坐标；ATTACK 可使用目标 tag。
+  consumers:
+  - name: STORM 当前实现
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      target: 按公式得到
+    explanation: MOVE/BUILD 使用坐标；ATTACK 可使用目标 tag。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: MOVE/BUILD 使用坐标；ATTACK 可使用目标 tag。
+    status: code_reality
+    evidence_ids:
+    - pysc2-function-target-code
+  limitations:
+  - 硬编码编号和参数顺序尚未对安装中的 PySC2 ActionSpec 做运行时核验。
+  known_issues:
+  - id: pysc2_function_id_version
+    description: FunctionCall 编号可能受 PySC2 版本和动作表影响。
+    status: needs_verification
+    evidence_ids:
+    - pysc2-function-target-code
+  evidence:
+  - id: pysc2-function-target-code
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    line_start: 160
+    line_end: 160
+    evidence_type: E1
+    claim: MOVE/BUILD 使用坐标；ATTACK 可使用目标 tag。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: pysc2.function.unit_tags
+  canonical_name: unit_tags
+  names:
+    zh: 单位标签参数
+    en: Unit Tags Argument
+    code: unit_tags
+  category: pysc2_function_call
+  aliases:
+  - 单位标签参数
+  - Unit Tags Argument
+  - unit_tags
+  definition: 经验证和映射的 tag 列表。
+  intuitive_explanation: 经验证和映射的 tag 列表。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: sequence
+      dimensions: []
+      description: 可变长度序列。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - FunctionCall.arguments.unit_tags
+  provenance:
+    source_layer: executor_mapping
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/action_executor.py
+      symbol: ActionExecutor.execute
+      line_start: 160
+      line_end: 160
+    extraction_code:
+    - action["units"]
+    transformation_formula:
+    - 经验证和映射的 tag 列表。
+  consumers:
+  - name: STORM 当前实现
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      unit_tags: 按公式得到
+    explanation: 经验证和映射的 tag 列表。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 经验证和映射的 tag 列表。
+    status: code_reality
+    evidence_ids:
+    - pysc2-function-unit-tags-code
+  limitations:
+  - 硬编码编号和参数顺序尚未对安装中的 PySC2 ActionSpec 做运行时核验。
+  known_issues:
+  - id: pysc2_function_id_version
+    description: FunctionCall 编号可能受 PySC2 版本和动作表影响。
+    status: needs_verification
+    evidence_ids:
+    - pysc2-function-unit-tags-code
+  evidence:
+  - id: pysc2-function-unit-tags-code
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    line_start: 160
+    line_end: 160
+    evidence_type: E1
+    claim: 经验证和映射的 tag 列表。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: pysc2.move.function_id
+  canonical_name: function_id
+  names:
+    zh: MOVE 函数编号
+    en: MOVE Function ID
+    code: function_id
+  category: pysc2_function_call
+  aliases:
+  - MOVE 函数编号
+  - MOVE Function ID
+  - function_id
+  definition: MOVE 使用编号 13。
+  intuitive_explanation: MOVE 使用编号 13。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - FunctionCall.function
+  provenance:
+    source_layer: executor_mapping
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/action_executor.py
+      symbol: ActionExecutor.execute
+      line_start: 162
+      line_end: 162
+    extraction_code:
+    - 13, arguments=args, raw=True
+    transformation_formula:
+    - MOVE 使用编号 13。
+  consumers:
+  - name: STORM 当前实现
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      function_id: 按公式得到
+    explanation: MOVE 使用编号 13。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: MOVE 使用编号 13。
+    status: code_reality
+    evidence_ids:
+    - pysc2-move-function-id-code
+  limitations:
+  - 硬编码编号和参数顺序尚未对安装中的 PySC2 ActionSpec 做运行时核验。
+  known_issues:
+  - id: pysc2_function_id_version
+    description: FunctionCall 编号可能受 PySC2 版本和动作表影响。
+    status: needs_verification
+    evidence_ids:
+    - pysc2-move-function-id-code
+  evidence:
+  - id: pysc2-move-function-id-code
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    line_start: 162
+    line_end: 162
+    evidence_type: E1
+    claim: MOVE 使用编号 13。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: pysc2.no_op.function_id
+  canonical_name: function_id
+  names:
+    zh: No-op 函数编号
+    en: No-op Function ID
+    code: function_id
+  category: pysc2_function_call
+  aliases:
+  - No-op 函数编号
+  - No-op Function ID
+  - function_id
+  definition: 空动作返回编号 0。
+  intuitive_explanation: 空动作返回编号 0。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - FunctionCall.function
+  provenance:
+    source_layer: executor_mapping
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/action_executor.py
+      symbol: ActionExecutor.execute
+      line_start: 139
+      line_end: 139
+    extraction_code:
+    - init_with_validation(0, arguments=[], raw=True)
+    transformation_formula:
+    - 空动作返回编号 0。
+  consumers:
+  - name: STORM 当前实现
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      function_id: 按公式得到
+    explanation: 空动作返回编号 0。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 空动作返回编号 0。
+    status: code_reality
+    evidence_ids:
+    - pysc2-no-op-function-id-code
+  limitations:
+  - 硬编码编号和参数顺序尚未对安装中的 PySC2 ActionSpec 做运行时核验。
+  known_issues:
+  - id: pysc2_function_id_version
+    description: FunctionCall 编号可能受 PySC2 版本和动作表影响。
+    status: needs_verification
+    evidence_ids:
+    - pysc2-no-op-function-id-code
+  evidence:
+  - id: pysc2-no-op-function-id-code
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    line_start: 139
+    line_end: 139
+    evidence_type: E1
+    claim: 空动作返回编号 0。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: pysc2.train.function_id
+  canonical_name: function_id
+  names:
+    zh: TRAIN 函数编号
+    en: TRAIN Function ID
+    code: function_id
+  category: pysc2_function_call
+  aliases:
+  - TRAIN 函数编号
+  - TRAIN Function ID
+  - function_id
+  definition: TRAIN 按 subtype 查询 TRAIN_CALLS。
+  intuitive_explanation: TRAIN 按 subtype 查询 TRAIN_CALLS。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - FunctionCall.function
+  provenance:
+    source_layer: executor_mapping
+    derivation_kind: validated
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/action_executor.py
+      symbol: ActionExecutor.execute
+      line_start: 236
+      line_end: 236
+    extraction_code:
+    - TRAIN_CALLS[subtype]
+    transformation_formula:
+    - TRAIN 按 subtype 查询 TRAIN_CALLS。
+  consumers:
+  - name: STORM 当前实现
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_action
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      function_id: 按公式得到
+    explanation: TRAIN 按 subtype 查询 TRAIN_CALLS。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: TRAIN 按 subtype 查询 TRAIN_CALLS。
+    status: code_reality
+    evidence_ids:
+    - pysc2-train-function-id-code
+  limitations:
+  - 硬编码编号和参数顺序尚未对安装中的 PySC2 ActionSpec 做运行时核验。
+  known_issues:
+  - id: pysc2_function_id_version
+    description: FunctionCall 编号可能受 PySC2 版本和动作表影响。
+    status: needs_verification
+    evidence_ids:
+    - pysc2-train-function-id-code
+  evidence:
+  - id: pysc2-train-function-id-code
+    path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    line_start: 236
+    line_end: 236
+    evidence_type: E1
+    claim: TRAIN 按 subtype 查询 TRAIN_CALLS。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。

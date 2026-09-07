@@ -1,0 +1,7 @@
+﻿benchmark,model,metric,actual,minimum,passed
+0.6.0,deepseek-v4-flash,behavior_accuracy,0.916667,0.85,True
+0.6.0,deepseek-v4-flash,variable_hit_rate,0.840278,0.85,False
+0.6.0,deepseek-v4-flash,variable_precision,0.946667,0.9,True
+0.6.0,deepseek-v4-flash,evidence_hit_rate,0.960556,0.9,True
+0.6.0,deepseek-v4-flash,refusal_accuracy,0.983333,0.9,True
+0.6.0,deepseek-v4-flash,native_json_compliance_rate,0.98,0.99,False

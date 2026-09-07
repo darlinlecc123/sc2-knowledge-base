@@ -1,0 +1,100 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema_version: 1.0.0
+acceptance_date: '2026-09-07'
+version: 0.1.0
+verdict: conditional_go
+verdict_scopes:
+  controlled_internal_llm_agent_use: conditional_go
+  paper_variable_lookup: conditional_go
+  code_assistance: conditional_go
+  autonomous_production_use: no_go
+  public_github_release: no_go
+execution_boundary:
+  external_api_called: false
+  sc2_executed: false
+  external_account_accessed: false
+  uploaded: false
+  model_results_reused_not_rerun: true
+inventory:
+  formal_variables: 135
+  relations: 1430
+  known_issues: 11
+  release_packages: 2
+record_completeness:
+  records_checked: 135
+  definitions_present: 135
+  interfaces_present: 135
+  implementation_locations_present: 135
+  evidence_present: 135
+  status: passed
+source_sample_audit:
+  sampled_items: 14
+  matched_current_source: 14
+  status: passed
+natural_language_sample:
+  total: 7
+  passed: 5
+  conditional: 1
+  failed: 1
+  failed_cases:
+    - query: 环境每次决策跨多少游戏步
+      expected_variable: environment.step_mul
+      actual_status: not_found
+  conditional_cases:
+    - query: SWM overall error 的计算公式
+      result: UTF-8 下召回正确，但 Windows 默认 GBK JSON 输出可能 UnicodeEncodeError
+offline_tests:
+  total: 21
+  passed: 20
+  failed: 1
+  timeout: 0
+  failed_tests:
+    - name: validate_step16.py
+      reason: 仍断言 status=planned，与已经执行的步骤16状态不一致
+  details: knowledge/reports/19_offline_test_results.json
+clean_room_release:
+  minimal:
+    archive_integrity: passed
+    cli_query: passed
+    first_variable: raw_unit.health
+  full:
+    archive_integrity: passed
+    cli_query: passed
+    included_test_direct_execution: failed
+    failure: "ModuleNotFoundError: No module named 'sc2kb'"
+model_evaluation_summary:
+  source: existing_executed_results_2026-09-06
+  rerun_in_step19: false
+  challenge_v0_6_first_blind:
+    behavior_accuracy: 0.9167
+    variable_hit_rate: 0.8403
+    variable_precision: 0.9467
+    evidence_hit_rate: 0.9606
+    refusal_accuracy: 0.9833
+    native_json_compliance_rate: 0.98
+    all_predeclared_gates_passed: false
+  post_v0_6_three_conditions:
+    no_kb_behavior_accuracy: 0.25
+    full_context_behavior_accuracy: 0.5667
+    rag_behavior_accuracy: 0.90
+    preferred_condition: retrieval_augmented
+issue_counts:
+  blocker: 1
+  severe: 4
+  general: 4
+  suggestion: 3
+go_conditions:
+  - 默认使用 RAG，并保留 grounding 与范围外拒答
+  - 启用 UTF-8 或修复 Windows CLI 输出编码
+  - 修复 full 包测试的路径和安装可移植性
+  - 在新冻结题集上使 variable_hit_rate >= 0.85 且 native_json_compliance_rate >= 0.99
+  - 公开发布前由负责人确认正式许可证、版权主体和作者列表
+post_acceptance_updates:
+  - date: '2026-09-07'
+    type: license_decision
+    value: Apache-2.0
+    note: historical verdict above is preserved
+  - date: '2026-09-07'
+    type: github_target_authorized
+    value: https://github.com/darlinlecc123/sc2-knowledge-base
+    note: publication must retain known limitations

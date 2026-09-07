@@ -1,0 +1,3083 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema: knowledge/schemas/variable.schema.json
+schema_version: 1.0.0
+generated_at: '2026-09-03'
+records:
+- schema_version: 1.0.0
+  id: abox.graph.enemy_count
+  canonical_name: enemy_count
+  names:
+    zh: ABox 敌军节点计数
+    en: ABox Enemy Node Count
+    code: enemy_count
+  category: abox_dynamic
+  aliases:
+  - ABox 敌军节点计数
+  - ABox Enemy Node Count
+  - enemy_count
+  definition: 当前 ABox 中 alliance 等于 4 的敌军单位节点数缓存。
+  intuitive_explanation: 当前 ABox 中 alliance 等于 4 的敌军单位节点数缓存。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.enemy_count
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.unit.alliance
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 941
+      line_end: 941
+    extraction_code:
+    - self.enemy_count = enemy_count
+    transformation_formula:
+    - enemy_count = len(enemy_units)
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      enemy_count: 按公式得到
+    explanation: 当前 ABox 中 alliance 等于 4 的敌军单位节点数缓存。
+  relationships:
+  - relation: derived_from
+    target_id: abox.unit.alliance
+    description: 按当前 ABox 节点 alliance 过滤并计数。
+  design_intent: []
+  code_reality:
+  - claim: 当前 ABox 中 alliance 等于 4 的敌军单位节点数缓存。
+    status: code_reality
+    evidence_ids:
+    - abox-graph-enemy-count-code
+  limitations:
+  - 该缓存会在创建、删除节点或生成战术摘要时更新；不要与 derived.tactical.enemy_count 合并。
+  known_issues: []
+  evidence:
+  - id: abox-graph-enemy-count-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 941
+    line_end: 941
+    evidence_type: E1
+    claim: 当前 ABox 中 alliance 等于 4 的敌军单位节点数缓存。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.graph.step_count
+  canonical_name: step_count
+  names:
+    zh: ABox 更新步数
+    en: ABox Update Step Count
+    code: step_count
+  category: abox_dynamic
+  aliases:
+  - ABox 更新步数
+  - ABox Update Step Count
+  - step_count
+  definition: BattlefieldGraph 每次接收一批 raw_units 时递增的图更新序号。
+  intuitive_explanation: BattlefieldGraph 每次接收一批 raw_units 时递增的图更新序号。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.step_count
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: computed
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.update_from_observation
+      line_start: 113
+      line_end: 113
+    extraction_code:
+    - self.step_count += 1
+    transformation_formula:
+    - step_count = previous_step_count + 1
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.update_from_observation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      step_count: 按公式得到
+    explanation: BattlefieldGraph 每次接收一批 raw_units 时递增的图更新序号。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: BattlefieldGraph 每次接收一批 raw_units 时递增的图更新序号。
+    status: code_reality
+    evidence_ids:
+    - abox-graph-step-count-code
+  limitations:
+  - 这是 BattlefieldGraph 更新次数，不等同于 SC2 game loop，也不等同于 PySC2 TimeStep 数。
+  known_issues: []
+  evidence:
+  - id: abox-graph-step-count-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.update_from_observation
+    line_start: 113
+    line_end: 113
+    evidence_type: E1
+    claim: BattlefieldGraph 每次接收一批 raw_units 时递增的图更新序号。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.relation.edge_class
+  canonical_name: edge_class
+  names:
+    zh: 关系类别
+    en: Relation Edge Class
+    code: edge_class
+  category: abox_dynamic
+  aliases:
+  - 关系类别
+  - Relation Edge Class
+  - edge_class
+  definition: ABox 边是静态关系副本还是动态动作关系。
+  intuitive_explanation: ABox 边是静态关系副本还是动态动作关系。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: known
+      values:
+      - static
+      - dynamic
+      description: 当前代码显式使用的枚举值。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.edges[*].edge_class
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+      line_start: 417
+      line_end: 417
+    extraction_code:
+    - edge_class="dynamic"
+    transformation_formula:
+    - edge_class 按当前 add_edge 调用参数写入
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      edge_class: 按公式得到
+    explanation: ABox 边是静态关系副本还是动态动作关系。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: ABox 边是静态关系副本还是动态动作关系。
+    status: code_reality
+    evidence_ids:
+    - abox-relation-edge-class-code
+  limitations:
+  - NetworkX DiGraph 对同一 source-target 节点对只保留一组边属性；后写入关系可能更新既有边。
+  known_issues: []
+  evidence:
+  - id: abox-relation-edge-class-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    line_start: 417
+    line_end: 417
+    evidence_type: E1
+    claim: ABox 边是静态关系副本还是动态动作关系。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.relation.edge_type
+  canonical_name: edge_type
+  names:
+    zh: 关系类型
+    en: Relation Edge Type
+    code: edge_type
+  category: abox_dynamic
+  aliases:
+  - 关系类型
+  - Relation Edge Type
+  - edge_type
+  definition: ABox 边的关系类型；动态关系由 relation_type 参数写入。
+  intuitive_explanation: ABox 边的关系类型；动态关系由 relation_type 参数写入。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.edges[*].edge_type
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+      line_start: 416
+      line_end: 416
+    extraction_code:
+    - edge_type=relation_type
+    transformation_formula:
+    - edge_type 按当前 add_edge 调用参数写入
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      edge_type: 按公式得到
+    explanation: ABox 边的关系类型；动态关系由 relation_type 参数写入。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: ABox 边的关系类型；动态关系由 relation_type 参数写入。
+    status: code_reality
+    evidence_ids:
+    - abox-relation-edge-type-code
+  limitations:
+  - NetworkX DiGraph 对同一 source-target 节点对只保留一组边属性；后写入关系可能更新既有边。
+  known_issues: []
+  evidence:
+  - id: abox-relation-edge-type-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    line_start: 416
+    line_end: 416
+    evidence_type: E1
+    claim: ABox 边的关系类型；动态关系由 relation_type 参数写入。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.relation.effectiveness
+  canonical_name: effectiveness
+  names:
+    zh: 关系有效性
+    en: Relation Effectiveness
+    code: effectiveness
+  category: abox_dynamic
+  aliases:
+  - 关系有效性
+  - Relation Effectiveness
+  - effectiveness
+  definition: 从 TBox 克制关系复制到 ABox 静态边的有效性描述。
+  intuitive_explanation: 从 TBox 克制关系复制到 ABox 静态边的有效性描述。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.edges[*].effectiveness
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - tbox.relation.edge
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+      line_start: 343
+      line_end: 343
+    extraction_code:
+    - effectiveness=relation["effectiveness"]
+    transformation_formula:
+    - effectiveness 按当前 add_edge 调用参数写入
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      effectiveness: 按公式得到
+    explanation: 从 TBox 克制关系复制到 ABox 静态边的有效性描述。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.relation.edge
+    description: 该边字段由上游图状态或 TBox 关系提供。
+  design_intent: []
+  code_reality:
+  - claim: 从 TBox 克制关系复制到 ABox 静态边的有效性描述。
+    status: code_reality
+    evidence_ids:
+    - abox-relation-effectiveness-code
+  limitations:
+  - NetworkX DiGraph 对同一 source-target 节点对只保留一组边属性；后写入关系可能更新既有边。
+  known_issues: []
+  evidence:
+  - id: abox-relation-effectiveness-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    line_start: 343
+    line_end: 343
+    evidence_type: E1
+    claim: 从 TBox 克制关系复制到 ABox 静态边的有效性描述。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.relation.reason
+  canonical_name: reason
+  names:
+    zh: 关系原因
+    en: Relation Reason
+    code: reason
+  category: abox_dynamic
+  aliases:
+  - 关系原因
+  - Relation Reason
+  - reason
+  definition: 从 TBox 克制关系复制到 ABox 静态边的原因说明。
+  intuitive_explanation: 从 TBox 克制关系复制到 ABox 静态边的原因说明。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.edges[*].reason
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - tbox.relation.edge
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+      line_start: 342
+      line_end: 342
+    extraction_code:
+    - reason=relation["reason"]
+    transformation_formula:
+    - reason 按当前 add_edge 调用参数写入
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      reason: 按公式得到
+    explanation: 从 TBox 克制关系复制到 ABox 静态边的原因说明。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.relation.edge
+    description: 该边字段由上游图状态或 TBox 关系提供。
+  design_intent: []
+  code_reality:
+  - claim: 从 TBox 克制关系复制到 ABox 静态边的原因说明。
+    status: code_reality
+    evidence_ids:
+    - abox-relation-reason-code
+  limitations:
+  - NetworkX DiGraph 对同一 source-target 节点对只保留一组边属性；后写入关系可能更新既有边。
+  known_issues: []
+  evidence:
+  - id: abox-relation-reason-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    line_start: 342
+    line_end: 342
+    evidence_type: E1
+    claim: 从 TBox 克制关系复制到 ABox 静态边的原因说明。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.relation.source_node
+  canonical_name: source_node
+  names:
+    zh: 关系源节点
+    en: Relation Source Node
+    code: source_node
+  category: abox_dynamic
+  aliases:
+  - 关系源节点
+  - Relation Source Node
+  - source_node
+  definition: ABox 有向关系边的起点实例节点 ID。
+  intuitive_explanation: ABox 有向关系边的起点实例节点 ID。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.edges[*].source_node
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+      line_start: 337
+      line_end: 337
+    extraction_code:
+    - self.abox.add_edge(
+    transformation_formula:
+    - source_node 按当前 add_edge 调用参数写入
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      source_node: 按公式得到
+    explanation: ABox 有向关系边的起点实例节点 ID。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: ABox 有向关系边的起点实例节点 ID。
+    status: code_reality
+    evidence_ids:
+    - abox-relation-source-node-code
+  limitations:
+  - NetworkX DiGraph 对同一 source-target 节点对只保留一组边属性；后写入关系可能更新既有边。
+  known_issues: []
+  evidence:
+  - id: abox-relation-source-node-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    line_start: 337
+    line_end: 337
+    evidence_type: E1
+    claim: ABox 有向关系边的起点实例节点 ID。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.relation.target_node
+  canonical_name: target_node
+  names:
+    zh: 关系目标节点
+    en: Relation Target Node
+    code: target_node
+  category: abox_dynamic
+  aliases:
+  - 关系目标节点
+  - Relation Target Node
+  - target_node
+  definition: ABox 有向关系边的终点实例节点 ID。
+  intuitive_explanation: ABox 有向关系边的终点实例节点 ID。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.edges[*].target_node
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+      line_start: 337
+      line_end: 337
+    extraction_code:
+    - self.abox.add_edge(
+    transformation_formula:
+    - target_node 按当前 add_edge 调用参数写入
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      target_node: 按公式得到
+    explanation: ABox 有向关系边的终点实例节点 ID。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: ABox 有向关系边的终点实例节点 ID。
+    status: code_reality
+    evidence_ids:
+    - abox-relation-target-node-code
+  limitations:
+  - NetworkX DiGraph 对同一 source-target 节点对只保留一组边属性；后写入关系可能更新既有边。
+  known_issues: []
+  evidence:
+  - id: abox-relation-target-node-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    line_start: 337
+    line_end: 337
+    evidence_type: E1
+    claim: ABox 有向关系边的终点实例节点 ID。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.relation.timestamp
+  canonical_name: timestamp
+  names:
+    zh: 动态关系时间戳
+    en: Dynamic Relation Timestamp
+    code: timestamp
+  category: abox_dynamic
+  aliases:
+  - 动态关系时间戳
+  - Dynamic Relation Timestamp
+  - timestamp
+  definition: 动态 ABox 关系创建时记录的 BattlefieldGraph.step_count。
+  intuitive_explanation: 动态 ABox 关系创建时记录的 BattlefieldGraph.step_count。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: ABox update step
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.edges[*].timestamp
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.graph.step_count
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+      line_start: 418
+      line_end: 418
+    extraction_code:
+    - timestamp=self.step_count
+    transformation_formula:
+    - timestamp 按当前 add_edge 调用参数写入
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      timestamp: 按公式得到
+    explanation: 动态 ABox 关系创建时记录的 BattlefieldGraph.step_count。
+  relationships:
+  - relation: derived_from
+    target_id: abox.graph.step_count
+    description: 该边字段由上游图状态或 TBox 关系提供。
+  design_intent: []
+  code_reality:
+  - claim: 动态 ABox 关系创建时记录的 BattlefieldGraph.step_count。
+    status: code_reality
+    evidence_ids:
+    - abox-relation-timestamp-code
+  limitations:
+  - NetworkX DiGraph 对同一 source-target 节点对只保留一组边属性；后写入关系可能更新既有边。
+  known_issues: []
+  evidence:
+  - id: abox-relation-timestamp-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._replicate_static_relations / add_dynamic_relation
+    line_start: 418
+    line_end: 418
+    evidence_type: E1
+    claim: 动态 ABox 关系创建时记录的 BattlefieldGraph.step_count。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.alliance
+  canonical_name: alliance
+  names:
+    zh: 阵营编码
+    en: Alliance Code
+    code: alliance
+  category: abox_dynamic
+  aliases:
+  - 阵营编码
+  - Alliance Code
+  - alliance
+  definition: 创建 ABox 单位实例时写入的 alliance 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 alliance 属性。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].alliance
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - raw_unit.alliance
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 189
+      line_end: 189
+    extraction_code:
+    - '"alliance": raw_unit["alliance"]'
+    transformation_formula:
+    - abox.alliance=raw_unit["alliance"]
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      alliance: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 alliance 属性。
+  relationships:
+  - relation: derived_from
+    target_id: raw_unit.alliance
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 alliance 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-alliance-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-alliance-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 189
+    line_end: 189
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 alliance 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.armor
+  canonical_name: armor
+  names:
+    zh: ABox armor 字段
+    en: ABox Armor Field
+    code: armor
+  category: abox_dynamic
+  aliases:
+  - ABox armor 字段
+  - ABox Armor Field
+  - armor
+  definition: 创建 ABox 单位实例时写入的 armor 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 armor 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].armor
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - raw_unit.shield
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 201
+      line_end: 201
+    extraction_code:
+    - '"armor": raw_unit.get("shield", 0)'
+    transformation_formula:
+    - abox.armor=raw_unit.get("shield", 0)
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      armor: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 armor 属性。
+  relationships:
+  - relation: derived_from
+    target_id: raw_unit.shield
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 armor 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-armor-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  - 该字段实际承载护盾值或护盾比例，不能按静态护甲解释。
+  known_issues:
+  - id: abox_armor_is_shield
+    description: 当前代码把 raw_unit.shield 写入 armor，字段名与来源语义不一致。
+    status: needs_verification
+    evidence_ids:
+    - abox-unit-armor-code
+  evidence:
+  - id: abox-unit-armor-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 201
+    line_end: 201
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 armor 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.armor_ratio
+  canonical_name: armor_ratio
+  names:
+    zh: ABox armor_ratio 字段
+    en: ABox Armor Ratio Field
+    code: armor_ratio
+  category: abox_dynamic
+  aliases:
+  - ABox armor_ratio 字段
+  - ABox Armor Ratio Field
+  - armor_ratio
+  definition: 创建 ABox 单位实例时写入的 armor_ratio 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 armor_ratio 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].armor_ratio
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - raw_unit.shield_ratio
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 202
+      line_end: 202
+    extraction_code:
+    - '"armor_ratio": raw_unit.get("shield_ratio", 0)'
+    transformation_formula:
+    - abox.armor_ratio=raw_unit.get("shield_ratio", 0)
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      armor_ratio: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 armor_ratio 属性。
+  relationships:
+  - relation: derived_from
+    target_id: raw_unit.shield_ratio
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 armor_ratio 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-armor-ratio-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  - 该字段实际承载护盾值或护盾比例，不能按静态护甲解释。
+  known_issues:
+  - id: abox_armor_is_shield
+    description: 当前代码把 raw_unit.shield_ratio 写入 armor_ratio，字段名与来源语义不一致。
+    status: needs_verification
+    evidence_ids:
+    - abox-unit-armor-ratio-code
+  evidence:
+  - id: abox-unit-armor-ratio-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 202
+    line_end: 202
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 armor_ratio 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.attack_damage
+  canonical_name: attack_damage
+  names:
+    zh: 攻击伤害
+    en: Attack Damage
+    code: attack_damage
+  category: abox_dynamic
+  aliases:
+  - 攻击伤害
+  - Attack Damage
+  - attack_damage
+  definition: 创建 ABox 单位实例时写入的 attack_damage 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 attack_damage 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].attack_damage
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - tbox.entity.attack_damage
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 194
+      line_end: 194
+    extraction_code:
+    - '"attack_damage": static_info.get("attack_damage")'
+    transformation_formula:
+    - abox.attack_damage=static_info.get("attack_damage")
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      attack_damage: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 attack_damage 属性。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.entity.attack_damage
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 attack_damage 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-attack-damage-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-attack-damage-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 194
+    line_end: 194
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 attack_damage 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.attack_range
+  canonical_name: attack_range
+  names:
+    zh: 攻击射程
+    en: Attack Range
+    code: attack_range
+  category: abox_dynamic
+  aliases:
+  - 攻击射程
+  - Attack Range
+  - attack_range
+  definition: 创建 ABox 单位实例时写入的 attack_range 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 attack_range 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].attack_range
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - tbox.entity.attack_range
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 195
+      line_end: 195
+    extraction_code:
+    - '"attack_range": static_info.get("attack_range")'
+    transformation_formula:
+    - abox.attack_range=static_info.get("attack_range")
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      attack_range: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 attack_range 属性。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.entity.attack_range
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 attack_range 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-attack-range-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-attack-range-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 195
+    line_end: 195
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 attack_range 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.attack_speed
+  canonical_name: attack_speed
+  names:
+    zh: 攻击速度字段
+    en: Attack Speed
+    code: attack_speed
+  category: abox_dynamic
+  aliases:
+  - 攻击速度字段
+  - Attack Speed
+  - attack_speed
+  definition: 创建 ABox 单位实例时写入的 attack_speed 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 attack_speed 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].attack_speed
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - tbox.entity.attack_speed
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 196
+      line_end: 196
+    extraction_code:
+    - '"attack_speed": static_info.get("attack_speed")'
+    transformation_formula:
+    - abox.attack_speed=static_info.get("attack_speed")
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      attack_speed: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 attack_speed 属性。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.entity.attack_speed
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 attack_speed 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-attack-speed-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-attack-speed-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 196
+    line_end: 196
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 attack_speed 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.category
+  canonical_name: category
+  names:
+    zh: 实体类别
+    en: Entity Category
+    code: category
+  category: abox_dynamic
+  aliases:
+  - 实体类别
+  - Entity Category
+  - category
+  definition: 创建 ABox 单位实例时写入的 category 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 category 属性。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: true
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].category
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - tbox.entity.category
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 193
+      line_end: 193
+    extraction_code:
+    - '"category": static_info.get("category")'
+    transformation_formula:
+    - abox.category=static_info.get("category")
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      category: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 category 属性。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.entity.category
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 category 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-category-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-category-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 193
+    line_end: 193
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 category 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.description
+  canonical_name: description
+  names:
+    zh: 实体说明
+    en: Description
+    code: description
+  category: abox_dynamic
+  aliases:
+  - 实体说明
+  - Description
+  - description
+  definition: 创建 ABox 单位实例时写入的 description 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 description 属性。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: true
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].description
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - tbox.entity.description
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 206
+      line_end: 206
+    extraction_code:
+    - '"description": static_info.get("description")'
+    transformation_formula:
+    - abox.description=static_info.get("description")
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      description: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 description 属性。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.entity.description
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 description 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-description-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-description-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 206
+    line_end: 206
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 description 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.hp
+  canonical_name: hp
+  names:
+    zh: 实例生命值
+    en: Instance HP
+    code: hp
+  category: abox_dynamic
+  aliases:
+  - 实例生命值
+  - Instance HP
+  - hp
+  definition: 创建 ABox 单位实例时写入的 hp 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 hp 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].hp
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - raw_unit.health
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 199
+      line_end: 199
+    extraction_code:
+    - '"hp": raw_unit["health"]'
+    transformation_formula:
+    - abox.hp=raw_unit["health"]
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      hp: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 hp 属性。
+  relationships:
+  - relation: derived_from
+    target_id: raw_unit.health
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 hp 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-hp-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-hp-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 199
+    line_end: 199
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 hp 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.hp_ratio
+  canonical_name: hp_ratio
+  names:
+    zh: 实例生命比例
+    en: Instance HP Ratio
+    code: hp_ratio
+  category: abox_dynamic
+  aliases:
+  - 实例生命比例
+  - Instance HP Ratio
+  - hp_ratio
+  definition: 创建 ABox 单位实例时写入的 hp_ratio 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 hp_ratio 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].hp_ratio
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - raw_unit.health_ratio
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 200
+      line_end: 200
+    extraction_code:
+    - '"hp_ratio": raw_unit["health_ratio"]'
+    transformation_formula:
+    - abox.hp_ratio=raw_unit["health_ratio"]
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      hp_ratio: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 hp_ratio 属性。
+  relationships:
+  - relation: derived_from
+    target_id: raw_unit.health_ratio
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 hp_ratio 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-hp-ratio-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-hp-ratio-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 200
+    line_end: 200
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 hp_ratio 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.is_unknown
+  canonical_name: is_unknown
+  names:
+    zh: 未知实体标志
+    en: Unknown Entity Flag
+    code: is_unknown
+  category: abox_dynamic
+  aliases:
+  - 未知实体标志
+  - Unknown Entity Flag
+  - is_unknown
+  definition: 创建 ABox 单位实例时写入的 is_unknown 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 is_unknown 属性。
+  interface:
+    data_type: boolean
+    python_type: bool
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: boolean
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].is_unknown
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - raw_unit.unit_type
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 190
+      line_end: 190
+    extraction_code:
+    - '"is_unknown": is_unknown'
+    transformation_formula:
+    - abox.is_unknown=is_unknown
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      is_unknown: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 is_unknown 属性。
+  relationships:
+  - relation: derived_from
+    target_id: raw_unit.unit_type
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 is_unknown 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-is-unknown-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-is-unknown-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 190
+    line_end: 190
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 is_unknown 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.movement_speed
+  canonical_name: movement_speed
+  names:
+    zh: 移动速度
+    en: Movement Speed
+    code: movement_speed
+  category: abox_dynamic
+  aliases:
+  - 移动速度
+  - Movement Speed
+  - movement_speed
+  definition: 创建 ABox 单位实例时写入的 movement_speed 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 movement_speed 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].movement_speed
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - tbox.entity.movement_speed
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 197
+      line_end: 197
+    extraction_code:
+    - '"movement_speed": static_info.get("movement_speed")'
+    transformation_formula:
+    - abox.movement_speed=static_info.get("movement_speed")
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      movement_speed: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 movement_speed 属性。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.entity.movement_speed
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 movement_speed 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-movement-speed-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-movement-speed-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 197
+    line_end: 197
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 movement_speed 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.node_type
+  canonical_name: node_type
+  names:
+    zh: 节点类型
+    en: Node Type
+    code: node_type
+  category: abox_dynamic
+  aliases:
+  - 节点类型
+  - Node Type
+  - node_type
+  definition: 创建 ABox 单位实例时写入的 node_type 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 node_type 属性。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: true
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].node_type
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - tbox.entity.node_type
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 185
+      line_end: 185
+    extraction_code:
+    - '"node_type": static_info["node_type"]'
+    transformation_formula:
+    - abox.node_type=static_info["node_type"]
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      node_type: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 node_type 属性。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.entity.node_type
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 node_type 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-node-type-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-node-type-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 185
+    line_end: 185
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 node_type 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.position
+  canonical_name: position
+  names:
+    zh: 二维位置对象
+    en: 2D Position
+    code: position
+  category: abox_dynamic
+  aliases:
+  - 二维位置对象
+  - 2D Position
+  - position
+  definition: 创建 ABox 单位实例时写入的 position 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 position 属性。
+  interface:
+    data_type: object
+    python_type: dict
+    shape:
+      kind: object
+      dimensions: []
+      description: 键值对象。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].position
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - raw_unit.x
+    - raw_unit.y
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 203
+      line_end: 203
+    extraction_code:
+    - '"position": {"x": raw_unit["x"], "y": raw_unit["y"]}'
+    transformation_formula:
+    - 'abox.position={"x": raw_unit["x"], "y": raw_unit["y"]}'
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      position: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 position 属性。
+  relationships:
+  - relation: derived_from
+    target_id: raw_unit.x
+    description: 由该上游字段复制、改名或组合得到。
+  - relation: derived_from
+    target_id: raw_unit.y
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 position 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-position-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-position-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 203
+    line_end: 203
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 position 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.race
+  canonical_name: race
+  names:
+    zh: 种族
+    en: Race
+    code: race
+  category: abox_dynamic
+  aliases:
+  - 种族
+  - Race
+  - race
+  definition: 创建 ABox 单位实例时写入的 race 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 race 属性。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: true
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].race
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - tbox.entity.race
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 192
+      line_end: 192
+    extraction_code:
+    - '"race": static_info.get("race")'
+    transformation_formula:
+    - abox.race=static_info.get("race")
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      race: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 race 属性。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.entity.race
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 race 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-race-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-race-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 192
+    line_end: 192
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 race 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.tag
+  canonical_name: tag
+  names:
+    zh: 实例标签
+    en: Instance Tag
+    code: tag
+  category: abox_dynamic
+  aliases:
+  - 实例标签
+  - Instance Tag
+  - tag
+  definition: 创建 ABox 单位实例时写入的 tag 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 tag 属性。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].tag
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - raw_unit.tag
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 186
+      line_end: 186
+    extraction_code:
+    - '"tag": tag'
+    transformation_formula:
+    - abox.tag=tag
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      tag: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 tag 属性。
+  relationships:
+  - relation: derived_from
+    target_id: raw_unit.tag
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 tag 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-tag-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-tag-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 186
+    line_end: 186
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 tag 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.unit_class
+  canonical_name: unit_class
+  names:
+    zh: 单位类别名
+    en: Unit Class
+    code: unit_class
+  category: abox_dynamic
+  aliases:
+  - 单位类别名
+  - Unit Class
+  - unit_class
+  definition: 创建 ABox 单位实例时写入的 unit_class 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 unit_class 属性。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: true
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].unit_class
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - tbox.entity.unit_type_id
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 188
+      line_end: 188
+    extraction_code:
+    - '"unit_class": unit_name'
+    transformation_formula:
+    - abox.unit_class=unit_name
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      unit_class: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 unit_class 属性。
+  relationships:
+  - relation: derived_from
+    target_id: tbox.entity.unit_type_id
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 unit_class 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-unit-class-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-unit-class-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 188
+    line_end: 188
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 unit_class 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.unit_type_id
+  canonical_name: unit_type_id
+  names:
+    zh: 单位类型编号
+    en: Unit Type ID
+    code: unit_type_id
+  category: abox_dynamic
+  aliases:
+  - 单位类型编号
+  - Unit Type ID
+  - unit_type_id
+  definition: 创建 ABox 单位实例时写入的 unit_type_id 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 unit_type_id 属性。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].unit_type_id
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - raw_unit.unit_type
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 187
+      line_end: 187
+    extraction_code:
+    - '"unit_type_id": unit_type_id'
+    transformation_formula:
+    - abox.unit_type_id=unit_type_id
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      unit_type_id: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 unit_type_id 属性。
+  relationships:
+  - relation: derived_from
+    target_id: raw_unit.unit_type
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 unit_type_id 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-unit-type-id-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-unit-type-id-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 187
+    line_end: 187
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 unit_type_id 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: abox.unit.weapon_cooldown
+  canonical_name: weapon_cooldown
+  names:
+    zh: 武器冷却
+    en: Weapon Cooldown
+    code: weapon_cooldown
+  category: abox_dynamic
+  aliases:
+  - 武器冷却
+  - Weapon Cooldown
+  - weapon_cooldown
+  definition: 创建 ABox 单位实例时写入的 weapon_cooldown 属性。
+  intuitive_explanation: 创建 ABox 单位实例时写入的 weapon_cooldown 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.abox.nodes[*].weapon_cooldown
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: renamed
+    upstream_variable_ids:
+    - raw_unit.weapon_cooldown
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph._create_instance
+      line_start: 204
+      line_end: 204
+    extraction_code:
+    - '"weapon_cooldown": raw_unit.get("weapon_cooldown", 0)'
+    transformation_formula:
+    - abox.weapon_cooldown=raw_unit.get("weapon_cooldown", 0)
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      weapon_cooldown: 按公式得到
+    explanation: 创建 ABox 单位实例时写入的 weapon_cooldown 属性。
+  relationships:
+  - relation: derived_from
+    target_id: raw_unit.weapon_cooldown
+    description: 由该上游字段复制、改名或组合得到。
+  design_intent: []
+  code_reality:
+  - claim: 创建 ABox 单位实例时写入的 weapon_cooldown 属性。
+    status: code_reality
+    evidence_ids:
+    - abox-unit-weapon-cooldown-code
+  limitations:
+  - ABox 实例字段不能与同名 TBox 静态属性合并。
+  known_issues: []
+  evidence:
+  - id: abox-unit-weapon-cooldown-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    line_start: 204
+    line_end: 204
+    evidence_type: E1
+    claim: 创建 ABox 单位实例时写入的 weapon_cooldown 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。

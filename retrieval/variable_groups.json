@@ -1,0 +1,1354 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-06",
+  "purpose": "声明变量族和跨层变量组，在 top-k 截断前按物理概念组合候选；不包含 benchmark 完整题句。",
+  "groups": [
+    {
+      "id": "group.raw.identity_spatial",
+      "kind": "family",
+      "layers": [
+        "raw"
+      ],
+      "all_groups": [
+        [
+          "raw",
+          "原始观测",
+          "原始单位"
+        ],
+        [
+          "身份",
+          "是谁",
+          "唯一标识",
+          "tag",
+          "对象"
+        ],
+        [
+          "位置",
+          "坐标",
+          "哪里",
+          "落点"
+        ],
+        [
+          "阵营",
+          "哪一方",
+          "所属方",
+          "alliance",
+          "敌我"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.unit_type",
+        "raw_unit.tag",
+        "raw_unit.alliance",
+        "raw_unit.x",
+        "raw_unit.y"
+      ]
+    },
+    {
+      "id": "group.raw.combat_snapshot",
+      "kind": "family",
+      "layers": [
+        "raw"
+      ],
+      "all_groups": [
+        [
+          "raw",
+          "原始观测",
+          "即时",
+          "快照"
+        ],
+        [
+          "生命",
+          "血量",
+          "health"
+        ],
+        [
+          "冷却",
+          "开火",
+          "weapon cooldown"
+        ],
+        [
+          "位置",
+          "坐标",
+          "二维"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.health",
+        "raw_unit.weapon_cooldown",
+        "raw_unit.x",
+        "raw_unit.y"
+      ]
+    },
+    {
+      "id": "group.environment.raw_cadence",
+      "kind": "family",
+      "layers": [
+        "environment"
+      ],
+      "all_groups": [
+        [
+          "环境",
+          "配置"
+        ],
+        [
+          "raw单位",
+          "raw 单位",
+          "raw units",
+          "raw_unit"
+        ],
+        [
+          "raw动作",
+          "raw 动作",
+          "raw actions"
+        ],
+        [
+          "分辨率",
+          "推进",
+          "step_mul",
+          "决策间隔",
+          "节奏"
+        ]
+      ],
+      "variable_ids": [
+        "environment.use_raw_units",
+        "environment.use_raw_actions",
+        "environment.raw_resolution",
+        "environment.step_mul",
+        "environment.decision_interval"
+      ]
+    },
+    {
+      "id": "group.environment.run_mode",
+      "kind": "family",
+      "layers": [
+        "environment"
+      ],
+      "all_groups": [
+        [
+          "地图",
+          "map"
+        ],
+        [
+          "实时",
+          "realtime"
+        ],
+        [
+          "可视化",
+          "visualize"
+        ]
+      ],
+      "variable_ids": [
+        "environment.map_name",
+        "environment.realtime",
+        "environment.visualize"
+      ]
+    },
+    {
+      "id": "group.timestep.outcome",
+      "kind": "family",
+      "layers": [
+        "timestep"
+      ],
+      "all_groups": [
+        [
+          "终局",
+          "结束",
+          "最后一步",
+          "is_last"
+        ],
+        [
+          "奖励",
+          "reward"
+        ],
+        [
+          "累计分数",
+          "score",
+          "得分"
+        ]
+      ],
+      "variable_ids": [
+        "timestep.is_last",
+        "timestep.reward_delta",
+        "timestep.score_cumulative_0"
+      ]
+    },
+    {
+      "id": "group.raw_abox.defense_full",
+      "kind": "cross_layer",
+      "layers": [
+        "raw",
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "raw"
+        ],
+        [
+          "abox",
+          "实例图",
+          "实例节点"
+        ],
+        [
+          "生命",
+          "血量",
+          "health"
+        ],
+        [
+          "护盾",
+          "shield",
+          "防护"
+        ],
+        [
+          "比例",
+          "ratio",
+          "归一"
+        ],
+        [
+          "armor",
+          "护甲",
+          "当前实现",
+          "实际映射"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.health",
+        "raw_unit.health_ratio",
+        "raw_unit.shield",
+        "raw_unit.shield_ratio",
+        "abox.unit.hp",
+        "abox.unit.hp_ratio",
+        "abox.unit.armor",
+        "abox.unit.armor_ratio"
+      ]
+    },
+    {
+      "id": "group.raw_abox.address_position",
+      "kind": "cross_layer",
+      "layers": [
+        "raw",
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "raw",
+          "原始对象",
+          "原始观测"
+        ],
+        [
+          "实例图",
+          "abox",
+          "实例节点"
+        ],
+        [
+          "tag",
+          "唯一标识"
+        ],
+        [
+          "类型号",
+          "类型编号",
+          "unit type"
+        ],
+        [
+          "坐标",
+          "position",
+          "位置"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.tag",
+        "raw_unit.unit_type",
+        "raw_unit.x",
+        "raw_unit.y",
+        "abox.unit.tag",
+        "abox.unit.unit_type_id",
+        "abox.unit.position"
+      ]
+    },
+    {
+      "id": "group.raw_abox.cooldown",
+      "kind": "cross_layer",
+      "layers": [
+        "raw",
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "raw"
+        ],
+        [
+          "abox",
+          "实例节点"
+        ],
+        [
+          "武器冷却",
+          "开火冷却",
+          "cooldown"
+        ],
+        [
+          "前后",
+          "两层",
+          "进入",
+          "写入"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.weapon_cooldown",
+        "abox.unit.weapon_cooldown"
+      ]
+    },
+    {
+      "id": "group.abox.identity",
+      "kind": "family",
+      "layers": [
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "abox",
+          "动态实例",
+          "实例节点",
+          "实例图"
+        ],
+        [
+          "身份",
+          "类别",
+          "类型",
+          "画像",
+          "区分"
+        ],
+        [
+          "tag",
+          "标识",
+          "类型编号",
+          "阵营",
+          "种族"
+        ]
+      ],
+      "variable_ids": [
+        "abox.unit.alliance",
+        "abox.unit.tag",
+        "abox.unit.unit_type_id",
+        "abox.unit.category",
+        "abox.unit.race"
+      ],
+      "none_terms": [
+        "raw 观察",
+        "raw观测",
+        "tbox",
+        "静态类型",
+        "raw"
+      ]
+    },
+    {
+      "id": "group.abox.dynamic_combat",
+      "kind": "family",
+      "layers": [
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "abox",
+          "动态节点",
+          "动态实例",
+          "实例节点",
+          "当前节点"
+        ],
+        [
+          "战斗",
+          "攻击",
+          "开火"
+        ],
+        [
+          "生命比例",
+          "血量比例",
+          "hp ratio",
+          "hp_ratio"
+        ],
+        [
+          "伤害",
+          "射程",
+          "冷却"
+        ]
+      ],
+      "variable_ids": [
+        "abox.unit.hp_ratio",
+        "abox.unit.weapon_cooldown",
+        "abox.unit.attack_damage",
+        "abox.unit.attack_range"
+      ]
+    },
+    {
+      "id": "group.abox.relation_full",
+      "kind": "family",
+      "layers": [
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "abox",
+          "实例关系",
+          "动态关系"
+        ],
+        [
+          "起点",
+          "source",
+          "源节点"
+        ],
+        [
+          "终点",
+          "target",
+          "目标节点"
+        ],
+        [
+          "关系类型",
+          "边类别",
+          "edge type",
+          "边类型"
+        ],
+        [
+          "效果",
+          "理由",
+          "时间戳",
+          "审计",
+          "完整"
+        ]
+      ],
+      "variable_ids": [
+        "abox.relation.source_node",
+        "abox.relation.target_node",
+        "abox.relation.edge_type",
+        "abox.relation.edge_class",
+        "abox.relation.effectiveness",
+        "abox.relation.reason",
+        "abox.relation.timestamp"
+      ]
+    },
+    {
+      "id": "group.abox.graph_counters",
+      "kind": "family",
+      "layers": [
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "实例图",
+          "abox图",
+          "图级"
+        ],
+        [
+          "更新",
+          "进度",
+          "第几步",
+          "step"
+        ],
+        [
+          "敌方节点",
+          "敌人节点",
+          "敌方缓存",
+          "enemy"
+        ]
+      ],
+      "variable_ids": [
+        "abox.graph.step_count",
+        "abox.graph.enemy_count"
+      ]
+    },
+    {
+      "id": "group.abox.unknown",
+      "kind": "family",
+      "layers": [
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "未知",
+          "未识别"
+        ],
+        [
+          "实例节点",
+          "abox"
+        ],
+        [
+          "类别",
+          "category"
+        ],
+        [
+          "描述",
+          "文字",
+          "description"
+        ]
+      ],
+      "variable_ids": [
+        "abox.unit.is_unknown",
+        "abox.unit.category",
+        "abox.unit.description"
+      ]
+    },
+    {
+      "id": "group.tbox.survival",
+      "kind": "family",
+      "layers": [
+        "tbox"
+      ],
+      "all_groups": [
+        [
+          "静态",
+          "tbox",
+          "兵种"
+        ],
+        [
+          "生命",
+          "耐久",
+          "hp"
+        ],
+        [
+          "护甲",
+          "armor"
+        ],
+        [
+          "移动",
+          "速度"
+        ],
+        [
+          "视野",
+          "sight"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.hp",
+        "tbox.entity.armor",
+        "tbox.entity.movement_speed",
+        "tbox.entity.sight"
+      ]
+    },
+    {
+      "id": "group.tbox.taxonomy",
+      "kind": "family",
+      "layers": [
+        "tbox"
+      ],
+      "all_groups": [
+        [
+          "tbox",
+          "静态本体",
+          "静态类型"
+        ],
+        [
+          "类型编号",
+          "unit type id"
+        ],
+        [
+          "节点类型",
+          "node type"
+        ],
+        [
+          "类别",
+          "category"
+        ],
+        [
+          "种族",
+          "race"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.unit_type_id",
+        "tbox.entity.node_type",
+        "tbox.entity.category",
+        "tbox.entity.race"
+      ]
+    },
+    {
+      "id": "group.action.command_shape",
+      "kind": "family",
+      "layers": [
+        "action"
+      ],
+      "all_groups": [
+        [
+          "动作",
+          "计划动作",
+          "action"
+        ],
+        [
+          "主类型",
+          "类型",
+          "action type"
+        ],
+        [
+          "子类型",
+          "subtype"
+        ],
+        [
+          "目标内容",
+          "目标",
+          "target type"
+        ],
+        [
+          "目标种类",
+          "目标类型",
+          "target type"
+        ]
+      ],
+      "variable_ids": [
+        "action.type",
+        "action.subtype",
+        "action.target",
+        "action.target_type"
+      ]
+    },
+    {
+      "id": "group.action.schedule",
+      "kind": "family",
+      "layers": [
+        "action"
+      ],
+      "all_groups": [
+        [
+          "动作",
+          "action"
+        ],
+        [
+          "执行单位",
+          "单位列表",
+          "units"
+        ],
+        [
+          "优先级",
+          "priority"
+        ],
+        [
+          "延迟",
+          "delay"
+        ],
+        [
+          "理由",
+          "reasoning"
+        ]
+      ],
+      "variable_ids": [
+        "action.units",
+        "action.priority",
+        "action.delay_steps",
+        "action.reasoning"
+      ]
+    },
+    {
+      "id": "group.action.validation",
+      "kind": "family",
+      "layers": [
+        "action"
+      ],
+      "all_groups": [
+        [
+          "计划",
+          "plan",
+          "计划文本"
+        ],
+        [
+          "计划动作",
+          "planned actions"
+        ],
+        [
+          "非法动作",
+          "invalid actions",
+          "无效动作"
+        ],
+        [
+          "非法原因",
+          "reason counts",
+          "无效原因"
+        ]
+      ],
+      "variable_ids": [
+        "action.plan",
+        "action.planned_actions",
+        "action.invalid_actions",
+        "action.invalid_reason_counts"
+      ]
+    },
+    {
+      "id": "group.functioncall.payload",
+      "kind": "family",
+      "layers": [
+        "pysc2_action"
+      ],
+      "all_groups": [
+        [
+          "functioncall",
+          "function call",
+          "pysc2 raw",
+          "raw调用"
+        ],
+        [
+          "排队",
+          "queued"
+        ],
+        [
+          "目标",
+          "target"
+        ],
+        [
+          "tags",
+          "单位tag",
+          "单位 tags"
+        ],
+        [
+          "raw标志",
+          "raw flag"
+        ]
+      ],
+      "variable_ids": [
+        "pysc2.function.queued",
+        "pysc2.function.target",
+        "pysc2.function.unit_tags",
+        "pysc2.function.raw_flag"
+      ]
+    },
+    {
+      "id": "group.functioncall.ids.selected",
+      "kind": "family",
+      "layers": [
+        "pysc2_action"
+      ],
+      "all_groups": [
+        [
+          "函数编号",
+          "function id"
+        ],
+        [
+          "build",
+          "建造"
+        ],
+        [
+          "train",
+          "训练"
+        ],
+        [
+          "no_op",
+          "无操作"
+        ]
+      ],
+      "variable_ids": [
+        "pysc2.build.function_id",
+        "pysc2.train.function_id",
+        "pysc2.no_op.function_id"
+      ]
+    },
+    {
+      "id": "group.swm.input",
+      "kind": "family",
+      "layers": [
+        "swm"
+      ],
+      "all_groups": [
+        [
+          "世界模型",
+          "swm"
+        ],
+        [
+          "输入",
+          "请求"
+        ],
+        [
+          "abox状态",
+          "当前状态",
+          "abox state"
+        ],
+        [
+          "计划动作",
+          "planned actions"
+        ],
+        [
+          "预测步数",
+          "未来步"
+        ],
+        [
+          "候选",
+          "candidate"
+        ]
+      ],
+      "variable_ids": [
+        "swm.input.abox_state",
+        "swm.input.planned_actions",
+        "swm.prediction_steps",
+        "swm.candidate_index"
+      ]
+    },
+    {
+      "id": "group.swm.step_delta",
+      "kind": "family",
+      "layers": [
+        "swm"
+      ],
+      "all_groups": [
+        [
+          "世界模型",
+          "swm"
+        ],
+        [
+          "未来步",
+          "某步",
+          "步号",
+          "预测步",
+          "step"
+        ],
+        [
+          "置信度",
+          "confidence"
+        ],
+        [
+          "位置增量",
+          "位置变化"
+        ],
+        [
+          "生命增量",
+          "生命变化"
+        ]
+      ],
+      "variable_ids": [
+        "swm.prediction.step",
+        "swm.confidence",
+        "swm.unit.position_delta",
+        "swm.unit.health_delta"
+      ]
+    },
+    {
+      "id": "group.metric.token_accounting",
+      "kind": "family",
+      "layers": [
+        "metric"
+      ],
+      "all_groups": [
+        [
+          "token"
+        ],
+        [
+          "提示",
+          "prompt"
+        ],
+        [
+          "补全",
+          "completion"
+        ],
+        [
+          "总量",
+          "total",
+          "总 token"
+        ]
+      ],
+      "variable_ids": [
+        "metric.llm.prompt_tokens",
+        "metric.llm.completion_tokens",
+        "metric.llm.total_tokens"
+      ]
+    },
+    {
+      "id": "group.metric.decision_cost",
+      "kind": "family",
+      "layers": [
+        "metric"
+      ],
+      "all_groups": [
+        [
+          "决策",
+          "decision"
+        ],
+        [
+          "调用次数",
+          "次数"
+        ],
+        [
+          "平均耗时",
+          "时间"
+        ],
+        [
+          "平均 token",
+          "每次 token"
+        ]
+      ],
+      "variable_ids": [
+        "metric.llm.decision_calls",
+        "metric.llm.avg_decision_time",
+        "metric.llm.avg_tokens_per_decision"
+      ]
+    },
+    {
+      "id": "group.metric.action_failures",
+      "kind": "family",
+      "layers": [
+        "metric"
+      ],
+      "all_groups": [
+        [
+          "失败率",
+          "failure rate"
+        ],
+        [
+          "总",
+          "整体",
+          "全部"
+        ],
+        [
+          "决策阶段",
+          "decision",
+          "决策"
+        ],
+        [
+          "延迟执行",
+          "delayed",
+          "延迟"
+        ]
+      ],
+      "variable_ids": [
+        "metric.action.failure_rate",
+        "metric.action.decision_failure_rate",
+        "metric.action.delayed_failure_rate"
+      ]
+    },
+    {
+      "id": "group.metric.swm_quality",
+      "kind": "family",
+      "layers": [
+        "metric"
+      ],
+      "all_groups": [
+        [
+          "世界模型",
+          "swm"
+        ],
+        [
+          "位置误差",
+          "position"
+        ],
+        [
+          "生命误差",
+          "health"
+        ],
+        [
+          "关系",
+          "relation"
+        ],
+        [
+          "总体误差",
+          "overall"
+        ]
+      ],
+      "variable_ids": [
+        "metric.swm.position_rmse",
+        "metric.swm.health_rmse",
+        "metric.swm.relation_accuracy",
+        "metric.swm.overall_error"
+      ]
+    },
+    {
+      "id": "group.cross_layer.attack_range",
+      "kind": "cross_layer",
+      "layers": [
+        "tbox",
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "攻击距离",
+          "射程",
+          "attack range"
+        ],
+        [
+          "静态",
+          "tbox"
+        ],
+        [
+          "动态",
+          "abox",
+          "实例节点"
+        ],
+        [
+          "两层",
+          "分别",
+          "比较",
+          "还是",
+          "候选"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.attack_range",
+        "abox.unit.attack_range"
+      ]
+    },
+    {
+      "id": "group.cross_layer.type_id",
+      "kind": "cross_layer",
+      "layers": [
+        "raw",
+        "abox",
+        "tbox"
+      ],
+      "all_groups": [
+        [
+          "类型编号",
+          "类型号",
+          "unit type"
+        ],
+        [
+          "raw",
+          "原始观测"
+        ],
+        [
+          "abox",
+          "实例"
+        ],
+        [
+          "tbox",
+          "静态"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.unit_type",
+        "abox.unit.unit_type_id",
+        "tbox.entity.unit_type_id"
+      ]
+    },
+    {
+      "id": "group.ambiguity.reason",
+      "kind": "ambiguity",
+      "layers": [
+        "action",
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "reason",
+          "理由"
+        ],
+        [
+          "只问",
+          "未说明",
+          "没有说明",
+          "可能"
+        ]
+      ],
+      "variable_ids": [
+        "action.reasoning",
+        "abox.relation.reason"
+      ],
+      "ambiguous": true
+    },
+    {
+      "id": "group.ambiguity.token_usage",
+      "kind": "ambiguity",
+      "layers": [
+        "swm",
+        "metric"
+      ],
+      "all_groups": [
+        [
+          "token usage",
+          "token用量",
+          "token 用量"
+        ],
+        [
+          "只说",
+          "未说明",
+          "可能",
+          "既可能"
+        ]
+      ],
+      "variable_ids": [
+        "swm.token_usage",
+        "metric.llm.total_tokens"
+      ],
+      "ambiguous": true
+    },
+    {
+      "id": "group.tbox.resource_description_edge",
+      "kind": "family",
+      "layers": [
+        "tbox"
+      ],
+      "all_groups": [
+        [
+          "tbox",
+          "静态本体",
+          "静态知识"
+        ],
+        [
+          "资源类型",
+          "resource type",
+          "resource_type"
+        ],
+        [
+          "描述文本",
+          "实体说明",
+          "description",
+          "说明文本"
+        ],
+        [
+          "关系边",
+          "relation edge",
+          "edge"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.resource_type",
+        "tbox.entity.description",
+        "tbox.relation.edge"
+      ]
+    },
+    {
+      "id": "group.tactical.army_vitals",
+      "kind": "family",
+      "layers": [
+        "derived"
+      ],
+      "all_groups": [
+        [
+          "战术摘要",
+          "战术状态",
+          "tactical"
+        ],
+        [
+          "我方",
+          "友方",
+          "friendly"
+        ],
+        [
+          "敌方",
+          "enemy"
+        ],
+        [
+          "数量",
+          "计数",
+          "count"
+        ],
+        [
+          "平均生命",
+          "平均血量",
+          "avg hp"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_count",
+        "derived.tactical.enemy_count",
+        "derived.tactical.friendly_avg_hp",
+        "derived.tactical.enemy_avg_hp"
+      ]
+    },
+    {
+      "id": "group.tactical.geometry",
+      "kind": "family",
+      "layers": [
+        "derived"
+      ],
+      "all_groups": [
+        [
+          "双方",
+          "我方",
+          "友方"
+        ],
+        [
+          "中心",
+          "centroid",
+          "质心"
+        ],
+        [
+          "距离",
+          "间距",
+          "formation"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_centroid",
+        "derived.tactical.enemy_centroid",
+        "derived.tactical.formation_distance"
+      ]
+    },
+    {
+      "id": "group.tactical.fire_state",
+      "kind": "family",
+      "layers": [
+        "derived"
+      ],
+      "all_groups": [
+        [
+          "开火",
+          "fire"
+        ],
+        [
+          "准备度",
+          "准备",
+          "readiness"
+        ],
+        [
+          "数量",
+          "计数",
+          "count",
+          "单位数",
+          "统计"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.fire_readiness",
+        "derived.tactical.ready_to_fire_count"
+      ]
+    },
+    {
+      "id": "group.tactical.engagement_priority",
+      "kind": "family",
+      "layers": [
+        "derived"
+      ],
+      "all_groups": [
+        [
+          "接触类型",
+          "交战类型",
+          "engagement"
+        ],
+        [
+          "重点处理",
+          "关键单位",
+          "critical"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.engagement_type",
+        "derived.tactical.critical_units"
+      ]
+    },
+    {
+      "id": "group.functioncall.move_full",
+      "kind": "family",
+      "layers": [
+        "function_call"
+      ],
+      "all_groups": [
+        [
+          "move",
+          "移动"
+        ],
+        [
+          "functioncall",
+          "function call",
+          "pysc2 raw",
+          "执行"
+        ],
+        [
+          "通用参数",
+          "四个参数",
+          "完整参数",
+          "函数编号",
+          "function id"
+        ]
+      ],
+      "variable_ids": [
+        "pysc2.move.function_id",
+        "pysc2.function.queued",
+        "pysc2.function.target",
+        "pysc2.function.unit_tags",
+        "pysc2.function.raw_flag"
+      ]
+    },
+    {
+      "id": "group.functioncall.attack_full",
+      "kind": "family",
+      "layers": [
+        "function_call"
+      ],
+      "all_groups": [
+        [
+          "attack",
+          "攻击"
+        ],
+        [
+          "functioncall",
+          "function call",
+          "pysc2 raw",
+          "执行"
+        ],
+        [
+          "通用参数",
+          "四个参数",
+          "完整参数",
+          "函数编号",
+          "function id"
+        ]
+      ],
+      "variable_ids": [
+        "pysc2.attack.function_id",
+        "pysc2.function.queued",
+        "pysc2.function.target",
+        "pysc2.function.unit_tags",
+        "pysc2.function.raw_flag"
+      ]
+    },
+    {
+      "id": "group.ambiguity.attack_range",
+      "kind": "ambiguity",
+      "layers": [
+        "tbox",
+        "abox"
+      ],
+      "all_groups": [
+        [
+          "attack range",
+          "攻击距离",
+          "射程"
+        ],
+        [
+          "未指定",
+          "没说明",
+          "还是",
+          "候选",
+          "没有指出",
+          "未指出",
+          "可能"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.attack_range",
+        "abox.unit.attack_range"
+      ],
+      "ambiguous": true
+    },
+    {
+      "id": "group.player.economy_headroom",
+      "kind": "family",
+      "layers": [
+        "timestep"
+      ],
+      "all_groups": [
+        [
+          "矿物",
+          "minerals"
+        ],
+        [
+          "瓦斯",
+          "vespene",
+          "gas"
+        ],
+        [
+          "已用补给",
+          "food_used",
+          "used supply"
+        ],
+        [
+          "补给上限",
+          "food_cap",
+          "supply cap"
+        ],
+        [
+          "剩余补给",
+          "还能使用",
+          "supply remaining"
+        ]
+      ],
+      "variable_ids": [
+        "player.minerals",
+        "player.vespene",
+        "player.food_used",
+        "player.food_cap",
+        "player.supply_remaining"
+      ]
+    }
+  ]
+}

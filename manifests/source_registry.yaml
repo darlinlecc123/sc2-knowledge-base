@@ -1,0 +1,2441 @@
+schema_version: '1.0'
+registry_id: storm-sc2kb-source-registry-v1
+scope_id: storm-sc2kb-v1-raw
+version: 0.1.0
+generated_at: '2026-09-03'
+repository:
+  name: storm111
+  root: .
+  commit: null
+  commit_status: unavailable_not_a_confirmed_git_worktree
+execution_status:
+  static_scan_completed: true
+  sc2_executed: false
+  external_llm_called: false
+  unit_tests_executed: false
+  examples_executed: false
+  ontology_cache_regenerated: false
+  historical_artifacts_reproduced: false
+priority_policy:
+- rank: 1
+  level: E1
+  meaning: 当前运行/实验代码中的真实读写与控制流
+- rank: 2
+  level: E2
+  meaning: 当前测试或可复现示例；未执行时只证明测试/示例定义
+- rank: 3
+  level: E3
+  meaning: 配置、Schema、静态数据和缓存
+- rank: 4
+  level: E4
+  meaning: 历史 CSV/JSON/JSONL 运行产物
+- rank: 5
+  level: E5
+  meaning: README、注释和项目说明
+- rank: 6
+  level: E6
+  meaning: 外部官方资料；本步骤未访问
+conflict_policy: 同一概念冲突时，E1 > 已执行的 E2 > E3 > E4 > E5 > E6；保留 design_intent 与 code_reality 两条断言，不静默合并。
+line_number_policy: 行号由 2026-09-03 当前文件 AST/文本定位获得，可能随编辑漂移；引用时必须同时使用 path 和 symbol。
+sources:
+- id: src-action-executor
+  path: agents/action_executor.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 把校验后动作转换为 PySC2 Raw FunctionCall，并记录跳过原因。
+  variable_domains:
+  - pysc2_function_call
+  - action_schema_and_scheduling
+  - experiment_metric
+  can_prove:
+  - MOVE/ATTACK/BUILD/TRAIN 的 FunctionCall 映射
+  - 单位 tag、目标 tag/坐标和资源约束
+  - executor skip 统计
+  limitations:
+  - Function ID 和参数顺序受当前 PySC2 版本影响。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: ActionExecutor.get_supported_subtypes
+    line: 40
+  - symbol: ActionExecutor._check_resource_budget
+    line: 100
+  - symbol: ActionExecutor._record_skip
+    line: 124
+  - symbol: ActionExecutor.execute
+    line: 130
+  metadata:
+    exists: true
+    size_bytes: 8459
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: bb618b77c15d6c6beb8f58c624993561f8cd81d9597f5ce073c967105af14f4c
+- id: src-heuristic-agent
+  path: agents/heuristic_agent.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 启发式基线共享 Raw 输入、PySC2 动作和失效率统计。
+  variable_domains:
+  - heuristic_and_rl_baselines
+  - raw_unit
+  - pysc2_function_call
+  - experiment_metric
+  can_prove:
+  - 比较基线使用的 Raw 字段和最终统计
+  limitations:
+  - 不作为 STORM LLM 主链变量定义来源。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: HeuristicAgent.step
+    line: 101
+  - symbol: HeuristicAgent._parse_raw_units
+    line: 136
+  - symbol: HeuristicAgent._make_decision
+    line: 151
+  - symbol: HeuristicAgent.get_action_failure_rate
+    line: 259
+  metadata:
+    exists: true
+    size_bytes: 9997
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: df224ce96e920ac6cda2bec4d41161c569473a727ee1b677b772a2bacd65768f
+- id: src-openai-client
+  path: agents/openai_client.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 封装 LLM 请求及 token usage、重试和延迟相关返回。
+  variable_domains:
+  - experiment_metric
+  - action_schema_and_scheduling
+  can_prove:
+  - 模型响应文本与 token 使用量来源
+  limitations:
+  - 不能证明模型输出质量；本步骤未调用外部模型。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: OpenAIClient.__init__
+    line: 28
+  - symbol: OpenAIClient.request
+    line: 80
+  - symbol: OpenAIClient.request_with_retry
+    line: 178
+  metadata:
+    exists: true
+    size_bytes: 7310
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: aff13e783ba5cc047acc446ea2a55e1baee544699642f4d2633e57db7c5cf581
+- id: src-raw-agent
+  path: agents/raw_agent.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: Raw observation 到 RawUnit/ABox/Prompt/动作调度的主控制器。
+  variable_domains:
+  - timestep_player_score
+  - raw_unit
+  - abox_dynamic
+  - derived_tactical_state
+  - action_schema_and_scheduling
+  - swm
+  - experiment_metric
+  can_prove:
+  - 实际读取的 10 个 RawUnit 字段
+  - player/score 使用
+  - 决策触发与 delay_steps 调度
+  - SWM 再评估与 Agent 统计
+  limitations:
+  - 文件较大；具体字段必须回指方法而不是只引用整个文件。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: RawAgent.__init__
+    line: 47
+  - symbol: RawAgent.step
+    line: 249
+  - symbol: RawAgent.parse_raw_units
+    line: 334
+  - symbol: RawAgent._make_llm_decision
+    line: 552
+  - symbol: RawAgent._swm_guided_reevaluation
+    line: 683
+  - symbol: RawAgent._convert_actions_to_pysc2
+    line: 828
+  - symbol: RawAgent.get_token_usage_stats
+    line: 1101
+  - symbol: RawAgent.get_latency_stats
+    line: 1129
+  - symbol: RawAgent.get_action_failure_rate
+    line: 1137
+  - symbol: RawAgent.get_swm_stats
+    line: 1152
+  metadata:
+    exists: true
+    size_bytes: 48033
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 880a87ed289af8c96d4a21a5fdd82e3ef25ee39c157c8bbdb96b911226ba2919
+- id: src-response-parser
+  path: agents/response_parser.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 解析 LLM JSON，执行动作 Schema 与语义校验。
+  variable_domains:
+  - action_schema_and_scheduling
+  can_prove:
+  - 动作、target_type、units、target、delay_steps、subtype 的有效性逻辑
+  - 坐标裁剪代码
+  limitations:
+  - 声明的常量不等于被实际消费；priority/confidence 和裁剪写回需后续专审。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: VALID_ACTIONS
+    line: 26
+  - symbol: VALID_TARGET_TYPES
+    line: 34
+  - symbol: VALID_PRIORITIES
+    line: 37
+  - symbol: ResponseParser.parse
+    line: 63
+  - symbol: ResponseParser._validate_schema
+    line: 165
+  - symbol: ResponseParser._validate_semantics
+    line: 458
+  metadata:
+    exists: true
+    size_bytes: 26280
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 9198a4440888bb0ac4d94a3153d32d76ed9c53a519b1890bbec1fb00208b7b8e
+- id: src-rl-agent
+  path: agents/rl_agent.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: RL 基线共享 Raw 输入、动作执行和比较指标。
+  variable_domains:
+  - heuristic_and_rl_baselines
+  - raw_unit
+  - pysc2_function_call
+  - experiment_metric
+  can_prove:
+  - 比较基线环境接口和最终动作统计
+  limitations:
+  - 网络内部状态明确排除在第一版核心范围外。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: RLAgent.step
+    line: 381
+  - symbol: RLAgent._parse_raw_units
+    line: 533
+  - symbol: RLAgent.get_action_failure_rate
+    line: 731
+  metadata:
+    exists: true
+    size_bytes: 29579
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: a4eca7602009cfa0c0047fc578d41c4543fbb52872613887f5d4bfd6ff643d54
+- id: src-ablation-experiment
+  path: examples/ablation_experiment.py
+  source_type: experiment_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: defined_not_executed
+  role_zh: 消融实验运行、统计和 CSV 写出逻辑。
+  variable_domains:
+  - environment_config
+  - experiment_metric
+  can_prove:
+  - score、决策次数、token、延迟、失效率等聚合来源
+  limitations:
+  - 未执行；历史 CSV 可能来自不同代码状态。
+  staleness:
+    risk: medium
+    reason: 历史结果必须回指当前写出逻辑并核对列名。
+  key_symbols:
+  - symbol: run_method
+    line: 69
+  - symbol: write_results_csv
+    line: 205
+  - symbol: main
+    line: 216
+  metadata:
+    exists: true
+    size_bytes: 8622
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: cf5e7e42d31d0365c8d4a5a282128ec9239e66f4542ba07810f3df17e7035e4d
+- id: src-adaptive-ontology-experiment
+  path: examples/adaptive_ontology_experiment.py
+  source_type: experiment_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: defined_not_executed
+  role_zh: 未知单位、本体缓存切换和自适应扩展实验。
+  variable_domains:
+  - unknown_ontology_extension
+  - tbox_static
+  - experiment_metric
+  can_prove:
+  - unknown_units_seen、TBox similarity 和缓存切换
+  limitations:
+  - 会改写/激活缓存的函数本步骤未运行。
+  staleness:
+    risk: high
+    reason: 该脚本能够切换 pickle，误运行可能改变后续本体加载结果。
+  key_symbols:
+  - symbol: bake_tbox_caches
+    line: 133
+  - symbol: _activate_pickle
+    line: 152
+  - symbol: _count_unknown_log_lines
+    line: 164
+  - symbol: run_single_episode
+    line: 171
+  - symbol: _evaluate_tbox_similarity
+    line: 397
+  - symbol: _write_csv
+    line: 517
+  - symbol: _write_raw_jsonl
+    line: 527
+  - symbol: main
+    line: 627
+  metadata:
+    exists: true
+    size_bytes: 26603
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 4e873357e01c062d24aa632b4141c77bcf3199b49fe1aec9f6b02d5f2090891c
+- id: src-llm-example
+  path: examples/llm_agent_example.py
+  source_type: executable_example
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: defined_not_executed
+  role_zh: 真实 LLM Agent 示例入口和每回合得分读取。
+  variable_domains:
+  - environment_config
+  - timestep_player_score
+  - experiment_metric
+  can_prove:
+  - SC2Env Raw 配置、score_cumulative 和日志输出
+  limitations:
+  - 未执行；需要 SC2 安装和 API 配置。
+  staleness:
+    risk: medium
+    reason: 示例参数可能与 main.py 或其他实验不同。
+  key_symbols:
+  - symbol: main
+    line: 62
+  metadata:
+    exists: true
+    size_bytes: 6464
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 040b83d0958f7df5557e68bdb574ed4089720cec615215fd448936efa5a20869
+- id: src-ood-heuristic-experiment
+  path: examples/ood_baseline_heuristic.py
+  source_type: experiment_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: defined_not_executed
+  role_zh: 启发式 OOD 基线运行和原始/聚合 CSV 输出。
+  variable_domains:
+  - heuristic_and_rl_baselines
+  - experiment_metric
+  can_prove:
+  - 启发式基线比较指标
+  limitations:
+  - 未执行。
+  staleness:
+    risk: medium
+    reason: 历史结果可能与当前代码参数不同。
+  key_symbols:
+  - symbol: run_single_episode
+    line: 114
+  - symbol: run_scene
+    line: 223
+  - symbol: write_aggregate_csv
+    line: 346
+  - symbol: write_raw_csv
+    line: 357
+  - symbol: main
+    line: 368
+  metadata:
+    exists: true
+    size_bytes: 14073
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: d2397923a575571612afb652972dd3f899ed600c708d9be88e9b7caa1c82404e
+- id: src-ood-rl-experiment
+  path: examples/ood_baseline_rl.py
+  source_type: experiment_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: defined_not_executed
+  role_zh: RL OOD 基线运行和动作比例/结果输出。
+  variable_domains:
+  - heuristic_and_rl_baselines
+  - experiment_metric
+  can_prove:
+  - RL 基线动作比例和比较指标
+  limitations:
+  - 未执行。
+  staleness:
+    risk: medium
+    reason: 模型权重和训练状态不属于第一版核心。
+  key_symbols:
+  - symbol: run_single_episode
+    line: 121
+  - symbol: run_scene
+    line: 254
+  - symbol: write_aggregate_csv
+    line: 391
+  - symbol: write_raw_csv
+    line: 402
+  - symbol: main
+    line: 413
+  metadata:
+    exists: true
+    size_bytes: 16340
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 0ebb173dbb60868b79a13c5f747cbcd4b09865eaa081867766ca23d5275f5d8c
+- id: src-ood-matrix-experiment
+  path: examples/ood_matrix_experiment.py
+  source_type: experiment_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: defined_not_executed
+  role_zh: 跨场景 OOD 矩阵实验和 SWM 误差汇总。
+  variable_domains:
+  - environment_config
+  - swm
+  - experiment_metric
+  can_prove:
+  - OOD 原始/聚合列及 SWM 误差指标来源
+  limitations:
+  - 未执行；no_swn 文件名含疑似历史拼写。
+  staleness:
+    risk: medium
+    reason: 结果文件可能由不同参数或代码版本生成。
+  key_symbols:
+  - symbol: _compute_trajectory_stats
+    line: 115
+  - symbol: run_single_episode
+    line: 150
+  - symbol: run_scene
+    line: 297
+  - symbol: write_aggregate_csv
+    line: 463
+  - symbol: write_raw_csv
+    line: 474
+  - symbol: main
+    line: 485
+  metadata:
+    exists: true
+    size_bytes: 20038
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 36f4eca9a0b3cc22475ac403c44afe72140de05177f170d0a162d42261ac624a
+- id: src-swm-experiment
+  path: examples/swm_experiment.py
+  source_type: experiment_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: defined_not_executed
+  role_zh: SWM 实验的回合记录、并行运行、聚合及 JSON/CSV 输出。
+  variable_domains:
+  - environment_config
+  - swm
+  - experiment_metric
+  can_prove:
+  - SWM episode/summary 指标定义和运行元数据
+  limitations:
+  - 未执行；已有三组历史目录只作为 E4。
+  staleness:
+    risk: medium
+    reason: 实验产物带时间戳且可能对应旧代码。
+  key_symbols:
+  - symbol: create_env
+    line: 174
+  - symbol: create_agent
+    line: 194
+  - symbol: build_episode_result
+    line: 215
+  - symbol: run_single_episode
+    line: 315
+  - symbol: aggregate_results
+    line: 436
+  - symbol: write_json
+    line: 514
+  - symbol: write_csv
+    line: 520
+  - symbol: build_run_config
+    line: 539
+  - symbol: main
+    line: 569
+  metadata:
+    exists: true
+    size_bytes: 23936
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: aca7ef6ba3af31d9985163a1dc8715083143dfd7ea3b734211510f480e4cc299
+- id: src-main-entry
+  path: main.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 创建 SC2Env、设置 Raw 接口配置并驱动回合循环。
+  variable_domains:
+  - environment_config
+  - timestep_player_score
+  can_prove:
+  - SC2Env 的当前示例配置
+  - TimeStep.last() 的回合结束使用
+  limitations:
+  - 只代表 main.py 示例入口，实验脚本可能使用不同参数。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: main
+    line: 23
+  metadata:
+    exists: true
+    size_bytes: 2949
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 39be3ce4cd9f26358062d23ed1f93ddec147373cf757a2d8b6a8246c22263d36
+- id: src-auto-extender
+  path: ontology/auto_extender.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 读取未知单位日志、校验并生成本体扩展 patch。
+  variable_domains:
+  - unknown_ontology_extension
+  - tbox_static
+  can_prove:
+  - unknown_units.jsonl 的消费接口和扩展 Schema
+  limitations:
+  - 第一版只部分纳入；本步骤未调用 LLM 扩展。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: load_unknown_units
+    line: 109
+  - symbol: build_extension_prompt
+    line: 131
+  - symbol: parse_and_validate
+    line: 241
+  - symbol: render_patch_module
+    line: 359
+  - symbol: run_pipeline
+    line: 412
+  metadata:
+    exists: true
+    size_bytes: 17402
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 329343a7c6b0efb42996be3f450e064770e87ccc57a247b23bba1cebf067c2d2
+- id: src-battlefield-graph
+  path: ontology/bridge.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 将 RawUnit 实例化为 ABox，复制 TBox 属性，生成关系、Prompt 和战术摘要。
+  variable_domains:
+  - abox_dynamic
+  - derived_tactical_state
+  - tbox_static
+  - unknown_ontology_extension
+  can_prove:
+  - ABox 字段来源
+  - unknown fallback 与日志
+  - Force_Ratio、质心、Formation_Distance、Engagement_Type、Fire_Readiness
+  limitations:
+  - ABox armor/armor_ratio 当前来自 shield/shield_ratio，属于高风险同名异义。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: UNKNOWN_UNIT_DEFAULTS
+    line: 33
+  - symbol: UNKNOWN_UNITS_LOG_PATH
+    line: 50
+  - symbol: BattlefieldGraph.update_from_observation
+    line: 100
+  - symbol: BattlefieldGraph._create_instance
+    line: 137
+  - symbol: BattlefieldGraph._update_instance
+    line: 253
+  - symbol: BattlefieldGraph.serialize_for_llm
+    line: 518
+  - symbol: BattlefieldGraph.generate_tactical_summary
+    line: 909
+  - symbol: BattlefieldGraph.build_full_prompt
+    line: 993
+  metadata:
+    exists: true
+    size_bytes: 58746
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 8f8a78878e0e6c5059e08b99983d55dccca7f7c966792167f4f05a0b45b45e52
+- id: src-ontology-builder
+  path: ontology/builder.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 从静态定义构建、校验、保存和加载 networkx 本体图。
+  variable_domains:
+  - tbox_static
+  can_prove:
+  - TBox 构建与缓存文件生成规则
+  limitations:
+  - 未在本步骤重新生成或对比 pickle/源图。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: build_ontology_graph
+    line: 24
+  - symbol: validate_ontology_graph
+    line: 58
+  - symbol: save_ontology_graph
+    line: 206
+  - symbol: load_ontology_graph_from_pickle
+    line: 240
+  metadata:
+    exists: true
+    size_bytes: 8864
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: addd3c04b050a662bc05468ba18c9be312ef897b180d8ee8a4f4792f0f8beca0
+- id: src-ontology-loader
+  path: ontology/loader.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 加载本体缓存并提供 TBox 查询与序列化接口。
+  variable_domains:
+  - tbox_static
+  - abox_dynamic
+  can_prove:
+  - pickle 优先加载行为
+  - TBox 查询返回路径
+  limitations:
+  - 相对缓存路径依赖从仓库根目录运行。
+  staleness:
+    risk: high
+    reason: 默认优先读取 data/ontology/ontology_graph.pkl，缓存可能与 Python 源定义不同步。
+  key_symbols:
+  - symbol: OntologyLoader.__init__
+    line: 40
+  - symbol: OntologyLoader.reload
+    line: 45
+  - symbol: OntologyLoader.get_unit_info
+    line: 71
+  - symbol: OntologyLoader.serialize_unit_for_llm
+    line: 318
+  metadata:
+    exists: true
+    size_bytes: 13881
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 01cd8a466e2e295d39c92ad0a6c6349be9ae978fcd74b72a6f6ea002eeba8ac5
+- id: src-swm-predictor
+  path: ontology/swm_predictor.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 构建 SWM 请求、解析预测并计算预测误差。
+  variable_domains:
+  - swm
+  - experiment_metric
+  can_prove:
+  - predictions、predicted_unit_states、predicted_relations、confidence
+  - health_rmse、position_rmse、relation_accuracy、overall_error
+  limitations:
+  - 预测是模型输出而非环境真值；误差时间基准需后续审计。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: SWMPredictor.predict
+    line: 93
+  - symbol: SWMPredictor.predict_for_actions
+    line: 164
+  - symbol: SWMPredictor.serialize_prediction_for_prompt
+    line: 193
+  - symbol: SWMPredictor.compute_prediction_error
+    line: 236
+  - symbol: SWMPredictor._parse_prediction_response
+    line: 387
+  metadata:
+    exists: true
+    size_bytes: 17010
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: fa52b81e31d59281e34c1897a982c89fd967e37ee8f4342c64e3088ed1211a60
+- id: src-swm-trainer
+  path: ontology/swm_trainer.py
+  source_type: runtime_code
+  evidence_level: E1
+  priority_rank: 1
+  fact_status:
+  - code_reality
+  inspection_status: static_inspected
+  role_zh: 收集状态/动作/预测/下一状态轨迹并生成 SWM few-shot 训练材料。
+  variable_domains:
+  - swm
+  - experiment_metric
+  can_prove:
+  - 轨迹记录生命周期、训练输入和误差聚合
+  limitations:
+  - 本步骤未训练或执行轨迹流水线。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: TrajectoryCollector.record_state
+    line: 68
+  - symbol: TrajectoryCollector.record_actions
+    line: 72
+  - symbol: TrajectoryCollector.record_prediction
+    line: 76
+  - symbol: TrajectoryCollector.record_next_state
+    line: 80
+  - symbol: TrajectoryCollector.on_episode_start
+    line: 119
+  - symbol: TrajectoryCollector.on_episode_end
+    line: 124
+  - symbol: SWMTrainer.train
+    line: 165
+  - symbol: run_training_pipeline
+    line: 357
+  metadata:
+    exists: true
+    size_bytes: 13772
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 698bee0f00d62b02f9b8560ea6b6aed5e1561177c4f803f6471eb99ca75956ac
+- id: src-action-executor-example
+  path: examples/action_executor_example.py
+  source_type: reproducible_example
+  evidence_level: E2
+  priority_rank: 2
+  fact_status:
+  - needs_verification
+  inspection_status: defined_not_executed
+  role_zh: 演示动作执行器输入和 FunctionCall 输出。
+  variable_domains:
+  - action_schema_and_scheduling
+  - pysc2_function_call
+  can_prove:
+  - 可作为动作映射离线测试候选
+  limitations:
+  - 未执行。
+  staleness:
+    risk: medium
+    reason: 示例不能替代 ActionExecutor 当前源码。
+  key_symbols: []
+  metadata:
+    exists: true
+    size_bytes: 3451
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 54b5eb5b905b9c03278180dba9b28e111ed22192cc0c3e5ff684e01353760d1e
+- id: src-battlefield-example
+  path: examples/battlefield_graph_example.py
+  source_type: reproducible_example
+  evidence_level: E2
+  priority_rank: 2
+  fact_status:
+  - needs_verification
+  inspection_status: defined_not_executed
+  role_zh: 用人工 RawUnit 字典演示 ABox 更新、序列化和战术派生量。
+  variable_domains:
+  - raw_unit
+  - abox_dynamic
+  - derived_tactical_state
+  can_prove:
+  - 可作为固定观测夹具候选
+  limitations:
+  - 示例未执行，人工数据不能证明真实 PySC2 dtype/范围。
+  staleness:
+    risk: medium
+    reason: 示例可能滞后于主实现。
+  key_symbols: []
+  metadata:
+    exists: true
+    size_bytes: 11683
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: d0fdf92b87f5e42f81e55be048842e08dea90538b9d47942af370a48aa831dfb
+- id: src-auto-extender-tests
+  path: tests/test_auto_extender.py
+  source_type: test_code
+  evidence_level: E2
+  priority_rank: 2
+  fact_status:
+  - needs_verification
+  inspection_status: defined_not_executed
+  role_zh: 定义自动扩展 Schema、安全校验和 mock LLM 流程测试。
+  variable_domains:
+  - unknown_ontology_extension
+  - tbox_static
+  can_prove:
+  - 扩展记录字段和拒绝规则的测试预期
+  limitations:
+  - 测试未执行。
+  staleness:
+    risk: medium
+    reason: mock 测试不能证明真实外部模型输出。
+  key_symbols:
+  - symbol: test_valid_response_produces_safe_patch
+    line: 139
+  - symbol: test_bad_effectiveness_is_rejected
+    line: 194
+  - symbol: test_end_to_end_pipeline_with_mock_llm
+    line: 223
+  - symbol: test_load_unknown_units_dedupes
+    line: 255
+  metadata:
+    exists: true
+    size_bytes: 9551
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 9aa32b3273edf862e4e4b80c8acdfe4c67b7659ec1a945402a4e9adf3b9a2072
+- id: src-unknown-fallback-tests
+  path: tests/test_unknown_unit_fallback.py
+  source_type: test_code
+  evidence_level: E2
+  priority_rank: 2
+  fact_status:
+  - needs_verification
+  inspection_status: defined_not_executed
+  role_zh: 定义未知单位 fallback、警告、日志和稳定性测试。
+  variable_domains:
+  - unknown_ontology_extension
+  - abox_dynamic
+  can_prove:
+  - 未知单位 ABox/日志预期行为
+  limitations:
+  - 测试未执行，因此仅证明预期和测试覆盖定义。
+  staleness:
+    risk: medium
+    reason: 运行会写 data/unknown_units.jsonl；本步骤未运行。
+  key_symbols:
+  - symbol: test_unknown_unit_creates_placeholder
+    line: 44
+  - symbol: test_serialize_for_llm_includes_warning
+    line: 86
+  - symbol: test_no_warning_when_all_known
+    line: 103
+  - symbol: test_agent_does_not_crash_with_unknown_units
+    line: 114
+  metadata:
+    exists: true
+    size_bytes: 5319
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: a1e5a4f7cfca95a138c7497893cf40e1897216411acdf70461e1cbeb69ca523e
+- id: src-python-version
+  path: .python-version
+  source_type: configuration
+  evidence_level: E3
+  priority_rank: 3
+  fact_status:
+  - needs_verification
+  inspection_status: static_inspected
+  role_zh: 声明 uv 默认 Python 版本。
+  variable_domains:
+  - environment_config
+  can_prove:
+  - Python 3.12 项目约定
+  limitations:
+  - 不证明当前命令实际使用该解释器。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols: []
+  metadata:
+    exists: true
+    size_bytes: 5
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d
+- id: src-marine-ontology
+  path: ontology/data/marine_ontology.py
+  source_type: static_schema
+  evidence_level: E3
+  priority_rank: 3
+  fact_status:
+  - needs_verification
+  inspection_status: static_inspected
+  role_zh: 定义当前基础 TBox 节点、属性和关系。
+  variable_domains:
+  - tbox_static
+  can_prove:
+  - 当前静态单位/建筑/资源/科技属性与边
+  limitations:
+  - 静态 Python 定义可能被缓存 pickle 遮蔽。
+  staleness:
+    risk: high
+    reason: OntologyLoader 优先加载 pickle；修改本文件后若不重建缓存，运行时可能仍使用旧图。
+  key_symbols:
+  - symbol: get_all_nodes
+    line: 712
+  - symbol: get_all_edges
+    line: 722
+  - symbol: get_node_by_type
+    line: 730
+  - symbol: get_edges_by_type
+    line: 744
+  metadata:
+    exists: true
+    size_bytes: 25672
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: c1c0bd1e3ee9f70fc51f61e62a2b5af90e41d80aed48bd425dddc1eb1dca116b
+- id: src-prompt-template
+  path: ontology/prompt_template.py
+  source_type: static_schema
+  evidence_level: E3
+  priority_rank: 3
+  fact_status:
+  - needs_verification
+  inspection_status: static_inspected
+  role_zh: 定义决策动作空间、输出格式、SWM 预测和再评估提示。
+  variable_domains:
+  - action_schema_and_scheduling
+  - swm
+  can_prove:
+  - Prompt 中声明的动作/预测接口和设计意图
+  limitations:
+  - Prompt 声明不能替代 Parser/Executor 的实际行为证据。
+  staleness:
+    risk: low
+    reason: 当前源码；语义仍需在后续变量卡片中逐字段审计。
+  key_symbols:
+  - symbol: SYSTEM_PROMPT
+    line: 1
+  - symbol: ACTION_SPACE
+    line: 17
+  - symbol: OUTPUT_FORMAT
+    line: 56
+  - symbol: PREDICTION_PROMPT
+    line: 132
+  - symbol: PREDICTION_REEVALUATION_PROMPT
+    line: 176
+  metadata:
+    exists: true
+    size_bytes: 7721
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: b455e0c98205232fff007e48f14c5f23ad74488f57d7ec7a39adf553bde46a7d
+- id: src-pyproject
+  path: pyproject.toml
+  source_type: configuration
+  evidence_level: E3
+  priority_rank: 3
+  fact_status:
+  - needs_verification
+  inspection_status: static_inspected
+  role_zh: 声明项目名、Python 下限和 PySC2 等依赖版本约束。
+  variable_domains:
+  - environment_config
+  can_prove:
+  - pysc2>=4.0.0、protobuf==3.20 等依赖约束
+  limitations:
+  - 版本约束不是实际已安装版本。
+  staleness:
+    risk: medium
+    reason: 实际环境可能与锁文件或当前解释器不同。
+  key_symbols: []
+  metadata:
+    exists: true
+    size_bytes: 382
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 3d174da8d8d1e664c31b74acf05e0efc40af50a5414e1263db6c8e91eeae7207
+- id: src-readme-root
+  path: README.md
+  source_type: documentation
+  evidence_level: E5
+  priority_rank: 5
+  fact_status:
+  - design_intent
+  inspection_status: static_inspected
+  role_zh: 项目总体设计、运行方式和研究目标说明。
+  variable_domains:
+  - environment_config
+  - experiment_metric
+  can_prove:
+  - 设计意图和候选术语
+  limitations:
+  - 不得覆盖当前源码事实。
+  staleness:
+    risk: high
+    reason: README 可能落后于实现。
+  key_symbols: []
+  metadata:
+    exists: true
+    size_bytes: 9075
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 6039bd0d899dad245a68524903e236d630404117c5065d06ca4f46ac20efc65d
+- id: src-readme-agents
+  path: agents/README.md
+  source_type: documentation
+  evidence_level: E5
+  priority_rank: 5
+  fact_status:
+  - design_intent
+  inspection_status: static_inspected
+  role_zh: Agent、Parser、Executor 的文档化接口说明。
+  variable_domains:
+  - action_schema_and_scheduling
+  - pysc2_function_call
+  can_prove:
+  - 设计意图、示例 JSON 和候选约束
+  limitations:
+  - 其中 confidence 等描述与当前注释掉的实现可能冲突。
+  staleness:
+    risk: high
+    reason: 已发现文档与当前 Parser 代码存在潜在差异。
+  key_symbols: []
+  metadata:
+    exists: true
+    size_bytes: 13527
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 864493c3757109739b7a1f1b6cb0a3524d7a911234641d692e062e169fbb6bb8
+- id: src-readme-examples
+  path: examples/README.md
+  source_type: documentation
+  evidence_level: E5
+  priority_rank: 5
+  fact_status:
+  - design_intent
+  inspection_status: static_inspected
+  role_zh: 示例与实验运行方式说明。
+  variable_domains:
+  - environment_config
+  - experiment_metric
+  can_prove:
+  - 运行意图和实验入口索引
+  limitations:
+  - 未执行示例，文档命令不作为成功证据。
+  staleness:
+    risk: high
+    reason: 命令和默认参数可能漂移。
+  key_symbols: []
+  metadata:
+    exists: true
+    size_bytes: 7735
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 39a3a506c9c88c72be866ccbedcb27688dc7902842cbe1ddaccac2a40783bbd3
+- id: src-readme-ontology
+  path: ontology/README.md
+  source_type: documentation
+  evidence_level: E5
+  priority_rank: 5
+  fact_status:
+  - design_intent
+  inspection_status: static_inspected
+  role_zh: TBox、ABox、Prompt 和 SWM 的设计说明。
+  variable_domains:
+  - tbox_static
+  - abox_dynamic
+  - derived_tactical_state
+  - swm
+  can_prove:
+  - 设计意图和术语
+  limitations:
+  - 不得替代 bridge/loader/predictor 当前代码。
+  staleness:
+    risk: high
+    reason: 可能描述计划能力或旧接口。
+  key_symbols: []
+  metadata:
+    exists: true
+    size_bytes: 14162
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: b0c2b714d839939223b12b596b08123248447d9e6ce76446f000d81964f0f898
+ontology_caches:
+- id: cache-ontology-pickle
+  path: data/ontology/ontology_graph.pkl
+  source_type: ontology_cache
+  evidence_level: E3
+  inspection_status: present_not_regenerated
+  role_zh: OntologyLoader 默认优先加载的基础本体 pickle。
+  variable_domains:
+  - tbox_static
+  - unknown_ontology_extension
+  metadata:
+    exists: true
+    size_bytes: 8899
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 0bccfcc74006aa819fae1df509656692abe779dc2d0cbdaec7e7ce46930ddb08
+  staleness:
+    risk: high
+    reason: 可能遮蔽 marine_ontology.py 的最新修改。
+- id: cache-ontology-graphml
+  path: data/ontology/ontology_graph.graphml
+  source_type: ontology_cache
+  evidence_level: E3
+  inspection_status: present_not_regenerated
+  role_zh: 基础本体的可交换 GraphML 快照。
+  variable_domains:
+  - tbox_static
+  - unknown_ontology_extension
+  metadata:
+    exists: true
+    size_bytes: 22803
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 12f4fced008a952a485a4f7b3d1a714b33cf8d7921ac8029fbe83e892fde4045
+  staleness:
+    risk: high
+    reason: 不保证与默认加载 pickle 或当前源定义同步。
+- id: cache-b3-pickle
+  path: data/ontology/ontology_graph_b3_extended.pkl
+  source_type: ontology_cache
+  evidence_level: E3
+  inspection_status: present_not_regenerated
+  role_zh: 自适应本体实验使用的 B3 扩展 pickle。
+  variable_domains:
+  - tbox_static
+  - unknown_ontology_extension
+  metadata:
+    exists: true
+    size_bytes: 4867
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: c65340cfcb734c4455c50b15a1fb237319df78c8c1937eb7d0ad7f2a499bacbf
+  staleness:
+    risk: high
+    reason: 历史实验缓存，不是默认基础真值。
+- id: cache-b3-graphml
+  path: data/ontology/ontology_graph_b3_extended.graphml
+  source_type: ontology_cache
+  evidence_level: E3
+  inspection_status: present_not_regenerated
+  role_zh: B3 扩展图的 GraphML 快照。
+  variable_domains:
+  - tbox_static
+  - unknown_ontology_extension
+  metadata:
+    exists: true
+    size_bytes: 11855
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: ab44e7edfabc2e0d24796c31abb5413269b76eddbf8ef50a2b79339bf443c594
+  staleness:
+    risk: high
+    reason: 可能与扩展 patch 或 pickle 不同步。
+- id: cache-b3-patch
+  path: data/ontology/b3_extension_patch.py
+  source_type: ontology_cache
+  evidence_level: E3
+  inspection_status: present_not_regenerated
+  role_zh: B3 自适应扩展生成的 Python patch。
+  variable_domains:
+  - tbox_static
+  - unknown_ontology_extension
+  metadata:
+    exists: true
+    size_bytes: 1488
+    modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+    sha256: 957c71161ebf7a3e72d49e895648e3b90c0f7bf6651daf233f5a08303b4f8f77
+  staleness:
+    risk: high
+    reason: 生成物；需要回指生成实验和 unknown 日志。
+runtime_expected_sources:
+- id: runtime-unknown-units-log
+  path: data/unknown_units.jsonl
+  source_type: runtime_generated_jsonl
+  exists: false
+  expected_generator: ontology/bridge.py::BattlefieldGraph._log_unknown_unit
+  expected_consumer: ontology/auto_extender.py::load_unknown_units
+  evidence_level: E2
+  inspection_status: missing_at_review
+  note: 只有实际遇到未知 unit_type 并启用 fallback 后才可能生成；本步骤未运行测试或 SC2。
+artifact_collections:
+  root: data/record
+  member_count: 31
+  members:
+  - id: artifact-3389fc7b5f17
+    path: data/record/ablation_buildmarine.csv
+    format: csv
+    group: legacy_ablation_and_scene_results
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 627
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 1ca7cfdd5db9162ba33d439cfc39dfa99cb38ef8f391bc1fc5bf18b1aee45a01
+    schema:
+      columns:
+      - scene
+      - methodology
+      - average token consumption per decision
+      - prompt token consumption
+      - average action failure rate
+      - average action failure rate on decision
+      - average scores per episode
+      - average number of decisions per episode
+      - ' average latency (s)'
+      - average token consumption per episode
+      - prompt token consumption per episode
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-76861aa64c72
+    path: data/record/ablation_contrast.csv
+    format: csv
+    group: legacy_ablation_and_scene_results
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 527
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: bf3c7a083a332c65b62a685c8be59834ccc9482283a8c46d5d0186ab3c630150
+    schema:
+      columns:
+      - scene
+      - methodology
+      - average token consumption per decision (prompt token consumption)
+      - average action failure rate (average action failure rate on decision)
+      - average scores per episode
+      - average number of decisions per episode
+      - ' average latency (s)'
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-22915149d885
+    path: data/record/ablation_movetobeacon.csv
+    format: csv
+    group: legacy_ablation_and_scene_results
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 609
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 74fa1c37173ea05a285ef9b203fd0825038ba70e87c67d1449a36167e57aa270
+    schema:
+      columns:
+      - scene
+      - methodology
+      - average token consumption per decision
+      - prompt token consumption
+      - average action failure rate
+      - average action failure rate on decision
+      - average scores per episode
+      - average number of decisions per episode
+      - ' average latency (s)'
+      - average token consumption per episode
+      - prompt token consumption per episode
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-b00a6871c5b0
+    path: data/record/adaptive_ontology.csv
+    format: csv
+    group: adaptive_ontology
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 606
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: d3caa087e177f3cc37f130ce3a09c29782543b313dd5b82c999b9d70b3806800
+    schema:
+      columns:
+      - scene
+      - condition
+      - episodes
+      - avg_score
+      - score_std
+      - action_failure_rate
+      - failure_rate_std
+      - avg_decision_time_s
+      - avg_prompt_tokens_per_decision
+      - avg_total_tokens_per_decision
+      - unknown_units_seen
+      - decision_calls
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-964afa4257f4
+    path: data/record/adaptive_ontology_raw.jsonl
+    format: jsonl
+    group: adaptive_ontology
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 18397
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 7a483c3785bf4d139473ec48e2992b7f19e1a448b9b0f8102f970a3fe297f9d1
+    schema:
+      first_record_keys:
+      - scene
+      - condition
+      - episode_idx
+      - score
+      - action_failure_rate
+      - decision_time_s
+      - prompt_tokens
+      - total_tokens
+      - decision_calls
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-3053492b268e
+    path: data/record/buildmarines.csv
+    format: csv
+    group: legacy_ablation_and_scene_results
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 323
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 314200d3a3a3812aad5d08bd6c99eb1703a236f76c5f809884429fc7249f6d53
+    schema:
+      columns:
+      - score
+      - step
+      - prompt_per_step
+      - AIR
+      - AIR_dt
+      - latency_per_step
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-53e42b7aa533
+    path: data/record/contrast.csv
+    format: csv
+    group: legacy_ablation_and_scene_results
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 1102
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 442718145e0e3cc8705cb0aaaf7975b0dfeb66342aae466501b8c3041644fd51
+    schema:
+      columns:
+      - scene
+      - methodology
+      - average token consumption per decision
+      - average prompt token consumption per decision
+      - average action failure rate (average action failure rate on decision)
+      - average scores per episode
+      - average number of decisions per episode
+      - ' average latency (s)'
+      - average token consumption per episode
+      - average prompt token consumption per episode
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-a284ce1cc1c2
+    path: data/record/defeatroaches.csv
+    format: csv
+    group: legacy_ablation_and_scene_results
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 267
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 758bd5f9908e346d4567db6f5aea7147fa00d1aad8ff465204db5f52786ca95a
+    schema:
+      columns:
+      - score
+      - step
+      - prompt_per_step
+      - AIR
+      - AIR_dt
+      - latency_per_step
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-3a0a46d20e21
+    path: data/record/movetobeacon.csv
+    format: csv
+    group: legacy_ablation_and_scene_results
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 190
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 8605f7a67fa8c4c1ab0f58e55c1e0a3fbd162509b9df11daae10b66e9eea0c70
+    schema:
+      columns:
+      - score
+      - step
+      - prompt_per_step
+      - AIR
+      - AIR_dt
+      - latency_per_step
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-5e792c333b95
+    path: data/record/no_swm_baseline.json
+    format: json
+    group: ood_and_baselines
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 444
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 924cf38ce5af356c2762194dc166ec5957cb228933c82cf13d8cfb71a9fcc549
+    schema:
+      top_level_keys:
+      - note
+      - source_csv
+      - scene
+      - episodes_completed
+      - episodes_failed
+      - avg_score
+      - std_score
+      - avg_overall_failure_rate
+      - std_overall_failure_rate
+      - avg_swm_prediction_count
+      - avg_swm_reevaluation_change_rate
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-f2406f6b3d87
+    path: data/record/ood_baseline_heuristic.csv
+    format: csv
+    group: ood_and_baselines
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 483
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 110fe1668be246005c131d95cf78adbf303367b88e2660c00882f194e2ec7b5b
+    schema:
+      columns:
+      - scene
+      - methodology
+      - avg_score
+      - score_std
+      - avg_token_per_decision
+      - prompt_token_per_decision
+      - avg_failure_rate
+      - failure_rate_std
+      - avg_decisions_per_episode
+      - decisions_std
+      - avg_latency_s
+      - latency_std
+      - episodes
+      - success_count
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-99434183f993
+    path: data/record/ood_baseline_heuristic_raw.csv
+    format: csv
+    group: ood_and_baselines
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 2051
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 51a8bf86902b44219dc4d8d5339bd8f7505c1abbb11477ef2d4e5205ca820be8
+    schema:
+      columns:
+      - scene
+      - episode_index
+      - methodology
+      - final_score
+      - step_count
+      - decision_calls
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      - avg_decision_time
+      - action_failure_rate
+      - delayed_failure_rate
+      - overall_failure_rate
+      - success
+      - error_message
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-1c27b7abb341
+    path: data/record/ood_baseline_rl.csv
+    format: csv
+    group: ood_and_baselines
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 659
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: e3db7a57b9776174d1a8bfa2cab0e43378142a5b26bb34cf7fd0982e3eb40c7f
+    schema:
+      columns:
+      - scene
+      - methodology
+      - avg_score
+      - score_std
+      - avg_token_per_decision
+      - prompt_token_per_decision
+      - avg_failure_rate
+      - failure_rate_std
+      - avg_decisions_per_episode
+      - decisions_std
+      - avg_latency_s
+      - latency_std
+      - avg_action_attack_ratio
+      - avg_action_move_ratio
+      - episodes
+      - success_count
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-126157ad6721
+    path: data/record/ood_baseline_rl_raw.csv
+    format: csv
+    group: ood_and_baselines
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 6424
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: d2f58c608827593f38c7375fc6c243aff1ff30084c51cf1f71f855920b36f3a1
+    schema:
+      columns:
+      - scene
+      - episode_index
+      - methodology
+      - final_score
+      - step_count
+      - decision_calls
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      - avg_decision_time
+      - action_failure_rate
+      - delayed_failure_rate
+      - overall_failure_rate
+      - action_attack_count
+      - action_move_count
+      - action_total
+      - action_attack_ratio
+      - action_move_ratio
+      - success
+      - error_message
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-49880185410b
+    path: data/record/ood_matrix.csv
+    format: csv
+    group: ood_and_baselines
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 613
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 5285142870caadfc056b38b75b4a8a2bb1d23c9047322f6fe6de01b71de79a4b
+    schema:
+      columns:
+      - scene
+      - methodology
+      - avg_score
+      - score_std
+      - avg_token_per_decision
+      - prompt_token_per_decision
+      - avg_failure_rate
+      - failure_rate_std
+      - avg_decisions_per_episode
+      - decisions_std
+      - avg_latency_s
+      - latency_std
+      - avg_swm_prediction_count
+      - avg_swm_prediction_success_rate
+      - avg_swm_reevaluation_count
+      - avg_swm_reevaluation_change_rate
+      - avg_relation_accuracy
+      - avg_health_rmse
+      - avg_position_rmse
+      - avg_overall_error
+      - episodes
+      - success_count
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-4840f3a1aa74
+    path: data/record/ood_matrix_no_swn.csv
+    format: csv
+    group: ood_and_baselines
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 407
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 95a0ff22630ed9751c6844f078aa165a7d3236eda7ebde47bcc4151d75aafbc9
+    schema:
+      columns:
+      - scene
+      - methodology
+      - avg_score
+      - score_std
+      - avg_token_per_decision
+      - prompt_token_per_decision
+      - avg_failure_rate
+      - failure_rate_std
+      - avg_decisions_per_episode
+      - decisions_std
+      - avg_latency_s
+      - latency_std
+      - episodes
+      - success_count
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-faef625fa21c
+    path: data/record/ood_matrix_raw.csv
+    format: csv
+    group: ood_and_baselines
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 3734
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: bf68511af2173cb0e4985544fea2cad125c44be0012daf641dcc024154939e60
+    schema:
+      columns:
+      - scene
+      - episode_index
+      - methodology
+      - final_score
+      - step_count
+      - decision_calls
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      - avg_decision_time
+      - action_failure_rate
+      - delayed_failure_rate
+      - overall_failure_rate
+      - swm_enabled
+      - swm_prediction_count
+      - swm_prediction_success_count
+      - swm_prediction_success_rate
+      - swm_reevaluation_count
+      - swm_reevaluation_changed_count
+      - swm_reevaluation_change_rate
+      - relation_accuracy
+      - health_rmse
+      - position_rmse
+      - overall_error
+      - success
+      - error_message
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-b6bccefc8782
+    path: data/record/ood_matrix_raw_no_swn.csv
+    format: csv
+    group: ood_and_baselines
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 2683
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: dfeeb6764d877eca7ce902e1c6acc03bba8db81cecb31d174edfb4412fe6fd39
+    schema:
+      columns:
+      - scene
+      - episode_index
+      - methodology
+      - final_score
+      - step_count
+      - decision_calls
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      - avg_decision_time
+      - action_failure_rate
+      - delayed_failure_rate
+      - overall_failure_rate
+      - success
+      - error_message
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-2bf1fa128fb9
+    path: data/record/swm_experiment_20260515_170552_pre_train/20260515_170552_DefeatRoaches_with_swm/episodes.csv
+    format: csv
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 5259
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: ac8eb84966704c238306fef319b4228c3d889c06e78726b23c90b0d705ecfe32
+    schema:
+      columns:
+      - run_id
+      - condition
+      - scene
+      - episode_index
+      - worker_id
+      - success
+      - error_message
+      - started_at
+      - finished_at
+      - duration_s
+      - step_count
+      - final_score
+      - decision_interval_requested
+      - decision_interval_effective
+      - mission_objective_requested
+      - mission_objective_effective
+      - swm_prediction_steps
+      - decision_calls
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      - avg_prompt_tokens
+      - avg_completion_tokens
+      - avg_total_tokens
+      - total_decision_time
+      - avg_decision_time
+      - planned_actions
+      - invalid_actions
+      - invalid_delayed_actions
+      - action_failure_rate
+      - delayed_failure_rate
+      - overall_failure_rate
+      - swm_enabled
+      - prediction_count
+      - prediction_success_count
+      - prediction_success_rate
+      - reevaluation_count
+      - reevaluation_changed_count
+      - reevaluation_change_rate
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-0db0a749356c
+    path: data/record/swm_experiment_20260515_170552_pre_train/20260515_170552_DefeatRoaches_with_swm/episodes.json
+    format: json
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 15011
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 71f842b2467cadddfff4e8a40fb1e3e8fd8bb6ed6c9722a4b9142f91d5970aa2
+    schema:
+      list_length: 10
+      item_keys:
+      - run_id
+      - condition
+      - scene
+      - episode_index
+      - worker_id
+      - success
+      - error_message
+      - started_at
+      - finished_at
+      - duration_s
+      - step_count
+      - final_score
+      - decision_interval_requested
+      - decision_interval_effective
+      - mission_objective_requested
+      - mission_objective_effective
+      - swm_prediction_steps
+      - decision_calls
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      - avg_prompt_tokens
+      - avg_completion_tokens
+      - avg_total_tokens
+      - total_decision_time
+      - avg_decision_time
+      - planned_actions
+      - invalid_actions
+      - invalid_delayed_actions
+      - action_failure_rate
+      - delayed_failure_rate
+      - overall_failure_rate
+      - swm_enabled
+      - prediction_count
+      - prediction_success_count
+      - prediction_success_rate
+      - reevaluation_count
+      - reevaluation_changed_count
+      - reevaluation_change_rate
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-55589b207ae4
+    path: data/record/swm_experiment_20260515_170552_pre_train/20260515_170552_DefeatRoaches_with_swm/summary.csv
+    format: csv
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 1204
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 1cf0647dabe121a0bd06b7db557166d1ea8772749c77232042479dc185c0bbd6
+    schema:
+      columns:
+      - run_id
+      - condition
+      - scene
+      - episodes_requested
+      - episodes_completed
+      - episodes_failed
+      - parallelism
+      - decision_interval_requested
+      - decision_interval_effective
+      - swm_prediction_steps
+      - trajectory_output_path
+      - avg_score
+      - std_score
+      - min_score
+      - max_score
+      - avg_decisions_per_episode
+      - std_decisions_per_episode
+      - avg_prompt_tokens_per_decision
+      - std_prompt_tokens_per_decision
+      - avg_total_tokens_per_decision
+      - std_total_tokens_per_decision
+      - avg_decision_time_s
+      - std_decision_time_s
+      - avg_action_failure_rate
+      - std_action_failure_rate
+      - avg_delayed_failure_rate
+      - std_delayed_failure_rate
+      - avg_overall_failure_rate
+      - std_overall_failure_rate
+      - avg_swm_prediction_count
+      - std_swm_prediction_count
+      - avg_swm_prediction_success_rate
+      - std_swm_prediction_success_rate
+      - avg_swm_reevaluation_count
+      - std_swm_reevaluation_count
+      - avg_swm_reevaluation_change_rate
+      - std_swm_reevaluation_change_rate
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-a6282ba54331
+    path: data/record/swm_experiment_20260515_170552_pre_train/20260515_170552_DefeatRoaches_with_swm/summary.json
+    format: json
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 2004
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: af14f51121ad735369234aea916335a830be3e976f041f9f435f75390431c25d
+    schema:
+      top_level_keys:
+      - run_config
+      - summary
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-3c410b874d9c
+    path: data/record/swm_experiment_20260515_205613_post_train/20260515_205613_DefeatRoaches_with_swm/episodes.csv
+    format: csv
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 5135
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 1a8d900cffa78242e8a32731ef5f276166d4875bc28cc1ee369e344dd30d62e1
+    schema:
+      columns:
+      - run_id
+      - condition
+      - scene
+      - episode_index
+      - worker_id
+      - success
+      - error_message
+      - started_at
+      - finished_at
+      - duration_s
+      - step_count
+      - final_score
+      - decision_interval_requested
+      - decision_interval_effective
+      - mission_objective_requested
+      - mission_objective_effective
+      - swm_prediction_steps
+      - decision_calls
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      - avg_prompt_tokens
+      - avg_completion_tokens
+      - avg_total_tokens
+      - total_decision_time
+      - avg_decision_time
+      - planned_actions
+      - invalid_actions
+      - invalid_delayed_actions
+      - action_failure_rate
+      - delayed_failure_rate
+      - overall_failure_rate
+      - swm_enabled
+      - prediction_count
+      - prediction_success_count
+      - prediction_success_rate
+      - reevaluation_count
+      - reevaluation_changed_count
+      - reevaluation_change_rate
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-66926781ee21
+    path: data/record/swm_experiment_20260515_205613_post_train/20260515_205613_DefeatRoaches_with_swm/episodes.json
+    format: json
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 14929
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: fe95308fe548e09b8b6a5b08bb63a50a0896183ce4f0e19ec854e658cd026701
+    schema:
+      list_length: 10
+      item_keys:
+      - run_id
+      - condition
+      - scene
+      - episode_index
+      - worker_id
+      - success
+      - error_message
+      - started_at
+      - finished_at
+      - duration_s
+      - step_count
+      - final_score
+      - decision_interval_requested
+      - decision_interval_effective
+      - mission_objective_requested
+      - mission_objective_effective
+      - swm_prediction_steps
+      - decision_calls
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      - avg_prompt_tokens
+      - avg_completion_tokens
+      - avg_total_tokens
+      - total_decision_time
+      - avg_decision_time
+      - planned_actions
+      - invalid_actions
+      - invalid_delayed_actions
+      - action_failure_rate
+      - delayed_failure_rate
+      - overall_failure_rate
+      - swm_enabled
+      - prediction_count
+      - prediction_success_count
+      - prediction_success_rate
+      - reevaluation_count
+      - reevaluation_changed_count
+      - reevaluation_change_rate
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-75f9bbbe9a42
+    path: data/record/swm_experiment_20260515_205613_post_train/20260515_205613_DefeatRoaches_with_swm/summary.csv
+    format: csv
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 1323
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 6fa89e7bb77cb4e5d97732369f91e2dabe202db78fdd0f8e3a1a292ea33abb39
+    schema:
+      columns:
+      - run_id
+      - condition
+      - scene
+      - episodes_requested
+      - episodes_completed
+      - episodes_failed
+      - parallelism
+      - decision_interval_requested
+      - decision_interval_effective
+      - swm_prediction_steps
+      - trajectory_output_path
+      - avg_score
+      - std_score
+      - min_score
+      - max_score
+      - avg_decisions_per_episode
+      - std_decisions_per_episode
+      - avg_prompt_tokens_per_decision
+      - std_prompt_tokens_per_decision
+      - avg_total_tokens_per_decision
+      - std_total_tokens_per_decision
+      - avg_decision_time_s
+      - std_decision_time_s
+      - avg_action_failure_rate
+      - std_action_failure_rate
+      - avg_delayed_failure_rate
+      - std_delayed_failure_rate
+      - avg_overall_failure_rate
+      - std_overall_failure_rate
+      - avg_swm_prediction_count
+      - std_swm_prediction_count
+      - avg_swm_prediction_success_rate
+      - std_swm_prediction_success_rate
+      - avg_swm_reevaluation_count
+      - std_swm_reevaluation_count
+      - avg_swm_reevaluation_change_rate
+      - std_swm_reevaluation_change_rate
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-c8f5e41386b7
+    path: data/record/swm_experiment_20260515_205613_post_train/20260515_205613_DefeatRoaches_with_swm/summary.json
+    format: json
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 2123
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 9c6c48398ac65f167c6bd510dac98d45835ed6096509fdeae7d058d596feed17
+    schema:
+      top_level_keys:
+      - run_config
+      - summary
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-b1233613a138
+    path: data/record/swm_experiment_20260516_182914_post_train/20260516_182914_DefeatRoaches_with_swm/episodes.csv
+    format: csv
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 6809
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: daaf8c39bf45e5aeb64eaabee18313447844365b32ed850384b3e654a033b3b0
+    schema:
+      columns:
+      - run_id
+      - condition
+      - scene
+      - episode_index
+      - worker_id
+      - success
+      - error_message
+      - started_at
+      - finished_at
+      - duration_s
+      - step_count
+      - final_score
+      - decision_interval_requested
+      - decision_interval_effective
+      - mission_objective_requested
+      - mission_objective_effective
+      - swm_prediction_steps
+      - decision_calls
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      - avg_prompt_tokens
+      - avg_completion_tokens
+      - avg_total_tokens
+      - total_decision_time
+      - avg_decision_time
+      - planned_actions
+      - invalid_actions
+      - invalid_delayed_actions
+      - action_failure_rate
+      - delayed_failure_rate
+      - overall_failure_rate
+      - swm_enabled
+      - prediction_count
+      - prediction_success_count
+      - prediction_success_rate
+      - reevaluation_count
+      - reevaluation_changed_count
+      - reevaluation_change_rate
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-d3a14227c009
+    path: data/record/swm_experiment_20260516_182914_post_train/20260516_182914_DefeatRoaches_with_swm/episodes.json
+    format: json
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 15646
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 4b00abcbdfc69d274a2f064bda24c9ba65411f4579241dadf85317f6871c92a1
+    schema:
+      list_length: 10
+      item_keys:
+      - run_id
+      - condition
+      - scene
+      - episode_index
+      - worker_id
+      - success
+      - error_message
+      - started_at
+      - finished_at
+      - duration_s
+      - step_count
+      - final_score
+      - decision_interval_requested
+      - decision_interval_effective
+      - mission_objective_requested
+      - mission_objective_effective
+      - swm_prediction_steps
+      - decision_calls
+      - prompt_tokens
+      - completion_tokens
+      - total_tokens
+      - avg_prompt_tokens
+      - avg_completion_tokens
+      - avg_total_tokens
+      - total_decision_time
+      - avg_decision_time
+      - planned_actions
+      - invalid_actions
+      - invalid_delayed_actions
+      - action_failure_rate
+      - delayed_failure_rate
+      - overall_failure_rate
+      - swm_enabled
+      - prediction_count
+      - prediction_success_count
+      - prediction_success_rate
+      - reevaluation_count
+      - reevaluation_changed_count
+      - reevaluation_change_rate
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-19e1e29d7b87
+    path: data/record/swm_experiment_20260516_182914_post_train/20260516_182914_DefeatRoaches_with_swm/summary.csv
+    format: csv
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 1173
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: ed91249c38fe03b6173b1dd24832d5303028037b0bf66b182cdb59cc53a4663d
+    schema:
+      columns:
+      - run_id
+      - condition
+      - scene
+      - episodes_requested
+      - episodes_completed
+      - episodes_failed
+      - parallelism
+      - decision_interval_requested
+      - decision_interval_effective
+      - swm_prediction_steps
+      - trajectory_output_path
+      - avg_score
+      - std_score
+      - min_score
+      - max_score
+      - avg_decisions_per_episode
+      - std_decisions_per_episode
+      - avg_prompt_tokens_per_decision
+      - std_prompt_tokens_per_decision
+      - avg_total_tokens_per_decision
+      - std_total_tokens_per_decision
+      - avg_decision_time_s
+      - std_decision_time_s
+      - avg_action_failure_rate
+      - std_action_failure_rate
+      - avg_delayed_failure_rate
+      - std_delayed_failure_rate
+      - avg_overall_failure_rate
+      - std_overall_failure_rate
+      - avg_swm_prediction_count
+      - std_swm_prediction_count
+      - avg_swm_prediction_success_rate
+      - std_swm_prediction_success_rate
+      - avg_swm_reevaluation_count
+      - std_swm_reevaluation_count
+      - avg_swm_reevaluation_change_rate
+      - std_swm_reevaluation_change_rate
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-126a04e59161
+    path: data/record/swm_experiment_20260516_182914_post_train/20260516_182914_DefeatRoaches_with_swm/summary.json
+    format: json
+    group: swm_runs
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 1904
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: 174290154c8b992dc5a1fbe9fe3477207bfa2e0c3f7cc2361a6c68b5d042c511
+    schema:
+      top_level_keys:
+      - run_config
+      - summary
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  - id: artifact-61efedef62e1
+    path: data/record/tbox_similarity.json
+    format: json
+    group: adaptive_ontology
+    evidence_level: E4
+    fact_status:
+    - runtime_observation
+    - needs_verification
+    inspection_status: schema_inspected_not_reproduced
+    metadata:
+      exists: true
+      size_bytes: 676
+      modified_at_filesystem: '2026-06-23T10:56:52+08:00'
+      sha256: c06227a2947889ccecc6aac0d3c0e0c8f755abfe031dd3263ec4847be937c8ed
+    schema:
+      top_level_keys:
+      - base_unit_count
+      - b3_unit_count
+      - b1_unit_count
+      - common_unit_count
+      - b3_new_unit_count
+      - b1_new_unit_count
+      - common_new_unit_count
+      - node_precision
+      - node_recall
+      - node_f1
+      - ext_node_precision
+      - ext_node_recall
+      - ext_node_f1
+      - b3_edge_count
+      - b1_edge_count
+      - common_edge_count
+      - edge_precision
+      - edge_recall
+      - edge_f1
+      - b3_new_edge_count
+      - b1_new_edge_count
+      - common_new_edge_count
+      - ext_edge_precision
+      - ext_edge_recall
+      - ext_edge_f1
+      - attr_mae
+      - attr_mae_count
+    staleness:
+      risk: high
+      reason: 历史运行产物；只能证明该文件记录过的结果，不能自动代表当前代码可复现。
+  usage_rule: 指标定义优先回指对应 examples/*.py 写出逻辑；产物仅作为 E4 运行记录。
+scanned_but_excluded_assets:
+- pattern: data/record/*.pdf
+  reason: 绘图输出，不作为变量定义证据。
+- pattern: data/ontology/*.svg
+  reason: 可视化输出，不作为 TBox/ABox 字段真值。
+- path: data/record/ood_all_in_one.xlsx
+  reason: 本步骤聚焦可直接结构化审计的 CSV/JSON；XLSX 留待表格专项审计。
+unresolved_issues:
+- id: issue-git-identity
+  status: needs_verification
+  description: 当前目录无法记录可靠 commit hash。
+- id: issue-installed-pysc2-version
+  status: needs_verification
+  description: pyproject 只给出 pysc2>=4.0.0，未核验实际运行环境版本。
+- id: issue-cache-source-drift
+  status: needs_verification
+  description: 未比较 ontology_graph.pkl 与 marine_ontology.py 构建结果是否一致。
+- id: issue-tests-not-run
+  status: needs_verification
+  description: 测试和示例均未执行，E2 条目不能标记 runtime_verified。
+- id: issue-historical-artifact-lineage
+  status: needs_verification
+  description: 历史结果未逐个绑定 commit、命令和配置。
+- id: issue-external-official-semantics
+  status: needs_verification
+  description: 本步骤未访问 PySC2 官方资料，dtype/单位/枚举的外部语义留待后续版本核验。
+next_step:
+  id: 03_design_schema
+  prompt: knowledge/prompts/03_design_schema.md
+  recommended_inputs:
+  - knowledge/manifests/scope.yaml
+  - knowledge/manifests/source_registry.yaml
+  outputs:
+  - knowledge/schemas/variable.schema.json
+  - knowledge/docs/03_schema_specification.md
+  - knowledge/variables/examples.yaml

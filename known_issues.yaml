@@ -1,0 +1,528 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema_version: 1.0.0
+generated_at: '2026-09-04'
+status: static_known_issues_recorded
+scope: 当前 STORM 主路径使用的 PySC2 Raw API 变量及直接转换、动作、SWM 与指标。
+runtime_boundary:
+  sc2_executed: false
+  external_llm_or_swm_called: false
+  experiments_reexecuted: false
+  statement: 仅执行静态源码审计和离线校验。
+truth_status_definitions:
+  design_intent: 注释、提示或文档表达的预期。
+  code_reality: 由当前源码控制流或赋值路径直接确认。
+  runtime_observation: 实际运行观测；本步骤未新增。
+  needs_verification: 静态证据不足，必须按建议方式确认。
+issue_types:
+- confirmed_bug
+- implementation_quirk
+- documentation_mismatch
+- needs_runtime_test
+severity_levels:
+- critical
+- high
+- medium
+- low
+statistics:
+  issue_count: 11
+  by_type:
+    confirmed_bug: 2
+    documentation_mismatch: 3
+    implementation_quirk: 4
+    needs_runtime_test: 2
+  by_severity:
+    critical: 1
+    high: 5
+    low: 1
+    medium: 4
+  affected_variable_count: 23
+  affected_noncanonical_field_count: 1
+issues:
+- id: issue.abox_armor_stores_shield
+  title_zh: ABox armor 字段实际保存 shield
+  issue_type: implementation_quirk
+  severity: high
+  truth_status: code_reality
+  status: open
+  phenomenon: ABox 的 armor/armor_ratio 由 shield/shield_ratio 赋值。
+  concise_explanation: 字段名称表达护甲，但当前数值语义是护盾。
+  expected_or_documented_behavior: armor 应保存护甲；若保存护盾应采用 shield 语义。
+  current_implementation: 创建和更新 ABox 时均使用 shield 映射。
+  affected_variable_ids:
+  - abox.unit.armor
+  - abox.unit.armor_ratio
+  - raw_unit.shield
+  - raw_unit.shield_ratio
+  affected_noncanonical_fields: []
+  evidence:
+  - path: ontology/bridge.py
+    symbol: BattlefieldGraph._add_unit_instance
+    line_start: 201
+    line_end: 202
+    claim: 创建路径把 shield 写入 armor。
+  - path: ontology/bridge.py
+    symbol: BattlefieldGraph._update_unit_instance
+    line_start: 264
+    line_end: 269
+    claim: 更新路径沿用同一映射。
+  impact:
+    knowledge_answer_constraint: 必须说明当前 ABox armor 实际是 shield，不能解释为 SC2 护甲。
+    code_or_experiment_risk: 论文或代码可能错误解释物理量。
+  recommended_verification:
+    method: static_unit_test
+    execution_status: not_executed
+    steps:
+    - 构造 shield 非零的 raw_unit。
+    - 检查 ABox 创建和更新结果。
+    success_criteria: 字段命名、文档语义和数据源一致。
+  limitations:
+  - 未启动 SC2。
+- id: issue.action_coordinate_clip_not_written_back
+  title_zh: 坐标裁剪结果未写回 action.target
+  issue_type: confirmed_bug
+  severity: high
+  truth_status: code_reality
+  status: open
+  phenomenon: np.clip 只修改局部 x/y，没有更新动作对象。
+  concise_explanation: 越界坐标看似被裁剪，后续仍可能收到原始 target。
+  expected_or_documented_behavior: 裁剪值应写回 action['target']，或明确拒绝越界动作。
+  current_implementation: 代码计算 x/y 后直接返回 True。
+  affected_variable_ids:
+  - action.target
+  - pysc2.function.target
+  affected_noncanonical_fields: []
+  evidence:
+  - path: agents/response_parser.py
+    symbol: ResponseParser._validate_semantics
+    line_start: 524
+    line_end: 525
+    claim: 局部裁剪值未写回 action['target']。
+  impact:
+    knowledge_answer_constraint: 不得声称 Parser 已把越界坐标修正后传给执行器。
+    code_or_experiment_risk: 越界参数可能进入转换或执行阶段。
+  recommended_verification:
+    method: static_unit_test
+    execution_status: not_executed
+    steps:
+    - 提交 target=[-1,80]。
+    - 检查校验后动作对象中的 target。
+    success_criteria: 通过校验的动作实际携带 [0,63]，或被明确拒绝。
+  limitations:
+  - 测试未执行。
+- id: issue.action_priority_not_validated_or_consumed
+  title_zh: priority 声明存在但未校验或调度
+  issue_type: documentation_mismatch
+  severity: medium
+  truth_status: code_reality
+  status: open
+  phenomenon: VALID_PRIORITIES 已定义，README 称会校验，但当前验证和执行链未读取 priority。
+  concise_explanation: priority 更接近设计字段，而不是已生效的调度量。
+  expected_or_documented_behavior: priority 应限制为 high/medium/low 并有明确消费点。
+  current_implementation: 常量和文档承诺存在，主路径未见强制校验或排序。
+  affected_variable_ids:
+  - action.priority
+  affected_noncanonical_fields: []
+  evidence:
+  - path: agents/response_parser.py
+    symbol: VALID_PRIORITIES
+    line_start: 37
+    line_end: 37
+    claim: 允许值常量已声明。
+  - path: agents/README.md
+    symbol: ResponseParser semantic validation
+    line_start: 254
+    line_end: 254
+    claim: README 声称会校验。
+  impact:
+    knowledge_answer_constraint: 不得说 priority 当前会被强制校验或决定执行顺序。
+    code_or_experiment_risk: 错误值不会被拒绝，调度语义可能被误读。
+  recommended_verification:
+    method: static_unit_test
+    execution_status: not_executed
+    steps:
+    - 输入 priority='urgent'。
+    - 跟踪解析结果和执行顺序。
+    success_criteria: 非法值被拒绝且有消费逻辑，或文档明确未使用。
+  limitations:
+  - 结论来自静态搜索。
+- id: issue.build_train_dual_representation
+  title_zh: BUILD/TRAIN 动作表示形式不一致
+  issue_type: documentation_mismatch
+  severity: high
+  truth_status: code_reality
+  status: open
+  phenomenon: 提示示例使用 BUILD-Barracks/TRAIN-Marine，Schema 又列 BUILD/TRAIN；执行器依赖 subtype。
+  concise_explanation: 纯 BUILD/TRAIN 若不另给 subtype，不能满足当前执行链。
+  expected_or_documented_behavior: 提示、Schema、Parser、Executor 应统一一种规范。
+  current_implementation: Parser 拆分连字符形式；ActionExecutor 读取并要求 subtype。
+  affected_variable_ids:
+  - action.subtype
+  - action.type
+  affected_noncanonical_fields: []
+  evidence:
+  - path: ontology/prompt_template.py
+    symbol: ACTION_TYPES
+    line_start: 32
+    line_end: 38
+    claim: 动作说明使用连字符形式。
+  - path: agents/response_parser.py
+    symbol: ResponseParser._validate_schema
+    line_start: 269
+    line_end: 277
+    claim: Parser 将连字符动作拆为 action 与 subtype。
+  - path: agents/action_executor.py
+    symbol: ActionExecutor.execute_actions
+    line_start: 176
+    line_end: 177
+    claim: 执行器读取并要求 subtype。
+  impact:
+    knowledge_answer_constraint: 推荐写 BUILD-Barracks/TRAIN-Marine，或显式提供 subtype；不能说纯动作名一定足够。
+    code_or_experiment_risk: 模型照 Schema 生成纯动作名时可能失败。
+  recommended_verification:
+    method: static_unit_test
+    execution_status: not_executed
+    steps:
+    - 比较 BUILD、BUILD-Barracks、BUILD+subtype。
+    - 对 TRAIN 重复测试。
+    success_criteria: 四处接口使用同一规范并有回归测试。
+  limitations:
+  - 未启动 SC2。
+- id: issue.function_ids_require_runtime_actionspec_check
+  title_zh: 硬编码 FunctionCall ID 尚未核验
+  issue_type: needs_runtime_test
+  severity: high
+  truth_status: needs_verification
+  status: open
+  phenomenon: ActionExecutor 硬编码 NO_OP/MOVE/ATTACK/BUILD/TRAIN 函数编号。
+  concise_explanation: 静态代码只能确认这些值被使用，不能证明与当前 ActionSpec 一致。
+  expected_or_documented_behavior: 应从当前 PySC2/SC2 ActionSpec 核对 ID、名称和参数签名。
+  current_implementation: 执行器直接用常量构造 FunctionCall。
+  affected_variable_ids:
+  - pysc2.attack.function_id
+  - pysc2.build.function_id
+  - pysc2.move.function_id
+  - pysc2.no_op.function_id
+  - pysc2.train.function_id
+  affected_noncanonical_fields: []
+  evidence:
+  - path: agents/action_executor.py
+    symbol: BUILD_CALLS/TRAIN_CALLS
+    line_start: 7
+    line_end: 15
+    claim: BUILD/TRAIN 函数编号以常量形式硬编码。
+  - path: agents/action_executor.py
+    symbol: ActionExecutor.execute_actions
+    line_start: 139
+    line_end: 162
+    claim: NO_OP、MOVE、ATTACK 调用使用数值 ID 0、13、3。
+  impact:
+    knowledge_answer_constraint: 回答 ID 时须标注为当前源码硬编码值、尚未运行核验。
+    code_or_experiment_risk: 版本或动作可用性差异可能导致无效调用。
+  recommended_verification:
+    method: runtime_sc2_test
+    execution_status: not_executed
+    steps:
+    - 启动 Raw API 环境。
+    - 读取 ActionSpec。
+    - 逐项比对并做最小冒烟测试。
+    success_criteria: 所有 ID 与参数签名匹配且调用可被环境接受。
+  limitations:
+  - 本步骤未启动 SC2。
+- id: issue.main_confidence_documented_but_disabled
+  title_zh: 主决策 confidence 文档声明但实现停用
+  issue_type: documentation_mismatch
+  severity: medium
+  truth_status: code_reality
+  status: open
+  phenomenon: README 仍称 confidence 必填且校验范围，Parser 返回和校验代码已注释。
+  concise_explanation: 主决策 confidence 不是步骤05正式动作变量，也不同于 swm.confidence。
+  expected_or_documented_behavior: 文档与代码应统一决定是否保留和校验该字段。
+  current_implementation: 主解析与消融解析均不返回该字段。
+  affected_variable_ids: []
+  affected_noncanonical_fields:
+  - decision_response.confidence
+  evidence:
+  - path: agents/README.md
+    symbol: ResponseParser schema validation
+    line_start: 232
+    line_end: 233
+    claim: README 声称必填并校验。
+  - path: agents/response_parser.py
+    symbol: ResponseParser.parse_response
+    line_start: 121
+    line_end: 121
+    claim: 主解析返回已注释。
+  - path: agents/raw_agent.py
+    symbol: RawAgent._parse_response_without_validation
+    line_start: 1087
+    line_end: 1087
+    claim: 消融解析返回也已注释。
+  impact:
+    knowledge_answer_constraint: 不能虚构 action.confidence；必须区分 decision_response.confidence 与 swm.confidence。
+    code_or_experiment_risk: 下游按 README 取键时可能缺失。
+  recommended_verification:
+    method: static_unit_test
+    execution_status: not_executed
+    steps:
+    - 解析带/不带 confidence 的响应。
+    - 根据设计决策同步实现、README 和变量表。
+    success_criteria: 代码、README、知识库对字段存在性一致。
+  limitations:
+  - 没有对应正式变量 ID。
+- id: issue.ontology_pickle_may_be_stale
+  title_zh: TBox pickle 可能与 Python 定义不同步
+  issue_type: needs_runtime_test
+  severity: medium
+  truth_status: needs_verification
+  status: open
+  phenomenon: OntologyLoader 默认在 pickle 存在时优先加载，未自动比对源码定义。
+  concise_explanation: 修改本体定义后若未重建缓存，运行时可能继续使用旧 TBox。
+  expected_or_documented_behavior: 缓存应有一致性检查或版本标记。
+  current_implementation: reload(use_pickle=True) 只在 pickle 不存在时重建。
+  affected_variable_ids:
+  - tbox.entity.armor
+  - tbox.entity.hp
+  affected_noncanonical_fields: []
+  evidence:
+  - path: ontology/loader.py
+    symbol: OntologyLoader.reload
+    line_start: 57
+    line_end: 61
+    claim: 存在 pickle 时优先加载。
+  impact:
+    knowledge_answer_constraint: 回答 TBox 数值时应披露缓存来源；未比对前不能断言与 Python 定义同步。
+    code_or_experiment_risk: 静态属性和 BUILD/TRAIN 校验可能使用陈旧值。
+  recommended_verification:
+    method: cache_consistency_check
+    execution_status: not_executed
+    steps:
+    - 分别加载 pickle 与源码重建图。
+    - 规范化后输出节点、边和属性差异。
+    success_criteria: 两图一致，或缓存可追溯且变更时自动重建。
+  limitations:
+  - 离线检查未执行。
+- id: issue.swm_confidence_not_a_gate
+  title_zh: SWM confidence 被规范化但不是硬阈值门控
+  issue_type: implementation_quirk
+  severity: medium
+  truth_status: code_reality
+  status: open
+  phenomenon: confidence 缺失时默认 0.5 并裁剪到 0..1；RawAgent 记录它，但未见阈值分支。
+  concise_explanation: 该值当前是预测元数据，不是自动决定采用预测的开关。
+  expected_or_documented_behavior: 若需要门控，应定义阈值、分支和日志。
+  current_implementation: 校验器规范化 confidence；非数值字符串还可能触发 float 异常。
+  affected_variable_ids:
+  - swm.confidence
+  affected_noncanonical_fields: []
+  evidence:
+  - path: ontology/swm_predictor.py
+    symbol: SWMPredictor._validate_prediction
+    line_start: 413
+    line_end: 427
+    claim: confidence 有默认和裁剪，但直接 float 转换。
+  - path: agents/raw_agent.py
+    symbol: RawAgent._run_swm_prediction
+    line_start: 731
+    line_end: 731
+    claim: RawAgent 在成功日志中读取该值。
+  impact:
+    knowledge_answer_constraint: 只能说它被默认、裁剪、记录和传递；不得声称存在采用阈值。
+    code_or_experiment_risk: 可能被误当成安全门控；格式漂移也可能引发转换异常。
+  recommended_verification:
+    method: static_unit_test
+    execution_status: not_executed
+    steps:
+    - 测试 0、0.5、1 和非数值输入。
+    - 跟踪后续路径是否因阈值改变。
+    success_criteria: 门控可测试或文档明确仅为元数据；非法类型被结构化处理。
+  limitations:
+  - 未调用外部 SWM。
+- id: issue.swm_error_uses_future_state_as_baseline
+  title_zh: SWM health/position 误差基线错误
+  issue_type: confirmed_bug
+  severity: critical
+  truth_status: code_reality
+  status: open
+  phenomenon: 误差函数用 actual(t+1) 同时构造预测值和真实值。
+  concise_explanation: health 误差退化为 delta²，position 误差退化为预测位移模长。
+  expected_or_documented_behavior: 预测绝对值应由 t 状态加 delta，再与 t+1 真值比较。
+  current_implementation: 函数没有接收 t 时刻单位基线。
+  affected_variable_ids:
+  - metric.swm.health_rmse
+  - metric.swm.overall_error
+  - metric.swm.position_rmse
+  affected_noncanonical_fields: []
+  evidence:
+  - path: ontology/swm_predictor.py
+    symbol: SWMPredictor.compute_prediction_error
+    line_start: 272
+    line_end: 282
+    claim: health 与 position 都从 actual_state 构造预测值。
+  - path: agents/raw_agent.py
+    symbol: RawAgent._record_swm_ground_truth
+    line_start: 285
+    line_end: 292
+    claim: 训练器记录下一帧快照。
+  impact:
+    knowledge_answer_constraint: 不得称这些值为严格未来状态 RMSE；须提示基线缺陷及其传播到 overall_error。
+    code_or_experiment_risk: 实验指标可能无法反映真实预测误差。
+  recommended_verification:
+    method: static_unit_test
+    execution_status: not_executed
+    steps:
+    - 构造 t、delta、t+1 的已知样例。
+    - 手算并回归三个指标。
+    success_criteria: 误差等于预测未来绝对状态与 t+1 真值之差。
+  limitations:
+  - 未重跑历史实验。
+- id: issue.swm_relation_accuracy_is_prediction_precision
+  title_zh: relation_accuracy 更接近预测关系命中率
+  issue_type: implementation_quirk
+  severity: high
+  truth_status: code_reality
+  status: open
+  phenomenon: 指标只以预测关系为分母；不惩罚漏报，空预测返回 1.0，当前真值快照 relations 为空。
+  concise_explanation: 它不等同于覆盖假阴性的完整关系准确率。
+  expected_or_documented_behavior: 应明确 precision/recall/F1 或定义空集合与漏报规则。
+  current_implementation: 实现遍历 predicted_relations；无预测时保留 1.0。
+  affected_variable_ids:
+  - metric.swm.overall_error
+  - metric.swm.relation_accuracy
+  affected_noncanonical_fields: []
+  evidence:
+  - path: ontology/swm_predictor.py
+    symbol: SWMPredictor.compute_prediction_error
+    line_start: 291
+    line_end: 309
+    claim: 只用预测关系作分母且空预测为 1.0。
+  - path: agents/raw_agent.py
+    symbol: RawAgent._record_swm_ground_truth
+    line_start: 290
+    line_end: 290
+    claim: 当前下一帧关系真值为空。
+  impact:
+    knowledge_answer_constraint: 应称预测关系命中比例，并披露空预测=1.0与当前真值为空。
+    code_or_experiment_risk: overall_error 可能偏乐观。
+  recommended_verification:
+    method: static_unit_test
+    execution_status: not_executed
+    steps:
+    - 构造命中、误报、漏报和空预测案例。
+    - 比较 precision/recall/F1。
+    success_criteria: 指标名、公式和空集合规则一致。
+  limitations:
+  - 未重跑 SWM 实验。
+- id: issue.unknown_unit_hp_default_is_static_only
+  title_zh: 未知单位 hp=100 不覆盖实时 health
+  issue_type: implementation_quirk
+  severity: low
+  truth_status: code_reality
+  status: open
+  phenomenon: UNKNOWN_UNIT_DEFAULTS 定义 hp=100，但 ABox hp 仍读取 raw_unit['health']。
+  concise_explanation: 100 是未知类型静态占位，不是动态生命值覆盖。
+  expected_or_documented_behavior: 静态默认与动态观测应明确分层。
+  current_implementation: 合并 static_info 后，instance_attrs.hp 单独使用实时 health。
+  affected_variable_ids:
+  - abox.unit.hp
+  - raw_unit.health
+  - tbox.entity.hp
+  affected_noncanonical_fields: []
+  evidence:
+  - path: ontology/bridge.py
+    symbol: UNKNOWN_UNIT_DEFAULTS
+    line_start: 37
+    line_end: 37
+    claim: 未知类型静态默认 hp 为 100。
+  - path: ontology/bridge.py
+    symbol: BattlefieldGraph._add_unit_instance
+    line_start: 166
+    line_end: 199
+    claim: ABox 动态 hp 读取实时 health。
+  impact:
+    knowledge_answer_constraint: 不能说未知单位生命值总被设为100；要解释静态占位和动态 hp 的层次。
+    code_or_experiment_risk: 混淆两层会错误判断未知单位状态。
+  recommended_verification:
+    method: static_unit_test
+    execution_status: not_executed
+    steps:
+    - 构造未知类型且 health=37。
+    - 断言 ABox hp=37。
+    success_criteria: 动态 hp 保持实时值，静态占位仍可保留。
+  limitations:
+  - 结论来自静态赋值路径。
+variable_issue_index:
+- variable_id: abox.unit.armor
+  issue_ids:
+  - issue.abox_armor_stores_shield
+- variable_id: abox.unit.armor_ratio
+  issue_ids:
+  - issue.abox_armor_stores_shield
+- variable_id: abox.unit.hp
+  issue_ids:
+  - issue.unknown_unit_hp_default_is_static_only
+- variable_id: action.priority
+  issue_ids:
+  - issue.action_priority_not_validated_or_consumed
+- variable_id: action.subtype
+  issue_ids:
+  - issue.build_train_dual_representation
+- variable_id: action.target
+  issue_ids:
+  - issue.action_coordinate_clip_not_written_back
+- variable_id: action.type
+  issue_ids:
+  - issue.build_train_dual_representation
+- variable_id: metric.swm.health_rmse
+  issue_ids:
+  - issue.swm_error_uses_future_state_as_baseline
+- variable_id: metric.swm.overall_error
+  issue_ids:
+  - issue.swm_error_uses_future_state_as_baseline
+  - issue.swm_relation_accuracy_is_prediction_precision
+- variable_id: metric.swm.position_rmse
+  issue_ids:
+  - issue.swm_error_uses_future_state_as_baseline
+- variable_id: metric.swm.relation_accuracy
+  issue_ids:
+  - issue.swm_relation_accuracy_is_prediction_precision
+- variable_id: pysc2.attack.function_id
+  issue_ids:
+  - issue.function_ids_require_runtime_actionspec_check
+- variable_id: pysc2.build.function_id
+  issue_ids:
+  - issue.function_ids_require_runtime_actionspec_check
+- variable_id: pysc2.function.target
+  issue_ids:
+  - issue.action_coordinate_clip_not_written_back
+- variable_id: pysc2.move.function_id
+  issue_ids:
+  - issue.function_ids_require_runtime_actionspec_check
+- variable_id: pysc2.no_op.function_id
+  issue_ids:
+  - issue.function_ids_require_runtime_actionspec_check
+- variable_id: pysc2.train.function_id
+  issue_ids:
+  - issue.function_ids_require_runtime_actionspec_check
+- variable_id: raw_unit.health
+  issue_ids:
+  - issue.unknown_unit_hp_default_is_static_only
+- variable_id: raw_unit.shield
+  issue_ids:
+  - issue.abox_armor_stores_shield
+- variable_id: raw_unit.shield_ratio
+  issue_ids:
+  - issue.abox_armor_stores_shield
+- variable_id: swm.confidence
+  issue_ids:
+  - issue.swm_confidence_not_a_gate
+- variable_id: tbox.entity.armor
+  issue_ids:
+  - issue.ontology_pickle_may_be_stale
+- variable_id: tbox.entity.hp
+  issue_ids:
+  - issue.ontology_pickle_may_be_stale
+  - issue.unknown_unit_hp_default_is_static_only
+noncanonical_field_issue_index:
+- field: decision_response.confidence
+  issue_ids:
+  - issue.main_confidence_documented_but_disabled

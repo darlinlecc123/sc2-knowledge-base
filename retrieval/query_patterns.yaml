@@ -1,0 +1,2900 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema_version: 1.0.0
+generated_at: '2026-09-03'
+status: query_patterns_built
+runtime_boundary:
+  external_llm_tested: false
+  sc2_executed: false
+intent_registry:
+- id: interface_query
+  name_zh: 接口形式查询
+  description: 查询数据类型、Python类型、形状、单位、范围以及PySC2/STORM访问路径
+- id: physical_meaning_query
+  name_zh: 物理含义查询
+  description: 查询变量在SC2或STORM数据流中的含义及其层级边界
+- id: source_location_query
+  name_zh: 源码定位查询
+  description: 查询生产、读取、转换或消费该变量的仓库相对路径与符号
+- id: formula_query
+  name_zh: 公式查询
+  description: 查询归一化、聚合、阈值、映射或统计公式
+- id: range_query
+  name_zh: 取值范围查询
+  description: 查询代码已验证的范围、枚举、单位及未知边界
+routing_rules:
+- priority: 1
+  condition: exact stable variable_id
+  action: direct lookup by variable_id
+- priority: 2
+  condition: one normalized alias candidate
+  action: return candidate with evidence and truth boundary
+- priority: 3
+  condition: multiple normalized alias candidates
+  action: return all candidates with taxonomy_source_layer and ask clarification_question
+- priority: 4
+  condition: common mistake only
+  action: show correction; do not invent or silently redirect
+- priority: 5
+  condition: no current variable candidate
+  action: report out_of_scope_or_not_found; do not create a PySC2 field
+global_templates:
+  interface_query:
+  - '{term}的接口形式是什么？'
+  - 如何从PySC2或STORM中读取{term}？
+  physical_meaning_query:
+  - '{term}是什么意思？'
+  - '{term}对应什么物理量，属于哪个数据层？'
+  source_location_query:
+  - '{term}在哪个.py文件实现？'
+  - 给出{term}的源码依据和消费者。
+  formula_query:
+  - '{term}是如何计算的？'
+  - '{term}的转换公式和上游变量是什么？'
+  range_query:
+  - '{term}的范围、单位和枚举是什么？'
+  - '{term}哪些取值已由代码确认，哪些仍需验证？'
+required_response_fields:
+- matched_variable_id
+- candidate_variables_if_ambiguous
+- taxonomy_source_layer
+- answer
+- evidence_ids
+- source_locations
+- truth_boundary
+- clarification_question_if_needed
+per_variable_patterns:
+- variable_id: abox.graph.enemy_count
+  preferred_query_terms:
+  - ABox 敌军节点计数
+  - abox.graph.enemy_count
+  - enemy_count
+  patterns:
+    interface_query:
+    - ABox 敌军节点计数的接口形式是什么？
+    - enemy_count的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - ABox 敌军节点计数表示什么物理量？
+    - abox.graph.enemy_count在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - ABox 敌军节点计数在哪个.py文件中读取或计算？
+    - 请给出abox.graph.enemy_count的源码路径、函数和证据行。
+    formula_query:
+    - ABox 敌军节点计数是怎么计算或转换的？
+    - enemy_count有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - ABox 敌军节点计数的取值范围和单位是什么？
+    - abox.graph.enemy_count有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.graph.step_count
+  preferred_query_terms:
+  - ABox 更新步数
+  - abox.graph.step_count
+  - step_count
+  patterns:
+    interface_query:
+    - ABox 更新步数的接口形式是什么？
+    - step_count的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - ABox 更新步数表示什么物理量？
+    - abox.graph.step_count在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - ABox 更新步数在哪个.py文件中读取或计算？
+    - 请给出abox.graph.step_count的源码路径、函数和证据行。
+    formula_query:
+    - ABox 更新步数是怎么计算或转换的？
+    - step_count有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - ABox 更新步数的取值范围和单位是什么？
+    - abox.graph.step_count有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.relation.edge_class
+  preferred_query_terms:
+  - abox.relation.edge_class
+  - edge_class
+  - 关系类别
+  patterns:
+    interface_query:
+    - 关系类别的接口形式是什么？
+    - edge_class的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 关系类别表示什么物理量？
+    - abox.relation.edge_class在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 关系类别在哪个.py文件中读取或计算？
+    - 请给出abox.relation.edge_class的源码路径、函数和证据行。
+    formula_query:
+    - 关系类别是怎么计算或转换的？
+    - edge_class有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 关系类别的取值范围和单位是什么？
+    - abox.relation.edge_class有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.relation.edge_type
+  preferred_query_terms:
+  - abox.relation.edge_type
+  - edge_type
+  - 关系类型
+  patterns:
+    interface_query:
+    - 关系类型的接口形式是什么？
+    - edge_type的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 关系类型表示什么物理量？
+    - abox.relation.edge_type在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 关系类型在哪个.py文件中读取或计算？
+    - 请给出abox.relation.edge_type的源码路径、函数和证据行。
+    formula_query:
+    - 关系类型是怎么计算或转换的？
+    - edge_type有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 关系类型的取值范围和单位是什么？
+    - abox.relation.edge_type有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.relation.effectiveness
+  preferred_query_terms:
+  - abox.relation.effectiveness
+  - effectiveness
+  - 关系有效性
+  patterns:
+    interface_query:
+    - 关系有效性的接口形式是什么？
+    - effectiveness的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 关系有效性表示什么物理量？
+    - abox.relation.effectiveness在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 关系有效性在哪个.py文件中读取或计算？
+    - 请给出abox.relation.effectiveness的源码路径、函数和证据行。
+    formula_query:
+    - 关系有效性是怎么计算或转换的？
+    - effectiveness有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 关系有效性的取值范围和单位是什么？
+    - abox.relation.effectiveness有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.relation.reason
+  preferred_query_terms:
+  - abox.relation.reason
+  - reason
+  - 关系原因
+  patterns:
+    interface_query:
+    - 关系原因的接口形式是什么？
+    - reason的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 关系原因表示什么物理量？
+    - abox.relation.reason在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 关系原因在哪个.py文件中读取或计算？
+    - 请给出abox.relation.reason的源码路径、函数和证据行。
+    formula_query:
+    - 关系原因是怎么计算或转换的？
+    - reason有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 关系原因的取值范围和单位是什么？
+    - abox.relation.reason有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.relation.source_node
+  preferred_query_terms:
+  - abox.relation.source_node
+  - source_node
+  - 关系源节点
+  patterns:
+    interface_query:
+    - 关系源节点的接口形式是什么？
+    - source_node的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 关系源节点表示什么物理量？
+    - abox.relation.source_node在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 关系源节点在哪个.py文件中读取或计算？
+    - 请给出abox.relation.source_node的源码路径、函数和证据行。
+    formula_query:
+    - 关系源节点是怎么计算或转换的？
+    - source_node有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 关系源节点的取值范围和单位是什么？
+    - abox.relation.source_node有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.relation.target_node
+  preferred_query_terms:
+  - abox.relation.target_node
+  - target_node
+  - 关系目标节点
+  patterns:
+    interface_query:
+    - 关系目标节点的接口形式是什么？
+    - target_node的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 关系目标节点表示什么物理量？
+    - abox.relation.target_node在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 关系目标节点在哪个.py文件中读取或计算？
+    - 请给出abox.relation.target_node的源码路径、函数和证据行。
+    formula_query:
+    - 关系目标节点是怎么计算或转换的？
+    - target_node有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 关系目标节点的取值范围和单位是什么？
+    - abox.relation.target_node有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.relation.timestamp
+  preferred_query_terms:
+  - abox.relation.timestamp
+  - timestamp
+  - 动态关系时间戳
+  patterns:
+    interface_query:
+    - 动态关系时间戳的接口形式是什么？
+    - timestamp的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 动态关系时间戳表示什么物理量？
+    - abox.relation.timestamp在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 动态关系时间戳在哪个.py文件中读取或计算？
+    - 请给出abox.relation.timestamp的源码路径、函数和证据行。
+    formula_query:
+    - 动态关系时间戳是怎么计算或转换的？
+    - timestamp有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 动态关系时间戳的取值范围和单位是什么？
+    - abox.relation.timestamp有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.alliance
+  preferred_query_terms:
+  - abox.unit.alliance
+  - alliance
+  - 阵营编码
+  patterns:
+    interface_query:
+    - 阵营编码的接口形式是什么？
+    - alliance的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 阵营编码表示什么物理量？
+    - abox.unit.alliance在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 阵营编码在哪个.py文件中读取或计算？
+    - 请给出abox.unit.alliance的源码路径、函数和证据行。
+    formula_query:
+    - 阵营编码是怎么计算或转换的？
+    - alliance有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 阵营编码的取值范围和单位是什么？
+    - abox.unit.alliance有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.armor
+  preferred_query_terms:
+  - ABox armor 字段
+  - abox.unit.armor
+  - armor
+  patterns:
+    interface_query:
+    - ABox armor 字段的接口形式是什么？
+    - armor的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - ABox armor 字段表示什么物理量？
+    - abox.unit.armor在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - ABox armor 字段在哪个.py文件中读取或计算？
+    - 请给出abox.unit.armor的源码路径、函数和证据行。
+    formula_query:
+    - ABox armor 字段是怎么计算或转换的？
+    - armor有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - ABox armor 字段的取值范围和单位是什么？
+    - abox.unit.armor有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.armor_ratio
+  preferred_query_terms:
+  - ABox armor_ratio 字段
+  - abox.unit.armor_ratio
+  - armor_ratio
+  patterns:
+    interface_query:
+    - ABox armor_ratio 字段的接口形式是什么？
+    - armor_ratio的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - ABox armor_ratio 字段表示什么物理量？
+    - abox.unit.armor_ratio在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - ABox armor_ratio 字段在哪个.py文件中读取或计算？
+    - 请给出abox.unit.armor_ratio的源码路径、函数和证据行。
+    formula_query:
+    - ABox armor_ratio 字段是怎么计算或转换的？
+    - armor_ratio有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - ABox armor_ratio 字段的取值范围和单位是什么？
+    - abox.unit.armor_ratio有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.attack_damage
+  preferred_query_terms:
+  - abox.unit.attack_damage
+  - attack_damage
+  - 攻击伤害
+  patterns:
+    interface_query:
+    - 攻击伤害的接口形式是什么？
+    - attack_damage的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 攻击伤害表示什么物理量？
+    - abox.unit.attack_damage在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 攻击伤害在哪个.py文件中读取或计算？
+    - 请给出abox.unit.attack_damage的源码路径、函数和证据行。
+    formula_query:
+    - 攻击伤害是怎么计算或转换的？
+    - attack_damage有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 攻击伤害的取值范围和单位是什么？
+    - abox.unit.attack_damage有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.attack_range
+  preferred_query_terms:
+  - abox.unit.attack_range
+  - attack_range
+  - 攻击射程
+  patterns:
+    interface_query:
+    - 攻击射程的接口形式是什么？
+    - attack_range的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 攻击射程表示什么物理量？
+    - abox.unit.attack_range在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 攻击射程在哪个.py文件中读取或计算？
+    - 请给出abox.unit.attack_range的源码路径、函数和证据行。
+    formula_query:
+    - 攻击射程是怎么计算或转换的？
+    - attack_range有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 攻击射程的取值范围和单位是什么？
+    - abox.unit.attack_range有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.attack_speed
+  preferred_query_terms:
+  - abox.unit.attack_speed
+  - attack_speed
+  - 攻击速度字段
+  patterns:
+    interface_query:
+    - 攻击速度字段的接口形式是什么？
+    - attack_speed的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 攻击速度字段表示什么物理量？
+    - abox.unit.attack_speed在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 攻击速度字段在哪个.py文件中读取或计算？
+    - 请给出abox.unit.attack_speed的源码路径、函数和证据行。
+    formula_query:
+    - 攻击速度字段是怎么计算或转换的？
+    - attack_speed有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 攻击速度字段的取值范围和单位是什么？
+    - abox.unit.attack_speed有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.category
+  preferred_query_terms:
+  - abox.unit.category
+  - category
+  - 实体类别
+  patterns:
+    interface_query:
+    - 实体类别的接口形式是什么？
+    - category的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 实体类别表示什么物理量？
+    - abox.unit.category在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 实体类别在哪个.py文件中读取或计算？
+    - 请给出abox.unit.category的源码路径、函数和证据行。
+    formula_query:
+    - 实体类别是怎么计算或转换的？
+    - category有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 实体类别的取值范围和单位是什么？
+    - abox.unit.category有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.description
+  preferred_query_terms:
+  - abox.unit.description
+  - description
+  - 实体说明
+  patterns:
+    interface_query:
+    - 实体说明的接口形式是什么？
+    - description的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 实体说明表示什么物理量？
+    - abox.unit.description在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 实体说明在哪个.py文件中读取或计算？
+    - 请给出abox.unit.description的源码路径、函数和证据行。
+    formula_query:
+    - 实体说明是怎么计算或转换的？
+    - description有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 实体说明的取值范围和单位是什么？
+    - abox.unit.description有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.hp
+  preferred_query_terms:
+  - abox.unit.hp
+  - hp
+  - 实例生命值
+  patterns:
+    interface_query:
+    - 实例生命值的接口形式是什么？
+    - hp的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 实例生命值表示什么物理量？
+    - abox.unit.hp在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 实例生命值在哪个.py文件中读取或计算？
+    - 请给出abox.unit.hp的源码路径、函数和证据行。
+    formula_query:
+    - 实例生命值是怎么计算或转换的？
+    - hp有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 实例生命值的取值范围和单位是什么？
+    - abox.unit.hp有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.hp_ratio
+  preferred_query_terms:
+  - abox.unit.hp_ratio
+  - hp_ratio
+  - 实例生命比例
+  patterns:
+    interface_query:
+    - 实例生命比例的接口形式是什么？
+    - hp_ratio的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 实例生命比例表示什么物理量？
+    - abox.unit.hp_ratio在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 实例生命比例在哪个.py文件中读取或计算？
+    - 请给出abox.unit.hp_ratio的源码路径、函数和证据行。
+    formula_query:
+    - 实例生命比例是怎么计算或转换的？
+    - hp_ratio有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 实例生命比例的取值范围和单位是什么？
+    - abox.unit.hp_ratio有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.is_unknown
+  preferred_query_terms:
+  - abox.unit.is_unknown
+  - is_unknown
+  - 未知实体标志
+  patterns:
+    interface_query:
+    - 未知实体标志的接口形式是什么？
+    - is_unknown的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 未知实体标志表示什么物理量？
+    - abox.unit.is_unknown在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 未知实体标志在哪个.py文件中读取或计算？
+    - 请给出abox.unit.is_unknown的源码路径、函数和证据行。
+    formula_query:
+    - 未知实体标志是怎么计算或转换的？
+    - is_unknown有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 未知实体标志的取值范围和单位是什么？
+    - abox.unit.is_unknown有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.movement_speed
+  preferred_query_terms:
+  - abox.unit.movement_speed
+  - movement_speed
+  - 移动速度
+  patterns:
+    interface_query:
+    - 移动速度的接口形式是什么？
+    - movement_speed的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 移动速度表示什么物理量？
+    - abox.unit.movement_speed在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 移动速度在哪个.py文件中读取或计算？
+    - 请给出abox.unit.movement_speed的源码路径、函数和证据行。
+    formula_query:
+    - 移动速度是怎么计算或转换的？
+    - movement_speed有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 移动速度的取值范围和单位是什么？
+    - abox.unit.movement_speed有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.node_type
+  preferred_query_terms:
+  - abox.unit.node_type
+  - node_type
+  - 节点类型
+  patterns:
+    interface_query:
+    - 节点类型的接口形式是什么？
+    - node_type的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 节点类型表示什么物理量？
+    - abox.unit.node_type在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 节点类型在哪个.py文件中读取或计算？
+    - 请给出abox.unit.node_type的源码路径、函数和证据行。
+    formula_query:
+    - 节点类型是怎么计算或转换的？
+    - node_type有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 节点类型的取值范围和单位是什么？
+    - abox.unit.node_type有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.position
+  preferred_query_terms:
+  - abox.unit.position
+  - position
+  - 二维位置对象
+  patterns:
+    interface_query:
+    - 二维位置对象的接口形式是什么？
+    - position的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 二维位置对象表示什么物理量？
+    - abox.unit.position在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 二维位置对象在哪个.py文件中读取或计算？
+    - 请给出abox.unit.position的源码路径、函数和证据行。
+    formula_query:
+    - 二维位置对象是怎么计算或转换的？
+    - position有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 二维位置对象的取值范围和单位是什么？
+    - abox.unit.position有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.race
+  preferred_query_terms:
+  - abox.unit.race
+  - race
+  - 种族
+  patterns:
+    interface_query:
+    - 种族的接口形式是什么？
+    - race的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 种族表示什么物理量？
+    - abox.unit.race在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 种族在哪个.py文件中读取或计算？
+    - 请给出abox.unit.race的源码路径、函数和证据行。
+    formula_query:
+    - 种族是怎么计算或转换的？
+    - race有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 种族的取值范围和单位是什么？
+    - abox.unit.race有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.tag
+  preferred_query_terms:
+  - abox.unit.tag
+  - tag
+  - 实例标签
+  patterns:
+    interface_query:
+    - 实例标签的接口形式是什么？
+    - tag的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 实例标签表示什么物理量？
+    - abox.unit.tag在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 实例标签在哪个.py文件中读取或计算？
+    - 请给出abox.unit.tag的源码路径、函数和证据行。
+    formula_query:
+    - 实例标签是怎么计算或转换的？
+    - tag有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 实例标签的取值范围和单位是什么？
+    - abox.unit.tag有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.unit_class
+  preferred_query_terms:
+  - abox.unit.unit_class
+  - unit_class
+  - 单位类别名
+  patterns:
+    interface_query:
+    - 单位类别名的接口形式是什么？
+    - unit_class的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 单位类别名表示什么物理量？
+    - abox.unit.unit_class在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 单位类别名在哪个.py文件中读取或计算？
+    - 请给出abox.unit.unit_class的源码路径、函数和证据行。
+    formula_query:
+    - 单位类别名是怎么计算或转换的？
+    - unit_class有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 单位类别名的取值范围和单位是什么？
+    - abox.unit.unit_class有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.unit_type_id
+  preferred_query_terms:
+  - abox.unit.unit_type_id
+  - unit_type_id
+  - 单位类型编号
+  patterns:
+    interface_query:
+    - 单位类型编号的接口形式是什么？
+    - unit_type_id的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 单位类型编号表示什么物理量？
+    - abox.unit.unit_type_id在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 单位类型编号在哪个.py文件中读取或计算？
+    - 请给出abox.unit.unit_type_id的源码路径、函数和证据行。
+    formula_query:
+    - 单位类型编号是怎么计算或转换的？
+    - unit_type_id有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 单位类型编号的取值范围和单位是什么？
+    - abox.unit.unit_type_id有哪些枚举、上下界或尚未确认的范围？
+- variable_id: abox.unit.weapon_cooldown
+  preferred_query_terms:
+  - abox.unit.weapon_cooldown
+  - weapon_cooldown
+  - 武器冷却
+  patterns:
+    interface_query:
+    - 武器冷却的接口形式是什么？
+    - weapon_cooldown的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 武器冷却表示什么物理量？
+    - abox.unit.weapon_cooldown在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 武器冷却在哪个.py文件中读取或计算？
+    - 请给出abox.unit.weapon_cooldown的源码路径、函数和证据行。
+    formula_query:
+    - 武器冷却是怎么计算或转换的？
+    - weapon_cooldown有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 武器冷却的取值范围和单位是什么？
+    - abox.unit.weapon_cooldown有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.delay_steps
+  preferred_query_terms:
+  - action.delay_steps
+  - delay_steps
+  - 延迟步数
+  patterns:
+    interface_query:
+    - 延迟步数的接口形式是什么？
+    - delay_steps的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 延迟步数表示什么物理量？
+    - action.delay_steps在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 延迟步数在哪个.py文件中读取或计算？
+    - 请给出action.delay_steps的源码路径、函数和证据行。
+    formula_query:
+    - 延迟步数是怎么计算或转换的？
+    - delay_steps有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 延迟步数的取值范围和单位是什么？
+    - action.delay_steps有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.invalid_actions
+  preferred_query_terms:
+  - action.invalid_actions
+  - invalid_actions
+  - 无效动作数
+  patterns:
+    interface_query:
+    - 无效动作数的接口形式是什么？
+    - invalid_actions的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 无效动作数表示什么物理量？
+    - action.invalid_actions在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 无效动作数在哪个.py文件中读取或计算？
+    - 请给出action.invalid_actions的源码路径、函数和证据行。
+    formula_query:
+    - 无效动作数是怎么计算或转换的？
+    - invalid_actions有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 无效动作数的取值范围和单位是什么？
+    - action.invalid_actions有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.invalid_reason_counts
+  preferred_query_terms:
+  - action.invalid_reason_counts
+  - invalid_reason_counts
+  - 无效原因计数
+  patterns:
+    interface_query:
+    - 无效原因计数的接口形式是什么？
+    - invalid_reason_counts的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 无效原因计数表示什么物理量？
+    - action.invalid_reason_counts在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 无效原因计数在哪个.py文件中读取或计算？
+    - 请给出action.invalid_reason_counts的源码路径、函数和证据行。
+    formula_query:
+    - 无效原因计数是怎么计算或转换的？
+    - invalid_reason_counts有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 无效原因计数的取值范围和单位是什么？
+    - action.invalid_reason_counts有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.plan
+  preferred_query_terms:
+  - action.plan
+  - plan
+  - 计划文本
+  patterns:
+    interface_query:
+    - 计划文本的接口形式是什么？
+    - plan的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 计划文本表示什么物理量？
+    - action.plan在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 计划文本在哪个.py文件中读取或计算？
+    - 请给出action.plan的源码路径、函数和证据行。
+    formula_query:
+    - 计划文本是怎么计算或转换的？
+    - plan有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 计划文本的取值范围和单位是什么？
+    - action.plan有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.planned_actions
+  preferred_query_terms:
+  - action.planned_actions
+  - planned_actions
+  - 计划动作数
+  patterns:
+    interface_query:
+    - 计划动作数的接口形式是什么？
+    - planned_actions的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 计划动作数表示什么物理量？
+    - action.planned_actions在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 计划动作数在哪个.py文件中读取或计算？
+    - 请给出action.planned_actions的源码路径、函数和证据行。
+    formula_query:
+    - 计划动作数是怎么计算或转换的？
+    - planned_actions有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 计划动作数的取值范围和单位是什么？
+    - action.planned_actions有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.priority
+  preferred_query_terms:
+  - action.priority
+  - priority
+  - 优先级
+  patterns:
+    interface_query:
+    - 优先级的接口形式是什么？
+    - priority的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 优先级表示什么物理量？
+    - action.priority在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 优先级在哪个.py文件中读取或计算？
+    - 请给出action.priority的源码路径、函数和证据行。
+    formula_query:
+    - 优先级是怎么计算或转换的？
+    - priority有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 优先级的取值范围和单位是什么？
+    - action.priority有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.reasoning
+  preferred_query_terms:
+  - action.reasoning
+  - reasoning
+  - 战术推理文本
+  patterns:
+    interface_query:
+    - 战术推理文本的接口形式是什么？
+    - reasoning的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 战术推理文本表示什么物理量？
+    - action.reasoning在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 战术推理文本在哪个.py文件中读取或计算？
+    - 请给出action.reasoning的源码路径、函数和证据行。
+    formula_query:
+    - 战术推理文本是怎么计算或转换的？
+    - reasoning有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 战术推理文本的取值范围和单位是什么？
+    - action.reasoning有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.subtype
+  preferred_query_terms:
+  - action.subtype
+  - subtype
+  - 动作子类型
+  patterns:
+    interface_query:
+    - 动作子类型的接口形式是什么？
+    - subtype的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 动作子类型表示什么物理量？
+    - action.subtype在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 动作子类型在哪个.py文件中读取或计算？
+    - 请给出action.subtype的源码路径、函数和证据行。
+    formula_query:
+    - 动作子类型是怎么计算或转换的？
+    - subtype有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 动作子类型的取值范围和单位是什么？
+    - action.subtype有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.target
+  preferred_query_terms:
+  - action.target
+  - target
+  - 动作目标
+  patterns:
+    interface_query:
+    - 动作目标的接口形式是什么？
+    - target的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 动作目标表示什么物理量？
+    - action.target在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 动作目标在哪个.py文件中读取或计算？
+    - 请给出action.target的源码路径、函数和证据行。
+    formula_query:
+    - 动作目标是怎么计算或转换的？
+    - target有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 动作目标的取值范围和单位是什么？
+    - action.target有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.target_type
+  preferred_query_terms:
+  - action.target_type
+  - target_type
+  - 目标类型
+  patterns:
+    interface_query:
+    - 目标类型的接口形式是什么？
+    - target_type的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 目标类型表示什么物理量？
+    - action.target_type在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 目标类型在哪个.py文件中读取或计算？
+    - 请给出action.target_type的源码路径、函数和证据行。
+    formula_query:
+    - 目标类型是怎么计算或转换的？
+    - target_type有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 目标类型的取值范围和单位是什么？
+    - action.target_type有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.type
+  preferred_query_terms:
+  - action
+  - action.type
+  - 动作类型
+  patterns:
+    interface_query:
+    - 动作类型的接口形式是什么？
+    - action的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 动作类型表示什么物理量？
+    - action.type在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 动作类型在哪个.py文件中读取或计算？
+    - 请给出action.type的源码路径、函数和证据行。
+    formula_query:
+    - 动作类型是怎么计算或转换的？
+    - action有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 动作类型的取值范围和单位是什么？
+    - action.type有哪些枚举、上下界或尚未确认的范围？
+- variable_id: action.units
+  preferred_query_terms:
+  - action.units
+  - units
+  - 执行单位列表
+  patterns:
+    interface_query:
+    - 执行单位列表的接口形式是什么？
+    - units的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 执行单位列表表示什么物理量？
+    - action.units在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 执行单位列表在哪个.py文件中读取或计算？
+    - 请给出action.units的源码路径、函数和证据行。
+    formula_query:
+    - 执行单位列表是怎么计算或转换的？
+    - units有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 执行单位列表的取值范围和单位是什么？
+    - action.units有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.critical_units
+  preferred_query_terms:
+  - critical_units
+  - derived.tactical.critical_units
+  - 危急单位列表
+  patterns:
+    interface_query:
+    - 危急单位列表的接口形式是什么？
+    - critical_units的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 危急单位列表表示什么物理量？
+    - derived.tactical.critical_units在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 危急单位列表在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.critical_units的源码路径、函数和证据行。
+    formula_query:
+    - 危急单位列表是怎么计算或转换的？
+    - critical_units有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 危急单位列表的取值范围和单位是什么？
+    - derived.tactical.critical_units有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.enemy_avg_hp
+  preferred_query_terms:
+  - derived.tactical.enemy_avg_hp
+  - enemy_avg_hp
+  - 敌军平均生命比例
+  patterns:
+    interface_query:
+    - 敌军平均生命比例的接口形式是什么？
+    - enemy_avg_hp的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 敌军平均生命比例表示什么物理量？
+    - derived.tactical.enemy_avg_hp在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 敌军平均生命比例在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.enemy_avg_hp的源码路径、函数和证据行。
+    formula_query:
+    - 敌军平均生命比例是怎么计算或转换的？
+    - enemy_avg_hp有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 敌军平均生命比例的取值范围和单位是什么？
+    - derived.tactical.enemy_avg_hp有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.enemy_centroid
+  preferred_query_terms:
+  - derived.tactical.enemy_centroid
+  - enemy_centroid
+  - 敌军质心
+  patterns:
+    interface_query:
+    - 敌军质心的接口形式是什么？
+    - enemy_centroid的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 敌军质心表示什么物理量？
+    - derived.tactical.enemy_centroid在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 敌军质心在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.enemy_centroid的源码路径、函数和证据行。
+    formula_query:
+    - 敌军质心是怎么计算或转换的？
+    - enemy_centroid有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 敌军质心的取值范围和单位是什么？
+    - derived.tactical.enemy_centroid有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.enemy_count
+  preferred_query_terms:
+  - derived.tactical.enemy_count
+  - enemy_count
+  - 敌军单位数
+  patterns:
+    interface_query:
+    - 敌军单位数的接口形式是什么？
+    - enemy_count的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 敌军单位数表示什么物理量？
+    - derived.tactical.enemy_count在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 敌军单位数在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.enemy_count的源码路径、函数和证据行。
+    formula_query:
+    - 敌军单位数是怎么计算或转换的？
+    - enemy_count有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 敌军单位数的取值范围和单位是什么？
+    - derived.tactical.enemy_count有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.engagement_type
+  preferred_query_terms:
+  - derived.tactical.engagement_type
+  - engagement_type
+  - 接战距离类型
+  patterns:
+    interface_query:
+    - 接战距离类型的接口形式是什么？
+    - engagement_type的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 接战距离类型表示什么物理量？
+    - derived.tactical.engagement_type在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 接战距离类型在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.engagement_type的源码路径、函数和证据行。
+    formula_query:
+    - 接战距离类型是怎么计算或转换的？
+    - engagement_type有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 接战距离类型的取值范围和单位是什么？
+    - derived.tactical.engagement_type有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.fire_readiness
+  preferred_query_terms:
+  - derived.tactical.fire_readiness
+  - fire_readiness
+  - 火力就绪比例
+  patterns:
+    interface_query:
+    - 火力就绪比例的接口形式是什么？
+    - fire_readiness的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 火力就绪比例表示什么物理量？
+    - derived.tactical.fire_readiness在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 火力就绪比例在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.fire_readiness的源码路径、函数和证据行。
+    formula_query:
+    - 火力就绪比例是怎么计算或转换的？
+    - fire_readiness有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 火力就绪比例的取值范围和单位是什么？
+    - derived.tactical.fire_readiness有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.force_ratio
+  preferred_query_terms:
+  - derived.tactical.force_ratio
+  - force_ratio
+  - 兵力对比
+  patterns:
+    interface_query:
+    - 兵力对比的接口形式是什么？
+    - force_ratio的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 兵力对比表示什么物理量？
+    - derived.tactical.force_ratio在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 兵力对比在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.force_ratio的源码路径、函数和证据行。
+    formula_query:
+    - 兵力对比是怎么计算或转换的？
+    - force_ratio有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 兵力对比的取值范围和单位是什么？
+    - derived.tactical.force_ratio有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.formation_distance
+  preferred_query_terms:
+  - derived.tactical.formation_distance
+  - formation_distance
+  - 阵型中心距离
+  patterns:
+    interface_query:
+    - 阵型中心距离的接口形式是什么？
+    - formation_distance的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 阵型中心距离表示什么物理量？
+    - derived.tactical.formation_distance在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 阵型中心距离在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.formation_distance的源码路径、函数和证据行。
+    formula_query:
+    - 阵型中心距离是怎么计算或转换的？
+    - formation_distance有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 阵型中心距离的取值范围和单位是什么？
+    - derived.tactical.formation_distance有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.friendly_avg_hp
+  preferred_query_terms:
+  - derived.tactical.friendly_avg_hp
+  - friendly_avg_hp
+  - 友军平均生命比例
+  patterns:
+    interface_query:
+    - 友军平均生命比例的接口形式是什么？
+    - friendly_avg_hp的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 友军平均生命比例表示什么物理量？
+    - derived.tactical.friendly_avg_hp在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 友军平均生命比例在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.friendly_avg_hp的源码路径、函数和证据行。
+    formula_query:
+    - 友军平均生命比例是怎么计算或转换的？
+    - friendly_avg_hp有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 友军平均生命比例的取值范围和单位是什么？
+    - derived.tactical.friendly_avg_hp有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.friendly_centroid
+  preferred_query_terms:
+  - derived.tactical.friendly_centroid
+  - friendly_centroid
+  - 友军质心
+  patterns:
+    interface_query:
+    - 友军质心的接口形式是什么？
+    - friendly_centroid的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 友军质心表示什么物理量？
+    - derived.tactical.friendly_centroid在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 友军质心在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.friendly_centroid的源码路径、函数和证据行。
+    formula_query:
+    - 友军质心是怎么计算或转换的？
+    - friendly_centroid有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 友军质心的取值范围和单位是什么？
+    - derived.tactical.friendly_centroid有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.friendly_count
+  preferred_query_terms:
+  - derived.tactical.friendly_count
+  - friendly_count
+  - 友军单位数
+  patterns:
+    interface_query:
+    - 友军单位数的接口形式是什么？
+    - friendly_count的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 友军单位数表示什么物理量？
+    - derived.tactical.friendly_count在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 友军单位数在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.friendly_count的源码路径、函数和证据行。
+    formula_query:
+    - 友军单位数是怎么计算或转换的？
+    - friendly_count有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 友军单位数的取值范围和单位是什么？
+    - derived.tactical.friendly_count有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.health_status
+  preferred_query_terms:
+  - derived.tactical.health_status
+  - health_status
+  - 血量态势
+  patterns:
+    interface_query:
+    - 血量态势的接口形式是什么？
+    - health_status的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 血量态势表示什么物理量？
+    - derived.tactical.health_status在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 血量态势在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.health_status的源码路径、函数和证据行。
+    formula_query:
+    - 血量态势是怎么计算或转换的？
+    - health_status有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 血量态势的取值范围和单位是什么？
+    - derived.tactical.health_status有哪些枚举、上下界或尚未确认的范围？
+- variable_id: derived.tactical.ready_to_fire_count
+  preferred_query_terms:
+  - derived.tactical.ready_to_fire_count
+  - ready_to_fire_count
+  - 可开火友军数
+  patterns:
+    interface_query:
+    - 可开火友军数的接口形式是什么？
+    - ready_to_fire_count的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 可开火友军数表示什么物理量？
+    - derived.tactical.ready_to_fire_count在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 可开火友军数在哪个.py文件中读取或计算？
+    - 请给出derived.tactical.ready_to_fire_count的源码路径、函数和证据行。
+    formula_query:
+    - 可开火友军数是怎么计算或转换的？
+    - ready_to_fire_count有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 可开火友军数的取值范围和单位是什么？
+    - derived.tactical.ready_to_fire_count有哪些枚举、上下界或尚未确认的范围？
+- variable_id: environment.decision_interval
+  preferred_query_terms:
+  - decision_interval
+  - environment.decision_interval
+  - 决策间隔
+  patterns:
+    interface_query:
+    - 决策间隔的接口形式是什么？
+    - decision_interval的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 决策间隔表示什么物理量？
+    - environment.decision_interval在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 决策间隔在哪个.py文件中读取或计算？
+    - 请给出environment.decision_interval的源码路径、函数和证据行。
+    formula_query:
+    - 决策间隔是怎么计算或转换的？
+    - decision_interval有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 决策间隔的取值范围和单位是什么？
+    - environment.decision_interval有哪些枚举、上下界或尚未确认的范围？
+- variable_id: environment.map_name
+  preferred_query_terms:
+  - environment.map_name
+  - map_name
+  - 地图名
+  patterns:
+    interface_query:
+    - 地图名的接口形式是什么？
+    - map_name的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 地图名表示什么物理量？
+    - environment.map_name在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 地图名在哪个.py文件中读取或计算？
+    - 请给出environment.map_name的源码路径、函数和证据行。
+    formula_query:
+    - 地图名是怎么计算或转换的？
+    - map_name有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 地图名的取值范围和单位是什么？
+    - environment.map_name有哪些枚举、上下界或尚未确认的范围？
+- variable_id: environment.raw_resolution
+  preferred_query_terms:
+  - environment.raw_resolution
+  - raw_resolution
+  - Raw 坐标分辨率
+  patterns:
+    interface_query:
+    - Raw 坐标分辨率的接口形式是什么？
+    - raw_resolution的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - Raw 坐标分辨率表示什么物理量？
+    - environment.raw_resolution在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - Raw 坐标分辨率在哪个.py文件中读取或计算？
+    - 请给出environment.raw_resolution的源码路径、函数和证据行。
+    formula_query:
+    - Raw 坐标分辨率是怎么计算或转换的？
+    - raw_resolution有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - Raw 坐标分辨率的取值范围和单位是什么？
+    - environment.raw_resolution有哪些枚举、上下界或尚未确认的范围？
+- variable_id: environment.realtime
+  preferred_query_terms:
+  - environment.realtime
+  - realtime
+  - 实时模式
+  patterns:
+    interface_query:
+    - 实时模式的接口形式是什么？
+    - realtime的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 实时模式表示什么物理量？
+    - environment.realtime在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 实时模式在哪个.py文件中读取或计算？
+    - 请给出environment.realtime的源码路径、函数和证据行。
+    formula_query:
+    - 实时模式是怎么计算或转换的？
+    - realtime有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 实时模式的取值范围和单位是什么？
+    - environment.realtime有哪些枚举、上下界或尚未确认的范围？
+- variable_id: environment.step_mul
+  preferred_query_terms:
+  - environment.step_mul
+  - step_mul
+  - 环境步长倍数
+  patterns:
+    interface_query:
+    - 环境步长倍数的接口形式是什么？
+    - step_mul的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 环境步长倍数表示什么物理量？
+    - environment.step_mul在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 环境步长倍数在哪个.py文件中读取或计算？
+    - 请给出environment.step_mul的源码路径、函数和证据行。
+    formula_query:
+    - 环境步长倍数是怎么计算或转换的？
+    - step_mul有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 环境步长倍数的取值范围和单位是什么？
+    - environment.step_mul有哪些枚举、上下界或尚未确认的范围？
+- variable_id: environment.use_raw_actions
+  preferred_query_terms:
+  - environment.use_raw_actions
+  - use_raw_actions
+  - 启用 Raw Actions
+  patterns:
+    interface_query:
+    - 启用 Raw Actions的接口形式是什么？
+    - use_raw_actions的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 启用 Raw Actions表示什么物理量？
+    - environment.use_raw_actions在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 启用 Raw Actions在哪个.py文件中读取或计算？
+    - 请给出environment.use_raw_actions的源码路径、函数和证据行。
+    formula_query:
+    - 启用 Raw Actions是怎么计算或转换的？
+    - use_raw_actions有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 启用 Raw Actions的取值范围和单位是什么？
+    - environment.use_raw_actions有哪些枚举、上下界或尚未确认的范围？
+- variable_id: environment.use_raw_units
+  preferred_query_terms:
+  - environment.use_raw_units
+  - use_raw_units
+  - 启用 Raw Units
+  patterns:
+    interface_query:
+    - 启用 Raw Units的接口形式是什么？
+    - use_raw_units的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 启用 Raw Units表示什么物理量？
+    - environment.use_raw_units在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 启用 Raw Units在哪个.py文件中读取或计算？
+    - 请给出environment.use_raw_units的源码路径、函数和证据行。
+    formula_query:
+    - 启用 Raw Units是怎么计算或转换的？
+    - use_raw_units有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 启用 Raw Units的取值范围和单位是什么？
+    - environment.use_raw_units有哪些枚举、上下界或尚未确认的范围？
+- variable_id: environment.visualize
+  preferred_query_terms:
+  - environment.visualize
+  - visualize
+  - 可视化开关
+  patterns:
+    interface_query:
+    - 可视化开关的接口形式是什么？
+    - visualize的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 可视化开关表示什么物理量？
+    - environment.visualize在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 可视化开关在哪个.py文件中读取或计算？
+    - 请给出environment.visualize的源码路径、函数和证据行。
+    formula_query:
+    - 可视化开关是怎么计算或转换的？
+    - visualize有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 可视化开关的取值范围和单位是什么？
+    - environment.visualize有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.action.decision_failure_rate
+  preferred_query_terms:
+  - decision_failure_rate
+  - metric.action.decision_failure_rate
+  - 决策动作失败率
+  patterns:
+    interface_query:
+    - 决策动作失败率的接口形式是什么？
+    - decision_failure_rate的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 决策动作失败率表示什么物理量？
+    - metric.action.decision_failure_rate在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 决策动作失败率在哪个.py文件中读取或计算？
+    - 请给出metric.action.decision_failure_rate的源码路径、函数和证据行。
+    formula_query:
+    - 决策动作失败率是怎么计算或转换的？
+    - decision_failure_rate有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 决策动作失败率的取值范围和单位是什么？
+    - metric.action.decision_failure_rate有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.action.delayed_failure_rate
+  preferred_query_terms:
+  - delayed_failure_rate
+  - metric.action.delayed_failure_rate
+  - 延迟动作失败率
+  patterns:
+    interface_query:
+    - 延迟动作失败率的接口形式是什么？
+    - delayed_failure_rate的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 延迟动作失败率表示什么物理量？
+    - metric.action.delayed_failure_rate在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 延迟动作失败率在哪个.py文件中读取或计算？
+    - 请给出metric.action.delayed_failure_rate的源码路径、函数和证据行。
+    formula_query:
+    - 延迟动作失败率是怎么计算或转换的？
+    - delayed_failure_rate有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 延迟动作失败率的取值范围和单位是什么？
+    - metric.action.delayed_failure_rate有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.action.failure_rate
+  preferred_query_terms:
+  - action_failure_rate
+  - metric.action.failure_rate
+  - 动作失败率
+  patterns:
+    interface_query:
+    - 动作失败率的接口形式是什么？
+    - action_failure_rate的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 动作失败率表示什么物理量？
+    - metric.action.failure_rate在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 动作失败率在哪个.py文件中读取或计算？
+    - 请给出metric.action.failure_rate的源码路径、函数和证据行。
+    formula_query:
+    - 动作失败率是怎么计算或转换的？
+    - action_failure_rate有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 动作失败率的取值范围和单位是什么？
+    - metric.action.failure_rate有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.episode.final_score
+  preferred_query_terms:
+  - final_score
+  - metric.episode.final_score
+  - 回合最终得分
+  patterns:
+    interface_query:
+    - 回合最终得分的接口形式是什么？
+    - final_score的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 回合最终得分表示什么物理量？
+    - metric.episode.final_score在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 回合最终得分在哪个.py文件中读取或计算？
+    - 请给出metric.episode.final_score的源码路径、函数和证据行。
+    formula_query:
+    - 回合最终得分是怎么计算或转换的？
+    - final_score有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 回合最终得分的取值范围和单位是什么？
+    - metric.episode.final_score有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.experiment.avg_score
+  preferred_query_terms:
+  - avg_score
+  - metric.experiment.avg_score
+  - 平均回合得分
+  patterns:
+    interface_query:
+    - 平均回合得分的接口形式是什么？
+    - avg_score的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 平均回合得分表示什么物理量？
+    - metric.experiment.avg_score在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 平均回合得分在哪个.py文件中读取或计算？
+    - 请给出metric.experiment.avg_score的源码路径、函数和证据行。
+    formula_query:
+    - 平均回合得分是怎么计算或转换的？
+    - avg_score有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 平均回合得分的取值范围和单位是什么？
+    - metric.experiment.avg_score有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.llm.avg_decision_time
+  preferred_query_terms:
+  - avg_decision_time
+  - metric.llm.avg_decision_time
+  - 平均决策耗时
+  patterns:
+    interface_query:
+    - 平均决策耗时的接口形式是什么？
+    - avg_decision_time的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 平均决策耗时表示什么物理量？
+    - metric.llm.avg_decision_time在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 平均决策耗时在哪个.py文件中读取或计算？
+    - 请给出metric.llm.avg_decision_time的源码路径、函数和证据行。
+    formula_query:
+    - 平均决策耗时是怎么计算或转换的？
+    - avg_decision_time有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 平均决策耗时的取值范围和单位是什么？
+    - metric.llm.avg_decision_time有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.llm.avg_tokens_per_decision
+  preferred_query_terms:
+  - avg_total_tokens_per_decision
+  - metric.llm.avg_tokens_per_decision
+  - 每决策平均 Token
+  patterns:
+    interface_query:
+    - 每决策平均 Token的接口形式是什么？
+    - avg_total_tokens_per_decision的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 每决策平均 Token表示什么物理量？
+    - metric.llm.avg_tokens_per_decision在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 每决策平均 Token在哪个.py文件中读取或计算？
+    - 请给出metric.llm.avg_tokens_per_decision的源码路径、函数和证据行。
+    formula_query:
+    - 每决策平均 Token是怎么计算或转换的？
+    - avg_total_tokens_per_decision有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 每决策平均 Token的取值范围和单位是什么？
+    - metric.llm.avg_tokens_per_decision有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.llm.completion_tokens
+  preferred_query_terms:
+  - completion_tokens
+  - metric.llm.completion_tokens
+  - 补全 Token 数
+  patterns:
+    interface_query:
+    - 补全 Token 数的接口形式是什么？
+    - completion_tokens的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 补全 Token 数表示什么物理量？
+    - metric.llm.completion_tokens在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 补全 Token 数在哪个.py文件中读取或计算？
+    - 请给出metric.llm.completion_tokens的源码路径、函数和证据行。
+    formula_query:
+    - 补全 Token 数是怎么计算或转换的？
+    - completion_tokens有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 补全 Token 数的取值范围和单位是什么？
+    - metric.llm.completion_tokens有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.llm.decision_calls
+  preferred_query_terms:
+  - decision_calls
+  - metric.llm.decision_calls
+  - 决策调用次数
+  patterns:
+    interface_query:
+    - 决策调用次数的接口形式是什么？
+    - decision_calls的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 决策调用次数表示什么物理量？
+    - metric.llm.decision_calls在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 决策调用次数在哪个.py文件中读取或计算？
+    - 请给出metric.llm.decision_calls的源码路径、函数和证据行。
+    formula_query:
+    - 决策调用次数是怎么计算或转换的？
+    - decision_calls有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 决策调用次数的取值范围和单位是什么？
+    - metric.llm.decision_calls有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.llm.prompt_tokens
+  preferred_query_terms:
+  - metric.llm.prompt_tokens
+  - prompt_tokens
+  - 提示 Token 数
+  patterns:
+    interface_query:
+    - 提示 Token 数的接口形式是什么？
+    - prompt_tokens的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 提示 Token 数表示什么物理量？
+    - metric.llm.prompt_tokens在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 提示 Token 数在哪个.py文件中读取或计算？
+    - 请给出metric.llm.prompt_tokens的源码路径、函数和证据行。
+    formula_query:
+    - 提示 Token 数是怎么计算或转换的？
+    - prompt_tokens有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 提示 Token 数的取值范围和单位是什么？
+    - metric.llm.prompt_tokens有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.llm.total_tokens
+  preferred_query_terms:
+  - metric.llm.total_tokens
+  - total_tokens
+  - 总 Token 数
+  patterns:
+    interface_query:
+    - 总 Token 数的接口形式是什么？
+    - total_tokens的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 总 Token 数表示什么物理量？
+    - metric.llm.total_tokens在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 总 Token 数在哪个.py文件中读取或计算？
+    - 请给出metric.llm.total_tokens的源码路径、函数和证据行。
+    formula_query:
+    - 总 Token 数是怎么计算或转换的？
+    - total_tokens有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 总 Token 数的取值范围和单位是什么？
+    - metric.llm.total_tokens有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.swm.health_rmse
+  preferred_query_terms:
+  - health_rmse
+  - metric.swm.health_rmse
+  - 生命预测均方根误差
+  patterns:
+    interface_query:
+    - 生命预测均方根误差的接口形式是什么？
+    - health_rmse的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 生命预测均方根误差表示什么物理量？
+    - metric.swm.health_rmse在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 生命预测均方根误差在哪个.py文件中读取或计算？
+    - 请给出metric.swm.health_rmse的源码路径、函数和证据行。
+    formula_query:
+    - 生命预测均方根误差是怎么计算或转换的？
+    - health_rmse有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 生命预测均方根误差的取值范围和单位是什么？
+    - metric.swm.health_rmse有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.swm.overall_error
+  preferred_query_terms:
+  - metric.swm.overall_error
+  - overall_error
+  - SWM 综合误差
+  patterns:
+    interface_query:
+    - SWM 综合误差的接口形式是什么？
+    - overall_error的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - SWM 综合误差表示什么物理量？
+    - metric.swm.overall_error在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - SWM 综合误差在哪个.py文件中读取或计算？
+    - 请给出metric.swm.overall_error的源码路径、函数和证据行。
+    formula_query:
+    - SWM 综合误差是怎么计算或转换的？
+    - overall_error有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - SWM 综合误差的取值范围和单位是什么？
+    - metric.swm.overall_error有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.swm.position_rmse
+  preferred_query_terms:
+  - metric.swm.position_rmse
+  - position_rmse
+  - 位置预测均方根误差
+  patterns:
+    interface_query:
+    - 位置预测均方根误差的接口形式是什么？
+    - position_rmse的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 位置预测均方根误差表示什么物理量？
+    - metric.swm.position_rmse在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 位置预测均方根误差在哪个.py文件中读取或计算？
+    - 请给出metric.swm.position_rmse的源码路径、函数和证据行。
+    formula_query:
+    - 位置预测均方根误差是怎么计算或转换的？
+    - position_rmse有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 位置预测均方根误差的取值范围和单位是什么？
+    - metric.swm.position_rmse有哪些枚举、上下界或尚未确认的范围？
+- variable_id: metric.swm.relation_accuracy
+  preferred_query_terms:
+  - metric.swm.relation_accuracy
+  - relation_accuracy
+  - 关系预测准确率
+  patterns:
+    interface_query:
+    - 关系预测准确率的接口形式是什么？
+    - relation_accuracy的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 关系预测准确率表示什么物理量？
+    - metric.swm.relation_accuracy在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 关系预测准确率在哪个.py文件中读取或计算？
+    - 请给出metric.swm.relation_accuracy的源码路径、函数和证据行。
+    formula_query:
+    - 关系预测准确率是怎么计算或转换的？
+    - relation_accuracy有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 关系预测准确率的取值范围和单位是什么？
+    - metric.swm.relation_accuracy有哪些枚举、上下界或尚未确认的范围？
+- variable_id: player.food_cap
+  preferred_query_terms:
+  - player.food_cap
+  - player[4]
+  - 人口上限
+  patterns:
+    interface_query:
+    - 人口上限的接口形式是什么？
+    - player[4]的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 人口上限表示什么物理量？
+    - player.food_cap在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 人口上限在哪个.py文件中读取或计算？
+    - 请给出player.food_cap的源码路径、函数和证据行。
+    formula_query:
+    - 人口上限是怎么计算或转换的？
+    - player[4]有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 人口上限的取值范围和单位是什么？
+    - player.food_cap有哪些枚举、上下界或尚未确认的范围？
+- variable_id: player.food_used
+  preferred_query_terms:
+  - player.food_used
+  - player[3]
+  - 已用人口
+  patterns:
+    interface_query:
+    - 已用人口的接口形式是什么？
+    - player[3]的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 已用人口表示什么物理量？
+    - player.food_used在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 已用人口在哪个.py文件中读取或计算？
+    - 请给出player.food_used的源码路径、函数和证据行。
+    formula_query:
+    - 已用人口是怎么计算或转换的？
+    - player[3]有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 已用人口的取值范围和单位是什么？
+    - player.food_used有哪些枚举、上下界或尚未确认的范围？
+- variable_id: player.minerals
+  preferred_query_terms:
+  - player.minerals
+  - player[1]
+  - 矿物资源
+  patterns:
+    interface_query:
+    - 矿物资源的接口形式是什么？
+    - player[1]的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 矿物资源表示什么物理量？
+    - player.minerals在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 矿物资源在哪个.py文件中读取或计算？
+    - 请给出player.minerals的源码路径、函数和证据行。
+    formula_query:
+    - 矿物资源是怎么计算或转换的？
+    - player[1]有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 矿物资源的取值范围和单位是什么？
+    - player.minerals有哪些枚举、上下界或尚未确认的范围？
+- variable_id: player.supply_remaining
+  preferred_query_terms:
+  - player.supply_remaining
+  - supply_remaining
+  - 剩余人口
+  patterns:
+    interface_query:
+    - 剩余人口的接口形式是什么？
+    - supply_remaining的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 剩余人口表示什么物理量？
+    - player.supply_remaining在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 剩余人口在哪个.py文件中读取或计算？
+    - 请给出player.supply_remaining的源码路径、函数和证据行。
+    formula_query:
+    - 剩余人口是怎么计算或转换的？
+    - supply_remaining有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 剩余人口的取值范围和单位是什么？
+    - player.supply_remaining有哪些枚举、上下界或尚未确认的范围？
+- variable_id: player.vespene
+  preferred_query_terms:
+  - player.vespene
+  - player[2]
+  - 高能瓦斯资源
+  patterns:
+    interface_query:
+    - 高能瓦斯资源的接口形式是什么？
+    - player[2]的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 高能瓦斯资源表示什么物理量？
+    - player.vespene在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 高能瓦斯资源在哪个.py文件中读取或计算？
+    - 请给出player.vespene的源码路径、函数和证据行。
+    formula_query:
+    - 高能瓦斯资源是怎么计算或转换的？
+    - player[2]有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 高能瓦斯资源的取值范围和单位是什么？
+    - player.vespene有哪些枚举、上下界或尚未确认的范围？
+- variable_id: pysc2.attack.function_id
+  preferred_query_terms:
+  - ATTACK 函数编号
+  - function_id
+  - pysc2.attack.function_id
+  patterns:
+    interface_query:
+    - ATTACK 函数编号的接口形式是什么？
+    - function_id的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - ATTACK 函数编号表示什么物理量？
+    - pysc2.attack.function_id在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - ATTACK 函数编号在哪个.py文件中读取或计算？
+    - 请给出pysc2.attack.function_id的源码路径、函数和证据行。
+    formula_query:
+    - ATTACK 函数编号是怎么计算或转换的？
+    - function_id有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - ATTACK 函数编号的取值范围和单位是什么？
+    - pysc2.attack.function_id有哪些枚举、上下界或尚未确认的范围？
+- variable_id: pysc2.build.function_id
+  preferred_query_terms:
+  - BUILD 函数编号
+  - function_id
+  - pysc2.build.function_id
+  patterns:
+    interface_query:
+    - BUILD 函数编号的接口形式是什么？
+    - function_id的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - BUILD 函数编号表示什么物理量？
+    - pysc2.build.function_id在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - BUILD 函数编号在哪个.py文件中读取或计算？
+    - 请给出pysc2.build.function_id的源码路径、函数和证据行。
+    formula_query:
+    - BUILD 函数编号是怎么计算或转换的？
+    - function_id有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - BUILD 函数编号的取值范围和单位是什么？
+    - pysc2.build.function_id有哪些枚举、上下界或尚未确认的范围？
+- variable_id: pysc2.function.queued
+  preferred_query_terms:
+  - pysc2.function.queued
+  - queued
+  - 排队标志
+  patterns:
+    interface_query:
+    - 排队标志的接口形式是什么？
+    - queued的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 排队标志表示什么物理量？
+    - pysc2.function.queued在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 排队标志在哪个.py文件中读取或计算？
+    - 请给出pysc2.function.queued的源码路径、函数和证据行。
+    formula_query:
+    - 排队标志是怎么计算或转换的？
+    - queued有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 排队标志的取值范围和单位是什么？
+    - pysc2.function.queued有哪些枚举、上下界或尚未确认的范围？
+- variable_id: pysc2.function.raw_flag
+  preferred_query_terms:
+  - pysc2.function.raw_flag
+  - raw
+  - Raw FunctionCall 标志
+  patterns:
+    interface_query:
+    - Raw FunctionCall 标志的接口形式是什么？
+    - raw的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - Raw FunctionCall 标志表示什么物理量？
+    - pysc2.function.raw_flag在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - Raw FunctionCall 标志在哪个.py文件中读取或计算？
+    - 请给出pysc2.function.raw_flag的源码路径、函数和证据行。
+    formula_query:
+    - Raw FunctionCall 标志是怎么计算或转换的？
+    - raw有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - Raw FunctionCall 标志的取值范围和单位是什么？
+    - pysc2.function.raw_flag有哪些枚举、上下界或尚未确认的范围？
+- variable_id: pysc2.function.target
+  preferred_query_terms:
+  - pysc2.function.target
+  - target
+  - 目标参数
+  patterns:
+    interface_query:
+    - 目标参数的接口形式是什么？
+    - target的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 目标参数表示什么物理量？
+    - pysc2.function.target在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 目标参数在哪个.py文件中读取或计算？
+    - 请给出pysc2.function.target的源码路径、函数和证据行。
+    formula_query:
+    - 目标参数是怎么计算或转换的？
+    - target有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 目标参数的取值范围和单位是什么？
+    - pysc2.function.target有哪些枚举、上下界或尚未确认的范围？
+- variable_id: pysc2.function.unit_tags
+  preferred_query_terms:
+  - pysc2.function.unit_tags
+  - unit_tags
+  - 单位标签参数
+  patterns:
+    interface_query:
+    - 单位标签参数的接口形式是什么？
+    - unit_tags的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 单位标签参数表示什么物理量？
+    - pysc2.function.unit_tags在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 单位标签参数在哪个.py文件中读取或计算？
+    - 请给出pysc2.function.unit_tags的源码路径、函数和证据行。
+    formula_query:
+    - 单位标签参数是怎么计算或转换的？
+    - unit_tags有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 单位标签参数的取值范围和单位是什么？
+    - pysc2.function.unit_tags有哪些枚举、上下界或尚未确认的范围？
+- variable_id: pysc2.move.function_id
+  preferred_query_terms:
+  - function_id
+  - MOVE 函数编号
+  - pysc2.move.function_id
+  patterns:
+    interface_query:
+    - MOVE 函数编号的接口形式是什么？
+    - function_id的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - MOVE 函数编号表示什么物理量？
+    - pysc2.move.function_id在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - MOVE 函数编号在哪个.py文件中读取或计算？
+    - 请给出pysc2.move.function_id的源码路径、函数和证据行。
+    formula_query:
+    - MOVE 函数编号是怎么计算或转换的？
+    - function_id有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - MOVE 函数编号的取值范围和单位是什么？
+    - pysc2.move.function_id有哪些枚举、上下界或尚未确认的范围？
+- variable_id: pysc2.no_op.function_id
+  preferred_query_terms:
+  - function_id
+  - No-op 函数编号
+  - pysc2.no_op.function_id
+  patterns:
+    interface_query:
+    - No-op 函数编号的接口形式是什么？
+    - function_id的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - No-op 函数编号表示什么物理量？
+    - pysc2.no_op.function_id在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - No-op 函数编号在哪个.py文件中读取或计算？
+    - 请给出pysc2.no_op.function_id的源码路径、函数和证据行。
+    formula_query:
+    - No-op 函数编号是怎么计算或转换的？
+    - function_id有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - No-op 函数编号的取值范围和单位是什么？
+    - pysc2.no_op.function_id有哪些枚举、上下界或尚未确认的范围？
+- variable_id: pysc2.train.function_id
+  preferred_query_terms:
+  - function_id
+  - pysc2.train.function_id
+  - TRAIN 函数编号
+  patterns:
+    interface_query:
+    - TRAIN 函数编号的接口形式是什么？
+    - function_id的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - TRAIN 函数编号表示什么物理量？
+    - pysc2.train.function_id在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - TRAIN 函数编号在哪个.py文件中读取或计算？
+    - 请给出pysc2.train.function_id的源码路径、函数和证据行。
+    formula_query:
+    - TRAIN 函数编号是怎么计算或转换的？
+    - function_id有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - TRAIN 函数编号的取值范围和单位是什么？
+    - pysc2.train.function_id有哪些枚举、上下界或尚未确认的范围？
+- variable_id: raw_unit.alliance
+  preferred_query_terms:
+  - alliance
+  - raw_unit.alliance
+  - 阵营关系编码
+  patterns:
+    interface_query:
+    - 阵营关系编码的接口形式是什么？
+    - alliance的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 阵营关系编码表示什么物理量？
+    - raw_unit.alliance在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 阵营关系编码在哪个.py文件中读取或计算？
+    - 请给出raw_unit.alliance的源码路径、函数和证据行。
+    formula_query:
+    - 阵营关系编码是怎么计算或转换的？
+    - alliance有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 阵营关系编码的取值范围和单位是什么？
+    - raw_unit.alliance有哪些枚举、上下界或尚未确认的范围？
+- variable_id: raw_unit.health
+  preferred_query_terms:
+  - health
+  - raw_unit.health
+  - 当前生命值
+  patterns:
+    interface_query:
+    - 当前生命值的接口形式是什么？
+    - health的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 当前生命值表示什么物理量？
+    - raw_unit.health在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 当前生命值在哪个.py文件中读取或计算？
+    - 请给出raw_unit.health的源码路径、函数和证据行。
+    formula_query:
+    - 当前生命值是怎么计算或转换的？
+    - health有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 当前生命值的取值范围和单位是什么？
+    - raw_unit.health有哪些枚举、上下界或尚未确认的范围？
+- variable_id: raw_unit.health_ratio
+  preferred_query_terms:
+  - health_ratio
+  - raw_unit.health_ratio
+  - 生命值比例
+  patterns:
+    interface_query:
+    - 生命值比例的接口形式是什么？
+    - health_ratio的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 生命值比例表示什么物理量？
+    - raw_unit.health_ratio在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 生命值比例在哪个.py文件中读取或计算？
+    - 请给出raw_unit.health_ratio的源码路径、函数和证据行。
+    formula_query:
+    - 生命值比例是怎么计算或转换的？
+    - health_ratio有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 生命值比例的取值范围和单位是什么？
+    - raw_unit.health_ratio有哪些枚举、上下界或尚未确认的范围？
+- variable_id: raw_unit.shield
+  preferred_query_terms:
+  - raw_unit.shield
+  - shield
+  - 当前护盾值
+  patterns:
+    interface_query:
+    - 当前护盾值的接口形式是什么？
+    - shield的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 当前护盾值表示什么物理量？
+    - raw_unit.shield在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 当前护盾值在哪个.py文件中读取或计算？
+    - 请给出raw_unit.shield的源码路径、函数和证据行。
+    formula_query:
+    - 当前护盾值是怎么计算或转换的？
+    - shield有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 当前护盾值的取值范围和单位是什么？
+    - raw_unit.shield有哪些枚举、上下界或尚未确认的范围？
+- variable_id: raw_unit.shield_ratio
+  preferred_query_terms:
+  - raw_unit.shield_ratio
+  - shield_ratio
+  - 护盾比例
+  patterns:
+    interface_query:
+    - 护盾比例的接口形式是什么？
+    - shield_ratio的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 护盾比例表示什么物理量？
+    - raw_unit.shield_ratio在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 护盾比例在哪个.py文件中读取或计算？
+    - 请给出raw_unit.shield_ratio的源码路径、函数和证据行。
+    formula_query:
+    - 护盾比例是怎么计算或转换的？
+    - shield_ratio有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 护盾比例的取值范围和单位是什么？
+    - raw_unit.shield_ratio有哪些枚举、上下界或尚未确认的范围？
+- variable_id: raw_unit.tag
+  preferred_query_terms:
+  - raw_unit.tag
+  - tag
+  - 单位标签
+  patterns:
+    interface_query:
+    - 单位标签的接口形式是什么？
+    - tag的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 单位标签表示什么物理量？
+    - raw_unit.tag在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 单位标签在哪个.py文件中读取或计算？
+    - 请给出raw_unit.tag的源码路径、函数和证据行。
+    formula_query:
+    - 单位标签是怎么计算或转换的？
+    - tag有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 单位标签的取值范围和单位是什么？
+    - raw_unit.tag有哪些枚举、上下界或尚未确认的范围？
+- variable_id: raw_unit.unit_type
+  preferred_query_terms:
+  - raw_unit.unit_type
+  - unit_type
+  - 单位类型编号
+  patterns:
+    interface_query:
+    - 单位类型编号的接口形式是什么？
+    - unit_type的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 单位类型编号表示什么物理量？
+    - raw_unit.unit_type在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 单位类型编号在哪个.py文件中读取或计算？
+    - 请给出raw_unit.unit_type的源码路径、函数和证据行。
+    formula_query:
+    - 单位类型编号是怎么计算或转换的？
+    - unit_type有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 单位类型编号的取值范围和单位是什么？
+    - raw_unit.unit_type有哪些枚举、上下界或尚未确认的范围？
+- variable_id: raw_unit.weapon_cooldown
+  preferred_query_terms:
+  - raw_unit.weapon_cooldown
+  - weapon_cooldown
+  - 武器冷却
+  patterns:
+    interface_query:
+    - 武器冷却的接口形式是什么？
+    - weapon_cooldown的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 武器冷却表示什么物理量？
+    - raw_unit.weapon_cooldown在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 武器冷却在哪个.py文件中读取或计算？
+    - 请给出raw_unit.weapon_cooldown的源码路径、函数和证据行。
+    formula_query:
+    - 武器冷却是怎么计算或转换的？
+    - weapon_cooldown有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 武器冷却的取值范围和单位是什么？
+    - raw_unit.weapon_cooldown有哪些枚举、上下界或尚未确认的范围？
+- variable_id: raw_unit.x
+  preferred_query_terms:
+  - raw_unit.x
+  - x
+  - 横坐标
+  patterns:
+    interface_query:
+    - 横坐标的接口形式是什么？
+    - x的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 横坐标表示什么物理量？
+    - raw_unit.x在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 横坐标在哪个.py文件中读取或计算？
+    - 请给出raw_unit.x的源码路径、函数和证据行。
+    formula_query:
+    - 横坐标是怎么计算或转换的？
+    - x有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 横坐标的取值范围和单位是什么？
+    - raw_unit.x有哪些枚举、上下界或尚未确认的范围？
+- variable_id: raw_unit.y
+  preferred_query_terms:
+  - raw_unit.y
+  - y
+  - 纵坐标
+  patterns:
+    interface_query:
+    - 纵坐标的接口形式是什么？
+    - y的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 纵坐标表示什么物理量？
+    - raw_unit.y在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 纵坐标在哪个.py文件中读取或计算？
+    - 请给出raw_unit.y的源码路径、函数和证据行。
+    formula_query:
+    - 纵坐标是怎么计算或转换的？
+    - y有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 纵坐标的取值范围和单位是什么？
+    - raw_unit.y有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.candidate_index
+  preferred_query_terms:
+  - candidate_index
+  - swm.candidate_index
+  - 候选动作编号
+  patterns:
+    interface_query:
+    - 候选动作编号的接口形式是什么？
+    - candidate_index的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 候选动作编号表示什么物理量？
+    - swm.candidate_index在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 候选动作编号在哪个.py文件中读取或计算？
+    - 请给出swm.candidate_index的源码路径、函数和证据行。
+    formula_query:
+    - 候选动作编号是怎么计算或转换的？
+    - candidate_index有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 候选动作编号的取值范围和单位是什么？
+    - swm.candidate_index有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.confidence
+  preferred_query_terms:
+  - confidence
+  - swm.confidence
+  - 预测置信度
+  patterns:
+    interface_query:
+    - 预测置信度的接口形式是什么？
+    - confidence的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 预测置信度表示什么物理量？
+    - swm.confidence在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 预测置信度在哪个.py文件中读取或计算？
+    - 请给出swm.confidence的源码路径、函数和证据行。
+    formula_query:
+    - 预测置信度是怎么计算或转换的？
+    - confidence有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 预测置信度的取值范围和单位是什么？
+    - swm.confidence有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.input.abox_state
+  preferred_query_terms:
+  - abox_state
+  - ABox 状态文本
+  - swm.input.abox_state
+  patterns:
+    interface_query:
+    - ABox 状态文本的接口形式是什么？
+    - abox_state的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - ABox 状态文本表示什么物理量？
+    - swm.input.abox_state在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - ABox 状态文本在哪个.py文件中读取或计算？
+    - 请给出swm.input.abox_state的源码路径、函数和证据行。
+    formula_query:
+    - ABox 状态文本是怎么计算或转换的？
+    - abox_state有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - ABox 状态文本的取值范围和单位是什么？
+    - swm.input.abox_state有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.input.planned_actions
+  preferred_query_terms:
+  - planned_actions
+  - swm.input.planned_actions
+  - 候选动作
+  patterns:
+    interface_query:
+    - 候选动作的接口形式是什么？
+    - planned_actions的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 候选动作表示什么物理量？
+    - swm.input.planned_actions在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 候选动作在哪个.py文件中读取或计算？
+    - 请给出swm.input.planned_actions的源码路径、函数和证据行。
+    formula_query:
+    - 候选动作是怎么计算或转换的？
+    - planned_actions有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 候选动作的取值范围和单位是什么？
+    - swm.input.planned_actions有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.predicted_relations
+  preferred_query_terms:
+  - predicted_relations
+  - swm.predicted_relations
+  - 预测关系
+  patterns:
+    interface_query:
+    - 预测关系的接口形式是什么？
+    - predicted_relations的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 预测关系表示什么物理量？
+    - swm.predicted_relations在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 预测关系在哪个.py文件中读取或计算？
+    - 请给出swm.predicted_relations的源码路径、函数和证据行。
+    formula_query:
+    - 预测关系是怎么计算或转换的？
+    - predicted_relations有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 预测关系的取值范围和单位是什么？
+    - swm.predicted_relations有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.predicted_unit_states
+  preferred_query_terms:
+  - predicted_unit_states
+  - swm.predicted_unit_states
+  - 预测单位状态
+  patterns:
+    interface_query:
+    - 预测单位状态的接口形式是什么？
+    - predicted_unit_states的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 预测单位状态表示什么物理量？
+    - swm.predicted_unit_states在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 预测单位状态在哪个.py文件中读取或计算？
+    - 请给出swm.predicted_unit_states的源码路径、函数和证据行。
+    formula_query:
+    - 预测单位状态是怎么计算或转换的？
+    - predicted_unit_states有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 预测单位状态的取值范围和单位是什么？
+    - swm.predicted_unit_states有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.prediction.step
+  preferred_query_terms:
+  - step
+  - swm.prediction.step
+  - 预测相对步
+  patterns:
+    interface_query:
+    - 预测相对步的接口形式是什么？
+    - step的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 预测相对步表示什么物理量？
+    - swm.prediction.step在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 预测相对步在哪个.py文件中读取或计算？
+    - 请给出swm.prediction.step的源码路径、函数和证据行。
+    formula_query:
+    - 预测相对步是怎么计算或转换的？
+    - step有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 预测相对步的取值范围和单位是什么？
+    - swm.prediction.step有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.prediction_steps
+  preferred_query_terms:
+  - prediction_steps
+  - swm.prediction_steps
+  - 预测步数
+  patterns:
+    interface_query:
+    - 预测步数的接口形式是什么？
+    - prediction_steps的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 预测步数表示什么物理量？
+    - swm.prediction_steps在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 预测步数在哪个.py文件中读取或计算？
+    - 请给出swm.prediction_steps的源码路径、函数和证据行。
+    formula_query:
+    - 预测步数是怎么计算或转换的？
+    - prediction_steps有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 预测步数的取值范围和单位是什么？
+    - swm.prediction_steps有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.predictions
+  preferred_query_terms:
+  - predictions
+  - swm.predictions
+  - 逐步预测列表
+  patterns:
+    interface_query:
+    - 逐步预测列表的接口形式是什么？
+    - predictions的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 逐步预测列表表示什么物理量？
+    - swm.predictions在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 逐步预测列表在哪个.py文件中读取或计算？
+    - 请给出swm.predictions的源码路径、函数和证据行。
+    formula_query:
+    - 逐步预测列表是怎么计算或转换的？
+    - predictions有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 逐步预测列表的取值范围和单位是什么？
+    - swm.predictions有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.raw_response
+  preferred_query_terms:
+  - raw_response
+  - swm.raw_response
+  - 预测原始响应
+  patterns:
+    interface_query:
+    - 预测原始响应的接口形式是什么？
+    - raw_response的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 预测原始响应表示什么物理量？
+    - swm.raw_response在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 预测原始响应在哪个.py文件中读取或计算？
+    - 请给出swm.raw_response的源码路径、函数和证据行。
+    formula_query:
+    - 预测原始响应是怎么计算或转换的？
+    - raw_response有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 预测原始响应的取值范围和单位是什么？
+    - swm.raw_response有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.token_usage
+  preferred_query_terms:
+  - swm.token_usage
+  - token_usage
+  - 预测 Token 用量
+  patterns:
+    interface_query:
+    - 预测 Token 用量的接口形式是什么？
+    - token_usage的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 预测 Token 用量表示什么物理量？
+    - swm.token_usage在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 预测 Token 用量在哪个.py文件中读取或计算？
+    - 请给出swm.token_usage的源码路径、函数和证据行。
+    formula_query:
+    - 预测 Token 用量是怎么计算或转换的？
+    - token_usage有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 预测 Token 用量的取值范围和单位是什么？
+    - swm.token_usage有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.unit.health_delta
+  preferred_query_terms:
+  - health_delta
+  - swm.unit.health_delta
+  - 预测生命变化
+  patterns:
+    interface_query:
+    - 预测生命变化的接口形式是什么？
+    - health_delta的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 预测生命变化表示什么物理量？
+    - swm.unit.health_delta在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 预测生命变化在哪个.py文件中读取或计算？
+    - 请给出swm.unit.health_delta的源码路径、函数和证据行。
+    formula_query:
+    - 预测生命变化是怎么计算或转换的？
+    - health_delta有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 预测生命变化的取值范围和单位是什么？
+    - swm.unit.health_delta有哪些枚举、上下界或尚未确认的范围？
+- variable_id: swm.unit.position_delta
+  preferred_query_terms:
+  - position_delta
+  - swm.unit.position_delta
+  - 预测位置变化
+  patterns:
+    interface_query:
+    - 预测位置变化的接口形式是什么？
+    - position_delta的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 预测位置变化表示什么物理量？
+    - swm.unit.position_delta在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 预测位置变化在哪个.py文件中读取或计算？
+    - 请给出swm.unit.position_delta的源码路径、函数和证据行。
+    formula_query:
+    - 预测位置变化是怎么计算或转换的？
+    - position_delta有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 预测位置变化的取值范围和单位是什么？
+    - swm.unit.position_delta有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.armor
+  preferred_query_terms:
+  - armor
+  - tbox.entity.armor
+  - 类型护甲
+  patterns:
+    interface_query:
+    - 类型护甲的接口形式是什么？
+    - armor的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 类型护甲表示什么物理量？
+    - tbox.entity.armor在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 类型护甲在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.armor的源码路径、函数和证据行。
+    formula_query:
+    - 类型护甲是怎么计算或转换的？
+    - armor有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 类型护甲的取值范围和单位是什么？
+    - tbox.entity.armor有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.attack_damage
+  preferred_query_terms:
+  - attack_damage
+  - tbox.entity.attack_damage
+  - 攻击伤害
+  patterns:
+    interface_query:
+    - 攻击伤害的接口形式是什么？
+    - attack_damage的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 攻击伤害表示什么物理量？
+    - tbox.entity.attack_damage在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 攻击伤害在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.attack_damage的源码路径、函数和证据行。
+    formula_query:
+    - 攻击伤害是怎么计算或转换的？
+    - attack_damage有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 攻击伤害的取值范围和单位是什么？
+    - tbox.entity.attack_damage有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.attack_range
+  preferred_query_terms:
+  - attack_range
+  - tbox.entity.attack_range
+  - 攻击射程
+  patterns:
+    interface_query:
+    - 攻击射程的接口形式是什么？
+    - attack_range的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 攻击射程表示什么物理量？
+    - tbox.entity.attack_range在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 攻击射程在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.attack_range的源码路径、函数和证据行。
+    formula_query:
+    - 攻击射程是怎么计算或转换的？
+    - attack_range有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 攻击射程的取值范围和单位是什么？
+    - tbox.entity.attack_range有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.attack_speed
+  preferred_query_terms:
+  - attack_speed
+  - tbox.entity.attack_speed
+  - 攻击速度字段
+  patterns:
+    interface_query:
+    - 攻击速度字段的接口形式是什么？
+    - attack_speed的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 攻击速度字段表示什么物理量？
+    - tbox.entity.attack_speed在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 攻击速度字段在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.attack_speed的源码路径、函数和证据行。
+    formula_query:
+    - 攻击速度字段是怎么计算或转换的？
+    - attack_speed有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 攻击速度字段的取值范围和单位是什么？
+    - tbox.entity.attack_speed有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.build_time
+  preferred_query_terms:
+  - build_time
+  - tbox.entity.build_time
+  - 建造时间
+  patterns:
+    interface_query:
+    - 建造时间的接口形式是什么？
+    - build_time的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 建造时间表示什么物理量？
+    - tbox.entity.build_time在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 建造时间在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.build_time的源码路径、函数和证据行。
+    formula_query:
+    - 建造时间是怎么计算或转换的？
+    - build_time有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 建造时间的取值范围和单位是什么？
+    - tbox.entity.build_time有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.category
+  preferred_query_terms:
+  - category
+  - tbox.entity.category
+  - 实体类别
+  patterns:
+    interface_query:
+    - 实体类别的接口形式是什么？
+    - category的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 实体类别表示什么物理量？
+    - tbox.entity.category在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 实体类别在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.category的源码路径、函数和证据行。
+    formula_query:
+    - 实体类别是怎么计算或转换的？
+    - category有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 实体类别的取值范围和单位是什么？
+    - tbox.entity.category有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.description
+  preferred_query_terms:
+  - description
+  - tbox.entity.description
+  - 实体说明
+  patterns:
+    interface_query:
+    - 实体说明的接口形式是什么？
+    - description的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 实体说明表示什么物理量？
+    - tbox.entity.description在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 实体说明在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.description的源码路径、函数和证据行。
+    formula_query:
+    - 实体说明是怎么计算或转换的？
+    - description有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 实体说明的取值范围和单位是什么？
+    - tbox.entity.description有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.dps
+  preferred_query_terms:
+  - dps
+  - tbox.entity.dps
+  - 每秒伤害
+  patterns:
+    interface_query:
+    - 每秒伤害的接口形式是什么？
+    - dps的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 每秒伤害表示什么物理量？
+    - tbox.entity.dps在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 每秒伤害在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.dps的源码路径、函数和证据行。
+    formula_query:
+    - 每秒伤害是怎么计算或转换的？
+    - dps有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 每秒伤害的取值范围和单位是什么？
+    - tbox.entity.dps有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.gas_cost
+  preferred_query_terms:
+  - gas_cost
+  - tbox.entity.gas_cost
+  - 瓦斯成本
+  patterns:
+    interface_query:
+    - 瓦斯成本的接口形式是什么？
+    - gas_cost的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 瓦斯成本表示什么物理量？
+    - tbox.entity.gas_cost在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 瓦斯成本在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.gas_cost的源码路径、函数和证据行。
+    formula_query:
+    - 瓦斯成本是怎么计算或转换的？
+    - gas_cost有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 瓦斯成本的取值范围和单位是什么？
+    - tbox.entity.gas_cost有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.hp
+  preferred_query_terms:
+  - hp
+  - tbox.entity.hp
+  - 类型生命值
+  patterns:
+    interface_query:
+    - 类型生命值的接口形式是什么？
+    - hp的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 类型生命值表示什么物理量？
+    - tbox.entity.hp在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 类型生命值在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.hp的源码路径、函数和证据行。
+    formula_query:
+    - 类型生命值是怎么计算或转换的？
+    - hp有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 类型生命值的取值范围和单位是什么？
+    - tbox.entity.hp有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.mineral_cost
+  preferred_query_terms:
+  - mineral_cost
+  - tbox.entity.mineral_cost
+  - 矿物成本
+  patterns:
+    interface_query:
+    - 矿物成本的接口形式是什么？
+    - mineral_cost的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 矿物成本表示什么物理量？
+    - tbox.entity.mineral_cost在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 矿物成本在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.mineral_cost的源码路径、函数和证据行。
+    formula_query:
+    - 矿物成本是怎么计算或转换的？
+    - mineral_cost有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 矿物成本的取值范围和单位是什么？
+    - tbox.entity.mineral_cost有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.movement_speed
+  preferred_query_terms:
+  - movement_speed
+  - tbox.entity.movement_speed
+  - 移动速度
+  patterns:
+    interface_query:
+    - 移动速度的接口形式是什么？
+    - movement_speed的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 移动速度表示什么物理量？
+    - tbox.entity.movement_speed在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 移动速度在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.movement_speed的源码路径、函数和证据行。
+    formula_query:
+    - 移动速度是怎么计算或转换的？
+    - movement_speed有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 移动速度的取值范围和单位是什么？
+    - tbox.entity.movement_speed有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.node_type
+  preferred_query_terms:
+  - node_type
+  - tbox.entity.node_type
+  - 节点类型
+  patterns:
+    interface_query:
+    - 节点类型的接口形式是什么？
+    - node_type的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 节点类型表示什么物理量？
+    - tbox.entity.node_type在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 节点类型在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.node_type的源码路径、函数和证据行。
+    formula_query:
+    - 节点类型是怎么计算或转换的？
+    - node_type有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 节点类型的取值范围和单位是什么？
+    - tbox.entity.node_type有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.race
+  preferred_query_terms:
+  - race
+  - tbox.entity.race
+  - 种族
+  patterns:
+    interface_query:
+    - 种族的接口形式是什么？
+    - race的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 种族表示什么物理量？
+    - tbox.entity.race在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 种族在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.race的源码路径、函数和证据行。
+    formula_query:
+    - 种族是怎么计算或转换的？
+    - race有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 种族的取值范围和单位是什么？
+    - tbox.entity.race有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.resource_type
+  preferred_query_terms:
+  - resource_type
+  - tbox.entity.resource_type
+  - 资源类型
+  patterns:
+    interface_query:
+    - 资源类型的接口形式是什么？
+    - resource_type的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 资源类型表示什么物理量？
+    - tbox.entity.resource_type在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 资源类型在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.resource_type的源码路径、函数和证据行。
+    formula_query:
+    - 资源类型是怎么计算或转换的？
+    - resource_type有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 资源类型的取值范围和单位是什么？
+    - tbox.entity.resource_type有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.sight
+  preferred_query_terms:
+  - sight
+  - tbox.entity.sight
+  - 视野
+  patterns:
+    interface_query:
+    - 视野的接口形式是什么？
+    - sight的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 视野表示什么物理量？
+    - tbox.entity.sight在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 视野在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.sight的源码路径、函数和证据行。
+    formula_query:
+    - 视野是怎么计算或转换的？
+    - sight有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 视野的取值范围和单位是什么？
+    - tbox.entity.sight有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.supply_cost
+  preferred_query_terms:
+  - supply_cost
+  - tbox.entity.supply_cost
+  - 人口成本
+  patterns:
+    interface_query:
+    - 人口成本的接口形式是什么？
+    - supply_cost的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 人口成本表示什么物理量？
+    - tbox.entity.supply_cost在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 人口成本在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.supply_cost的源码路径、函数和证据行。
+    formula_query:
+    - 人口成本是怎么计算或转换的？
+    - supply_cost有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 人口成本的取值范围和单位是什么？
+    - tbox.entity.supply_cost有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.entity.unit_type_id
+  preferred_query_terms:
+  - tbox.entity.unit_type_id
+  - unit_type_id
+  - 单位类型编号
+  patterns:
+    interface_query:
+    - 单位类型编号的接口形式是什么？
+    - unit_type_id的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 单位类型编号表示什么物理量？
+    - tbox.entity.unit_type_id在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 单位类型编号在哪个.py文件中读取或计算？
+    - 请给出tbox.entity.unit_type_id的源码路径、函数和证据行。
+    formula_query:
+    - 单位类型编号是怎么计算或转换的？
+    - unit_type_id有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 单位类型编号的取值范围和单位是什么？
+    - tbox.entity.unit_type_id有哪些枚举、上下界或尚未确认的范围？
+- variable_id: tbox.relation.edge
+  preferred_query_terms:
+  - EDGES
+  - tbox.relation.edge
+  - 本体关系边
+  patterns:
+    interface_query:
+    - 本体关系边的接口形式是什么？
+    - EDGES的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 本体关系边表示什么物理量？
+    - tbox.relation.edge在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 本体关系边在哪个.py文件中读取或计算？
+    - 请给出tbox.relation.edge的源码路径、函数和证据行。
+    formula_query:
+    - 本体关系边是怎么计算或转换的？
+    - EDGES有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 本体关系边的取值范围和单位是什么？
+    - tbox.relation.edge有哪些枚举、上下界或尚未确认的范围？
+- variable_id: timestep.is_last
+  preferred_query_terms:
+  - last()
+  - timestep.is_last
+  - 回合结束标志
+  patterns:
+    interface_query:
+    - 回合结束标志的接口形式是什么？
+    - last()的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 回合结束标志表示什么物理量？
+    - timestep.is_last在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 回合结束标志在哪个.py文件中读取或计算？
+    - 请给出timestep.is_last的源码路径、函数和证据行。
+    formula_query:
+    - 回合结束标志是怎么计算或转换的？
+    - last()有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 回合结束标志的取值范围和单位是什么？
+    - timestep.is_last有哪些枚举、上下界或尚未确认的范围？
+- variable_id: timestep.reward_delta
+  preferred_query_terms:
+  - reward
+  - timestep.reward_delta
+  - 决策间得分增量
+  patterns:
+    interface_query:
+    - 决策间得分增量的接口形式是什么？
+    - reward的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 决策间得分增量表示什么物理量？
+    - timestep.reward_delta在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 决策间得分增量在哪个.py文件中读取或计算？
+    - 请给出timestep.reward_delta的源码路径、函数和证据行。
+    formula_query:
+    - 决策间得分增量是怎么计算或转换的？
+    - reward有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 决策间得分增量的取值范围和单位是什么？
+    - timestep.reward_delta有哪些枚举、上下界或尚未确认的范围？
+- variable_id: timestep.score_cumulative_0
+  preferred_query_terms:
+  - score_cumulative[0]
+  - timestep.score_cumulative_0
+  - 累计得分首元素
+  patterns:
+    interface_query:
+    - 累计得分首元素的接口形式是什么？
+    - score_cumulative[0]的数据类型、形状和访问路径是什么？
+    physical_meaning_query:
+    - 累计得分首元素表示什么物理量？
+    - timestep.score_cumulative_0在STORM数据流中的含义和层级是什么？
+    source_location_query:
+    - 累计得分首元素在哪个.py文件中读取或计算？
+    - 请给出timestep.score_cumulative_0的源码路径、函数和证据行。
+    formula_query:
+    - 累计得分首元素是怎么计算或转换的？
+    - score_cumulative[0]有没有归一化、聚合、阈值或映射公式？
+    range_query:
+    - 累计得分首元素的取值范围和单位是什么？
+    - timestep.score_cumulative_0有哪些枚举、上下界或尚未确认的范围？

@@ -1,0 +1,50 @@
+# 复制此模板时，请替换所有尖括号占位符。
+id: "<category>.<stable_name>"
+canonical_name: "<code_or_canonical_name>"
+name_zh: "<中文名>"
+name_en: "<English name>"
+category: "<raw_unit|tbox_static|abox_dynamic|derived_tactical|action_schema|...>"
+source_layer: "<raw_observation|runtime_abox|derived_runtime|...>"
+aliases:
+  zh: ["<中文别名>"]
+  en: ["<English alias>"]
+  code: ["<field_name>"]
+definition: "<正式定义>"
+plain_explanation: "<一句大白话解释>"
+physical_meaning: "<物理或业务含义；不适用时写 null>"
+interface:
+  provider: "<PySC2|STORM|LLM|SWM|experiment>"
+  access_path: "<例如 observation.raw_units[*].health>"
+  data_type: "<int|float|bool|string|array|object>"
+  shape: "<scalar|[N]|[N,D]|...>"
+  unit: "<game_loop|world_coordinate|ratio|none|unknown>"
+  range: "<范围或 unknown>"
+  enum: []
+provenance:
+  upstream_ids: []
+  extraction_or_formula: "<直接读取或转换公式>"
+  update_timing: "<每 observation/每决策/静态/每 episode/...>"
+  downstream_consumers: []
+storm_implementation:
+  files:
+    - path: "<repo/relative/path.py>"
+      symbol: "<Class.method or function>"
+      line_start: null
+      line_end: null
+  code_summary: "<实现摘要>"
+design_intent: "<设计意图；未知时写 unknown>"
+code_reality: "<当前实现事实>"
+example:
+  raw_value: "<示例值>"
+  interpretation: "<示例解释>"
+limitations: []
+known_issue_ids: []
+confidence_status: "<confirmed|runtime_verified|needs_verification>"
+evidence:
+  - path: "<repo/relative/path.py>"
+    symbol: "<symbol>"
+    line_start: null
+    line_end: null
+    evidence_type: "<code_read|test|runtime_output|config|documentation>"
+    claim: "<该证据支持什么结论>"
+    verified_at: "2026-09-03"

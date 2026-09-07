@@ -1,0 +1,1388 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema: knowledge/schemas/variable.schema.json
+schema_version: 1.0.0
+generated_at: '2026-09-03'
+records:
+- schema_version: 1.0.0
+  id: swm.candidate_index
+  canonical_name: candidate_index
+  names:
+    zh: 候选动作编号
+    en: Candidate Index
+    code: candidate_index
+  category: swm
+  aliases:
+  - 候选动作编号
+  - Candidate Index
+  - candidate_index
+  definition: 多候选预测的零基编号。
+  intuitive_explanation: 多候选预测的零基编号。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.candidate_index
+  provenance:
+    source_layer: swm_prediction
+    derivation_kind: predicted
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 189
+      line_end: 189
+    extraction_code:
+    - result["candidate_index"] = i
+    transformation_formula:
+    - candidate_index=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      candidate_index: 按公式得到
+    explanation: 多候选预测的零基编号。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 多候选预测的零基编号。
+    status: needs_verification
+    evidence_ids:
+    - swm-candidate-index-code
+  limitations:
+  - 该值由外部 LLM 预测或随预测流程生成；本步骤未调用模型验证实际输出。
+  known_issues: []
+  evidence:
+  - id: swm-candidate-index-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 189
+    line_end: 189
+    evidence_type: E1
+    claim: 多候选预测的零基编号。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: needs_verification
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.confidence
+  canonical_name: confidence
+  names:
+    zh: 预测置信度
+    en: Prediction Confidence
+    code: confidence
+  category: swm
+  aliases:
+  - 预测置信度
+  - Prediction Confidence
+  - confidence
+  definition: SWM 返回的置信度。
+  intuitive_explanation: SWM 返回的置信度。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.confidence
+  provenance:
+    source_layer: swm_prediction
+    derivation_kind: predicted
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 119
+      line_end: 119
+    extraction_code:
+    - '"confidence": 0.75'
+    transformation_formula:
+    - confidence=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      confidence: 按公式得到
+    explanation: SWM 返回的置信度。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: SWM 返回的置信度。
+    status: needs_verification
+    evidence_ids:
+    - swm-confidence-code
+  limitations:
+  - 该值由外部 LLM 预测或随预测流程生成；本步骤未调用模型验证实际输出。
+  known_issues: []
+  evidence:
+  - id: swm-confidence-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 119
+    line_end: 119
+    evidence_type: E1
+    claim: SWM 返回的置信度。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: needs_verification
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.input.abox_state
+  canonical_name: abox_state
+  names:
+    zh: ABox 状态文本
+    en: ABox State Text
+    code: abox_state
+  category: swm
+  aliases:
+  - ABox 状态文本
+  - ABox State Text
+  - abox_state
+  definition: 当前 ABox 序列化文本输入。
+  intuitive_explanation: 当前 ABox 序列化文本输入。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.input.abox_state
+  provenance:
+    source_layer: abox_runtime
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 95
+      line_end: 95
+    extraction_code:
+    - 'abox_state: str'
+    transformation_formula:
+    - abox_state=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      abox_state: 按公式得到
+    explanation: 当前 ABox 序列化文本输入。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前 ABox 序列化文本输入。
+    status: code_reality
+    evidence_ids:
+    - swm-input-abox-state-code
+  limitations:
+  - 输入格式由当前 STORM 约定；来源层表示输入在进入 SWM 前的事实边界。
+  known_issues: []
+  evidence:
+  - id: swm-input-abox-state-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 95
+    line_end: 95
+    evidence_type: E1
+    claim: 当前 ABox 序列化文本输入。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.input.planned_actions
+  canonical_name: planned_actions
+  names:
+    zh: 候选动作
+    en: Planned Actions
+    code: planned_actions
+  category: swm
+  aliases:
+  - 候选动作
+  - Planned Actions
+  - planned_actions
+  definition: 待预测的候选动作列表。
+  intuitive_explanation: 待预测的候选动作列表。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: sequence
+      dimensions: []
+      description: 可变长度序列。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.input.planned_actions
+  provenance:
+    source_layer: validated_action
+    derivation_kind: direct_read
+    upstream_variable_ids:
+    - action.planned_actions
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 96
+      line_end: 96
+    extraction_code:
+    - 'planned_actions: List'
+    transformation_formula:
+    - planned_actions=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      planned_actions: 按公式得到
+    explanation: 待预测的候选动作列表。
+  relationships:
+  - relation: derived_from
+    target_id: action.planned_actions
+    description: 作为 SWM 输入的上游变量。
+  design_intent: []
+  code_reality:
+  - claim: 待预测的候选动作列表。
+    status: code_reality
+    evidence_ids:
+    - swm-input-planned-actions-code
+  limitations:
+  - 输入格式由当前 STORM 约定；来源层表示输入在进入 SWM 前的事实边界。
+  known_issues: []
+  evidence:
+  - id: swm-input-planned-actions-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 96
+    line_end: 96
+    evidence_type: E1
+    claim: 待预测的候选动作列表。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.predicted_relations
+  canonical_name: predicted_relations
+  names:
+    zh: 预测关系
+    en: Predicted Relations
+    code: predicted_relations
+  category: swm
+  aliases:
+  - 预测关系
+  - Predicted Relations
+  - predicted_relations
+  definition: 预测步内的关系列表。
+  intuitive_explanation: 预测步内的关系列表。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: sequence
+      dimensions: []
+      description: 可变长度序列。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.predicted_relations
+  provenance:
+    source_layer: swm_prediction
+    derivation_kind: predicted
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 116
+      line_end: 116
+    extraction_code:
+    - '"predicted_relations":'
+    transformation_formula:
+    - predicted_relations=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      predicted_relations: 按公式得到
+    explanation: 预测步内的关系列表。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 预测步内的关系列表。
+    status: needs_verification
+    evidence_ids:
+    - swm-predicted-relations-code
+  limitations:
+  - 该值由外部 LLM 预测或随预测流程生成；本步骤未调用模型验证实际输出。
+  known_issues: []
+  evidence:
+  - id: swm-predicted-relations-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 116
+    line_end: 116
+    evidence_type: E1
+    claim: 预测步内的关系列表。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: needs_verification
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.predicted_unit_states
+  canonical_name: predicted_unit_states
+  names:
+    zh: 预测单位状态
+    en: Predicted Unit States
+    code: predicted_unit_states
+  category: swm
+  aliases:
+  - 预测单位状态
+  - Predicted Unit States
+  - predicted_unit_states
+  definition: 预测步内的单位状态变化列表。
+  intuitive_explanation: 预测步内的单位状态变化列表。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: sequence
+      dimensions: []
+      description: 可变长度序列。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.predicted_unit_states
+  provenance:
+    source_layer: swm_prediction
+    derivation_kind: predicted
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 115
+      line_end: 115
+    extraction_code:
+    - '"predicted_unit_states":'
+    transformation_formula:
+    - predicted_unit_states=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      predicted_unit_states: 按公式得到
+    explanation: 预测步内的单位状态变化列表。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 预测步内的单位状态变化列表。
+    status: needs_verification
+    evidence_ids:
+    - swm-predicted-unit-states-code
+  limitations:
+  - 该值由外部 LLM 预测或随预测流程生成；本步骤未调用模型验证实际输出。
+  known_issues: []
+  evidence:
+  - id: swm-predicted-unit-states-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 115
+    line_end: 115
+    evidence_type: E1
+    claim: 预测步内的单位状态变化列表。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: needs_verification
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.prediction.step
+  canonical_name: step
+  names:
+    zh: 预测相对步
+    en: Prediction Step
+    code: step
+  category: swm
+  aliases:
+  - 预测相对步
+  - Prediction Step
+  - step
+  definition: 预测项相对当前状态的步号。
+  intuitive_explanation: 预测项相对当前状态的步号。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.prediction.step
+  provenance:
+    source_layer: swm_prediction
+    derivation_kind: predicted
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 114
+      line_end: 114
+    extraction_code:
+    - '"step": 1'
+    transformation_formula:
+    - step=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      step: 按公式得到
+    explanation: 预测项相对当前状态的步号。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 预测项相对当前状态的步号。
+    status: needs_verification
+    evidence_ids:
+    - swm-prediction-step-code
+  limitations:
+  - 该值由外部 LLM 预测或随预测流程生成；本步骤未调用模型验证实际输出。
+  known_issues: []
+  evidence:
+  - id: swm-prediction-step-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 114
+    line_end: 114
+    evidence_type: E1
+    claim: 预测项相对当前状态的步号。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: needs_verification
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.prediction_steps
+  canonical_name: prediction_steps
+  names:
+    zh: 预测步数
+    en: Prediction Steps
+    code: prediction_steps
+  category: swm
+  aliases:
+  - 预测步数
+  - Prediction Steps
+  - prediction_steps
+  definition: 预测未来多少个 STORM 步。
+  intuitive_explanation: 预测未来多少个 STORM 步。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.prediction_steps
+  provenance:
+    source_layer: environment_config
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 129
+      line_end: 129
+    extraction_code:
+    - n_steps = prediction_steps or self.prediction_steps
+    transformation_formula:
+    - prediction_steps=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      prediction_steps: 按公式得到
+    explanation: 预测未来多少个 STORM 步。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 预测未来多少个 STORM 步。
+    status: code_reality
+    evidence_ids:
+    - swm-prediction-steps-code
+  limitations:
+  - 输入格式由当前 STORM 约定；来源层表示输入在进入 SWM 前的事实边界。
+  known_issues: []
+  evidence:
+  - id: swm-prediction-steps-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 129
+    line_end: 129
+    evidence_type: E1
+    claim: 预测未来多少个 STORM 步。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.predictions
+  canonical_name: predictions
+  names:
+    zh: 逐步预测列表
+    en: Step Predictions
+    code: predictions
+  category: swm
+  aliases:
+  - 逐步预测列表
+  - Step Predictions
+  - predictions
+  definition: 未来各步预测对象列表。
+  intuitive_explanation: 未来各步预测对象列表。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: sequence
+      dimensions: []
+      description: 可变长度序列。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.predictions
+  provenance:
+    source_layer: swm_prediction
+    derivation_kind: predicted
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 112
+      line_end: 112
+    extraction_code:
+    - '"predictions": ['
+    transformation_formula:
+    - predictions=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      predictions: 按公式得到
+    explanation: 未来各步预测对象列表。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 未来各步预测对象列表。
+    status: needs_verification
+    evidence_ids:
+    - swm-predictions-code
+  limitations:
+  - 该值由外部 LLM 预测或随预测流程生成；本步骤未调用模型验证实际输出。
+  known_issues: []
+  evidence:
+  - id: swm-predictions-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 112
+    line_end: 112
+    evidence_type: E1
+    claim: 未来各步预测对象列表。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: needs_verification
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.raw_response
+  canonical_name: raw_response
+  names:
+    zh: 预测原始响应
+    en: Prediction Raw Response
+    code: raw_response
+  category: swm
+  aliases:
+  - 预测原始响应
+  - Prediction Raw Response
+  - raw_response
+  definition: 预测模型原始返回文本。
+  intuitive_explanation: 预测模型原始返回文本。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.raw_response
+  provenance:
+    source_layer: llm_output
+    derivation_kind: predicted
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 147
+      line_end: 147
+    extraction_code:
+    - parsed["raw_response"] = raw_response
+    transformation_formula:
+    - raw_response=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      raw_response: 按公式得到
+    explanation: 预测模型原始返回文本。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 预测模型原始返回文本。
+    status: needs_verification
+    evidence_ids:
+    - swm-raw-response-code
+  limitations:
+  - 该值由外部 LLM 预测或随预测流程生成；本步骤未调用模型验证实际输出。
+  known_issues: []
+  evidence:
+  - id: swm-raw-response-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 147
+    line_end: 147
+    evidence_type: E1
+    claim: 预测模型原始返回文本。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: needs_verification
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.token_usage
+  canonical_name: token_usage
+  names:
+    zh: 预测 Token 用量
+    en: Prediction Token Usage
+    code: token_usage
+  category: swm
+  aliases:
+  - 预测 Token 用量
+  - Prediction Token Usage
+  - token_usage
+  definition: SWM LLM 调用 token 用量对象。
+  intuitive_explanation: SWM LLM 调用 token 用量对象。
+  interface:
+    data_type: object
+    python_type: dict
+    shape:
+      kind: object
+      dimensions: []
+      description: 键值对象。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.token_usage
+  provenance:
+    source_layer: swm_prediction
+    derivation_kind: predicted
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 146
+      line_end: 146
+    extraction_code:
+    - parsed["token_usage"] = self.client.last_usage
+    transformation_formula:
+    - token_usage=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      token_usage: 按公式得到
+    explanation: SWM LLM 调用 token 用量对象。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: SWM LLM 调用 token 用量对象。
+    status: needs_verification
+    evidence_ids:
+    - swm-token-usage-code
+  limitations:
+  - 该值由外部 LLM 预测或随预测流程生成；本步骤未调用模型验证实际输出。
+  known_issues: []
+  evidence:
+  - id: swm-token-usage-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 146
+    line_end: 146
+    evidence_type: E1
+    claim: SWM LLM 调用 token 用量对象。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: needs_verification
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.unit.health_delta
+  canonical_name: health_delta
+  names:
+    zh: 预测生命变化
+    en: Predicted Health Delta
+    code: health_delta
+  category: swm
+  aliases:
+  - 预测生命变化
+  - Predicted Health Delta
+  - health_delta
+  definition: 预测单位生命变化量。
+  intuitive_explanation: 预测单位生命变化量。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.unit.health_delta
+  provenance:
+    source_layer: swm_prediction
+    derivation_kind: predicted
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 272
+      line_end: 272
+    extraction_code:
+    - pred_unit.get("health_delta", 0)
+    transformation_formula:
+    - health_delta=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      health_delta: 按公式得到
+    explanation: 预测单位生命变化量。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 预测单位生命变化量。
+    status: needs_verification
+    evidence_ids:
+    - swm-unit-health-delta-code
+  limitations:
+  - 该值由外部 LLM 预测或随预测流程生成；本步骤未调用模型验证实际输出。
+  known_issues: []
+  evidence:
+  - id: swm-unit-health-delta-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 272
+    line_end: 272
+    evidence_type: E1
+    claim: 预测单位生命变化量。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: needs_verification
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: swm.unit.position_delta
+  canonical_name: position_delta
+  names:
+    zh: 预测位置变化
+    en: Predicted Position Delta
+    code: position_delta
+  category: swm
+  aliases:
+  - 预测位置变化
+  - Predicted Position Delta
+  - position_delta
+  definition: 预测单位二维位置变化。
+  intuitive_explanation: 预测单位二维位置变化。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: vector
+      dimensions:
+      - 2
+      description: 二维 [x, y] 向量。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - swm.unit.position_delta
+  provenance:
+    source_layer: swm_prediction
+    derivation_kind: predicted
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/swm_predictor.py
+      symbol: SWMPredictor.predict / compute_prediction_error
+      line_start: 276
+      line_end: 276
+    extraction_code:
+    - pred_unit.get("position_delta", [0, 0])
+    transformation_formula:
+    - position_delta=SWM input/output field
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      position_delta: 按公式得到
+    explanation: 预测单位二维位置变化。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 预测单位二维位置变化。
+    status: needs_verification
+    evidence_ids:
+    - swm-unit-position-delta-code
+  limitations:
+  - 该值由外部 LLM 预测或随预测流程生成；本步骤未调用模型验证实际输出。
+  known_issues: []
+  evidence:
+  - id: swm-unit-position-delta-code
+    path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict / compute_prediction_error
+    line_start: 276
+    line_end: 276
+    evidence_type: E1
+    claim: 预测单位二维位置变化。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: needs_verification
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。

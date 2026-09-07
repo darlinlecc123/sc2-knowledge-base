@@ -1,0 +1,1472 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema: knowledge/schemas/variable.schema.json
+schema_version: 1.0.0
+generated_at: '2026-09-03'
+records:
+- schema_version: 1.0.0
+  id: derived.tactical.critical_units
+  canonical_name: critical_units
+  names:
+    zh: 危急单位列表
+    en: Critical Units
+    code: critical_units
+  category: derived_tactical_state
+  aliases:
+  - 危急单位列表
+  - Critical Units
+  - critical_units
+  definition: hp_ratio 小于 0.3 的友军，输出最多三个实例名。
+  intuitive_explanation: hp_ratio 小于 0.3 的友军，输出最多三个实例名。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: sequence
+      dimensions: []
+      description: 可变长度序列。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.Critical_Units
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.unit.hp_ratio
+    - abox.unit.alliance
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 952
+      line_end: 952
+    extraction_code:
+    - d.get("hp_ratio", 1.0) < 0.3
+    transformation_formula:
+    - d.get("hp_ratio", 1.0) < 0.3
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      critical_units: 按公式得到
+    explanation: hp_ratio 小于 0.3 的友军，输出最多三个实例名。
+  relationships:
+  - relation: derived_from
+    target_id: abox.unit.hp_ratio
+    description: 参与该派生量计算。
+  - relation: derived_from
+    target_id: abox.unit.alliance
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: hp_ratio 小于 0.3 的友军，输出最多三个实例名。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-critical-units-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-critical-units-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 952
+    line_end: 952
+    evidence_type: E1
+    claim: hp_ratio 小于 0.3 的友军，输出最多三个实例名。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.enemy_avg_hp
+  canonical_name: enemy_avg_hp
+  names:
+    zh: 敌军平均生命比例
+    en: Enemy Average HP Ratio
+    code: enemy_avg_hp
+  category: derived_tactical_state
+  aliases:
+  - 敌军平均生命比例
+  - Enemy Average HP Ratio
+  - enemy_avg_hp
+  definition: 敌军 hp_ratio 算术平均。
+  intuitive_explanation: 敌军 hp_ratio 算术平均。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: '1'
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.enemy_avg_hp
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.unit.hp_ratio
+    - abox.unit.alliance
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 945
+      line_end: 945
+    extraction_code:
+    - enemy_avg_hp = sum
+    transformation_formula:
+    - enemy_avg_hp = sum
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      enemy_avg_hp: 按公式得到
+    explanation: 敌军 hp_ratio 算术平均。
+  relationships:
+  - relation: derived_from
+    target_id: abox.unit.hp_ratio
+    description: 参与该派生量计算。
+  - relation: derived_from
+    target_id: abox.unit.alliance
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: 敌军 hp_ratio 算术平均。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-enemy-avg-hp-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-enemy-avg-hp-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 945
+    line_end: 945
+    evidence_type: E1
+    claim: 敌军 hp_ratio 算术平均。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.enemy_centroid
+  canonical_name: enemy_centroid
+  names:
+    zh: 敌军质心
+    en: Enemy Centroid
+    code: enemy_centroid
+  category: derived_tactical_state
+  aliases:
+  - 敌军质心
+  - Enemy Centroid
+  - enemy_centroid
+  definition: 敌军二维位置的算术平均点。
+  intuitive_explanation: 敌军二维位置的算术平均点。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: vector
+      dimensions:
+      - 2
+      description: 二维 [x, y] 向量。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - derived.enemy_centroid
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.unit.position
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 965
+      line_end: 965
+    extraction_code:
+    - enemy_center_x =
+    transformation_formula:
+    - enemy_center_x =
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      enemy_centroid: 按公式得到
+    explanation: 敌军二维位置的算术平均点。
+  relationships:
+  - relation: derived_from
+    target_id: abox.unit.position
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: 敌军二维位置的算术平均点。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-enemy-centroid-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-enemy-centroid-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 965
+    line_end: 965
+    evidence_type: E1
+    claim: 敌军二维位置的算术平均点。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.enemy_count
+  canonical_name: enemy_count
+  names:
+    zh: 敌军单位数
+    en: Enemy Unit Count
+    code: enemy_count
+  category: derived_tactical_state
+  aliases:
+  - 敌军单位数
+  - Enemy Unit Count
+  - enemy_count
+  definition: 敌军 ABox 节点数量。
+  intuitive_explanation: 敌军 ABox 节点数量。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.enemy_count
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.unit.alliance
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 940
+      line_end: 940
+    extraction_code:
+    - enemy_count = len(enemy_units)
+    transformation_formula:
+    - enemy_count = len(enemy_units)
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      enemy_count: 按公式得到
+    explanation: 敌军 ABox 节点数量。
+  relationships:
+  - relation: derived_from
+    target_id: abox.unit.alliance
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: 敌军 ABox 节点数量。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-enemy-count-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-enemy-count-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 940
+    line_end: 940
+    evidence_type: E1
+    claim: 敌军 ABox 节点数量。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.engagement_type
+  canonical_name: engagement_type
+  names:
+    zh: 接战距离类型
+    en: Engagement Type
+    code: engagement_type
+  category: derived_tactical_state
+  aliases:
+  - 接战距离类型
+  - Engagement Type
+  - engagement_type
+  definition: 质心距离小于 10 为 Close-Combat，小于 20 为 Medium-Range，否则 Long-Range。
+  intuitive_explanation: 质心距离小于 10 为 Close-Combat，小于 20 为 Medium-Range，否则 Long-Range。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: known
+      values:
+      - Close-Combat
+      - Medium-Range
+      - Long-Range
+      description: 当前代码显式使用的枚举值。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.Engagement_Type
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - derived.tactical.formation_distance
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 976
+      line_end: 976
+    extraction_code:
+    - situation = "Close-Combat"
+    transformation_formula:
+    - 'd<10: Close-Combat; 10<=d<20: Medium-Range; d>=20: Long-Range'
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      engagement_type: 按公式得到
+    explanation: 质心距离小于 10 为 Close-Combat，小于 20 为 Medium-Range，否则 Long-Range。
+  relationships:
+  - relation: derived_from
+    target_id: derived.tactical.formation_distance
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: 质心距离小于 10 为 Close-Combat，小于 20 为 Medium-Range，否则 Long-Range。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-engagement-type-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-engagement-type-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 976
+    line_end: 976
+    evidence_type: E1
+    claim: 质心距离小于 10 为 Close-Combat，小于 20 为 Medium-Range，否则 Long-Range。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.fire_readiness
+  canonical_name: fire_readiness
+  names:
+    zh: 火力就绪比例
+    en: Fire Readiness
+    code: fire_readiness
+  category: derived_tactical_state
+  aliases:
+  - 火力就绪比例
+  - Fire Readiness
+  - fire_readiness
+  definition: 可开火友军数除以友军总数。
+  intuitive_explanation: 可开火友军数除以友军总数。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: '1'
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.fire_readiness
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - derived.tactical.ready_to_fire_count
+    - derived.tactical.friendly_count
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 987
+      line_end: 987
+    extraction_code:
+    - ready_ratio = ready_to_fire / friendly_count
+    transformation_formula:
+    - ready_ratio = ready_to_fire / friendly_count
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      fire_readiness: 按公式得到
+    explanation: 可开火友军数除以友军总数。
+  relationships:
+  - relation: derived_from
+    target_id: derived.tactical.ready_to_fire_count
+    description: 参与该派生量计算。
+  - relation: derived_from
+    target_id: derived.tactical.friendly_count
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: 可开火友军数除以友军总数。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-fire-readiness-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-fire-readiness-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 987
+    line_end: 987
+    evidence_type: E1
+    claim: 可开火友军数除以友军总数。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.force_ratio
+  canonical_name: force_ratio
+  names:
+    zh: 兵力对比
+    en: Force Ratio
+    code: force_ratio
+  category: derived_tactical_state
+  aliases:
+  - 兵力对比
+  - Force Ratio
+  - force_ratio
+  definition: “友军数 vs 敌军数”的摘要文本。
+  intuitive_explanation: “友军数 vs 敌军数”的摘要文本。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.force_ratio
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - derived.tactical.friendly_count
+    - derived.tactical.enemy_count
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 948
+      line_end: 948
+    extraction_code:
+    - 'Force_Ratio: {friendly_count} vs {enemy_count}'
+    transformation_formula:
+    - 'Force_Ratio: {friendly_count} vs {enemy_count}'
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      force_ratio: 按公式得到
+    explanation: “友军数 vs 敌军数”的摘要文本。
+  relationships:
+  - relation: derived_from
+    target_id: derived.tactical.friendly_count
+    description: 参与该派生量计算。
+  - relation: derived_from
+    target_id: derived.tactical.enemy_count
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: “友军数 vs 敌军数”的摘要文本。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-force-ratio-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-force-ratio-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 948
+    line_end: 948
+    evidence_type: E1
+    claim: “友军数 vs 敌军数”的摘要文本。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.formation_distance
+  canonical_name: formation_distance
+  names:
+    zh: 阵型中心距离
+    en: Formation Distance
+    code: formation_distance
+  category: derived_tactical_state
+  aliases:
+  - 阵型中心距离
+  - Formation Distance
+  - formation_distance
+  definition: 敌我质心之间的欧氏距离。
+  intuitive_explanation: 敌我质心之间的欧氏距离。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.formation_distance
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - derived.tactical.friendly_centroid
+    - derived.tactical.enemy_centroid
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 969
+      line_end: 969
+    extraction_code:
+    - center_distance = math.dist
+    transformation_formula:
+    - center_distance = math.dist
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      formation_distance: 按公式得到
+    explanation: 敌我质心之间的欧氏距离。
+  relationships:
+  - relation: derived_from
+    target_id: derived.tactical.friendly_centroid
+    description: 参与该派生量计算。
+  - relation: derived_from
+    target_id: derived.tactical.enemy_centroid
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: 敌我质心之间的欧氏距离。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-formation-distance-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-formation-distance-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 969
+    line_end: 969
+    evidence_type: E1
+    claim: 敌我质心之间的欧氏距离。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.friendly_avg_hp
+  canonical_name: friendly_avg_hp
+  names:
+    zh: 友军平均生命比例
+    en: Friendly Average HP Ratio
+    code: friendly_avg_hp
+  category: derived_tactical_state
+  aliases:
+  - 友军平均生命比例
+  - Friendly Average HP Ratio
+  - friendly_avg_hp
+  definition: 友军 hp_ratio 算术平均。
+  intuitive_explanation: 友军 hp_ratio 算术平均。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: '1'
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.friendly_avg_hp
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.unit.hp_ratio
+    - abox.unit.alliance
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 944
+      line_end: 944
+    extraction_code:
+    - friendly_avg_hp = sum
+    transformation_formula:
+    - friendly_avg_hp = sum
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      friendly_avg_hp: 按公式得到
+    explanation: 友军 hp_ratio 算术平均。
+  relationships:
+  - relation: derived_from
+    target_id: abox.unit.hp_ratio
+    description: 参与该派生量计算。
+  - relation: derived_from
+    target_id: abox.unit.alliance
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: 友军 hp_ratio 算术平均。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-friendly-avg-hp-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-friendly-avg-hp-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 944
+    line_end: 944
+    evidence_type: E1
+    claim: 友军 hp_ratio 算术平均。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.friendly_centroid
+  canonical_name: friendly_centroid
+  names:
+    zh: 友军质心
+    en: Friendly Centroid
+    code: friendly_centroid
+  category: derived_tactical_state
+  aliases:
+  - 友军质心
+  - Friendly Centroid
+  - friendly_centroid
+  definition: 友军二维位置的算术平均点。
+  intuitive_explanation: 友军二维位置的算术平均点。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: vector
+      dimensions:
+      - 2
+      description: 二维 [x, y] 向量。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - derived.friendly_centroid
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.unit.position
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 960
+      line_end: 960
+    extraction_code:
+    - friendly_center_x =
+    transformation_formula:
+    - friendly_center_x =
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      friendly_centroid: 按公式得到
+    explanation: 友军二维位置的算术平均点。
+  relationships:
+  - relation: derived_from
+    target_id: abox.unit.position
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: 友军二维位置的算术平均点。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-friendly-centroid-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-friendly-centroid-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 960
+    line_end: 960
+    evidence_type: E1
+    claim: 友军二维位置的算术平均点。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.friendly_count
+  canonical_name: friendly_count
+  names:
+    zh: 友军单位数
+    en: Friendly Unit Count
+    code: friendly_count
+  category: derived_tactical_state
+  aliases:
+  - 友军单位数
+  - Friendly Unit Count
+  - friendly_count
+  definition: 友军 ABox 节点数量。
+  intuitive_explanation: 友军 ABox 节点数量。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.friendly_count
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.unit.alliance
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 939
+      line_end: 939
+    extraction_code:
+    - friendly_count = len(friendly_units)
+    transformation_formula:
+    - friendly_count = len(friendly_units)
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      friendly_count: 按公式得到
+    explanation: 友军 ABox 节点数量。
+  relationships:
+  - relation: derived_from
+    target_id: abox.unit.alliance
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: 友军 ABox 节点数量。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-friendly-count-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-friendly-count-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 939
+    line_end: 939
+    evidence_type: E1
+    claim: 友军 ABox 节点数量。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.health_status
+  canonical_name: health_status
+  names:
+    zh: 血量态势
+    en: Health Status
+    code: health_status
+  category: derived_tactical_state
+  aliases:
+  - 血量态势
+  - Health Status
+  - health_status
+  definition: 敌我平均生命比例的百分比摘要。
+  intuitive_explanation: 敌我平均生命比例的百分比摘要。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.health_status
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - derived.tactical.friendly_avg_hp
+    - derived.tactical.enemy_avg_hp
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 949
+      line_end: 949
+    extraction_code:
+    - 'Health_Status: Friendly'
+    transformation_formula:
+    - 'Health_Status: Friendly'
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      health_status: 按公式得到
+    explanation: 敌我平均生命比例的百分比摘要。
+  relationships:
+  - relation: derived_from
+    target_id: derived.tactical.friendly_avg_hp
+    description: 参与该派生量计算。
+  - relation: derived_from
+    target_id: derived.tactical.enemy_avg_hp
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: 敌我平均生命比例的百分比摘要。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-health-status-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-health-status-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 949
+    line_end: 949
+    evidence_type: E1
+    claim: 敌我平均生命比例的百分比摘要。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: derived.tactical.ready_to_fire_count
+  canonical_name: ready_to_fire_count
+  names:
+    zh: 可开火友军数
+    en: Ready-to-fire Unit Count
+    code: ready_to_fire_count
+  category: derived_tactical_state
+  aliases:
+  - 可开火友军数
+  - Ready-to-fire Unit Count
+  - ready_to_fire_count
+  definition: weapon_cooldown 等于 0 的友军数量。
+  intuitive_explanation: weapon_cooldown 等于 0 的友军数量。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.ready_to_fire_count
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.unit.weapon_cooldown
+    - abox.unit.alliance
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 985
+      line_end: 985
+    extraction_code:
+    - ready_to_fire = sum
+    transformation_formula:
+    - ready_to_fire = sum
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      ready_to_fire_count: 按公式得到
+    explanation: weapon_cooldown 等于 0 的友军数量。
+  relationships:
+  - relation: derived_from
+    target_id: abox.unit.weapon_cooldown
+    description: 参与该派生量计算。
+  - relation: derived_from
+    target_id: abox.unit.alliance
+    description: 参与该派生量计算。
+  design_intent: []
+  code_reality:
+  - claim: weapon_cooldown 等于 0 的友军数量。
+    status: derived_runtime
+    evidence_ids:
+    - derived-tactical-ready-to-fire-count-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: derived-tactical-ready-to-fire-count-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 985
+    line_end: 985
+    evidence_type: E1
+    claim: weapon_cooldown 等于 0 的友军数量。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。

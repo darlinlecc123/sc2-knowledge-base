@@ -1,0 +1,26 @@
+{
+  "id": "raw_unit.health.direct.zh.001",
+  "question": "单位当前血量对应哪个变量？请给出接口和 STORM 源码依据。",
+  "language": "zh",
+  "category": "direct_lookup",
+  "difficulty": "easy",
+  "expected_variable_ids": [
+    "raw_unit.health"
+  ],
+  "required_facts": [
+    "该变量表示单位当前生命值",
+    "与 health_ratio 不是同一个量"
+  ],
+  "required_evidence": [
+    {
+      "path": "agents/raw_agent.py",
+      "symbol": "RawAgent.parse_raw_units"
+    }
+  ],
+  "forbidden_claims": [
+    "把 health 说成 TBox 静态最大生命值",
+    "声称它是 feature layer 像素值"
+  ],
+  "expected_behavior": "answer",
+  "notes": "实际 ID 和 symbol 应以最终变量记录为准。"
+}

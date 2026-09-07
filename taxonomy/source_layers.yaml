@@ -1,0 +1,235 @@
+schema_version: 1.0.0
+layer_registry_id: storm-sc2kb-source-layers-v1
+scope_id: storm-sc2kb-v1-raw
+reviewed_at: '2026-09-03'
+status: static_defined
+orthogonality:
+  category_vs_source_layer: category 回答“它是什么类型的变量”，source layer 回答“这条值或断言来自数据流哪一层”。二者必须分别记录。
+  fact_status_vs_source_layer: fact_status 回答证据可信状态，不能用 source layer 替代。例如 model_predicted 仍需标明 code_reality 或 runtime_observation。
+compatibility:
+  variable_schema: knowledge/schemas/variable.schema.json
+  policy: 规范 source layer 写在本登记表；落入步骤三 Schema 时使用 schema_source_layers 映射，并通过 provenance.derivation_kind 保留 direct_read、normalized、computed
+    等差别。
+layers:
+- id: environment_config
+  required_by_step_04: false
+  extension_reason: 步骤四指定的九个标签没有覆盖 SC2Env/Agent 配置；为避免把配置误标为 raw_observation，增加该边界层。
+  name_zh: 环境配置输入
+  name_en: Environment Configuration
+  order: 0
+  schema_source_layers:
+  - environment_config
+  definition: 调用环境或 Agent 前由当前代码设置和传入的配置值。
+  produced_by:
+  - main.py
+  - examples/*.py
+  consumed_by:
+  - sc2_env.SC2Env
+  - RawAgent.__init__
+  truth_boundary: 表示调用前配置；SWM 的 prediction_steps 可归入此层，但不能解释为环境观测。
+  allowed_categories:
+  - environment
+  - swm
+- id: raw_observation
+  required_by_step_04: true
+  name_zh: 原始观测层
+  name_en: Raw Observation
+  order: 10
+  schema_source_layers:
+  - pysc2_timestep
+  - pysc2_raw_observation
+  - raw_unit_transformed
+  definition: 当前 STORM 从 TimeStep、player、score 或 raw_units 直接读取的数据；解析器内紧邻读取的归一化量仍映射到此层，并由 derivation_kind=normalized 区分。
+  produced_by:
+  - PySC2 TimeStep/observation boundary
+  consumed_by:
+  - RawAgent.step
+  - RawAgent.parse_raw_units
+  truth_boundary: 这是 Agent 可见观测，不等于 SC2 引擎不可见的完整真值。
+  allowed_categories:
+  - timestep_player
+  - raw_unit
+- id: static_ontology
+  required_by_step_04: true
+  name_zh: 静态本体层
+  name_en: Static Ontology
+  order: 20
+  schema_source_layers:
+  - tbox_static
+  definition: 仓库中预定义并由 builder/loader 加载的类型、属性和关系知识。
+  produced_by:
+  - ontology/data/marine_ontology.py
+  - ontology/builder.py
+  consumed_by:
+  - OntologyLoader
+  - BattlefieldGraph
+  truth_boundary: 证明当前静态声明或缓存内容，不自动证明与当前游戏版本一致。
+  allowed_categories:
+  - tbox_static
+- id: runtime_abox
+  required_by_step_04: true
+  name_zh: 运行时 ABox 层
+  name_en: Runtime ABox
+  order: 30
+  schema_source_layers:
+  - abox_runtime
+  definition: BattlefieldGraph 根据当前观测和静态本体创建或更新的实例事实。
+  produced_by:
+  - BattlefieldGraph.update_from_observation
+  - BattlefieldGraph._create_instance
+  - BattlefieldGraph._update_instance
+  consumed_by:
+  - tactical summary
+  - prompt serialization
+  - SWM
+  truth_boundary: 混合当前观测、静态属性副本和 fallback；SWM 的 abox_state 输入只表示该层的序列化快照，每个字段仍需独立记录具体来源。
+  allowed_categories:
+  - abox_dynamic
+  - swm
+- id: derived_runtime
+  required_by_step_04: true
+  name_zh: 运行时派生层
+  name_en: Derived Runtime
+  order: 40
+  schema_source_layers:
+  - derived_runtime
+  definition: 由当前观测、ABox、player 或其他运行时量按明确公式、聚合或阈值得到的值。
+  produced_by:
+  - BattlefieldGraph.generate_tactical_summary
+  - RawAgent.step and other current computations
+  consumed_by:
+  - Prompt
+  - decision logic
+  - metrics
+  truth_boundary: 公式可以由代码确认，但具体数值只有实际运行或构造输入后才是 runtime observation。
+  allowed_categories:
+  - timestep_player
+  - derived_tactical
+  - experiment_metric
+- id: llm_output
+  required_by_step_04: true
+  name_zh: LLM 原始输出层
+  name_en: LLM Output
+  order: 50
+  schema_source_layers:
+  - llm_output
+  definition: 模型返回、尚未通过 ResponseParser 完整校验的文本或动作字段。
+  produced_by:
+  - OpenAIClient
+  - LLM response
+  consumed_by:
+  - ResponseParser
+  truth_boundary: 模型输出不是环境事实，也不保证动作合法。
+  allowed_categories:
+  - action_schema
+  - swm
+- id: parser_validated
+  required_by_step_04: true
+  name_zh: Parser 校验层
+  name_en: Parser Validated
+  order: 60
+  schema_source_layers:
+  - validated_action
+  definition: ResponseParser 已检查、补默认值、强制转换或裁剪后的动作记录。
+  produced_by:
+  - ResponseParser.parse
+  - ResponseParser._validate_schema
+  consumed_by:
+  - RawAgent action conversion and scheduling
+  truth_boundary: 只表示动作已通过当前 Parser 规则；SWM 的 planned_actions 输入继承该边界，不代表资源、目标或 PySC2 执行一定成功。
+  allowed_categories:
+  - action_schema
+  - swm
+- id: executor_mapped
+  required_by_step_04: true
+  name_zh: 执行器映射层
+  name_en: Executor Mapped
+  order: 70
+  schema_source_layers:
+  - executor_mapping
+  definition: 校验后动作被映射为 PySC2 Raw FunctionCall 函数编号和参数的表示。
+  produced_by:
+  - ActionExecutor.execute
+  - RawAgent action conversion
+  consumed_by:
+  - PySC2 environment step
+  truth_boundary: 构造出 FunctionCall 不等于游戏引擎已成功执行。
+  allowed_categories:
+  - pysc2_function_call
+  - action_schema
+- id: model_predicted
+  required_by_step_04: true
+  name_zh: 模型预测层
+  name_en: Model Predicted
+  order: 80
+  schema_source_layers:
+  - swm_prediction
+  definition: SWM 根据当前状态和候选动作生成的未来状态或预测指标。
+  produced_by:
+  - SWMPredictor
+  consumed_by:
+  - LLM reevaluation
+  - TrajectoryCollector
+  - prediction error computation
+  truth_boundary: 必须与下一时刻真实 observation 分开，不能写成环境真值。
+  allowed_categories:
+  - swm
+- id: experiment_aggregated
+  required_by_step_04: true
+  name_zh: 实验聚合层
+  name_en: Experiment Aggregated
+  order: 90
+  schema_source_layers:
+  - experiment_aggregate
+  definition: 实验脚本对回合、请求、动作或预测结果计算并写出的统计量。
+  produced_by:
+  - examples experiment scripts
+  consumed_by:
+  - CSV/JSON reports
+  - plotting and paper analysis
+  truth_boundary: 历史产物只证明对应运行记录，不自动代表当前 checkout 可复现。
+  allowed_categories:
+  - experiment_metric
+allowed_transitions:
+- - environment_config
+  - raw_observation
+- - raw_observation
+  - runtime_abox
+- - static_ontology
+  - runtime_abox
+- - runtime_abox
+  - derived_runtime
+- - runtime_abox
+  - model_predicted
+- - derived_runtime
+  - llm_output
+- - llm_output
+  - parser_validated
+- - parser_validated
+  - executor_mapped
+- - executor_mapped
+  - raw_observation
+- - model_predicted
+  - llm_output
+- - raw_observation
+  - experiment_aggregated
+- - derived_runtime
+  - experiment_aggregated
+- - model_predicted
+  - experiment_aggregated
+validation_rules:
+- 每条正式变量必须有一个 primary category。
+- 每条正式变量必须有一个 provenance.source_layer；若步骤三 Schema 使用兼容枚举，则必须可由 schema_source_layers 反向映射。
+- model_predicted 不得标成环境 runtime truth。
+- experiment_aggregated 不得仅凭历史文件外推当前实现。
+- runtime_abox 字段必须进一步说明来自观测、静态复制、fallback 还是计算。
+evidence:
+- path: knowledge/manifests/scope.yaml
+  symbol: core_pipeline / swm_pipeline
+  claim: 步骤一确定数据链和范围。
+- path: knowledge/schemas/variable.schema.json
+  symbol: properties.category / properties.provenance
+  claim: 步骤三机器 Schema 的兼容枚举。
+- path: knowledge/manifests/source_registry.yaml
+  symbol: sources
+  claim: 步骤二登记各层当前证据源。

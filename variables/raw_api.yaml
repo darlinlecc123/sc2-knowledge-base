@@ -1,0 +1,2830 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema: knowledge/schemas/variable.schema.json
+schema_version: 1.0.0
+generated_at: '2026-09-03'
+records:
+- schema_version: 1.0.0
+  id: environment.decision_interval
+  canonical_name: decision_interval
+  names:
+    zh: 决策间隔
+    en: Decision Interval
+    code: decision_interval
+  category: environment_config
+  aliases:
+  - 决策间隔
+  - Decision Interval
+  - decision_interval
+  definition: 当前代码将 decision_interval 配置为 10。
+  intuitive_explanation: 当前代码将 decision_interval 配置为 10。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: environment step
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - SC2Env.decision_interval
+  provenance:
+    source_layer: environment_config
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.__init__
+      line_start: 50
+      line_end: 50
+    extraction_code:
+    - 'decision_interval: int = 10'
+    transformation_formula:
+    - decision_interval=10
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.__init__
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      decision_interval: 10
+    output:
+      decision_interval: 10
+    explanation: 当前代码将 decision_interval 配置为 10。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码将 decision_interval 配置为 10。
+    status: code_reality
+    evidence_ids:
+    - environment-decision-interval-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: environment-decision-interval-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.__init__
+    line_start: 50
+    line_end: 50
+    evidence_type: E1
+    claim: 当前代码将 decision_interval 配置为 10。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: environment.map_name
+  canonical_name: map_name
+  names:
+    zh: 地图名
+    en: Map Name
+    code: map_name
+  category: environment_config
+  aliases:
+  - 地图名
+  - Map Name
+  - map_name
+  definition: 当前代码将 map_name 配置为 'DefeatRoaches'。
+  intuitive_explanation: 当前代码将 map_name 配置为 'DefeatRoaches'。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - SC2Env.map_name
+  provenance:
+    source_layer: environment_config
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/llm_agent_example.py
+      symbol: main
+      line_start: 77
+      line_end: 77
+    extraction_code:
+    - map_name="DefeatRoaches"
+    transformation_formula:
+    - map_name='DefeatRoaches'
+  consumers:
+  - name: STORM 当前实现
+    path: examples/llm_agent_example.py
+    symbol: main
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      map_name: DefeatRoaches
+    output:
+      map_name: DefeatRoaches
+    explanation: 当前代码将 map_name 配置为 'DefeatRoaches'。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码将 map_name 配置为 'DefeatRoaches'。
+    status: code_reality
+    evidence_ids:
+    - environment-map-name-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: environment-map-name-code
+    path: examples/llm_agent_example.py
+    symbol: main
+    line_start: 77
+    line_end: 77
+    evidence_type: E1
+    claim: 当前代码将 map_name 配置为 'DefeatRoaches'。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: environment.raw_resolution
+  canonical_name: raw_resolution
+  names:
+    zh: Raw 坐标分辨率
+    en: Raw Resolution
+    code: raw_resolution
+  category: environment_config
+  aliases:
+  - Raw 坐标分辨率
+  - Raw Resolution
+  - raw_resolution
+  definition: 当前代码将 raw_resolution 配置为 64。
+  intuitive_explanation: 当前代码将 raw_resolution 配置为 64。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - SC2Env.raw_resolution
+  provenance:
+    source_layer: environment_config
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/llm_agent_example.py
+      symbol: main
+      line_start: 86
+      line_end: 86
+    extraction_code:
+    - raw_resolution=64
+    transformation_formula:
+    - raw_resolution=64
+  consumers:
+  - name: STORM 当前实现
+    path: examples/llm_agent_example.py
+    symbol: main
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      raw_resolution: 64
+    output:
+      raw_resolution: 64
+    explanation: 当前代码将 raw_resolution 配置为 64。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码将 raw_resolution 配置为 64。
+    status: code_reality
+    evidence_ids:
+    - environment-raw-resolution-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: environment-raw-resolution-code
+    path: examples/llm_agent_example.py
+    symbol: main
+    line_start: 86
+    line_end: 86
+    evidence_type: E1
+    claim: 当前代码将 raw_resolution 配置为 64。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: environment.realtime
+  canonical_name: realtime
+  names:
+    zh: 实时模式
+    en: Realtime Mode
+    code: realtime
+  category: environment_config
+  aliases:
+  - 实时模式
+  - Realtime Mode
+  - realtime
+  definition: 当前代码将 realtime 配置为 False。
+  intuitive_explanation: 当前代码将 realtime 配置为 False。
+  interface:
+    data_type: boolean
+    python_type: bool
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: boolean
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - SC2Env.realtime
+  provenance:
+    source_layer: environment_config
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/llm_agent_example.py
+      symbol: main
+      line_start: 90
+      line_end: 90
+    extraction_code:
+    - realtime=False
+    transformation_formula:
+    - realtime=False
+  consumers:
+  - name: STORM 当前实现
+    path: examples/llm_agent_example.py
+    symbol: main
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      realtime: false
+    output:
+      realtime: false
+    explanation: 当前代码将 realtime 配置为 False。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码将 realtime 配置为 False。
+    status: code_reality
+    evidence_ids:
+    - environment-realtime-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: environment-realtime-code
+    path: examples/llm_agent_example.py
+    symbol: main
+    line_start: 90
+    line_end: 90
+    evidence_type: E1
+    claim: 当前代码将 realtime 配置为 False。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: environment.step_mul
+  canonical_name: step_mul
+  names:
+    zh: 环境步长倍数
+    en: Environment Step Multiplier
+    code: step_mul
+  category: environment_config
+  aliases:
+  - 环境步长倍数
+  - Environment Step Multiplier
+  - step_mul
+  definition: 当前代码将 step_mul 配置为 8。
+  intuitive_explanation: 当前代码将 step_mul 配置为 8。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: known
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - SC2Env.step_mul
+  provenance:
+    source_layer: environment_config
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/llm_agent_example.py
+      symbol: main
+      line_start: 89
+      line_end: 89
+    extraction_code:
+    - step_mul=8
+    transformation_formula:
+    - step_mul=8
+  consumers:
+  - name: STORM 当前实现
+    path: examples/llm_agent_example.py
+    symbol: main
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      step_mul: 8
+    output:
+      step_mul: 8
+    explanation: 当前代码将 step_mul 配置为 8。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码将 step_mul 配置为 8。
+    status: code_reality
+    evidence_ids:
+    - environment-step-mul-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: environment-step-mul-code
+    path: examples/llm_agent_example.py
+    symbol: main
+    line_start: 89
+    line_end: 89
+    evidence_type: E1
+    claim: 当前代码将 step_mul 配置为 8。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: environment.use_raw_actions
+  canonical_name: use_raw_actions
+  names:
+    zh: 启用 Raw Actions
+    en: Use Raw Actions
+    code: use_raw_actions
+  category: environment_config
+  aliases:
+  - 启用 Raw Actions
+  - Use Raw Actions
+  - use_raw_actions
+  definition: 当前代码将 use_raw_actions 配置为 True。
+  intuitive_explanation: 当前代码将 use_raw_actions 配置为 True。
+  interface:
+    data_type: boolean
+    python_type: bool
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: boolean
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - SC2Env.use_raw_actions
+  provenance:
+    source_layer: environment_config
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/llm_agent_example.py
+      symbol: main
+      line_start: 85
+      line_end: 85
+    extraction_code:
+    - use_raw_actions=True
+    transformation_formula:
+    - use_raw_actions=True
+  consumers:
+  - name: STORM 当前实现
+    path: examples/llm_agent_example.py
+    symbol: main
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      use_raw_actions: true
+    output:
+      use_raw_actions: true
+    explanation: 当前代码将 use_raw_actions 配置为 True。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码将 use_raw_actions 配置为 True。
+    status: code_reality
+    evidence_ids:
+    - environment-use-raw-actions-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: environment-use-raw-actions-code
+    path: examples/llm_agent_example.py
+    symbol: main
+    line_start: 85
+    line_end: 85
+    evidence_type: E1
+    claim: 当前代码将 use_raw_actions 配置为 True。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: environment.use_raw_units
+  canonical_name: use_raw_units
+  names:
+    zh: 启用 Raw Units
+    en: Use Raw Units
+    code: use_raw_units
+  category: environment_config
+  aliases:
+  - 启用 Raw Units
+  - Use Raw Units
+  - use_raw_units
+  definition: 当前代码将 use_raw_units 配置为 True。
+  intuitive_explanation: 当前代码将 use_raw_units 配置为 True。
+  interface:
+    data_type: boolean
+    python_type: bool
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: boolean
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - SC2Env.use_raw_units
+  provenance:
+    source_layer: environment_config
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/llm_agent_example.py
+      symbol: main
+      line_start: 84
+      line_end: 84
+    extraction_code:
+    - use_raw_units=True
+    transformation_formula:
+    - use_raw_units=True
+  consumers:
+  - name: STORM 当前实现
+    path: examples/llm_agent_example.py
+    symbol: main
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      use_raw_units: true
+    output:
+      use_raw_units: true
+    explanation: 当前代码将 use_raw_units 配置为 True。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码将 use_raw_units 配置为 True。
+    status: code_reality
+    evidence_ids:
+    - environment-use-raw-units-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: environment-use-raw-units-code
+    path: examples/llm_agent_example.py
+    symbol: main
+    line_start: 84
+    line_end: 84
+    evidence_type: E1
+    claim: 当前代码将 use_raw_units 配置为 True。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: environment.visualize
+  canonical_name: visualize
+  names:
+    zh: 可视化开关
+    en: Visualization Flag
+    code: visualize
+  category: environment_config
+  aliases:
+  - 可视化开关
+  - Visualization Flag
+  - visualize
+  definition: 当前代码将 visualize 配置为 False。
+  intuitive_explanation: 当前代码将 visualize 配置为 False。
+  interface:
+    data_type: boolean
+    python_type: bool
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: boolean
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - SC2Env.visualize
+  provenance:
+    source_layer: environment_config
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/llm_agent_example.py
+      symbol: main
+      line_start: 91
+      line_end: 91
+    extraction_code:
+    - visualize=False
+    transformation_formula:
+    - visualize=False
+  consumers:
+  - name: STORM 当前实现
+    path: examples/llm_agent_example.py
+    symbol: main
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      visualize: false
+    output:
+      visualize: false
+    explanation: 当前代码将 visualize 配置为 False。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前代码将 visualize 配置为 False。
+    status: code_reality
+    evidence_ids:
+    - environment-visualize-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: environment-visualize-code
+    path: examples/llm_agent_example.py
+    symbol: main
+    line_start: 91
+    line_end: 91
+    evidence_type: E1
+    claim: 当前代码将 visualize 配置为 False。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: player.food_cap
+  canonical_name: player[4]
+  names:
+    zh: 人口上限
+    en: Food Cap
+    code: player[4]
+  category: timestep_player_score
+  aliases:
+  - 人口上限
+  - Food Cap
+  - player[4]
+  definition: 从 player_info 索引 4 读取人口上限。
+  intuitive_explanation: 从 player_info 索引 4 读取人口上限。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.player[4]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.player_info[4]
+  provenance:
+    source_layer: pysc2_timestep
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 933
+      line_end: 933
+    extraction_code:
+    - player_info[4]
+    transformation_formula:
+    - food_cap=player_info[4]
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      player[4]: 按公式得到
+    explanation: 从 player_info 索引 4 读取人口上限。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 从 player_info 索引 4 读取人口上限。
+    status: code_reality
+    evidence_ids:
+    - player-food-cap-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: player-food-cap-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 933
+    line_end: 933
+    evidence_type: E1
+    claim: 从 player_info 索引 4 读取人口上限。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: player.food_used
+  canonical_name: player[3]
+  names:
+    zh: 已用人口
+    en: Food Used
+    code: player[3]
+  category: timestep_player_score
+  aliases:
+  - 已用人口
+  - Food Used
+  - player[3]
+  definition: 从 player_info 索引 3 读取已用人口。
+  intuitive_explanation: 从 player_info 索引 3 读取已用人口。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.player[3]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.player_info[3]
+  provenance:
+    source_layer: pysc2_timestep
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 933
+      line_end: 933
+    extraction_code:
+    - player_info[3]
+    transformation_formula:
+    - food_used=player_info[3]
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      player[3]: 按公式得到
+    explanation: 从 player_info 索引 3 读取已用人口。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 从 player_info 索引 3 读取已用人口。
+    status: code_reality
+    evidence_ids:
+    - player-food-used-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: player-food-used-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 933
+    line_end: 933
+    evidence_type: E1
+    claim: 从 player_info 索引 3 读取已用人口。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: player.minerals
+  canonical_name: player[1]
+  names:
+    zh: 矿物资源
+    en: Minerals
+    code: player[1]
+  category: timestep_player_score
+  aliases:
+  - 矿物资源
+  - Minerals
+  - player[1]
+  definition: 从 player_info 索引 1 读取矿物资源。
+  intuitive_explanation: 从 player_info 索引 1 读取矿物资源。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.player[1]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.player_info[1]
+  provenance:
+    source_layer: pysc2_timestep
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 933
+      line_end: 933
+    extraction_code:
+    - player_info[1]
+    transformation_formula:
+    - minerals=player_info[1]
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      player[1]: 按公式得到
+    explanation: 从 player_info 索引 1 读取矿物资源。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 从 player_info 索引 1 读取矿物资源。
+    status: code_reality
+    evidence_ids:
+    - player-minerals-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: player-minerals-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 933
+    line_end: 933
+    evidence_type: E1
+    claim: 从 player_info 索引 1 读取矿物资源。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: player.supply_remaining
+  canonical_name: supply_remaining
+  names:
+    zh: 剩余人口
+    en: Remaining Supply
+    code: supply_remaining
+  category: timestep_player_score
+  aliases:
+  - 剩余人口
+  - Remaining Supply
+  - supply_remaining
+  definition: 人口上限减去已用人口。
+  intuitive_explanation: 人口上限减去已用人口。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - tactical_summary.Resources.Supply remaining
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - player.food_cap
+    - player.food_used
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 933
+      line_end: 933
+    extraction_code:
+    - player_info[4] - player_info[3]
+    transformation_formula:
+    - supply_remaining=food_cap-food_used
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      supply_remaining: 按公式得到
+    explanation: 人口上限减去已用人口。
+  relationships:
+  - relation: derived_from
+    target_id: player.food_cap
+    description: 作为被减数。
+  - relation: derived_from
+    target_id: player.food_used
+    description: 作为减数。
+  design_intent: []
+  code_reality:
+  - claim: 人口上限减去已用人口。
+    status: derived_runtime
+    evidence_ids:
+    - player-supply-remaining-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: player-supply-remaining-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 933
+    line_end: 933
+    evidence_type: E1
+    claim: 人口上限减去已用人口。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: player.vespene
+  canonical_name: player[2]
+  names:
+    zh: 高能瓦斯资源
+    en: Vespene Gas
+    code: player[2]
+  category: timestep_player_score
+  aliases:
+  - 高能瓦斯资源
+  - Vespene Gas
+  - player[2]
+  definition: 从 player_info 索引 2 读取高能瓦斯资源。
+  intuitive_explanation: 从 player_info 索引 2 读取高能瓦斯资源。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.player[2]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - BattlefieldGraph.player_info[2]
+  provenance:
+    source_layer: pysc2_timestep
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 933
+      line_end: 933
+    extraction_code:
+    - player_info[2]
+    transformation_formula:
+    - vespene=player_info[2]
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      player[2]: 按公式得到
+    explanation: 从 player_info 索引 2 读取高能瓦斯资源。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 从 player_info 索引 2 读取高能瓦斯资源。
+    status: code_reality
+    evidence_ids:
+    - player-vespene-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: player-vespene-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 933
+    line_end: 933
+    evidence_type: E1
+    claim: 从 player_info 索引 2 读取高能瓦斯资源。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: raw_unit.alliance
+  canonical_name: alliance
+  names:
+    zh: 阵营关系编码
+    en: Alliance Code
+    code: alliance
+  category: raw_unit
+  aliases:
+  - 阵营关系编码
+  - Alliance Code
+  - alliance
+  definition: 相对当前代理的阵营编码；代码按 0/1/2/3/4 分组。
+  intuitive_explanation: 相对当前代理的阵营编码；代码按 0/1/2/3/4 分组。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: known
+      values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      description: 当前代码显式分组使用。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][1]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - parsed_raw_unit.alliance
+  provenance:
+    source_layer: pysc2_raw_observation
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 351
+      line_end: 351
+    extraction_code:
+    - '"alliance": unit[1]'
+    transformation_formula:
+    - alliance=unit[1]
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      alliance: 按公式得到
+    explanation: 相对当前代理的阵营编码；代码按 0/1/2/3/4 分组。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 相对当前代理的阵营编码；代码按 0/1/2/3/4 分组。
+    status: code_reality
+    evidence_ids:
+    - raw-unit-alliance-code
+  limitations:
+  - 采用位置索引；需与实际 PySC2 版本核验。
+  known_issues:
+  - id: raw_alliance_index_semantics
+    description: RawUnit 索引 1 的官方字段名、dtype 和版本语义尚未核验。
+    status: needs_verification
+    evidence_ids:
+    - raw-unit-alliance-code
+  evidence:
+  - id: raw-unit-alliance-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 351
+    line_end: 351
+    evidence_type: E1
+    claim: 相对当前代理的阵营编码；代码按 0/1/2/3/4 分组。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: raw_unit.health
+  canonical_name: health
+  names:
+    zh: 当前生命值
+    en: Current Health
+    code: health
+  category: raw_unit
+  aliases:
+  - 当前生命值
+  - Current Health
+  - health
+  definition: 当前绝对生命值。
+  intuitive_explanation: 当前绝对生命值。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][2]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - parsed_raw_unit.health
+  provenance:
+    source_layer: pysc2_raw_observation
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 354
+      line_end: 354
+    extraction_code:
+    - '"health": unit[2]'
+    transformation_formula:
+    - health=unit[2]
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      health: 按公式得到
+    explanation: 当前绝对生命值。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前绝对生命值。
+    status: code_reality
+    evidence_ids:
+    - raw-unit-health-code
+  limitations:
+  - 采用位置索引；需与实际 PySC2 版本核验。
+  known_issues:
+  - id: raw_health_index_semantics
+    description: RawUnit 索引 2 的官方字段名、dtype 和版本语义尚未核验。
+    status: needs_verification
+    evidence_ids:
+    - raw-unit-health-code
+  evidence:
+  - id: raw-unit-health-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 354
+    line_end: 354
+    evidence_type: E1
+    claim: 当前绝对生命值。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: raw_unit.health_ratio
+  canonical_name: health_ratio
+  names:
+    zh: 生命值比例
+    en: Health Ratio
+    code: health_ratio
+  category: raw_unit
+  aliases:
+  - 生命值比例
+  - Health Ratio
+  - health_ratio
+  definition: 索引 7 的编码值除以 255。
+  intuitive_explanation: 索引 7 的编码值除以 255。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: '1'
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: dimensionless
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][7]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - parsed_raw_unit.health_ratio
+  provenance:
+    source_layer: raw_unit_transformed
+    derivation_kind: normalized
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 355
+      line_end: 355
+    extraction_code:
+    - '"health_ratio": unit[7]'
+    transformation_formula:
+    - health_ratio=unit[7]/255
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      health_ratio: 按公式得到
+    explanation: 索引 7 的编码值除以 255。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 索引 7 的编码值除以 255。
+    status: code_reality
+    evidence_ids:
+    - raw-unit-health-ratio-code
+  limitations:
+  - 采用位置索引；需与实际 PySC2 版本核验。
+  - 比例不是绝对值。
+  known_issues:
+  - id: raw_health_ratio_index_semantics
+    description: RawUnit 索引 7 的官方字段名、dtype 和版本语义尚未核验。
+    status: needs_verification
+    evidence_ids:
+    - raw-unit-health-ratio-code
+  evidence:
+  - id: raw-unit-health-ratio-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 355
+    line_end: 355
+    evidence_type: E1
+    claim: 索引 7 的编码值除以 255。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: raw_unit.shield
+  canonical_name: shield
+  names:
+    zh: 当前护盾值
+    en: Current Shield
+    code: shield
+  category: raw_unit
+  aliases:
+  - 当前护盾值
+  - Current Shield
+  - shield
+  definition: 当前绝对护盾值。
+  intuitive_explanation: 当前绝对护盾值。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][3]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - parsed_raw_unit.shield
+  provenance:
+    source_layer: pysc2_raw_observation
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 356
+      line_end: 356
+    extraction_code:
+    - '"shield": unit[3]'
+    transformation_formula:
+    - shield=unit[3]
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      shield: 按公式得到
+    explanation: 当前绝对护盾值。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前绝对护盾值。
+    status: code_reality
+    evidence_ids:
+    - raw-unit-shield-code
+  limitations:
+  - 采用位置索引；需与实际 PySC2 版本核验。
+  known_issues:
+  - id: raw_shield_index_semantics
+    description: RawUnit 索引 3 的官方字段名、dtype 和版本语义尚未核验。
+    status: needs_verification
+    evidence_ids:
+    - raw-unit-shield-code
+  evidence:
+  - id: raw-unit-shield-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 356
+    line_end: 356
+    evidence_type: E1
+    claim: 当前绝对护盾值。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: raw_unit.shield_ratio
+  canonical_name: shield_ratio
+  names:
+    zh: 护盾比例
+    en: Shield Ratio
+    code: shield_ratio
+  category: raw_unit
+  aliases:
+  - 护盾比例
+  - Shield Ratio
+  - shield_ratio
+  definition: 索引 8 的编码值除以 255。
+  intuitive_explanation: 索引 8 的编码值除以 255。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: '1'
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: dimensionless
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][8]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - parsed_raw_unit.shield_ratio
+  provenance:
+    source_layer: raw_unit_transformed
+    derivation_kind: normalized
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 357
+      line_end: 357
+    extraction_code:
+    - '"shield_ratio": unit[8]'
+    transformation_formula:
+    - shield_ratio=unit[8]/255
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      shield_ratio: 按公式得到
+    explanation: 索引 8 的编码值除以 255。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 索引 8 的编码值除以 255。
+    status: code_reality
+    evidence_ids:
+    - raw-unit-shield-ratio-code
+  limitations:
+  - 采用位置索引；需与实际 PySC2 版本核验。
+  - 比例不是绝对值。
+  known_issues:
+  - id: raw_shield_ratio_index_semantics
+    description: RawUnit 索引 8 的官方字段名、dtype 和版本语义尚未核验。
+    status: needs_verification
+    evidence_ids:
+    - raw-unit-shield-ratio-code
+  evidence:
+  - id: raw-unit-shield-ratio-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 357
+    line_end: 357
+    evidence_type: E1
+    claim: 索引 8 的编码值除以 255。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: raw_unit.tag
+  canonical_name: tag
+  names:
+    zh: 单位标签
+    en: Unit Tag
+    code: tag
+  category: raw_unit
+  aliases:
+  - 单位标签
+  - Unit Tag
+  - tag
+  definition: 单位实例的运行时标签，用于追踪和动作寻址。
+  intuitive_explanation: 单位实例的运行时标签，用于追踪和动作寻址。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][29]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - parsed_raw_unit.tag
+  provenance:
+    source_layer: pysc2_raw_observation
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 349
+      line_end: 349
+    extraction_code:
+    - '"tag": unit[29]'
+    transformation_formula:
+    - tag=unit[29]
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      tag: 按公式得到
+    explanation: 单位实例的运行时标签，用于追踪和动作寻址。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 单位实例的运行时标签，用于追踪和动作寻址。
+    status: code_reality
+    evidence_ids:
+    - raw-unit-tag-code
+  limitations:
+  - 采用位置索引；需与实际 PySC2 版本核验。
+  known_issues:
+  - id: raw_tag_index_semantics
+    description: RawUnit 索引 29 的官方字段名、dtype 和版本语义尚未核验。
+    status: needs_verification
+    evidence_ids:
+    - raw-unit-tag-code
+  evidence:
+  - id: raw-unit-tag-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 349
+    line_end: 349
+    evidence_type: E1
+    claim: 单位实例的运行时标签，用于追踪和动作寻址。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: raw_unit.unit_type
+  canonical_name: unit_type
+  names:
+    zh: 单位类型编号
+    en: Unit Type ID
+    code: unit_type
+  category: raw_unit
+  aliases:
+  - 单位类型编号
+  - Unit Type ID
+  - unit_type
+  definition: 单位类型数字编号，用于查询 TBox。
+  intuitive_explanation: 单位类型数字编号，用于查询 TBox。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][0]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - parsed_raw_unit.unit_type
+  provenance:
+    source_layer: pysc2_raw_observation
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 350
+      line_end: 350
+    extraction_code:
+    - '"unit_type": unit[0]'
+    transformation_formula:
+    - unit_type=unit[0]
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      unit_type: 按公式得到
+    explanation: 单位类型数字编号，用于查询 TBox。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 单位类型数字编号，用于查询 TBox。
+    status: code_reality
+    evidence_ids:
+    - raw-unit-unit-type-code
+  limitations:
+  - 采用位置索引；需与实际 PySC2 版本核验。
+  known_issues:
+  - id: raw_unit_type_index_semantics
+    description: RawUnit 索引 0 的官方字段名、dtype 和版本语义尚未核验。
+    status: needs_verification
+    evidence_ids:
+    - raw-unit-unit-type-code
+  evidence:
+  - id: raw-unit-unit-type-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 350
+    line_end: 350
+    evidence_type: E1
+    claim: 单位类型数字编号，用于查询 TBox。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: raw_unit.weapon_cooldown
+  canonical_name: weapon_cooldown
+  names:
+    zh: 武器冷却
+    en: Weapon Cooldown
+    code: weapon_cooldown
+  category: raw_unit
+  aliases:
+  - 武器冷却
+  - Weapon Cooldown
+  - weapon_cooldown
+  definition: 当前武器冷却；等于 0 被近似视为可开火。
+  intuitive_explanation: 当前武器冷却；等于 0 被近似视为可开火。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][25]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - parsed_raw_unit.weapon_cooldown
+  provenance:
+    source_layer: pysc2_raw_observation
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 358
+      line_end: 358
+    extraction_code:
+    - '"weapon_cooldown": unit[25]'
+    transformation_formula:
+    - weapon_cooldown=unit[25]
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      weapon_cooldown: 按公式得到
+    explanation: 当前武器冷却；等于 0 被近似视为可开火。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 当前武器冷却；等于 0 被近似视为可开火。
+    status: code_reality
+    evidence_ids:
+    - raw-unit-weapon-cooldown-code
+  limitations:
+  - 采用位置索引；需与实际 PySC2 版本核验。
+  known_issues:
+  - id: raw_weapon_cooldown_index_semantics
+    description: RawUnit 索引 25 的官方字段名、dtype 和版本语义尚未核验。
+    status: needs_verification
+    evidence_ids:
+    - raw-unit-weapon-cooldown-code
+  evidence:
+  - id: raw-unit-weapon-cooldown-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 358
+    line_end: 358
+    evidence_type: E1
+    claim: 当前武器冷却；等于 0 被近似视为可开火。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: raw_unit.x
+  canonical_name: x
+  names:
+    zh: 横坐标
+    en: X Coordinate
+    code: x
+  category: raw_unit
+  aliases:
+  - 横坐标
+  - X Coordinate
+  - x
+  definition: Raw 坐标 x 分量。
+  intuitive_explanation: Raw 坐标 x 分量。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][12]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - parsed_raw_unit.x
+  provenance:
+    source_layer: pysc2_raw_observation
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 352
+      line_end: 352
+    extraction_code:
+    - '"x": unit[12]'
+    transformation_formula:
+    - x=unit[12]
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      x: 按公式得到
+    explanation: Raw 坐标 x 分量。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: Raw 坐标 x 分量。
+    status: code_reality
+    evidence_ids:
+    - raw-unit-x-code
+  limitations:
+  - 采用位置索引；需与实际 PySC2 版本核验。
+  known_issues:
+  - id: raw_x_index_semantics
+    description: RawUnit 索引 12 的官方字段名、dtype 和版本语义尚未核验。
+    status: needs_verification
+    evidence_ids:
+    - raw-unit-x-code
+  evidence:
+  - id: raw-unit-x-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 352
+    line_end: 352
+    evidence_type: E1
+    claim: Raw 坐标 x 分量。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: raw_unit.y
+  canonical_name: y
+  names:
+    zh: 纵坐标
+    en: Y Coordinate
+    code: y
+  category: raw_unit
+  aliases:
+  - 纵坐标
+  - Y Coordinate
+  - y
+  definition: Raw 坐标 y 分量。
+  intuitive_explanation: Raw 坐标 y 分量。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][13]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - parsed_raw_unit.y
+  provenance:
+    source_layer: pysc2_raw_observation
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 353
+      line_end: 353
+    extraction_code:
+    - '"y": unit[13]'
+    transformation_formula:
+    - y=unit[13]
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      y: 按公式得到
+    explanation: Raw 坐标 y 分量。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: Raw 坐标 y 分量。
+    status: code_reality
+    evidence_ids:
+    - raw-unit-y-code
+  limitations:
+  - 采用位置索引；需与实际 PySC2 版本核验。
+  known_issues:
+  - id: raw_y_index_semantics
+    description: RawUnit 索引 13 的官方字段名、dtype 和版本语义尚未核验。
+    status: needs_verification
+    evidence_ids:
+    - raw-unit-y-code
+  evidence:
+  - id: raw-unit-y-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 353
+    line_end: 353
+    evidence_type: E1
+    claim: Raw 坐标 y 分量。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: timestep.is_last
+  canonical_name: last()
+  names:
+    zh: 回合结束标志
+    en: Terminal TimeStep Flag
+    code: last()
+  category: timestep_player_score
+  aliases:
+  - 回合结束标志
+  - Terminal TimeStep Flag
+  - last()
+  definition: 通过 TimeStep.last() 判断当前步是否结束回合。
+  intuitive_explanation: 通过 TimeStep.last() 判断当前步是否结束回合。
+  interface:
+    data_type: boolean
+    python_type: bool
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: boolean
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.last()
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - RawAgent.step terminal branch
+  provenance:
+    source_layer: pysc2_timestep
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: examples/llm_agent_example.py
+      symbol: main
+      line_start: 114
+      line_end: 114
+    extraction_code:
+    - 'if timesteps[0].last():'
+    transformation_formula:
+    - is_last=obs.last()
+  consumers:
+  - name: STORM 当前实现
+    path: examples/llm_agent_example.py
+    symbol: main
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      last(): 按公式得到
+    explanation: 通过 TimeStep.last() 判断当前步是否结束回合。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 通过 TimeStep.last() 判断当前步是否结束回合。
+    status: code_reality
+    evidence_ids:
+    - timestep-is-last-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: timestep-is-last-code
+    path: examples/llm_agent_example.py
+    symbol: main
+    line_start: 114
+    line_end: 114
+    evidence_type: E1
+    claim: 通过 TimeStep.last() 判断当前步是否结束回合。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: timestep.reward_delta
+  canonical_name: reward
+  names:
+    zh: 决策间得分增量
+    en: Decision Score Delta
+    code: reward
+  category: timestep_player_score
+  aliases:
+  - 决策间得分增量
+  - Decision Score Delta
+  - reward
+  definition: 相邻两次触发决策时累计分数之差；不是直接读取 TimeStep.reward。
+  intuitive_explanation: 相邻两次触发决策时累计分数之差；不是直接读取 TimeStep.reward。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: score point
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - RawAgent.reward
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - timestep.score_cumulative_0
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.step
+      line_start: 314
+      line_end: 314
+    extraction_code:
+    - self.reward = new_score - self.score
+    transformation_formula:
+    - reward=new_score-previous_score
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.step
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_decision
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      reward: 按公式得到
+    explanation: 相邻两次触发决策时累计分数之差；不是直接读取 TimeStep.reward。
+  relationships:
+  - relation: derived_from
+    target_id: timestep.score_cumulative_0
+    description: 由累计分数差分得到。
+  design_intent: []
+  code_reality:
+  - claim: 相邻两次触发决策时累计分数之差；不是直接读取 TimeStep.reward。
+    status: derived_runtime
+    evidence_ids:
+    - timestep-reward-delta-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: timestep-reward-delta-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.step
+    line_start: 314
+    line_end: 314
+    evidence_type: E1
+    claim: 相邻两次触发决策时累计分数之差；不是直接读取 TimeStep.reward。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: timestep.score_cumulative_0
+  canonical_name: score_cumulative[0]
+  names:
+    zh: 累计得分首元素
+    en: Cumulative Score Element 0
+    code: score_cumulative[0]
+  category: timestep_player_score
+  aliases:
+  - 累计得分首元素
+  - Cumulative Score Element 0
+  - score_cumulative[0]
+  definition: 读取 score_cumulative 第 0 个元素作为累计分数。
+  intuitive_explanation: 读取 score_cumulative 第 0 个元素作为累计分数。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: score point
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.score_cumulative[0]
+      status: needs_verification
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - RawAgent.score
+  provenance:
+    source_layer: pysc2_timestep
+    derivation_kind: direct_read
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.step
+      line_start: 313
+      line_end: 313
+    extraction_code:
+    - obs.observation.get("score_cumulative", [0])[0]
+    transformation_formula:
+    - score=score_cumulative[0]
+  consumers:
+  - name: STORM 当前实现
+    path: agents/raw_agent.py
+    symbol: RawAgent.step
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: per_observation
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      source: current code
+    output:
+      score_cumulative[0]: 按公式得到
+    explanation: 读取 score_cumulative 第 0 个元素作为累计分数。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 读取 score_cumulative 第 0 个元素作为累计分数。
+    status: code_reality
+    evidence_ids:
+    - timestep-score-cumulative-0-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: timestep-score-cumulative-0-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.step
+    line_start: 313
+    line_end: 313
+    evidence_type: E1
+    claim: 读取 score_cumulative 第 0 个元素作为累计分数。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。

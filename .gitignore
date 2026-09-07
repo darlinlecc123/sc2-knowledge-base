@@ -1,0 +1,28 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*secret*
+
+# Python cache and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Runtime and model outputs
+*.log
+evals/results/
+evals/configs/
+evals/analysis/
+
+# Local release archives are attached separately to GitHub Releases
+dist/*.zip
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

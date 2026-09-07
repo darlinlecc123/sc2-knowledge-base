@@ -1,0 +1,2454 @@
+{
+  "excluded_files": [
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/variable_request.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": ".github/workflows/validate.yml",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": ".gitignore",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "LICENSE_CANDIDATE.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "README.md",
+      "reason": "outdated_workspace_readme"
+    },
+    {
+      "path": "ROADMAP.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "dist/SHA256SUMS",
+      "reason": "outer_release_artifact"
+    },
+    {
+      "path": "dist/storm-sc2kb-0.1.0-full.zip",
+      "reason": "outer_release_artifact"
+    },
+    {
+      "path": "dist/storm-sc2kb-0.1.0-minimal.zip",
+      "reason": "outer_release_artifact"
+    },
+    {
+      "path": "docs/10_retrieval_usage.md",
+      "reason": "private_python_path"
+    },
+    {
+      "path": "docs/12_qa_agent_usage.md",
+      "reason": "private_python_path"
+    },
+    {
+      "path": "docs/13_benchmark_design.md",
+      "reason": "private_python_path"
+    },
+    {
+      "path": "docs/14_evaluation_usage.md",
+      "reason": "private_python_path"
+    },
+    {
+      "path": "docs/15_offline_tests.md",
+      "reason": "private_windows_user_path"
+    },
+    {
+      "path": "docs/gpt_5_4_mini_third_party_setup.md",
+      "reason": "private_python_path"
+    },
+    {
+      "path": "docs/知识库使用说明.docx",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "docs/知识库使用说明.md",
+      "reason": "private_windows_user_path"
+    },
+    {
+      "path": "evals/__pycache__/analyze_gpt_vs_deepseek.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "evals/__pycache__/analyze_three_conditions.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "evals/__pycache__/create_challenge_v0_4.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "evals/__pycache__/create_challenge_v0_6.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "evals/__pycache__/create_v0_6_preblind_lock.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "evals/__pycache__/diagnose_deepseek_response.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "evals/__pycache__/enhance_three_condition_analysis.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "evals/__pycache__/report.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "evals/__pycache__/run_evaluation.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "evals/__pycache__/scorers.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "evals/analysis/20260905_deepseek_three_conditions/analysis.json",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260905_deepseek_three_conditions/per_question.csv",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260905_deepseek_three_conditions/report.md",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_challenge_v0.4_first_blind/audit.json",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_challenge_v0.4_first_blind/report.md",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_challenge_v0.5_first_blind/audit.json",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_challenge_v0.5_first_blind/report.md",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_challenge_v0.6_first_blind/audit.json",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_challenge_v0.6_first_blind/report.md",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_deepseek_challenge_v0.6_post_three_conditions/audit.json",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_deepseek_challenge_v0.6_post_three_conditions/manifest.json",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_deepseek_challenge_v0.6_post_three_conditions/per_question_comparison.csv",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_deepseek_challenge_v0.6_post_three_conditions/report.md",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_gpt54mini_three_conditions/analysis.json",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_gpt54mini_three_conditions/per_question.csv",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_gpt54mini_three_conditions/report.md",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_gpt54mini_vs_deepseek/comparison.json",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_gpt54mini_vs_deepseek/per_question_comparison.csv",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_gpt54mini_vs_deepseek/report.md",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_rag_accuracy_optimization/audit.json",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/analysis/20260906_rag_accuracy_optimization/report.md",
+      "reason": "excluded_evaluation_analysis"
+    },
+    {
+      "path": "evals/configs/deepseek_v4_flash_formal.yaml",
+      "reason": "excluded_evaluation_configs"
+    },
+    {
+      "path": "evals/configs/deepseek_v4_flash_rag_optimized.yaml",
+      "reason": "excluded_evaluation_configs"
+    },
+    {
+      "path": "evals/configs/deepseek_v4_flash_smoke.yaml",
+      "reason": "excluded_evaluation_configs"
+    },
+    {
+      "path": "evals/configs/deepseek_v4_flash_three_conditions.yaml",
+      "reason": "excluded_evaluation_configs"
+    },
+    {
+      "path": "evals/configs/gpt_5_4_mini_formal_freeze_manifest_20260906.json",
+      "reason": "excluded_evaluation_configs"
+    },
+    {
+      "path": "evals/configs/gpt_5_4_mini_third_party.yaml",
+      "reason": "excluded_evaluation_configs"
+    },
+    {
+      "path": "evals/configs/gpt_5_4_mini_third_party_formal_frozen_20260906.yaml",
+      "reason": "excluded_evaluation_configs"
+    },
+    {
+      "path": "evals/configs/model_matrix.yaml",
+      "reason": "excluded_evaluation_configs"
+    },
+    {
+      "path": "evals/configs/set_gpt_5_4_mini_third_party_env.ps1",
+      "reason": "excluded_evaluation_configs"
+    },
+    {
+      "path": "evals/results/20260904_151451_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_151451_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_151451_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_151451_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160313_improved_dev_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160313_improved_dev_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160313_improved_dev_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160313_improved_dev_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160313_improved_test_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160313_improved_test_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160313_improved_test_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160313_improved_test_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160935_improved_v2_dev_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160935_improved_v2_dev_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160935_improved_v2_dev_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160935_improved_v2_dev_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160935_improved_v2_test_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160935_improved_v2_test_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160935_improved_v2_test_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_160935_improved_v2_test_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_163620_evidence_fix_dev_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_163620_evidence_fix_dev_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_163620_evidence_fix_dev_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_163620_evidence_fix_dev_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_163620_evidence_fix_test_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_163620_evidence_fix_test_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_163620_evidence_fix_test_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_163620_evidence_fix_test_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_164301_challenge_v0.1_frozen_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_164301_challenge_v0.1_frozen_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_164301_challenge_v0.1_frozen_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_164301_challenge_v0.1_frozen_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_generalization_dev_v0.1_refined_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_generalization_dev_v0.1_refined_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_generalization_dev_v0.1_refined_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_generalization_dev_v0.1_refined_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_semantic_refined_dev_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_semantic_refined_dev_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_semantic_refined_dev_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_semantic_refined_dev_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_semantic_refined_test_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_semantic_refined_test_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_semantic_refined_test_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171000_semantic_refined_test_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_generalization_dev_v0.1_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_generalization_dev_v0.1_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_generalization_dev_v0.1_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_generalization_dev_v0.1_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_semantic_dev_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_semantic_dev_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_semantic_dev_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_semantic_dev_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_semantic_test_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_semantic_test_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_semantic_test_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_171500_semantic_test_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_172500_challenge_v0.2_frozen_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_172500_challenge_v0.2_frozen_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_172500_challenge_v0.2_frozen_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_172500_challenge_v0.2_frozen_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_challenge_v0.3_frozen_first_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_challenge_v0.3_frozen_first_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_challenge_v0.3_frozen_first_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_challenge_v0.3_frozen_first_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_response_diagnostic_health_shield.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_challenge_v0.3_rag_first/audit_summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_challenge_v0.3_rag_first/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_challenge_v0.3_rag_first/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_challenge_v0.3_rag_first/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_challenge_v0.3_rag_first/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_challenge_v0.3_rag_protocol_retest/audit_summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_challenge_v0.3_rag_protocol_retest/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_challenge_v0.3_rag_protocol_retest/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_challenge_v0.3_rag_protocol_retest/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_challenge_v0.3_rag_protocol_retest/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_formal_complex_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_formal_complex_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_formal_complex_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_formal_complex_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_single_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_single_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_single_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_single_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_single_smoke_retry2/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_single_smoke_retry2/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_single_smoke_retry2/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_deepseek_v4_flash_single_smoke_retry2/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_generalization_dev_v0.2_round1_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_generalization_dev_v0.2_round1_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_generalization_dev_v0.2_round1_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_generalization_dev_v0.2_round1_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_challenge_v01_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_challenge_v01_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_challenge_v01_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_challenge_v01_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_dev_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_dev_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_dev_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_dev_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_generalization_v01_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_generalization_v01_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_generalization_v01_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_generalization_v01_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_test_dry-run/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_test_dry-run/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_test_dry-run/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260904_v03_regression_test_dry-run/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_full_compact_three_conditions/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_full_compact_three_conditions/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_full_compact_three_conditions/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_full_compact_three_conditions/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_no_kb_three_conditions/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_no_kb_three_conditions/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_no_kb_three_conditions/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_no_kb_three_conditions/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_rag_three_conditions/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_rag_three_conditions/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_rag_three_conditions/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_challenge_v0.3_rag_three_conditions/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_json_mode_off_verified_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_json_mode_off_verified_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_json_mode_off_verified_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_json_mode_off_verified_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_no_json_mode_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_no_json_mode_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_no_json_mode_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_no_json_mode_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_compact_v2_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_smoke_retry2/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_smoke_retry2/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_smoke_retry2/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_smoke_retry2/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_thinking_disabled_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_thinking_disabled_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_thinking_disabled_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_full_context_thinking_disabled_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_smoke_retry2/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_smoke_retry2/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_smoke_retry2/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_smoke_retry2/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_thinking_disabled_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_thinking_disabled_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_thinking_disabled_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_no_kb_thinking_disabled_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_rag_json_mode_off_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_rag_json_mode_off_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_rag_json_mode_off_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260905_deepseek_three_conditions_rag_json_mode_off_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.3_rag_optimized_v1/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.3_rag_optimized_v1/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.3_rag_optimized_v1/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.3_rag_optimized_v1/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_first_blind/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_first_blind/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_first_blind/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_first_blind/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_first_valid_full_blind/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_first_valid_full_blind/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_first_valid_full_blind/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_first_valid_full_blind/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_post_regression_rag_v2/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_post_regression_rag_v2/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_post_regression_rag_v2/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.4_post_regression_rag_v2/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.5_first_blind/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.5_first_blind/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.5_first_blind/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.5_first_blind/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.5_post_regression_rag_v2/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.5_post_regression_rag_v2/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.5_post_regression_rag_v2/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.5_post_regression_rag_v2/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_first_blind/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_first_blind/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_first_blind/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_first_blind/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_full_context/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_full_context/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_full_context/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_full_context/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_no_kb/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_no_kb/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_no_kb/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_no_kb/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_rag/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_rag/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_rag/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_challenge_v0.6_post_three_conditions_rag/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimization_dev_v0.1_formal/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimization_dev_v0.1_formal/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimization_dev_v0.1_formal/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimization_dev_v0.1_formal/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_compact_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_compact_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_compact_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_compact_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_compact_smoke_fixed/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_compact_smoke_fixed/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_compact_smoke_fixed/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_compact_smoke_fixed/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_smoke_after_fix/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_smoke_after_fix/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_smoke_after_fix/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_smoke_after_fix/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_thinking_off_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_thinking_off_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_thinking_off_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_deepseek_rag_optimized_v1_thinking_off_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_full_compact_formal/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_full_compact_formal/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_full_compact_formal/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_full_compact_formal/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_no_kb_formal/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_no_kb_formal/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_no_kb_formal/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_no_kb_formal/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_rag_formal/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_rag_formal/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_rag_formal/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_challenge_v0.3_rag_formal/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_full_compact_v2_smoke_sdk_retry0/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_full_compact_v2_smoke_sdk_retry0/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_full_compact_v2_smoke_sdk_retry0/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_full_compact_v2_smoke_sdk_retry0/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_no_kb_smoke_sdk_retry0/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_no_kb_smoke_sdk_retry0/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_no_kb_smoke_sdk_retry0/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_no_kb_smoke_sdk_retry0/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_rag_smoke_sdk_retry0/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_rag_smoke_sdk_retry0/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_rag_smoke_sdk_retry0/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_rag_smoke_sdk_retry0/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_third_party_rag_smoke/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_third_party_rag_smoke/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_third_party_rag_smoke/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/20260906_gpt54mini_third_party_rag_smoke/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_2_e8214u/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_2_e8214u/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_2_e8214u/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_2_e8214u/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_a2pv6b1u/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_a2pv6b1u/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_a2pv6b1u/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_a2pv6b1u/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_ibokzrzn/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_ibokzrzn/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_ibokzrzn/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_ibokzrzn/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_kauavfii/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_kauavfii/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_kauavfii/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_kauavfii/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_lx2xnuma/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_lx2xnuma/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_lx2xnuma/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_lx2xnuma/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_mgclyvm2/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_mgclyvm2/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_mgclyvm2/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_mgclyvm2/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_njm6c4co/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_njm6c4co/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_njm6c4co/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_njm6c4co/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_qa9estiy/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_qa9estiy/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_qa9estiy/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_qa9estiy/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_qh2bijuu/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_qh2bijuu/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_qh2bijuu/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_qh2bijuu/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_rz8yw1un/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_rz8yw1un/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_rz8yw1un/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_rz8yw1un/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_seu_xpg8/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_seu_xpg8/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_seu_xpg8/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_seu_xpg8/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_t0v42ehv/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_t0v42ehv/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_t0v42ehv/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_t0v42ehv/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_x8d6ougk/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_x8d6ougk/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_x8d6ougk/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_dry_x8d6ougk/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_1fqow718/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_1fqow718/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_1fqow718/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_1fqow718/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_3ou3w01x/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_3ou3w01x/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_3ou3w01x/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_3ou3w01x/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_4bfmt3fw/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_4bfmt3fw/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_4bfmt3fw/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_4bfmt3fw/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_4rr8apal/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_4rr8apal/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_4rr8apal/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_4rr8apal/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_hrjazg1d/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_hrjazg1d/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_hrjazg1d/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_hrjazg1d/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_jeaat0kv/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_jeaat0kv/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_jeaat0kv/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_jeaat0kv/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_kwv2y98l/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_kwv2y98l/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_kwv2y98l/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_kwv2y98l/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_qcg6mqdp/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_qcg6mqdp/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_qcg6mqdp/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_qcg6mqdp/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_r1kn4gfq/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_r1kn4gfq/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_r1kn4gfq/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_r1kn4gfq/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_tq7pxis6/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_tq7pxis6/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_tq7pxis6/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_tq7pxis6/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_uvgbgpyd/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_uvgbgpyd/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_uvgbgpyd/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_uvgbgpyd/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_v3zhy669/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_v3zhy669/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_v3zhy669/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_v3zhy669/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_wzam8t2y/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_wzam8t2y/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_wzam8t2y/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_imperfect_wzam8t2y/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_54ve0ct0/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_54ve0ct0/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_54ve0ct0/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_54ve0ct0/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_94jxu8aq/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_94jxu8aq/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_94jxu8aq/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_94jxu8aq/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_a5eli6s2/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_a5eli6s2/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_a5eli6s2/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_a5eli6s2/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_bl_0mgyf/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_bl_0mgyf/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_bl_0mgyf/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_bl_0mgyf/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_f4b1y17i/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_f4b1y17i/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_f4b1y17i/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_f4b1y17i/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_nnpq9c2e/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_nnpq9c2e/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_nnpq9c2e/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_nnpq9c2e/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_ox8s7k0q/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_ox8s7k0q/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_ox8s7k0q/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_ox8s7k0q/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_r448ae0y/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_r448ae0y/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_r448ae0y/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_r448ae0y/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_txw9bhki/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_txw9bhki/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_txw9bhki/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_txw9bhki/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_vp46fyuc/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_vp46fyuc/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_vp46fyuc/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_vp46fyuc/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_xr5s0tt0/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_xr5s0tt0/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_xr5s0tt0/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_xr5s0tt0/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_ytg2f1ng/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_ytg2f1ng/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_ytg2f1ng/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_ytg2f1ng/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_zw_5len1/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_zw_5len1/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_zw_5len1/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_perfect_zw_5len1/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_4dv5h22y/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_4dv5h22y/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_4dv5h22y/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_4dv5h22y/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_91rrb26q/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_91rrb26q/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_91rrb26q/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_91rrb26q/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_9frszxni/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_9frszxni/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_9frszxni/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_9frszxni/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce__2x1gfot/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce__2x1gfot/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce__2x1gfot/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce__2x1gfot/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_g212kky_/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_g212kky_/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_g212kky_/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_g212kky_/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_ouhi4lkv/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_ouhi4lkv/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_ouhi4lkv/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_ouhi4lkv/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_p7y5ypac/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_p7y5ypac/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_p7y5ypac/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_p7y5ypac/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_qvkaovhn/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_qvkaovhn/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_qvkaovhn/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_qvkaovhn/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_qxb7xny0/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_qxb7xny0/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_qxb7xny0/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_qxb7xny0/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_veoamp96/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_veoamp96/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_veoamp96/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_veoamp96/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_vlr58ztb/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_vlr58ztb/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_vlr58ztb/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_vlr58ztb/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_wxlg97pr/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_wxlg97pr/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_wxlg97pr/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_wxlg97pr/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_wxsg315i/report.md",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_wxsg315i/results.jsonl",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_wxsg315i/run_manifest.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "evals/results/step14_reproduce_wxsg315i/summary.json",
+      "reason": "excluded_evaluation_results"
+    },
+    {
+      "path": "github/CONTRIBUTING.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "github/ISSUE_TEMPLATE/bug_report.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "github/ISSUE_TEMPLATE/variable_request.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "github/PUBLISH_ALLOWLIST.txt",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "github/PULL_REQUEST_TEMPLATE.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "github/README_GITHUB.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "github/ROADMAP.md",
+      "reason": "not_in_full_whitelist"
+    },
+    {
+      "path": "prompts/00_master_prompt.md",
+      "reason": "private_windows_user_path"
+    },
+    {
+      "path": "release/MANIFEST.json",
+      "reason": "outer_release_artifact"
+    },
+    {
+      "path": "reports/05_extraction_coverage.md",
+      "reason": "private_python_path"
+    },
+    {
+      "path": "reports/18_build_release_package.md",
+      "reason": "outer_release_report_avoids_hash_cycle"
+    },
+    {
+      "path": "reports/multi_model_evaluation/data/challenge_v0.6_blind_thresholds.csv",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/data/deepseek_challenge_v0.6_three_conditions.csv",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/data/model_comparison_challenge_v0.3.csv",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig1_model_comparison_challenge_v0.3.pdf",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig1_model_comparison_challenge_v0.3.png",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig1_model_comparison_challenge_v0.3.svg",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig1_model_comparison_challenge_v0.3.tiff",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig2_metric_heatmap_challenge_v0.3.pdf",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig2_metric_heatmap_challenge_v0.3.png",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig2_metric_heatmap_challenge_v0.3.svg",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig2_metric_heatmap_challenge_v0.3.tiff",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig3_deepseek_challenge_v0.6_three_conditions.pdf",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig3_deepseek_challenge_v0.6_three_conditions.png",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig3_deepseek_challenge_v0.6_three_conditions.svg",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig3_deepseek_challenge_v0.6_three_conditions.tiff",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig4_challenge_v0.6_blind_thresholds.pdf",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig4_challenge_v0.6_blind_thresholds.png",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig4_challenge_v0.6_blind_thresholds.svg",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "reports/multi_model_evaluation/figures/fig4_challenge_v0.6_blind_thresholds.tiff",
+      "reason": "unsupported_or_binary_file"
+    },
+    {
+      "path": "scripts/__pycache__/build_full_compact_context.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "scripts/__pycache__/build_full_compact_context_v2.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "scripts/__pycache__/build_step18_release.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "scripts/__pycache__/generate_challenge_set.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "scripts/__pycache__/generate_challenge_v0_2.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "scripts/__pycache__/generate_step07.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "scripts/__pycache__/generate_step13_benchmark.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "scripts/__pycache__/generate_step17_docs.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "scripts/__pycache__/validate_github_release.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "src/sc2kb/__pycache__/__init__.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "src/sc2kb/__pycache__/evaluation_conditions.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "src/sc2kb/__pycache__/loader.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "src/sc2kb/__pycache__/model_clients.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "src/sc2kb/__pycache__/qa_agent.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "src/sc2kb/__pycache__/search.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/run_step19_offline_suite.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/test_challenge_v0_4_freeze.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/test_challenge_v0_5_freeze.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/test_challenge_v0_6_freeze.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/test_known_issues.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/test_model_runtime_metadata.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/test_rag_compositional_retrieval.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/test_relations.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/test_retrieval.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/test_schema_and_data.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/test_three_conditions_runner.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/validate_challenge_set.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/validate_challenge_v0_2.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/validate_challenge_v0_3.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/validate_step12.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/validate_step13.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/validate_step14.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/validate_step16.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/validate_step17.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/__pycache__/validate_step18_release.cpython-313.pyc",
+      "reason": "python_cache"
+    },
+    {
+      "path": "tests/test_model_runtime_metadata.py",
+      "reason": "possible_literal_api_key"
+    },
+    {
+      "path": "tests/validate_step16.py",
+      "reason": "stale_planned_state_validator"
+    }
+  ],
+  "execution": {
+    "external_api_called": false,
+    "sc2_executed": false
+  },
+  "full_source_file_count": 194,
+  "git_metadata_available": true,
+  "license_status": "Apache-2.0",
+  "minimal_source_files": [
+    "VERSION",
+    "CHANGELOG.md",
+    "CITATION.cff",
+    "LICENSE",
+    "requirements-minimal.txt",
+    "release/README_RELEASE.md",
+    "docs/index.md",
+    "docs/variable_catalog.md",
+    "docs/dataflow.md",
+    "docs/query_cookbook.md",
+    "docs/glossary.md",
+    "variables/raw_api.yaml",
+    "variables/tbox.yaml",
+    "variables/abox.yaml",
+    "variables/derived.yaml",
+    "variables/actions.yaml",
+    "variables/swm.yaml",
+    "variables/metrics.yaml",
+    "schemas/variable.schema.json",
+    "retrieval/aliases.yaml",
+    "relations/variable_relations.jsonl",
+    "known_issues.yaml",
+    "src/sc2kb/__init__.py",
+    "src/sc2kb/loader.py",
+    "src/sc2kb/search.py",
+    "src/sc2kb/cli.py"
+  ],
+  "packages": [
+    {
+      "bytes": 243000,
+      "file_count": 27,
+      "filename": "storm-sc2kb-0.1.0-minimal.zip",
+      "kind": "minimal",
+      "root_directory": "storm-sc2kb-0.1.0-minimal",
+      "sha256": "02a4920e6154660f88992f6780242827b6fd98c6f77688f593fd8e3347af3f2a"
+    },
+    {
+      "bytes": 999724,
+      "file_count": 195,
+      "filename": "storm-sc2kb-0.1.0-full.zip",
+      "kind": "full",
+      "root_directory": "storm-sc2kb-0.1.0-full",
+      "sha256": "6215fb25b127bfe0897c4f8230e1ff7105a3ff2634e3f445571844e5dc508626"
+    }
+  ],
+  "publication": {
+    "external_account_accessed": false,
+    "repository": "https://github.com/darlinlecc123/sc2-knowledge-base",
+    "uploaded": false
+  },
+  "release": {
+    "formal_variable_count": 135,
+    "knowledge_base": "storm-sc2kb-v1-raw",
+    "known_issue_count": 11,
+    "name": "STORM PySC2 Raw API Variable Knowledge Base",
+    "relation_count": 1430,
+    "release_date": "2026-09-07",
+    "version": "0.1.0"
+  },
+  "schema_version": "1.0.0",
+  "scope": {
+    "description": "Only variables used by the current STORM PySC2 Raw API path and direct derivatives.",
+    "fact_statuses": [
+      "design_intent",
+      "code_reality",
+      "runtime_observation",
+      "needs_verification"
+    ]
+  },
+  "security_policy": {
+    "excluded": [
+      ".env",
+      "API keys",
+      "logs",
+      "Python caches",
+      "private absolute paths",
+      "evals/results",
+      "evals/analysis",
+      "evals/configs"
+    ],
+    "note": "The literal not-a-real-key in an offline test fixture is treated as a placeholder, but that test is excluded by the generic literal-key filter."
+  }
+}

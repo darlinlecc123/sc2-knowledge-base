@@ -1,0 +1,641 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema: knowledge/schemas/variable.schema.json
+schema_version: 1.0.0
+generated_at: '2026-09-03'
+records:
+- schema_version: 1.0.0
+  id: raw_unit.health_ratio
+  canonical_name: health_ratio
+  names:
+    zh: 生命值比例
+    en: Health Ratio
+    code: health_ratio
+  category: raw_unit
+  aliases:
+  - 血量比例
+  - 生命百分比
+  - HP ratio
+  - health_ratio
+  - 归一化生命值
+  definition: STORM 从当前 RawUnit 行的索引 7 读取编码值并除以 255 后生成的无量纲比例字段。
+  intuitive_explanation: 它表示单位当前生命状态的相对量，而不是还剩多少点绝对生命值；STORM 用除以 255 的方式把接口编码转换成比例。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 每个解析后的单位一个标量。
+    unit:
+      value: '1'
+      status: known
+      note: 无量纲比例。
+    dimension:
+      value: dimensionless
+      status: known
+      note: 比例量，无物理量纲。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: 1
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: 按当前除以 255 的实现预期约为 [0,1]；底层字段编码范围尚未用官方资料或运行时观测核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 连续数值，不使用枚举。
+    nullable: false
+    pysc2_path:
+      value: obs.observation.raw_units[*][7]
+      status: needs_verification
+      note: 当前 STORM 的位置索引访问形式；官方字段名和版本语义尚未外部核验。
+    storm_paths:
+    - parsed_raw_unit.health_ratio
+    - abox.hp_ratio
+  provenance:
+    source_layer: raw_unit_transformed
+    derivation_kind: normalized
+    upstream_variable_ids:
+    - pysc2.raw_unit.index_7
+  implementation:
+    source_locations:
+    - path: agents/raw_agent.py
+      symbol: RawAgent.parse_raw_units
+      line_start: 334
+      line_end: 362
+    extraction_code:
+    - unit[7]
+    transformation_formula:
+    - health_ratio = unit[7] / 255
+  consumers:
+  - name: BattlefieldGraph
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.update_from_observation
+    purpose: 作为运行时 ABox 单位生命比例的上游输入。
+  - name: tactical summary
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 通过 ABox hp_ratio 参与平均血量和低血量判断。
+  lifecycle:
+    update_timing: 每次 RawAgent.step 收到新 observation 并调用 parse_raw_units 时重新计算。
+    scope: per_observation
+    persistence: 先存在于当前解析字典中，随后可写入当前 ABox；不是静态常量。
+  examples:
+  - scenario: 索引 7 的编码值为 204
+    input:
+      raw_unit_index_7: 204
+    output:
+      health_ratio: 0.8
+    explanation: 204 / 255 = 0.8。
+  relationships:
+  - relation: derived_from
+    target_id: pysc2.raw_unit.index_7
+    description: 由 RawUnit 索引 7 的值归一化得到。
+  - relation: distinct_from
+    target_id: raw_unit.health
+    description: health 是绝对生命值；health_ratio 是比例。
+  - relation: transformed_to
+    target_id: abox.hp_ratio
+    description: 进入 BattlefieldGraph 后作为 ABox hp_ratio。
+  design_intent:
+  - claim: 方法文档希望返回单位的生命相关字段，但列出 health_max，未准确列出实际 health_ratio。
+    status: design_intent
+    evidence_ids:
+    - raw-health-doc
+  code_reality:
+  - claim: 当前实现返回 health_ratio = unit[7] / 255，且没有返回 health_max。
+    status: code_reality
+    evidence_ids:
+    - raw-health-code
+  limitations:
+  - 未核验当前 PySC2 版本中 RawUnit 索引 7 的官方字段名、dtype 和编码范围。
+  - 不能把该比例当作绝对 HP。
+  - 源码行号会随编辑漂移，应同时使用 path 和 symbol。
+  known_issues:
+  - id: rawunit_doc_mismatch
+    description: parse_raw_units 的 docstring 提到 health_max，但当前返回字典没有该字段，实际返回 health_ratio。
+    status: open
+    evidence_ids:
+    - raw-health-doc
+    - raw-health-code
+  evidence:
+  - id: raw-health-code
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 344
+    line_end: 359
+    evidence_type: E1
+    claim: 当前解析器以 unit[7] / 255 生成 health_ratio。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  - id: raw-health-doc
+    path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    line_start: 334
+    line_end: 343
+    evidence_type: E5
+    claim: 方法文档声明 health_max，但当前返回字典与之不一致。
+    fact_status: design_intent
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: current_source_static_inspection
+      result: passed
+    - name: StarCraft II runtime observation
+      result: not_executed
+    external_sources_checked: false
+    notes: 仅完成当前源码静态核对；未启动 SC2，也未查阅外部 PySC2 官方定义。
+- schema_version: 1.0.0
+  id: tbox.unit.marine.attack_range
+  canonical_name: Marine.attack_range
+  names:
+    zh: 陆战队员攻击射程
+    en: Marine Attack Range
+    code: UNITS["Marine"]["attack_range"]
+  category: tbox_static
+  aliases:
+  - Marine射程
+  - 陆战队攻击距离
+  - attack_range
+  - Marine range
+  - UNITS Marine attack_range
+  definition: 当前静态本体数据中为 Marine 节点声明的 attack_range 属性，代码值为 5.0。
+  intuitive_explanation: 这是知识图谱预先保存的“Marine 通常能打多远”的类型知识，不是某一帧里某个 Marine 实例动态测出的值。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: Marine 类型节点上的一个静态标量属性。
+    unit:
+      value: null
+      status: needs_verification
+      note: 当前字段附近未声明单位；不能擅自写成格、米或游戏坐标单位。
+    dimension:
+      value: length
+      status: needs_verification
+      note: 名称表明它是距离类量，但具体接口量纲尚未核验。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码只声明 Marine 的值 5.0，没有定义全局合法范围。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 连续数值，不使用枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 这是 STORM 静态 TBox 字段，不是从当前 PySC2 observation 直接读取。
+    storm_paths:
+    - ontology.data.marine_ontology.UNITS["Marine"]["attack_range"]
+    - TBox node Marine.attack_range
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS["Marine"]
+      line_start: 21
+      line_end: 38
+    - path: ontology/loader.py
+      symbol: OntologyLoader.reload
+      line_start: 45
+      line_end: 62
+    extraction_code:
+    - UNITS["Marine"]["attack_range"]
+    transformation_formula:
+    - 无数值转换；静态声明值为 5.0。
+  consumers:
+  - name: Ontology builder/loader
+    path: ontology/builder.py
+    symbol: build_ontology_graph
+    purpose: 把静态本体属性构造成图节点并供加载器查询。
+  - name: BattlefieldGraph
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    purpose: 创建运行时实例时可复制对应类型的静态属性。
+  lifecycle:
+    update_timing: 仅在本体源码被修改并构建/加载本体时改变。
+    scope: static_repository
+    persistence: 声明在 Python 静态数据中，并可能序列化到 data/ontology/ontology_graph.pkl。
+  examples:
+  - scenario: 查询当前 Marine 类型知识
+    input:
+      unit_type: Marine
+      property: attack_range
+    output: 5
+    explanation: 当前 marine_ontology.py 的静态声明值为 5.0。
+  relationships:
+  - relation: distinct_from
+    target_id: abox.unit.attack_range
+    description: 本记录是类型级静态知识；ABox 字段属于实例层。
+  - relation: related_to
+    target_id: tbox.unit.marine.sight
+    description: 同属 Marine 的距离相关静态属性，但语义不同。
+  design_intent:
+  - claim: 文件注释称单位属性参考 StarCraft II Wiki/Liquipedia、版本 5.0.11。
+    status: design_intent
+    evidence_ids:
+    - marine-module-doc
+  code_reality:
+  - claim: 当前 Python 静态数据将 Marine.attack_range 声明为 5.0。
+    status: code_reality
+    evidence_ids:
+    - marine-range-code
+  limitations:
+  - 单位和与 PySC2 坐标的换算关系尚未核验。
+  - OntologyLoader 优先使用 pickle 缓存时，修改 Python 定义可能不会立即反映到运行时。
+  - 本步骤未比较缓存中的当前值，也未重建本体缓存。
+  known_issues:
+  - id: ontology_cache_staleness
+    description: 运行时可能优先读取 ontology_graph.pkl，Python 声明与缓存存在不同步风险。
+    status: needs_verification
+    evidence_ids:
+    - marine-range-code
+    - ontology-loader-cache
+  evidence:
+  - id: marine-range-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS["Marine"]
+    line_start: 21
+    line_end: 38
+    evidence_type: E3
+    claim: Marine 静态记录中的 attack_range 值为 5.0。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  - id: marine-module-doc
+    path: ontology/data/marine_ontology.py
+    symbol: null
+    line_start: 1
+    line_end: 14
+    evidence_type: E5
+    claim: 模块说明给出设计来源和目标版本，但不等同于当前外部核验。
+    fact_status: design_intent
+    verified_at: '2026-09-03'
+  - id: ontology-loader-cache
+    path: ontology/loader.py
+    symbol: OntologyLoader.reload
+    line_start: 45
+    line_end: 62
+    evidence_type: E1
+    claim: reload 默认 use_pickle=True；缓存文件存在时优先从 data/ontology/ontology_graph.pkl 加载，否则才重建本体图。
+    fact_status: needs_verification
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: current_source_static_inspection
+      result: passed
+    - name: StarCraft II runtime observation
+      result: not_executed
+    external_sources_checked: false
+    notes: 已确认 Python 静态声明；未启动 SC2、未访问外部 Wiki、未重建或对比本体缓存。
+- schema_version: 1.0.0
+  id: derived.tactical.engagement_type
+  canonical_name: Engagement_Type
+  names:
+    zh: 交战距离类型
+    en: Engagement Type
+    code: Engagement_Type
+  category: derived_tactical_state
+  aliases:
+  - 交战类型
+  - 接战距离
+  - 敌我距离档位
+  - Engagement_Type
+  - Close-Combat Medium-Range Long-Range
+  definition: STORM 根据友军与敌军 ABox 单位位置质心之间的欧氏距离，通过两个阈值生成的战术分类标签。
+  intuitive_explanation: 先找我方部队中心和敌方部队中心，再看两个中心离多远：小于 10 算近战，小于 20 算中距离，否则算远距离。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 战术摘要中的单个字符串标签；仅敌我双方均有单位时生成。
+    unit:
+      value: null
+      status: not_applicable
+      note: 分类标签本身无单位。
+    dimension:
+      value: categorical
+      status: known
+      note: 类别量。
+    range:
+      status: not_applicable
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 字符串枚举不使用数值范围。
+    enum_values:
+      status: known
+      values:
+      - Close-Combat
+      - Medium-Range
+      - Long-Range
+      description: 当前代码可生成的三个精确字符串。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 由 ABox 位置运行时派生，不是 PySC2 原始字段。
+    storm_paths:
+    - 'BattlefieldGraph.generate_tactical_summary output: Engagement_Type'
+  provenance:
+    source_layer: derived_runtime
+    derivation_kind: computed
+    upstream_variable_ids:
+    - abox.unit.position.x
+    - abox.unit.position.y
+    - abox.unit.alliance
+  implementation:
+    source_locations:
+    - path: ontology/bridge.py
+      symbol: BattlefieldGraph.generate_tactical_summary
+      line_start: 909
+      line_end: 991
+    extraction_code:
+    - 'friendly units: alliance == 1'
+    - 'enemy units: alliance == 4'
+    - missing position x/y defaults to 0
+    transformation_formula:
+    - friendly_centroid = mean(friendly positions)
+    - enemy_centroid = mean(enemy positions)
+    - d = euclidean_distance(friendly_centroid, enemy_centroid)
+    - Close-Combat if d < 10; Medium-Range if 10 <= d < 20; Long-Range if d >= 20
+  consumers:
+  - name: LLM tactical prompt context
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    purpose: 作为战术摘要文本，帮助决策模型理解敌我接战尺度。
+  lifecycle:
+    update_timing: 每次调用 generate_tactical_summary 且敌我双方均非空时重新计算。
+    scope: per_decision
+    persistence: 作为摘要字符串临时生成，不是 PySC2 持久状态。
+  examples:
+  - scenario: 质心距离恰好为 10
+    input:
+      center_distance: 10
+    output: Medium-Range
+    explanation: 第一分支使用 d < 10。
+  - scenario: 质心距离恰好为 20
+    input:
+      center_distance: 20
+    output: Long-Range
+    explanation: 第二分支使用 d < 20。
+  relationships:
+  - relation: derived_from
+    target_id: abox.unit.position
+    description: 由敌我单位位置集合的质心距离派生。
+  - relation: related_to
+    target_id: derived.tactical.formation_distance
+    description: 先计算 Formation_Distance，再按阈值形成类别标签。
+  design_intent:
+  - claim: 摘要被设计为放在 Prompt 开头的全局快速视角，而不是替代详细状态。
+    status: design_intent
+    evidence_ids:
+    - engagement-doc
+  code_reality:
+  - claim: 当前实现只在敌我双方均非空时计算质心距离，并按 <10、<20、else 输出三个标签。
+    status: code_reality
+    evidence_ids:
+    - engagement-code
+  limitations:
+  - 质心无法表达包围、分兵或离群单位。
+  - 缺失 position/x/y 时代码使用 0，可能影响质心。
+  - 距离单位及阈值物理依据尚未核验。
+  - 敌我任一方为空时不会出现 Engagement_Type 行。
+  known_issues:
+  - id: engagement_distance_unit_unknown
+    description: center_distance 的接口单位和阈值物理依据未在当前代码中声明。
+    status: needs_verification
+    evidence_ids:
+    - engagement-code
+  evidence:
+  - id: engagement-code
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 956
+    line_end: 982
+    evidence_type: E1
+    claim: 代码计算敌我位置质心、欧氏距离并按 10/20 阈值分类。
+    fact_status: derived_runtime
+    verified_at: '2026-09-03'
+  - id: engagement-doc
+    path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    line_start: 909
+    line_end: 925
+    evidence_type: E5
+    claim: docstring 声明战术摘要用于提供全局快速视角。
+    fact_status: design_intent
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: current_source_static_inspection
+      result: passed
+    - name: StarCraft II runtime observation
+      result: not_executed
+    external_sources_checked: false
+    notes: 公式和边界分支已静态核对；未构造 BattlefieldGraph 运行，也未执行 SC2。
+- schema_version: 1.0.0
+  id: action.delay_steps
+  canonical_name: delay_steps
+  names:
+    zh: 动作延迟步数
+    en: Action Delay Steps
+    code: delay_steps
+  category: action_schema_and_scheduling
+  aliases:
+  - 延迟执行
+  - 未来第几步执行
+  - 动作等待步数
+  - delay_steps
+  - action delay
+  definition: LLM 动作记录中的可选调度字段；ResponseParser 将其转换并裁剪到 0–9，RawAgent 用当前 self.steps 加该值确定待执行步骤。
+  intuitive_explanation: 0 表示现在做，N 表示先把动作放进计划表，到当前 Agent 步数加 N 时再取出执行。它是 STORM 环境交互步，不是秒。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 每条动作记录一个整数。
+    unit:
+      value: STORM environment step
+      status: known
+      note: 代码按 self.steps + delay_steps 调度；不直接等同于秒或 SC2 game loop。
+    dimension:
+      value: step count
+      status: known
+      note: 离散环境交互步数。
+    range:
+      status: known
+      minimum: 0
+      maximum: 9
+      minimum_inclusive: true
+      maximum_inclusive: true
+      description: Parser 负值归零，大于 9 截断为 9。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 整数范围，不逐项维护枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 这是 STORM 的 LLM 动作 Schema/调度字段，不是 PySC2 FunctionCall 原生参数。
+    storm_paths:
+    - llm_response.actions[*].delay_steps
+    - validated_action.delay_steps
+    - RawAgent.pending_actions[self.steps + delay_steps]
+  provenance:
+    source_layer: validated_action
+    derivation_kind: validated
+    upstream_variable_ids:
+    - llm_output.actions.delay_steps
+  implementation:
+    source_locations:
+    - path: ontology/prompt_template.py
+      symbol: ACTION_SPACE
+      line_start: 17
+      line_end: 54
+    - path: agents/response_parser.py
+      symbol: ResponseParser._validate_schema
+      line_start: 165
+      line_end: 267
+    - path: agents/raw_agent.py
+      symbol: RawAgent._convert_actions_to_pysc2
+      line_start: 828
+      line_end: 1000
+    extraction_code:
+    - missing delay_steps defaults to 0
+    - delay = int(action["delay_steps"])
+    transformation_formula:
+    - validated_delay = min(9, max(0, int(input_delay)))
+    - target_step = self.steps + validated_delay
+  consumers:
+  - name: ResponseParser
+    path: agents/response_parser.py
+    symbol: ResponseParser._validate_schema
+    purpose: 补默认值、转整数、裁剪范围或返回类型错误。
+  - name: RawAgent scheduler
+    path: agents/raw_agent.py
+    symbol: RawAgent._convert_actions_to_pysc2
+    purpose: 决定立即执行，或写入 pending_actions 的未来 Agent 步。
+  lifecycle:
+    update_timing: 每次解析一条 LLM 动作时校验；每次动作转换时用于一次调度。
+    scope: per_action
+    persistence: 延迟动作保存在 RawAgent.pending_actions，直到目标 Agent 步被处理。
+  examples:
+  - scenario: 字段缺失
+    input:
+      action: MOVE
+    output:
+      delay_steps: 0
+    explanation: Parser 默认补 0。
+  - scenario: 输入超出上限
+    input:
+      delay_steps: 12
+    output:
+      delay_steps: 9
+    explanation: Parser 截断为 9。
+  - scenario: 当前 Agent 步为 30，延迟为 4
+    input:
+      self_steps: 30
+      delay_steps: 4
+    output:
+      target_step: 34
+    explanation: 调度键为 self.steps + delay_steps。
+  relationships:
+  - relation: distinct_from
+    target_id: environment.step_mul
+    description: step_mul 表示一次环境交互推进多少 game loops；delay_steps 是等待多少次 Agent 环境步。
+  - relation: distinct_from
+    target_id: agent.decision_interval
+    description: decision_interval 控制多久请求一次新决策；delay_steps 控制某条动作何时执行。
+  - relation: constrains
+    target_id: validated_action.execution_time
+    description: 决定动作立即执行还是进入 pending_actions。
+  design_intent:
+  - claim: Prompt 要求模型为未来 10 个步骤规划，并将 delay_steps 限制为 0–9；0 为立即执行。
+    status: design_intent
+    evidence_ids:
+    - delay-prompt
+  code_reality:
+  - claim: 缺失值补 0；输入经 int 转换；负值归 0；大于 9 截断为 9；转换失败使解析无效。
+    status: code_reality
+    evidence_ids:
+    - delay-parser
+  - claim: 0 立即执行，否则写入 pending_actions[self.steps + delay_steps]。
+    status: code_reality
+    evidence_ids:
+    - delay-scheduler
+  limitations:
+  - 单位是 STORM 环境/Agent 步；换算成 game loop 或现实时间需结合 step_mul。
+  - int() 可接受部分非整数表示并发生转换，不能简单描述为输入必须已经是 JSON integer。
+  - 本步骤未运行调度流程验证到期动作。
+  known_issues:
+  - id: delay_input_coercion
+    description: 设计要求 integer，但 Parser 使用 int(...) 强制转换，实际接受范围更宽。
+    status: open
+    evidence_ids:
+    - delay-prompt
+    - delay-parser
+  evidence:
+  - id: delay-prompt
+    path: ontology/prompt_template.py
+    symbol: ACTION_SPACE / OUTPUT_FORMAT
+    line_start: 17
+    line_end: 79
+    evidence_type: E3
+    claim: Prompt 描述 delay_steps 为 0–9，0 立即、N 表示 N 步后执行。
+    fact_status: design_intent
+    verified_at: '2026-09-03'
+  - id: delay-parser
+    path: agents/response_parser.py
+    symbol: ResponseParser._validate_schema
+    line_start: 245
+    line_end: 267
+    evidence_type: E1
+    claim: Parser 实现默认值、int 转换、0–9 裁剪和转换错误。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  - id: delay-scheduler
+    path: agents/raw_agent.py
+    symbol: RawAgent._convert_actions_to_pysc2
+    line_start: 907
+    line_end: 991
+    evidence_type: E1
+    claim: 动作分支按 delay_steps 选择立即动作或未来 pending_actions。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: current_source_static_inspection
+      result: passed
+    - name: StarCraft II runtime observation
+      result: not_executed
+    external_sources_checked: false
+    notes: 已静态核对 Prompt、Parser 和调度分支；未运行 Agent、SC2 或动作到期执行测试。

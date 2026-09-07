@@ -1,0 +1,1268 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-06",
+  "purpose": "声明式多变量领域分面；不包含 benchmark 问题 ID 或完整题句。",
+  "matching_policy": {
+    "all_groups": "每组至少命中一个短语",
+    "any_terms": "若存在则至少命中一个上下文词",
+    "none_terms": "命中则排除",
+    "priority": "同时命中时仅保留最高优先级分面"
+  },
+  "facets": [
+    {
+      "id": "facet.raw.identity.triple",
+      "priority": 100,
+      "all_groups": [
+        [
+          "阵营",
+          "所属方",
+          "敌我",
+          "alliance"
+        ],
+        [
+          "兵种",
+          "单位类型",
+          "类型编号",
+          "unit type"
+        ],
+        [
+          "唯一标识",
+          "对象身份",
+          "实例标识",
+          "tag"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.alliance",
+        "raw_unit.unit_type",
+        "raw_unit.tag"
+      ],
+      "any_terms": [
+        "raw",
+        "原始观测",
+        "原始单位"
+      ]
+    },
+    {
+      "id": "facet.raw.survival.four",
+      "priority": 100,
+      "all_groups": [
+        [
+          "生命",
+          "血量",
+          "health",
+          "血盾",
+          "血"
+        ],
+        [
+          "护盾",
+          "盾值",
+          "shield",
+          "盾"
+        ],
+        [
+          "原值",
+          "绝对值",
+          "当前值",
+          "绝对"
+        ],
+        [
+          "比例",
+          "归一",
+          "ratio"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.health",
+        "raw_unit.health_ratio",
+        "raw_unit.shield",
+        "raw_unit.shield_ratio"
+      ],
+      "any_terms": [
+        "raw",
+        "原始单位",
+        "特征"
+      ]
+    },
+    {
+      "id": "facet.raw.position.cooldown",
+      "priority": 100,
+      "all_groups": [
+        [
+          "位置",
+          "坐标",
+          "横纵",
+          "平面"
+        ],
+        [
+          "开火",
+          "武器",
+          "攻击"
+        ],
+        [
+          "等待",
+          "冷却",
+          "多久",
+          "cooldown"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.x",
+        "raw_unit.y",
+        "raw_unit.weapon_cooldown"
+      ],
+      "any_terms": [
+        "raw",
+        "原始单位"
+      ]
+    },
+    {
+      "id": "facet.raw_abox.identity.chain",
+      "priority": 110,
+      "all_groups": [
+        [
+          "阵营",
+          "alliance"
+        ],
+        [
+          "唯一标识",
+          "身份",
+          "tag"
+        ],
+        [
+          "前后",
+          "两层",
+          "映射",
+          "变成"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.alliance",
+        "raw_unit.tag",
+        "abox.unit.alliance",
+        "abox.unit.tag"
+      ],
+      "any_terms": [
+        "raw",
+        "原始"
+      ]
+    },
+    {
+      "id": "facet.health.three.layers",
+      "priority": 110,
+      "all_groups": [
+        [
+          "血量",
+          "生命",
+          "hp"
+        ],
+        [
+          "观测",
+          "raw"
+        ],
+        [
+          "实例",
+          "abox",
+          "图节点"
+        ],
+        [
+          "静态",
+          "tbox",
+          "类型"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.health",
+        "abox.unit.hp",
+        "tbox.entity.hp"
+      ]
+    },
+    {
+      "id": "facet.armor.actual.lineage",
+      "priority": 115,
+      "all_groups": [
+        [
+          "armor",
+          "护甲"
+        ],
+        [
+          "实际",
+          "来源",
+          "接收",
+          "错位"
+        ],
+        [
+          "raw",
+          "原始量"
+        ],
+        [
+          "abox",
+          "实例图",
+          "图中"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.shield",
+        "abox.unit.armor"
+      ]
+    },
+    {
+      "id": "facet.tbox.offense",
+      "priority": 100,
+      "all_groups": [
+        [
+          "伤害",
+          "单次伤害",
+          "attack damage"
+        ],
+        [
+          "周期",
+          "攻击速度",
+          "attack speed"
+        ],
+        [
+          "每秒",
+          "dps",
+          "秒伤"
+        ],
+        [
+          "射程",
+          "攻击距离",
+          "range"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.attack_damage",
+        "tbox.entity.attack_speed",
+        "tbox.entity.dps",
+        "tbox.entity.attack_range"
+      ],
+      "any_terms": [
+        "静态",
+        "tbox",
+        "类型表",
+        "火力"
+      ]
+    },
+    {
+      "id": "facet.tbox.mobility_perception",
+      "priority": 100,
+      "all_groups": [
+        [
+          "移动",
+          "移速",
+          "movement"
+        ],
+        [
+          "视野",
+          "可见范围",
+          "sight"
+        ],
+        [
+          "攻击距离",
+          "射程",
+          "attack range"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.movement_speed",
+        "tbox.entity.sight",
+        "tbox.entity.attack_range"
+      ],
+      "any_terms": [
+        "静态",
+        "tbox",
+        "单位画像"
+      ]
+    },
+    {
+      "id": "facet.tbox.production",
+      "priority": 100,
+      "all_groups": [
+        [
+          "矿物",
+          "晶体矿",
+          "mineral",
+          "矿"
+        ],
+        [
+          "瓦斯",
+          "气体",
+          "gas",
+          "vespene",
+          "气"
+        ],
+        [
+          "人口",
+          "补给",
+          "supply"
+        ],
+        [
+          "建造时间",
+          "生产时间",
+          "耗时",
+          "build time"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.mineral_cost",
+        "tbox.entity.gas_cost",
+        "tbox.entity.supply_cost",
+        "tbox.entity.build_time"
+      ],
+      "any_terms": [
+        "静态",
+        "tbox",
+        "生产",
+        "建造"
+      ]
+    },
+    {
+      "id": "facet.tbox.description_classes",
+      "priority": 100,
+      "all_groups": [
+        [
+          "说明",
+          "描述",
+          "description"
+        ],
+        [
+          "节点类型",
+          "node type"
+        ],
+        [
+          "实体大类",
+          "类别",
+          "category"
+        ],
+        [
+          "资源细类",
+          "资源类型",
+          "resource type"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.description",
+        "tbox.entity.node_type",
+        "tbox.entity.category",
+        "tbox.entity.resource_type"
+      ],
+      "any_terms": [
+        "tbox",
+        "静态",
+        "实体卡片"
+      ]
+    },
+    {
+      "id": "facet.abox.descriptor",
+      "priority": 100,
+      "all_groups": [
+        [
+          "种族",
+          "race"
+        ],
+        [
+          "单位类别",
+          "unit class"
+        ],
+        [
+          "节点类别",
+          "节点类型",
+          "node type"
+        ],
+        [
+          "说明",
+          "描述",
+          "description"
+        ]
+      ],
+      "variable_ids": [
+        "abox.unit.race",
+        "abox.unit.unit_class",
+        "abox.unit.node_type",
+        "abox.unit.description"
+      ],
+      "any_terms": [
+        "abox",
+        "实例节点",
+        "实例图"
+      ]
+    },
+    {
+      "id": "facet.abox.combat",
+      "priority": 100,
+      "all_groups": [
+        [
+          "攻击伤害",
+          "伤害"
+        ],
+        [
+          "攻击距离",
+          "射程"
+        ],
+        [
+          "攻击速度",
+          "攻击周期"
+        ],
+        [
+          "移动速度",
+          "移速"
+        ]
+      ],
+      "variable_ids": [
+        "abox.unit.attack_damage",
+        "abox.unit.attack_range",
+        "abox.unit.attack_speed",
+        "abox.unit.movement_speed"
+      ],
+      "any_terms": [
+        "abox",
+        "实例图",
+        "实例节点"
+      ]
+    },
+    {
+      "id": "facet.abox.edge.identity",
+      "priority": 100,
+      "all_groups": [
+        [
+          "起点",
+          "源节点",
+          "source"
+        ],
+        [
+          "终点",
+          "目标节点",
+          "target"
+        ],
+        [
+          "边类别",
+          "关系类别",
+          "edge class"
+        ],
+        [
+          "边型",
+          "关系类型",
+          "edge type"
+        ]
+      ],
+      "variable_ids": [
+        "abox.relation.source_node",
+        "abox.relation.target_node",
+        "abox.relation.edge_class",
+        "abox.relation.edge_type"
+      ],
+      "any_terms": [
+        "关系",
+        "边",
+        "edge"
+      ]
+    },
+    {
+      "id": "facet.abox.edge.explanation",
+      "priority": 100,
+      "all_groups": [
+        [
+          "有效程度",
+          "有效性",
+          "effectiveness"
+        ],
+        [
+          "理由",
+          "解释原因",
+          "reason"
+        ]
+      ],
+      "variable_ids": [
+        "abox.relation.effectiveness",
+        "abox.relation.reason"
+      ],
+      "any_terms": [
+        "关系",
+        "边",
+        "edge"
+      ]
+    },
+    {
+      "id": "facet.abox.graph.counters",
+      "priority": 100,
+      "all_groups": [
+        [
+          "步编号",
+          "更新步数",
+          "step count"
+        ],
+        [
+          "敌方实例",
+          "敌军节点",
+          "enemy count"
+        ]
+      ],
+      "variable_ids": [
+        "abox.graph.step_count",
+        "abox.graph.enemy_count"
+      ],
+      "any_terms": [
+        "图级",
+        "battlefieldgraph",
+        "图状态"
+      ]
+    },
+    {
+      "id": "facet.tactical.side_counts",
+      "priority": 100,
+      "all_groups": [
+        [
+          "我方单位数",
+          "友军数量",
+          "friendly count"
+        ],
+        [
+          "敌方单位数",
+          "敌军数量",
+          "enemy count"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_count",
+        "derived.tactical.enemy_count"
+      ],
+      "any_terms": [
+        "战术",
+        "摘要",
+        "双方规模"
+      ]
+    },
+    {
+      "id": "facet.tactical.spatial",
+      "priority": 100,
+      "all_groups": [
+        [
+          "我方质心",
+          "友军中心",
+          "friendly centroid"
+        ],
+        [
+          "敌方质心",
+          "敌军中心",
+          "enemy centroid"
+        ],
+        [
+          "中心间隔",
+          "阵型距离",
+          "formation distance"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_centroid",
+        "derived.tactical.enemy_centroid",
+        "derived.tactical.formation_distance"
+      ],
+      "any_terms": [
+        "战术",
+        "空间态势",
+        "摘要"
+      ]
+    },
+    {
+      "id": "facet.tactical.fire",
+      "priority": 100,
+      "all_groups": [
+        [
+          "立即开火",
+          "可开火",
+          "ready to fire"
+        ],
+        [
+          "单位数量",
+          "计数",
+          "count"
+        ],
+        [
+          "就绪程度",
+          "火力就绪",
+          "readiness"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.ready_to_fire_count",
+        "derived.tactical.fire_readiness"
+      ],
+      "any_terms": [
+        "战术",
+        "摘要"
+      ]
+    },
+    {
+      "id": "facet.tactical.health",
+      "priority": 100,
+      "all_groups": [
+        [
+          "友军平均",
+          "我方平均",
+          "friendly average"
+        ],
+        [
+          "敌军平均",
+          "敌方平均",
+          "enemy average"
+        ],
+        [
+          "健康等级",
+          "生存状态",
+          "health status",
+          "健康状态"
+        ]
+      ],
+      "variable_ids": [
+        "derived.tactical.friendly_avg_hp",
+        "derived.tactical.enemy_avg_hp",
+        "derived.tactical.health_status"
+      ],
+      "any_terms": [
+        "生命",
+        "血量",
+        "生存态势"
+      ]
+    },
+    {
+      "id": "facet.action.decision_metadata",
+      "priority": 100,
+      "all_groups": [
+        [
+          "动作主类",
+          "动作类型",
+          "type"
+        ],
+        [
+          "子类",
+          "subtype"
+        ],
+        [
+          "优先级",
+          "priority"
+        ],
+        [
+          "推理说明",
+          "决策理由",
+          "reasoning"
+        ]
+      ],
+      "variable_ids": [
+        "action.type",
+        "action.subtype",
+        "action.priority",
+        "action.reasoning"
+      ],
+      "any_terms": [
+        "动作",
+        "决策",
+        "schema"
+      ]
+    },
+    {
+      "id": "facet.action.target_contract",
+      "priority": 100,
+      "all_groups": [
+        [
+          "执行单位",
+          "单位集合",
+          "actors",
+          "谁执行",
+          "执行者"
+        ],
+        [
+          "目标类型",
+          "目标解释",
+          "target type",
+          "何种类型",
+          "怎样解释目标"
+        ],
+        [
+          "目标数据",
+          "目标值",
+          "target"
+        ]
+      ],
+      "variable_ids": [
+        "action.units",
+        "action.target_type",
+        "action.target"
+      ],
+      "any_terms": [
+        "动作契约",
+        "schema",
+        "动作"
+      ]
+    },
+    {
+      "id": "facet.action.queue",
+      "priority": 100,
+      "all_groups": [
+        [
+          "计划对象",
+          "主计划",
+          "action plan"
+        ],
+        [
+          "队列",
+          "计划动作集合",
+          "planned actions"
+        ],
+        [
+          "等待步数",
+          "延迟步数",
+          "delay steps"
+        ]
+      ],
+      "variable_ids": [
+        "action.plan",
+        "action.planned_actions",
+        "action.delay_steps"
+      ],
+      "any_terms": [
+        "调度",
+        "延时",
+        "动作"
+      ]
+    },
+    {
+      "id": "facet.action.invalid",
+      "priority": 100,
+      "all_groups": [
+        [
+          "失败条目",
+          "无效动作列表",
+          "invalid actions"
+        ],
+        [
+          "原因聚合",
+          "原因计数",
+          "reason counts"
+        ]
+      ],
+      "variable_ids": [
+        "action.invalid_actions",
+        "action.invalid_reason_counts"
+      ],
+      "any_terms": [
+        "解析器",
+        "拒绝",
+        "失败",
+        "无效"
+      ]
+    },
+    {
+      "id": "facet.environment.raw_contract",
+      "priority": 100,
+      "all_groups": [
+        [
+          "raw 单位",
+          "raw单位",
+          "raw units"
+        ],
+        [
+          "raw 动作",
+          "raw动作",
+          "raw actions"
+        ],
+        [
+          "raw 分辨率",
+          "原始分辨率",
+          "raw resolution"
+        ],
+        [
+          "地图名",
+          "地图名称",
+          "map name"
+        ]
+      ],
+      "variable_ids": [
+        "environment.use_raw_units",
+        "environment.use_raw_actions",
+        "environment.raw_resolution",
+        "environment.map_name"
+      ],
+      "any_terms": [
+        "环境",
+        "sc2env",
+        "接口"
+      ]
+    },
+    {
+      "id": "facet.environment.clock_display",
+      "priority": 100,
+      "all_groups": [
+        [
+          "步长倍率",
+          "推进倍率",
+          "step mul"
+        ],
+        [
+          "实时模式",
+          "realtime"
+        ],
+        [
+          "可视化开关",
+          "显示开关",
+          "visualize"
+        ]
+      ],
+      "variable_ids": [
+        "environment.step_mul",
+        "environment.realtime",
+        "environment.visualize"
+      ],
+      "any_terms": [
+        "环境",
+        "运行节奏",
+        "显示"
+      ]
+    },
+    {
+      "id": "facet.player.economy",
+      "priority": 100,
+      "all_groups": [
+        [
+          "晶体矿",
+          "矿物",
+          "minerals"
+        ],
+        [
+          "高能瓦斯",
+          "瓦斯",
+          "vespene"
+        ]
+      ],
+      "variable_ids": [
+        "player.minerals",
+        "player.vespene"
+      ],
+      "any_terms": [
+        "玩家",
+        "经济",
+        "资源"
+      ]
+    },
+    {
+      "id": "facet.player.supply",
+      "priority": 100,
+      "all_groups": [
+        [
+          "已占用",
+          "已用人口",
+          "food used"
+        ],
+        [
+          "容量上限",
+          "人口上限",
+          "food cap"
+        ],
+        [
+          "尚可使用",
+          "剩余人口",
+          "supply remaining"
+        ]
+      ],
+      "variable_ids": [
+        "player.food_used",
+        "player.food_cap",
+        "player.supply_remaining"
+      ],
+      "any_terms": [
+        "人口",
+        "补给",
+        "player"
+      ]
+    },
+    {
+      "id": "facet.timestep.result",
+      "priority": 100,
+      "all_groups": [
+        [
+          "终局",
+          "是否结束",
+          "is last",
+          "结束标志",
+          "结束状态"
+        ],
+        [
+          "本步奖励",
+          "奖励变化",
+          "reward delta",
+          "奖励增量"
+        ],
+        [
+          "累计分数",
+          "总分",
+          "cumulative score",
+          "累计得分"
+        ]
+      ],
+      "variable_ids": [
+        "timestep.is_last",
+        "timestep.reward_delta",
+        "timestep.score_cumulative_0"
+      ],
+      "any_terms": [
+        "timestep",
+        "时间步",
+        "每步"
+      ]
+    },
+    {
+      "id": "facet.functioncall.payload",
+      "priority": 100,
+      "all_groups": [
+        [
+          "排队标志",
+          "queued"
+        ],
+        [
+          "raw 标志",
+          "raw flag"
+        ],
+        [
+          "单位tag列表",
+          "单位 tag 列表",
+          "unit tags"
+        ],
+        [
+          "目标",
+          "target"
+        ]
+      ],
+      "variable_ids": [
+        "pysc2.function.queued",
+        "pysc2.function.raw_flag",
+        "pysc2.function.unit_tags",
+        "pysc2.function.target"
+      ],
+      "any_terms": [
+        "functioncall",
+        "function call",
+        "执行函数"
+      ]
+    },
+    {
+      "id": "facet.functioncall.ids",
+      "priority": 100,
+      "all_groups": [
+        [
+          "no_op",
+          "no op"
+        ],
+        [
+          "move"
+        ],
+        [
+          "attack"
+        ],
+        [
+          "build"
+        ],
+        [
+          "train"
+        ]
+      ],
+      "variable_ids": [
+        "pysc2.no_op.function_id",
+        "pysc2.move.function_id",
+        "pysc2.attack.function_id",
+        "pysc2.build.function_id",
+        "pysc2.train.function_id"
+      ],
+      "any_terms": [
+        "function id",
+        "函数编号",
+        "执行器"
+      ]
+    },
+    {
+      "id": "facet.swm.input_control",
+      "priority": 100,
+      "all_groups": [
+        [
+          "abox状态",
+          "abox state"
+        ],
+        [
+          "候选动作",
+          "planned actions"
+        ],
+        [
+          "预测步数",
+          "prediction steps"
+        ],
+        [
+          "候选序号",
+          "candidate index"
+        ]
+      ],
+      "variable_ids": [
+        "swm.input.abox_state",
+        "swm.input.planned_actions",
+        "swm.prediction_steps",
+        "swm.candidate_index"
+      ],
+      "any_terms": [
+        "swm",
+        "世界模型"
+      ]
+    },
+    {
+      "id": "facet.swm.result_envelope",
+      "priority": 100,
+      "all_groups": [
+        [
+          "预测集合",
+          "predictions"
+        ],
+        [
+          "单步编号",
+          "prediction step"
+        ],
+        [
+          "原文",
+          "原始响应",
+          "raw response"
+        ],
+        [
+          "token用量",
+          "token usage"
+        ]
+      ],
+      "variable_ids": [
+        "swm.predictions",
+        "swm.prediction.step",
+        "swm.raw_response",
+        "swm.token_usage"
+      ],
+      "any_terms": [
+        "swm",
+        "世界模型",
+        "结果包"
+      ]
+    },
+    {
+      "id": "facet.swm.quality",
+      "priority": 100,
+      "all_groups": [
+        [
+          "生命rmse",
+          "health rmse"
+        ],
+        [
+          "位置rmse",
+          "position rmse"
+        ],
+        [
+          "关系准确率",
+          "relation accuracy"
+        ],
+        [
+          "总体误差",
+          "overall error"
+        ]
+      ],
+      "variable_ids": [
+        "metric.swm.health_rmse",
+        "metric.swm.position_rmse",
+        "metric.swm.relation_accuracy",
+        "metric.swm.overall_error"
+      ],
+      "any_terms": [
+        "swm",
+        "世界模型",
+        "评估"
+      ]
+    },
+    {
+      "id": "facet.llm.usage",
+      "priority": 100,
+      "all_groups": [
+        [
+          "调用次数",
+          "decision calls"
+        ],
+        [
+          "决策耗时",
+          "decision time"
+        ],
+        [
+          "平均每次token",
+          "avg tokens"
+        ],
+        [
+          "输入token",
+          "prompt tokens"
+        ],
+        [
+          "输出token",
+          "completion tokens"
+        ]
+      ],
+      "variable_ids": [
+        "metric.llm.decision_calls",
+        "metric.llm.avg_decision_time",
+        "metric.llm.avg_tokens_per_decision",
+        "metric.llm.prompt_tokens",
+        "metric.llm.completion_tokens"
+      ],
+      "any_terms": [
+        "llm",
+        "模型开销",
+        "决策模型"
+      ]
+    },
+    {
+      "id": "facet.experiment.outcome",
+      "priority": 100,
+      "all_groups": [
+        [
+          "最终分数",
+          "final score"
+        ],
+        [
+          "平均分",
+          "average score",
+          "avg score"
+        ],
+        [
+          "总体动作失败率",
+          "动作失败率",
+          "failure rate",
+          "三类动作失败率",
+          "overall action failure"
+        ],
+        [
+          "延迟动作失败率",
+          "delayed failure",
+          "三类动作失败率"
+        ],
+        [
+          "决策失败率",
+          "decision failure",
+          "三类动作失败率"
+        ]
+      ],
+      "variable_ids": [
+        "metric.episode.final_score",
+        "metric.experiment.avg_score",
+        "metric.action.failure_rate",
+        "metric.action.delayed_failure_rate",
+        "metric.action.decision_failure_rate"
+      ],
+      "any_terms": [
+        "实验",
+        "汇总",
+        "指标"
+      ]
+    },
+    {
+      "id": "facet.ambiguity.hp",
+      "priority": 120,
+      "all_groups": [
+        [
+          "hp"
+        ],
+        [
+          "未注明",
+          "没注明",
+          "未指定",
+          "没指定",
+          "哪一层",
+          "来自哪里"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.health",
+        "abox.unit.hp",
+        "tbox.entity.hp"
+      ],
+      "none_terms": [
+        "health_ratio",
+        "比例"
+      ],
+      "ambiguous": true
+    },
+    {
+      "id": "facet.ambiguity.alliance",
+      "priority": 120,
+      "all_groups": [
+        [
+          "alliance"
+        ],
+        [
+          "未指出",
+          "没指出",
+          "未指定",
+          "没有说明",
+          "哪一层",
+          "rawunit还是abox",
+          "没有指出",
+          "没有指定"
+        ]
+      ],
+      "variable_ids": [
+        "raw_unit.alliance",
+        "abox.unit.alliance"
+      ],
+      "ambiguous": true
+    },
+    {
+      "id": "facet.ambiguity.attack_range",
+      "priority": 120,
+      "all_groups": [
+        [
+          "attack_range",
+          "attack range"
+        ],
+        [
+          "未交代",
+          "没交代",
+          "未指定",
+          "没有说明",
+          "哪一层",
+          "静态还是运行时",
+          "没有交代",
+          "没有指定"
+        ]
+      ],
+      "variable_ids": [
+        "tbox.entity.attack_range",
+        "abox.unit.attack_range"
+      ],
+      "ambiguous": true
+    },
+    {
+      "id": "facet.functioncall.combat-three",
+      "priority": 130,
+      "all_groups": [
+        [
+          "无操作",
+          "no_op",
+          "no op"
+        ],
+        [
+          "移动",
+          "move"
+        ],
+        [
+          "攻击",
+          "attack"
+        ],
+        [
+          "函数编号",
+          "function id",
+          "编号变量"
+        ]
+      ],
+      "variable_ids": [
+        "pysc2.no_op.function_id",
+        "pysc2.move.function_id",
+        "pysc2.attack.function_id"
+      ]
+    }
+  ]
+}

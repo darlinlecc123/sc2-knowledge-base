@@ -1,0 +1,2449 @@
+knowledge_base: storm-sc2kb-v1-raw
+schema: knowledge/schemas/variable.schema.json
+schema_version: 1.0.0
+generated_at: '2026-09-03'
+records:
+- schema_version: 1.0.0
+  id: tbox.entity.armor
+  canonical_name: armor
+  names:
+    zh: 类型护甲
+    en: Type Armor
+    code: armor
+  category: tbox_static
+  aliases:
+  - 类型护甲
+  - Type Armor
+  - armor
+  definition: 本体数据中已收录实体的类型级静态 armor 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 armor 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.armor
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 27
+      line_end: 27
+    extraction_code:
+    - '"armor":'
+    transformation_formula:
+    - armor=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 0
+        SCV: 0
+        Zergling: 0
+        Roach: 1
+        Reaper: 0
+        Marauder: 1
+        SiegeTank: 1
+        Medivac: 1
+        Hellion: 0
+        Banshee: 0
+        Baneling: 0
+        Hydralisk: 0
+        Mutalisk: 0
+        Overlord: 0
+        Drone: 0
+        Barracks: 1
+        SupplyDepot: 1
+        CommandCenter: 1
+    explanation: 本体数据中已收录实体的类型级静态 armor 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 armor 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-armor-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-armor-code
+  evidence:
+  - id: tbox-entity-armor-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 27
+    line_end: 27
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 armor 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.attack_damage
+  canonical_name: attack_damage
+  names:
+    zh: 攻击伤害
+    en: Attack Damage
+    code: attack_damage
+  category: tbox_static
+  aliases:
+  - 攻击伤害
+  - Attack Damage
+  - attack_damage
+  definition: 本体数据中已收录实体的类型级静态 attack_damage 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 attack_damage 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.attack_damage
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 28
+      line_end: 28
+    extraction_code:
+    - '"attack_damage":'
+    transformation_formula:
+    - attack_damage=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 6
+        SCV: 5
+        Zergling: 5
+        Roach: 16
+        Reaper: 4
+        Marauder: 10
+        SiegeTank: 15
+        Medivac: 0
+        Hellion: 8
+        Banshee: 12
+        Baneling: 20
+        Hydralisk: 12
+        Mutalisk: 9
+        Overlord: 0
+        Drone: 5
+    explanation: 本体数据中已收录实体的类型级静态 attack_damage 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 attack_damage 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-attack-damage-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-attack-damage-code
+  evidence:
+  - id: tbox-entity-attack-damage-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 28
+    line_end: 28
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 attack_damage 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.attack_range
+  canonical_name: attack_range
+  names:
+    zh: 攻击射程
+    en: Attack Range
+    code: attack_range
+  category: tbox_static
+  aliases:
+  - 攻击射程
+  - Attack Range
+  - attack_range
+  definition: 本体数据中已收录实体的类型级静态 attack_range 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 attack_range 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.attack_range
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 29
+      line_end: 29
+    extraction_code:
+    - '"attack_range":'
+    transformation_formula:
+    - attack_range=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 5.0
+        SCV: 0.2
+        Zergling: 0.1
+        Roach: 4.0
+        Reaper: 5.0
+        Marauder: 6.0
+        SiegeTank: 7.0
+        Medivac: 0.0
+        Hellion: 5.0
+        Banshee: 6.0
+        Baneling: 0.25
+        Hydralisk: 5.0
+        Mutalisk: 3.0
+        Overlord: 0.0
+        Drone: 0.1
+    explanation: 本体数据中已收录实体的类型级静态 attack_range 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 attack_range 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-attack-range-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-attack-range-code
+  evidence:
+  - id: tbox-entity-attack-range-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 29
+    line_end: 29
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 attack_range 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.attack_speed
+  canonical_name: attack_speed
+  names:
+    zh: 攻击速度字段
+    en: Attack Speed
+    code: attack_speed
+  category: tbox_static
+  aliases:
+  - 攻击速度字段
+  - Attack Speed
+  - attack_speed
+  definition: 本体数据中已收录实体的类型级静态 attack_speed 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 attack_speed 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.attack_speed
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 66
+      line_end: 66
+    extraction_code:
+    - '"attack_speed":'
+    transformation_formula:
+    - attack_speed=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Zergling: 0.497
+        Roach: 2.0
+        Reaper: 1.1
+        Marauder: 1.5
+        SiegeTank: 0.74
+        Medivac: 0.0
+        Hellion: 1.79
+        Banshee: 0.89
+        Baneling: 0.0
+        Hydralisk: 0.59
+        Mutalisk: 1.09
+        Overlord: 0.0
+        Drone: 1.07
+    explanation: 本体数据中已收录实体的类型级静态 attack_speed 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 attack_speed 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-attack-speed-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-attack-speed-code
+  evidence:
+  - id: tbox-entity-attack-speed-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 66
+    line_end: 66
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 attack_speed 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.build_time
+  canonical_name: build_time
+  names:
+    zh: 建造时间
+    en: Build Time
+    code: build_time
+  category: tbox_static
+  aliases:
+  - 建造时间
+  - Build Time
+  - build_time
+  definition: 本体数据中已收录实体的类型级静态 build_time 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 build_time 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.build_time
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 36
+      line_end: 36
+    extraction_code:
+    - '"build_time":'
+    transformation_formula:
+    - build_time=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 25
+        SCV: 17
+        Zergling: 17
+        Roach: 27
+        Reaper: 32
+        Marauder: 21
+        SiegeTank: 32
+        Medivac: 30
+        Hellion: 21
+        Banshee: 43
+        Baneling: 14
+        Hydralisk: 24
+        Mutalisk: 24
+        Overlord: 18
+        Drone: 12
+        Barracks: 46
+        SupplyDepot: 21
+        CommandCenter: 71
+    explanation: 本体数据中已收录实体的类型级静态 build_time 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 build_time 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-build-time-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-build-time-code
+  evidence:
+  - id: tbox-entity-build-time-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 36
+    line_end: 36
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 build_time 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.category
+  canonical_name: category
+  names:
+    zh: 实体类别
+    en: Entity Category
+    code: category
+  category: tbox_static
+  aliases:
+  - 实体类别
+  - Entity Category
+  - category
+  definition: 本体数据中已收录实体的类型级静态 category 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 category 属性。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.category
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 25
+      line_end: 25
+    extraction_code:
+    - '"category":'
+    transformation_formula:
+    - category=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: Combat
+        SCV: Worker
+        Zergling: Combat
+        Roach: Combat
+        Reaper: Combat
+        Marauder: Combat
+        SiegeTank: Combat
+        Medivac: Support
+        Hellion: Combat
+        Banshee: Combat
+        Baneling: Combat
+        Hydralisk: Combat
+        Mutalisk: Combat
+        Overlord: Support
+        Drone: Worker
+        Barracks: Production
+        SupplyDepot: Resource
+        CommandCenter: Main
+    explanation: 本体数据中已收录实体的类型级静态 category 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 category 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-category-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-category-code
+  evidence:
+  - id: tbox-entity-category-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 25
+    line_end: 25
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 category 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.description
+  canonical_name: description
+  names:
+    zh: 实体说明
+    en: Description
+    code: description
+  category: tbox_static
+  aliases:
+  - 实体说明
+  - Description
+  - description
+  definition: 本体数据中已收录实体的类型级静态 description 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 description 属性。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.description
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 37
+      line_end: 37
+    extraction_code:
+    - '"description":'
+    transformation_formula:
+    - description=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: Basic Terran infantry. High fire rate with low per-shot damage. Vulnerable with only 45 HP, easily eliminated
+          by area damage. Low cost enables rapid production and numerical superiority. Effective against melee units (Zergling)
+          due to range advantage, but struggles against high-armor units (Roach).
+        SCV: Terran worker unit. Can gather minerals and gas, construct buildings, and repair mechanical units. Vulnerable
+          with only 45 HP and no armor. Low cost allows for rapid production, but should be protected from enemy attacks.
+          Essential for economy and infrastructure development.
+        Zergling: Cheapest Zerg melee unit with high mobility for flanking and harassment. Low HP without armor makes it vulnerable
+          to ranged fire suppression.
+        Roach: Zerg medium ground unit with high HP (145) and armor, effectively resists low-damage weapons. Strong attack
+          power with slow fire rate, excels against high-HP units.
+        Reaper: Highly mobile Terran scout/skirmisher. Cliff-jumping ability and KD8 charge enable hit-and-run tactics. Effective
+          against light units, weak against heavy armor.
+        Marauder: Terran heavy infantry with concussive shells (slows armored). Excellent vs Roach/Stalker/Immortal. Vulnerable
+          to massed light units.
+        SiegeTank: Terran heavy mech. Siege Mode unlocks splash damage at 13 range, devastating massed armies. Vulnerable
+          to flanks while sieged.
+        Medivac: Terran flying medic / dropship. Heals biological units (12.6 HP/s) and transports infantry (8 cargo). Cannot
+          attack.
+        Hellion: Fast Terran light vehicle. Linear flame attack (+5 vs Light) excels against workers and light infantry. Fragile
+          vs heavy fire.
+        Banshee: Terran cloakable air-to-ground gunship. High burst DPS against ground; cannot attack air. Cloaking enables
+          harassment.
+        Baneling: Zerg suicide AOE unit (morphed from Zergling). Single-shot 20 splash damage (+15 vs Light) devastates clumped
+          Marines/Zerglings. Dies on use.
+        Hydralisk: Zerg ranged unit firing both ground and air. High DPS but fragile (90 HP, 0 armor). Backbone vs Marines
+          and air harass.
+        Mutalisk: Zerg mobile flying unit with bouncing glaive attack (3 targets). Excels at harass / map control. Weak vs
+          Marine massed AA.
+        Overlord: Zerg supply provider and basic detector (after upgrade). Slow flying unit, vital for population cap. Cannot
+          attack.
+        Drone: Zerg worker. Gathers minerals/gas and morphs into structures (consumed). Essential for economy.
+        Barracks: Terran barracks for infantry production. Requires SupplyDepot prerequisite. Produces Marine, Reaper, Marauder
+          and other infantry units.
+        SupplyDepot: Terran supply structure providing 8 population capacity. Can raise/lower to block ground unit passage
+          when lowered.
+        CommandCenter: Terran main base building. Produces SCV workers and provides 11 population capacity. Upgradable to
+          Planetary_Fortress or Orbital_Command.
+        Mineral: Mineral crystals, primary resource for constructing all buildings and units. Harvested by SCV workers.
+        VespeneGas: Vespene gas, advanced resource for tech upgrades and advanced units. Requires Refinery construction for
+          SCV harvesting.
+        Supply: Population supply limiting maximum unit count. Provided by Supply_Depot and Command_Center structures.
+        Beacon: Score resource used for tracking minigame performance. Accumulated based on actions taken and objectives achieved
+          during the episode.
+    explanation: 本体数据中已收录实体的类型级静态 description 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 description 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-description-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-description-code
+  evidence:
+  - id: tbox-entity-description-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 37
+    line_end: 37
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 description 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.dps
+  canonical_name: dps
+  names:
+    zh: 每秒伤害
+    en: Damage Per Second
+    code: dps
+  category: tbox_static
+  aliases:
+  - 每秒伤害
+  - Damage Per Second
+  - dps
+  definition: 本体数据中已收录实体的类型级静态 dps 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 dps 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.dps
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 31
+      line_end: 31
+    extraction_code:
+    - '"dps":'
+    transformation_formula:
+    - dps=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 9.8
+        SCV: 4.67
+        Reaper: 10.1
+        Marauder: 9.3
+        SiegeTank: 20.3
+        Medivac: 0.0
+        Hellion: 4.5
+        Banshee: 27.0
+        Baneling: 20.0
+        Hydralisk: 20.4
+        Mutalisk: 8.3
+        Overlord: 0.0
+        Drone: 4.67
+    explanation: 本体数据中已收录实体的类型级静态 dps 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 dps 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-dps-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-dps-code
+  evidence:
+  - id: tbox-entity-dps-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 31
+    line_end: 31
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 dps 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.gas_cost
+  canonical_name: gas_cost
+  names:
+    zh: 瓦斯成本
+    en: Gas Cost
+    code: gas_cost
+  category: tbox_static
+  aliases:
+  - 瓦斯成本
+  - Gas Cost
+  - gas_cost
+  definition: 本体数据中已收录实体的类型级静态 gas_cost 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 gas_cost 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.gas_cost
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 34
+      line_end: 34
+    extraction_code:
+    - '"gas_cost":'
+    transformation_formula:
+    - gas_cost=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 0
+        SCV: 0
+        Zergling: 0
+        Roach: 25
+        Reaper: 50
+        Marauder: 25
+        SiegeTank: 125
+        Medivac: 100
+        Hellion: 0
+        Banshee: 100
+        Baneling: 25
+        Hydralisk: 50
+        Mutalisk: 100
+        Overlord: 0
+        Drone: 0
+        Barracks: 0
+        SupplyDepot: 0
+        CommandCenter: 0
+    explanation: 本体数据中已收录实体的类型级静态 gas_cost 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 gas_cost 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-gas-cost-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-gas-cost-code
+  evidence:
+  - id: tbox-entity-gas-cost-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 34
+    line_end: 34
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 gas_cost 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.hp
+  canonical_name: hp
+  names:
+    zh: 类型生命值
+    en: Type HP
+    code: hp
+  category: tbox_static
+  aliases:
+  - 类型生命值
+  - Type HP
+  - hp
+  definition: 本体数据中已收录实体的类型级静态 hp 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 hp 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.hp
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 26
+      line_end: 26
+    extraction_code:
+    - '"hp":'
+    transformation_formula:
+    - hp=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 45
+        SCV: 45
+        Zergling: 35
+        Roach: 145
+        Reaper: 60
+        Marauder: 125
+        SiegeTank: 175
+        Medivac: 150
+        Hellion: 90
+        Banshee: 140
+        Baneling: 30
+        Hydralisk: 90
+        Mutalisk: 120
+        Overlord: 200
+        Drone: 40
+        Barracks: 1000
+        SupplyDepot: 400
+        CommandCenter: 1500
+    explanation: 本体数据中已收录实体的类型级静态 hp 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 hp 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-hp-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-hp-code
+  evidence:
+  - id: tbox-entity-hp-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 26
+    line_end: 26
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 hp 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.mineral_cost
+  canonical_name: mineral_cost
+  names:
+    zh: 矿物成本
+    en: Mineral Cost
+    code: mineral_cost
+  category: tbox_static
+  aliases:
+  - 矿物成本
+  - Mineral Cost
+  - mineral_cost
+  definition: 本体数据中已收录实体的类型级静态 mineral_cost 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 mineral_cost 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.mineral_cost
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 33
+      line_end: 33
+    extraction_code:
+    - '"mineral_cost":'
+    transformation_formula:
+    - mineral_cost=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 50
+        SCV: 50
+        Zergling: 25
+        Roach: 75
+        Reaper: 50
+        Marauder: 100
+        SiegeTank: 150
+        Medivac: 100
+        Hellion: 100
+        Banshee: 150
+        Baneling: 25
+        Hydralisk: 100
+        Mutalisk: 100
+        Overlord: 100
+        Drone: 50
+        Barracks: 150
+        SupplyDepot: 100
+        CommandCenter: 400
+    explanation: 本体数据中已收录实体的类型级静态 mineral_cost 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 mineral_cost 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-mineral-cost-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-mineral-cost-code
+  evidence:
+  - id: tbox-entity-mineral-cost-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 33
+    line_end: 33
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 mineral_cost 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.movement_speed
+  canonical_name: movement_speed
+  names:
+    zh: 移动速度
+    en: Movement Speed
+    code: movement_speed
+  category: tbox_static
+  aliases:
+  - 移动速度
+  - Movement Speed
+  - movement_speed
+  definition: 本体数据中已收录实体的类型级静态 movement_speed 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 movement_speed 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.movement_speed
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 32
+      line_end: 32
+    extraction_code:
+    - '"movement_speed":'
+    transformation_formula:
+    - movement_speed=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 3.15
+        SCV: 3.94
+        Zergling: 3.85
+        Roach: 3.15
+        Reaper: 5.25
+        Marauder: 3.15
+        SiegeTank: 2.25
+        Medivac: 3.5
+        Hellion: 5.95
+        Banshee: 3.85
+        Baneling: 3.5
+        Hydralisk: 3.15
+        Mutalisk: 5.6
+        Overlord: 0.902
+        Drone: 3.94
+    explanation: 本体数据中已收录实体的类型级静态 movement_speed 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 movement_speed 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-movement-speed-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-movement-speed-code
+  evidence:
+  - id: tbox-entity-movement-speed-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 32
+    line_end: 32
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 movement_speed 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.node_type
+  canonical_name: node_type
+  names:
+    zh: 节点类型
+    en: Node Type
+    code: node_type
+  category: tbox_static
+  aliases:
+  - 节点类型
+  - Node Type
+  - node_type
+  definition: 本体数据中已收录实体的类型级静态 node_type 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 node_type 属性。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.node_type
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 22
+      line_end: 22
+    extraction_code:
+    - '"node_type":'
+    transformation_formula:
+    - node_type=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: Unit
+        SCV: Unit
+        Zergling: Unit
+        Roach: Unit
+        Reaper: Unit
+        Marauder: Unit
+        SiegeTank: Unit
+        Medivac: Unit
+        Hellion: Unit
+        Banshee: Unit
+        Baneling: Unit
+        Hydralisk: Unit
+        Mutalisk: Unit
+        Overlord: Unit
+        Drone: Unit
+        Barracks: Building
+        SupplyDepot: Building
+        CommandCenter: Building
+        Mineral: Resource
+        VespeneGas: Resource
+        Supply: Resource
+        Beacon: Resource
+    explanation: 本体数据中已收录实体的类型级静态 node_type 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 node_type 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-node-type-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-node-type-code
+  evidence:
+  - id: tbox-entity-node-type-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 22
+    line_end: 22
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 node_type 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.race
+  canonical_name: race
+  names:
+    zh: 种族
+    en: Race
+    code: race
+  category: tbox_static
+  aliases:
+  - 种族
+  - Race
+  - race
+  definition: 本体数据中已收录实体的类型级静态 race 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 race 属性。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.race
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 24
+      line_end: 24
+    extraction_code:
+    - '"race":'
+    transformation_formula:
+    - race=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: Terran
+        SCV: Terran
+        Zergling: Zerg
+        Roach: Zerg
+        Reaper: Terran
+        Marauder: Terran
+        SiegeTank: Terran
+        Medivac: Terran
+        Hellion: Terran
+        Banshee: Terran
+        Baneling: Zerg
+        Hydralisk: Zerg
+        Mutalisk: Zerg
+        Overlord: Zerg
+        Drone: Zerg
+        Barracks: Terran
+        SupplyDepot: Terran
+        CommandCenter: Terran
+    explanation: 本体数据中已收录实体的类型级静态 race 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 race 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-race-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-race-code
+  evidence:
+  - id: tbox-entity-race-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 24
+    line_end: 24
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 race 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.resource_type
+  canonical_name: resource_type
+  names:
+    zh: 资源类型
+    en: Resource Type
+    code: resource_type
+  category: tbox_static
+  aliases:
+  - 资源类型
+  - Resource Type
+  - resource_type
+  definition: 本体数据中已收录实体的类型级静态 resource_type 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 resource_type 属性。
+  interface:
+    data_type: string
+    python_type: str
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: categorical
+      status: known
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: unknown
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.resource_type
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 349
+      line_end: 349
+    extraction_code:
+    - '"resource_type":'
+    transformation_formula:
+    - resource_type=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Mineral: Mineral
+        VespeneGas: Gas
+        Supply: Supply
+        Beacon: Score
+    explanation: 本体数据中已收录实体的类型级静态 resource_type 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 resource_type 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-resource-type-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-resource-type-code
+  evidence:
+  - id: tbox-entity-resource-type-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 349
+    line_end: 349
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 resource_type 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.sight
+  canonical_name: sight
+  names:
+    zh: 视野
+    en: Sight
+    code: sight
+  category: tbox_static
+  aliases:
+  - 视野
+  - Sight
+  - sight
+  definition: 本体数据中已收录实体的类型级静态 sight 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 sight 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.sight
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 30
+      line_end: 30
+    extraction_code:
+    - '"sight":'
+    transformation_formula:
+    - sight=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 9
+        SCV: 8
+        Reaper: 9
+        Marauder: 10
+        SiegeTank: 11
+        Medivac: 11
+        Hellion: 10
+        Banshee: 10
+        Baneling: 8
+        Hydralisk: 9
+        Mutalisk: 11
+        Overlord: 11
+        Drone: 8
+    explanation: 本体数据中已收录实体的类型级静态 sight 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 sight 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-sight-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-sight-code
+  evidence:
+  - id: tbox-entity-sight-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 30
+    line_end: 30
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 sight 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.supply_cost
+  canonical_name: supply_cost
+  names:
+    zh: 人口成本
+    en: Supply Cost
+    code: supply_cost
+  category: tbox_static
+  aliases:
+  - 人口成本
+  - Supply Cost
+  - supply_cost
+  definition: 本体数据中已收录实体的类型级静态 supply_cost 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 supply_cost 属性。
+  interface:
+    data_type: number
+    python_type: float
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.supply_cost
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 35
+      line_end: 35
+    extraction_code:
+    - '"supply_cost":'
+    transformation_formula:
+    - supply_cost=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 1
+        SCV: 1
+        Zergling: 0.5
+        Roach: 2
+        Reaper: 1
+        Marauder: 2
+        SiegeTank: 3
+        Medivac: 2
+        Hellion: 2
+        Banshee: 3
+        Baneling: 0.5
+        Hydralisk: 2
+        Mutalisk: 2
+        Overlord: 0
+        Drone: 1
+    explanation: 本体数据中已收录实体的类型级静态 supply_cost 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 supply_cost 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-supply-cost-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-supply-cost-code
+  evidence:
+  - id: tbox-entity-supply-cost-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 35
+    line_end: 35
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 supply_cost 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.entity.unit_type_id
+  canonical_name: unit_type_id
+  names:
+    zh: 单位类型编号
+    en: Unit Type ID
+    code: unit_type_id
+  category: tbox_static
+  aliases:
+  - 单位类型编号
+  - Unit Type ID
+  - unit_type_id
+  definition: 本体数据中已收录实体的类型级静态 unit_type_id 属性。
+  intuitive_explanation: 本体数据中已收录实体的类型级静态 unit_type_id 属性。
+  interface:
+    data_type: integer
+    python_type: int
+    shape:
+      kind: scalar
+      dimensions: []
+      description: 单个标量值。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: needs_verification
+      minimum: 0
+      maximum: null
+      minimum_inclusive: true
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - TBox node.unit_type_id
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: UNITS / BUILDINGS / RESOURCES
+      line_start: 23
+      line_end: 23
+    extraction_code:
+    - '"unit_type_id":'
+    transformation_formula:
+    - unit_type_id=ontology node attribute
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      entity: Marine
+    output:
+      known_values:
+        Marine: 48
+        SCV: 45
+        Zergling: 105
+        Roach: 110
+        Reaper: 49
+        Marauder: 51
+        SiegeTank: 33
+        Medivac: 54
+        Hellion: 53
+        Banshee: 55
+        Baneling: 9
+        Hydralisk: 107
+        Mutalisk: 108
+        Overlord: 106
+        Drone: 104
+        Barracks: 21
+        SupplyDepot: 19
+        CommandCenter: 18
+        Mineral: 341
+        VespeneGas: 342
+        Beacon: 317
+    explanation: 本体数据中已收录实体的类型级静态 unit_type_id 属性。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 本体数据中已收录实体的类型级静态 unit_type_id 属性。
+    status: code_reality
+    evidence_ids:
+    - tbox-entity-unit-type-id-code
+  limitations:
+  - 当前值来自 marine_ontology.py；OntologyLoader 可能优先读取 pickle 缓存，二者可能不同步。
+  - 未逐项用 SC2 运行时或官方资料核验。
+  known_issues:
+  - id: tbox_cache_sync
+    description: OntologyLoader 优先使用 data/ontology/ontology_graph.pkl，Python 定义修改后需重建缓存。
+    status: needs_verification
+    evidence_ids:
+    - tbox-entity-unit-type-id-code
+  evidence:
+  - id: tbox-entity-unit-type-id-code
+    path: ontology/data/marine_ontology.py
+    symbol: UNITS / BUILDINGS / RESOURCES
+    line_start: 23
+    line_end: 23
+    evidence_type: E1
+    claim: 本体数据中已收录实体的类型级静态 unit_type_id 属性。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。
+- schema_version: 1.0.0
+  id: tbox.relation.edge
+  canonical_name: EDGES
+  names:
+    zh: 本体关系边
+    en: Ontology Relation Edge
+    code: EDGES
+  category: tbox_static
+  aliases:
+  - 本体关系边
+  - Ontology Relation Edge
+  - EDGES
+  definition: 类型级生产、依赖、消耗和克制等关系的边元组列表。
+  intuitive_explanation: 类型级生产、依赖、消耗和克制等关系的边元组列表。
+  interface:
+    data_type: array
+    python_type: list
+    shape:
+      kind: sequence
+      dimensions: []
+      description: 可变长度序列。
+    unit:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    dimension:
+      value: null
+      status: unknown
+      note: 按当前代码记录；未声明时保持未知。
+    range:
+      status: unknown
+      minimum: null
+      maximum: null
+      minimum_inclusive: null
+      maximum_inclusive: null
+      description: 当前代码能证明的范围；其余范围待核验。
+    enum_values:
+      status: not_applicable
+      values: []
+      description: 不使用或未声明枚举。
+    nullable: false
+    pysc2_path:
+      value: null
+      status: not_applicable
+      note: 直接接口路径或当前代码的位置索引表达。
+    storm_paths:
+    - ontology.data.marine_ontology.EDGES
+  provenance:
+    source_layer: tbox_static
+    derivation_kind: static_declaration
+    upstream_variable_ids: []
+  implementation:
+    source_locations:
+    - path: ontology/data/marine_ontology.py
+      symbol: EDGES
+      line_start: 394
+      line_end: 394
+    extraction_code:
+    - EDGES =
+    transformation_formula:
+    - edge=(source,target,attributes)
+  consumers:
+  - name: STORM 当前实现
+    path: ontology/data/marine_ontology.py
+    symbol: EDGES
+    purpose: 读取、转换、校验、执行或统计该变量。
+  lifecycle:
+    update_timing: 执行证据符号时读取或更新。
+    scope: static_repository
+    persistence: 存在于当前运行对象、返回字典或输出文件；静态声明除外。
+  examples:
+  - scenario: 当前实现的最小语义示例
+    input:
+      container: EDGES
+    output:
+      edge_count: 6
+      relation_types:
+      - Consumes
+      - Countered_By
+      - Counters
+      - Produces
+      - Requires
+      - Upgrades
+    explanation: 类型级生产、依赖、消耗和克制等关系的边元组列表。
+  relationships: []
+  design_intent: []
+  code_reality:
+  - claim: 类型级生产、依赖、消耗和克制等关系的边元组列表。
+    status: code_reality
+    evidence_ids:
+    - tbox-relation-edge-code
+  limitations:
+  - 只证明当前 STORM 代码含义；未用 SC2 运行时或外部官方资料核验。
+  known_issues: []
+  evidence:
+  - id: tbox-relation-edge-code
+    path: ontology/data/marine_ontology.py
+    symbol: EDGES
+    line_start: 394
+    line_end: 394
+    evidence_type: E1
+    claim: 类型级生产、依赖、消耗和克制等关系的边元组列表。
+    fact_status: code_reality
+    verified_at: '2026-09-03'
+  verification:
+    status: static_verified
+    verified_at: '2026-09-03'
+    sc2_executed: false
+    tests_executed:
+    - name: 步骤05严格静态 Schema、关系与证据校验
+      result: passed
+    external_sources_checked: false
+    notes: 已通过步骤05严格静态 Schema、关系与证据校验；未启动 SC2，未调用外部 LLM/SWM，未检查外部官方资料。

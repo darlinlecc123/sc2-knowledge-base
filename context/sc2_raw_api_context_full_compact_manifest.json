@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-05",
+  "condition_label": "full_compact_context",
+  "source_file": "knowledge/context/variables.jsonl",
+  "source_sha256": "94180e785e5d6b93e49289db969483243465ab2f29814e60739199ef9882579d",
+  "output_file": "knowledge/context/sc2_raw_api_context_full_compact.jsonl",
+  "output_sha256": "e4aa2c2ead6ef53e525f3b1350390d1f39ca74e4ee7b56e6a327c1c9ecc3bcae",
+  "source_record_count": 135,
+  "output_record_count": 135,
+  "variable_id_coverage": 1.0,
+  "variable_id_order_preserved": true,
+  "selected_fields": [
+    "variable_id",
+    "names",
+    "aliases",
+    "meaning.definition",
+    "interface.python_type",
+    "interface.shape",
+    "interface.pysc2_path",
+    "interface.storm_paths",
+    "implementation.source_locations",
+    "implementation.transformation_formula",
+    "evidence",
+    "limitations"
+  ],
+  "query_specific_filtering": false,
+  "retrieval_used": false,
+  "truncated": false,
+  "semantic_note": "包含 variables.jsonl 的全部变量，但仅保留三条件评测所需的核心语义、接口、实现和证据字段；不等于原始完整 Markdown 的逐字副本。"
+}

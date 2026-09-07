@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-05",
+  "condition_label": "full_compact_context_v2",
+  "source_file": "knowledge/context/variables.jsonl",
+  "source_sha256": "94180e785e5d6b93e49289db969483243465ab2f29814e60739199ef9882579d",
+  "output_file": "knowledge/context/sc2_raw_api_context_full_compact_v2.jsonl",
+  "output_sha256": "ebc989ea40630fdae8e6edbf07a4b24f48a6c6af3e7bd4c4a6a9d75be3d369a8",
+  "source_record_count": 135,
+  "output_record_count": 135,
+  "variable_id_coverage": 1.0,
+  "variable_id_order_preserved": true,
+  "field_legend": {
+    "id": "variable_id",
+    "n": "names",
+    "a": "aliases",
+    "d": "meaning.definition",
+    "t": "interface.python_type",
+    "s.k": "interface.shape.kind",
+    "s.d": "interface.shape.dimensions",
+    "p.v": "interface.pysc2_path.value",
+    "p.s": "interface.pysc2_path.status",
+    "sp": "interface.storm_paths",
+    "loc": "implementation.source_locations",
+    "f": "implementation.transformation_formula",
+    "e": "evidence(id/path/symbol)",
+    "l": "limitations"
+  },
+  "query_specific_filtering": false,
+  "retrieval_used": false,
+  "truncated": false,
+  "semantic_note": "包含全部变量；对重复结构和字段名做无损语义压缩，不按问题筛选，不等于原始 Markdown 逐字全文。"
+}

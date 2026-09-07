@@ -1,0 +1,30 @@
+# 不要在此文件提交真实 API key。
+run_name: "sc2kb_<model>_<date>"
+knowledge_version: "0.1.0"
+mode: "dry_run"  # dry_run | live
+model:
+  provider: "<openai_compatible|deepseek|other>"
+  name: "<model-name>"
+  base_url_env: "MODEL_BASE_URL"
+  api_key_env: "MODEL_API_KEY"
+  temperature: 0
+  max_output_tokens: 2000
+retrieval:
+  strategy: "hybrid_local"
+  top_k: 5
+  context_tier: "standard"
+evaluation:
+  question_files:
+    - "knowledge/evals/questions_test.jsonl"
+  repeats: 1
+  save_raw_answers: true
+  deterministic_scorers: true
+  llm_judge:
+    enabled: false
+    provider: null
+    model: null
+output_dir: "knowledge/evals/results/<run_id>"
+metadata:
+  operator: "<name>"
+  run_date: "2026-09-03"
+  notes: "<本次测试说明>"

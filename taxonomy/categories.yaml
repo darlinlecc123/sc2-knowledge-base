@@ -1,0 +1,316 @@
+schema_version: 1.0.0
+taxonomy_id: storm-sc2kb-taxonomy-v1
+scope_id: storm-sc2kb-v1-raw
+reviewed_at: '2026-09-03'
+status: static_defined
+runtime_verification:
+  sc2_executed: false
+  external_llm_called: false
+  note: 本步骤仅依据当前仓库、步骤一范围、步骤二证据登记表和步骤三 Schema 进行静态设计。
+compatibility:
+  variable_schema: knowledge/schemas/variable.schema.json
+  policy: taxonomy id 用于检索与治理；写入 variable.schema.json 的 category 时使用每类的 schema_category，直到后续 Schema 版本统一命名。
+  known_mismatch: 步骤四指定的短分类名与步骤三 Schema 的部分枚举不同，因此显式维护一对一映射，不静默改写上游文件。
+classification_policy:
+  primary_category_cardinality: exactly_one
+  selection_basis: 按变量在当前记录所描述阶段的主要语义角色分类，而不是按它最初来自哪个文件分类。
+  raw_and_transformed: 原始量与转换后量分别建记录；允许属于同一一级分类，但 source layer、derivation_kind 和 relationships 必须不同。
+  same_name_different_semantics: 同名但层级或含义不同的字段必须建立不同 ID，例如 tbox.unit.armor 与 abox.unit.armor。
+  containers: 容器和实际消费的子字段分别记录；只在容器本身被代码消费时建立容器记录。
+  cross_category_rule: 一条记录只能有一个一级分类；跨层数据流使用 relationships 和 source layer 表示，不能给同一记录堆多个一级分类。
+allowed_cross_category_relations:
+- derived_from
+- transformed_to
+- consumed_by
+- constrains
+- distinct_from
+- related_to
+categories:
+- id: environment
+  display_key: environment
+  name_zh: 环境配置
+  name_en: Environment Configuration
+  schema_category: environment_config
+  id_prefixes:
+  - environment
+  definition: 当前入口或实验脚本实际传给 SC2Env、Agent 或环境接口，并影响运行方式的配置量。
+  include_if: 当前代码实际设置、传递或消费该配置。
+  exclude_if: 只属于 PySC2 可选配置全集但当前 STORM 未使用。
+  default_source_layers:
+  - environment_config
+  examples:
+  - id: environment.step_mul
+    code_name: step_mul
+  - id: environment.raw_resolution
+    code_name: raw_resolution
+  evidence:
+  - path: main.py
+    symbol: main
+    claim: 当前 SC2Env 示例配置入口。
+  - path: examples/llm_agent_example.py
+    symbol: null
+    claim: LLM Agent 示例环境和 Agent 配置。
+- id: timestep_player
+  display_key: timestep/player
+  name_zh: 时间步、玩家与得分
+  name_en: TimeStep, Player and Score
+  schema_category: timestep_player_score
+  id_prefixes:
+  - timestep
+  - player
+  definition: 当前代码从 TimeStep、observation.player、score_cumulative 读取，或紧邻这些输入直接计算的状态。
+  include_if: 当前代码读取 TimeStep/player/score 字段或由相邻读数直接得到 reward 等量。
+  exclude_if: 未被当前 STORM 消费的 player 容器字段。
+  default_source_layers:
+  - raw_observation
+  - derived_runtime
+  examples:
+  - id: timestep.is_last
+    code_name: last()
+  - id: player.minerals
+    code_name: player[1]
+  - id: timestep.reward
+    code_name: reward
+  evidence:
+  - path: agents/raw_agent.py
+    symbol: RawAgent.step
+    claim: 读取 raw_units、player、score 并计算得分增量。
+  - path: main.py
+    symbol: main
+    claim: 使用 TimeStep.last() 判断回合结束。
+- id: raw_unit
+  display_key: raw_unit
+  name_zh: RawUnit 单位字段
+  name_en: Raw Unit Fields
+  schema_category: raw_unit
+  id_prefixes:
+  - raw_unit
+  definition: 当前 RawAgent.parse_raw_units 实际从 raw_units 中读取并写入结构化单位字典的字段。
+  include_if: 必须能定位到当前解析器的真实索引读取或转换。
+  exclude_if: PySC2 可能提供但当前解析器没有读取的字段。
+  default_source_layers:
+  - raw_observation
+  examples:
+  - id: raw_unit.tag
+    code_name: tag
+  - id: raw_unit.health
+    code_name: health
+  - id: raw_unit.health_ratio
+    code_name: health_ratio
+  evidence:
+  - path: agents/raw_agent.py
+    symbol: RawAgent.parse_raw_units
+    claim: 当前实际解析十个 RawUnit 字段。
+- id: tbox_static
+  display_key: tbox_static
+  name_zh: TBox 静态本体
+  name_en: Static TBox Ontology
+  schema_category: tbox_static
+  id_prefixes:
+  - tbox
+  definition: 当前静态本体中的类型、属性和关系知识，以及被 builder/loader/bridge 实际加载或查询的内容。
+  include_if: 静态声明能被当前本体构建、加载、查询、实例化或序列化链使用。
+  exclude_if: 只在说明文字出现而没有当前实现路径的百科知识。
+  default_source_layers:
+  - static_ontology
+  examples:
+  - id: tbox.unit.marine.attack_range
+    code_name: UNITS["Marine"]["attack_range"]
+  - id: tbox.relation.counters
+    code_name: COUNTERS
+  evidence:
+  - path: ontology/data/marine_ontology.py
+    symbol: UNITS
+    claim: 静态单位类型属性声明。
+  - path: ontology/loader.py
+    symbol: OntologyLoader.reload
+    claim: 静态本体加载和缓存入口。
+- id: abox_dynamic
+  display_key: abox_dynamic
+  name_zh: ABox 运行时实例状态
+  name_en: Dynamic ABox State
+  schema_category: abox_dynamic
+  id_prefixes:
+  - abox
+  definition: BattlefieldGraph 中针对当前单位实例创建或更新的节点、属性、映射和关系。
+  include_if: 由当前 observation、TBox 副本或 fallback 写入运行时 ABox 并供后续模块使用。
+  exclude_if: 纯类型级静态知识，或未进入 BattlefieldGraph 的临时变量。
+  default_source_layers:
+  - runtime_abox
+  examples:
+  - id: abox.unit.hp
+    code_name: hp
+  - id: abox.unit.armor
+    code_name: armor
+  - id: abox.unit.position
+    code_name: position
+  evidence:
+  - path: ontology/bridge.py
+    symbol: BattlefieldGraph.update_from_observation
+    claim: 由 observation 更新 ABox。
+  - path: ontology/bridge.py
+    symbol: BattlefieldGraph._create_instance
+    claim: 创建实例属性。
+- id: derived_tactical
+  display_key: derived_tactical
+  name_zh: 派生战术状态
+  name_en: Derived Tactical State
+  schema_category: derived_tactical_state
+  id_prefixes:
+  - derived
+  definition: 由 ABox、player 或其他当前状态通过明确公式、聚合或阈值生成的战术量。
+  include_if: 当前代码实际计算并提供给 Prompt、决策、验证或执行。
+  exclude_if: 未经实现的战术常识、建议或人工判断。
+  default_source_layers:
+  - derived_runtime
+  examples:
+  - id: derived.tactical.force_ratio
+    code_name: Force_Ratio
+  - id: derived.tactical.formation_distance
+    code_name: Formation_Distance
+  - id: derived.tactical.engagement_type
+    code_name: Engagement_Type
+  evidence:
+  - path: ontology/bridge.py
+    symbol: BattlefieldGraph.generate_tactical_summary
+    claim: 计算计数、均值、质心距离、交战类别和开火准备度。
+- id: action_schema
+  display_key: action_schema
+  name_zh: 动作 Schema 与调度
+  name_en: Action Schema and Scheduling
+  schema_category: action_schema_and_scheduling
+  id_prefixes:
+  - action
+  definition: LLM 动作输出中被 Prompt 声明、Parser 校验/归一化或 RawAgent 调度消费的字段。
+  include_if: 字段被当前 Prompt、Parser 或调度代码真实声明或使用。
+  exclude_if: 只存在于理想动作设计但当前解析器和执行器均不消费的字段。
+  default_source_layers:
+  - llm_output
+  - parser_validated
+  examples:
+  - id: action.action_type
+    code_name: action
+  - id: action.target
+    code_name: target
+  - id: action.delay_steps
+    code_name: delay_steps
+  evidence:
+  - path: ontology/prompt_template.py
+    symbol: ACTION_SPACE / OUTPUT_FORMAT
+    claim: 动作输出设计意图。
+  - path: agents/response_parser.py
+    symbol: ResponseParser._validate_schema
+    claim: 动作字段代码现实。
+  - path: agents/raw_agent.py
+    symbol: RawAgent._convert_actions_to_pysc2
+    claim: 动作调度消费。
+- id: pysc2_function_call
+  display_key: pysc2_function_call
+  name_zh: PySC2 Raw FunctionCall
+  name_en: PySC2 Raw Function Call
+  schema_category: pysc2_function_call
+  id_prefixes:
+  - pysc2
+  definition: 当前 ActionExecutor 或相关 Agent 将已校验动作映射为 PySC2 Raw FunctionCall 时使用的函数和参数。
+  include_if: 当前代码实际构造对应 FunctionCall 或参数列表。
+  exclude_if: 完整 PySC2 动作全集中当前 STORM 没有映射的函数。
+  default_source_layers:
+  - executor_mapped
+  examples:
+  - id: pysc2.move.function_id
+    code_name: function_id
+  - id: pysc2.move.unit_tags
+    code_name: unit_tags
+  evidence:
+  - path: agents/action_executor.py
+    symbol: ActionExecutor.execute
+    claim: 把动作映射为 Raw FunctionCall。
+- id: swm
+  display_key: swm
+  name_zh: 世界模型变量
+  name_en: State/World Model Variables
+  schema_category: swm
+  id_prefixes:
+  - swm
+  definition: 当前 SWM 输入、输出、轨迹和预测误差链中实际序列化、解析、保存或消费的变量。
+  include_if: 当前 SWM predictor/trainer 或 Agent 再评估路径实际使用。
+  exclude_if: 未实现的隐藏世界状态，或把模型预测误写成环境真值。
+  default_source_layers:
+  - model_predicted
+  examples:
+  - id: swm.prediction.units
+    code_name: predicted_units
+  - id: swm.prediction.error
+    code_name: prediction_error
+  evidence:
+  - path: ontology/swm_predictor.py
+    symbol: SWMPredictor.predict
+    claim: 生成和解析 SWM 预测。
+  - path: ontology/swm_trainer.py
+    symbol: TrajectoryCollector
+    claim: 记录状态、动作、预测和下一状态。
+- id: experiment_metric
+  display_key: experiment_metric
+  name_zh: 实验指标
+  name_en: Experiment Metrics
+  schema_category: experiment_metric
+  id_prefixes:
+  - metric
+  definition: 当前实验脚本实际计算、聚合或写入 CSV/JSON 的结果指标。
+  include_if: 必须能回指生成逻辑或明确的已提交运行产物。
+  exclude_if: 无法定位生成逻辑的孤立历史列，或从历史结果推断当前代码必然表现。
+  default_source_layers:
+  - experiment_aggregated
+  examples:
+  - id: metric.episode.win
+    code_name: win
+  - id: metric.llm.response_time_s
+    code_name: avg_response_time_s
+  - id: metric.action.failure_rate
+    code_name: action_failure_rate
+  evidence:
+  - path: examples/ablation_experiment.py
+    symbol: null
+    claim: 消融实验指标计算和写出。
+  - path: examples/swm_experiment.py
+    symbol: null
+    claim: SWM 实验指标计算和写出。
+  - path: data/record
+    symbol: null
+    claim: 历史实验产物目录，只证明对应文件曾记录结果。
+disambiguation_examples:
+- surface_name: armor
+  records:
+  - id: tbox.unit.marine.armor
+    meaning: Marine 类型的静态本体属性。
+    source_layer: static_ontology
+  - id: abox.unit.armor
+    meaning: 当前 ABox 单位实例的动态字段；必须按 bridge 当前赋值逻辑解释。
+    source_layer: runtime_abox
+  rule: 不得合并；回答时必须先确认用户问类型知识还是当前实例状态。
+- surface_name: health / hp
+  records:
+  - id: raw_unit.health
+    meaning: RawUnit 解析后的当前绝对生命值。
+    source_layer: raw_observation
+  - id: abox.unit.hp
+    meaning: 写入 ABox 的当前实例生命值。
+    source_layer: runtime_abox
+  - id: tbox.unit.marine.hp
+    meaning: Marine 类型的静态基准生命属性。
+    source_layer: static_ontology
+  rule: 分别建记录，用 transformed_to 或 related_to 连接。
+- surface_name: attack_range
+  records:
+  - id: tbox.unit.marine.attack_range
+    meaning: 类型级静态值。
+    source_layer: static_ontology
+  - id: abox.unit.attack_range
+    meaning: 实例节点携带的属性副本或运行时值。
+    source_layer: runtime_abox
+  rule: 即使数值相同也不能共用 ID。
+maintenance_summary:
+  add: 确认范围与 E1/E3 证据，选择唯一一级分类和来源层，按前缀生成 ID，检查冲突，再创建变量卡片。
+  rename: 语义不变时保留 ID，只更新 canonical_name/names 并把旧名称放入 aliases。
+  deprecate: 语义变化时创建新 ID；旧记录保留并标记弃用问题和替代关系，不直接删除。
+  alias: 兼容别名必须指向稳定 ID；歧义别名不得自动唯一解析。
