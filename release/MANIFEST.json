@@ -2406,18 +2406,18 @@
       "sha256": "02a4920e6154660f88992f6780242827b6fd98c6f77688f593fd8e3347af3f2a"
     },
     {
-      "bytes": 999724,
+      "bytes": 999930,
       "file_count": 195,
       "filename": "storm-sc2kb-0.1.0-full.zip",
       "kind": "full",
       "root_directory": "storm-sc2kb-0.1.0-full",
-      "sha256": "6215fb25b127bfe0897c4f8230e1ff7105a3ff2634e3f445571844e5dc508626"
+      "sha256": "5c179afe811096aaf6751998c7ca4591191dbd1cb1eb521c13893ff293cdc371"
     }
   ],
   "publication": {
-    "external_account_accessed": false,
+    "external_account_accessed": true,
     "repository": "https://github.com/darlinlecc123/sc2-knowledge-base",
-    "uploaded": false
+    "uploaded": true
   },
   "release": {
     "formal_variable_count": 135,

@@ -1,11 +1,11 @@
 # 步骤 20 完成报告：准备 GitHub 开源与持续维护
 
 - 执行日期：2026-09-07
-- 状态：**本地发布材料完成；GitHub 上传已获授权，等待最终提交与 push**
+- 状态：**完成；知识库源码已上传至 GitHub main 分支**
 - 版本：`0.1.0`
 - 发布边界：只允许候选文件来自 `knowledge/`
-- 外部账号访问：未执行
-- GitHub 建仓或 push：未执行
+- 外部账号访问：已执行（由 Git Credential Manager 完成 GitHub 凭据处理）
+- GitHub push：已执行，`main` 已跟踪 `origin/main`
 - STORM 业务源码：未修改
 
 ## 1. 简明结论
@@ -16,8 +16,9 @@
 
 1. 用户已提供空仓库 `https://github.com/darlinlecc123/sc2-knowledge-base.git`；
 2. 用户已选择 Apache License 2.0；
-3. `knowledge/` 已作为独立 Git 仓库初始化，远程仓库只读检查成功且为空；
-4. 上传仍必须通过白名单、敏感信息扫描和暂存路径审计。
+3. `knowledge/` 已作为独立 Git 仓库初始化；
+4. 首次提交 `a82c299` 已推送至远程 `main`，且本地 `main` 已跟踪 `origin/main`；
+5. 实际上传前已通过白名单、敏感信息扫描和暂存路径审计。
 
 ## 2. 读取的关键证据
 
@@ -108,13 +109,13 @@ python knowledge\scripts\validate_github_release.py
 
 ```text
 GITHUB_RELEASE_VALIDATION_OK
-allowlisted_files=95
+allowlisted_files=103
 outside_knowledge_files=0
 network_accessed=false
 uploaded=false
 ```
 
-结论：95 个候选文件全部位于 `knowledge/`，未命中禁止目录、缓存、日志、私人 Windows 路径或密钥形态。该检查没有访问网络、调用模型 API或启动 StarCraft II。
+结论：103 个候选文件全部位于 `knowledge/`，未命中禁止目录、缓存、日志、私人 Windows 路径或密钥形态。该检查没有访问网络、调用模型 API或启动 StarCraft II。 其中 `uploaded=false` 仅表示该离线校验脚本自身不执行上传，不代表仓库当前发布状态；实际 Git push 结果见第 9 节和第 11 节。
 
 ## 8. 未解决问题
 
@@ -128,18 +129,30 @@ uploaded=false
 
 ## 9. 远程操作记录
 
-- GitHub 登录：**未执行**
-- 创建远程仓库：**未执行**
-- Git 初始化：**已执行，仅在 knowledge/.git**
-- Git 暂存/提交：**未执行**
-- Git push：**未执行**
+- GitHub 登录：**已执行（Git Credential Manager）**
+- 创建远程仓库：**用户预先创建，本步骤未创建**
+- Git 初始化：**已执行，仅在 `knowledge/.git`**
+- Git 暂存/提交：**已执行；首次提交为 `a82c299`**
+- Git push：**已执行；`main` 已推送并跟踪 `origin/main`**
 - GitHub Release：**未执行**
-- 公众号发布：**未执行**
+- 公众号发布：**未执行，仅生成草稿**
 
-## 10. 建议下一步
+## 10. 后续可选工作
 
-1. 使用已确认的 Apache License 2.0 和目标空仓库；
-2. 以 `knowledge/` 为独立仓库根目录，按白名单生成候选提交；
-3. 在暂存后检查 `git diff --cached --name-only`，要求所有路径都属于候选知识库文件；
-4. 通过安全校验后再提交和 push；
-5. 上传 minimal/full ZIP 时使用 GitHub Release 附件，而不是把二进制包混入源码提交。
+1. 检查 GitHub Actions 首次运行结果；
+2. 如需二进制分发，可创建 GitHub Release，并上传 minimal/full ZIP 附件；
+3. 补充作者和版权主体展示信息；
+4. 继续修复已知检索与兼容性问题；
+5. 公众号文章仍需人工审阅后再发布。
+
+
+## 11. 实际上传结果
+
+- 仓库：`https://github.com/darlinlecc123/sc2-knowledge-base`
+- 分支：`main`
+- 首次提交：`a82c299`
+- 上传方式：HTTPS + Git Credential Manager
+- 上传范围：103 个白名单文件，全部来自 `knowledge/`
+- `storm111/` 其他目录上传数量：0
+- GitHub Release 附件：未创建
+- 公众号文章：仅生成草稿，未发布

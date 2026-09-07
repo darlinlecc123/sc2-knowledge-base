@@ -183,7 +183,7 @@ def main() -> int:
             "fact_statuses": ["design_intent", "code_reality", "runtime_observation", "needs_verification"],
         },
         "license_status": "Apache-2.0",
-        "publication": {"repository": "https://github.com/darlinlecc123/sc2-knowledge-base", "uploaded": False, "external_account_accessed": False},
+        "publication": {"repository": "https://github.com/darlinlecc123/sc2-knowledge-base", "uploaded": True, "external_account_accessed": True},
         "execution": {"external_api_called": False, "sc2_executed": False},
         "packages": packages,
         "minimal_source_files": list(MINIMAL),

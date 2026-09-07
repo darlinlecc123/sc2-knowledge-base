@@ -86,7 +86,8 @@ def main() -> int:
     assert citation["version"] == "0.1.0"
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     assert manifest["license_status"] == "Apache-2.0"
-    assert manifest["publication"]["uploaded"] is False
+    assert manifest["publication"]["uploaded"] is True
+    assert manifest["publication"]["external_account_accessed"] is True
     assert manifest["execution"]["external_api_called"] is False
     assert len(manifest["packages"]) == 2
     for package in manifest["packages"]:
@@ -98,7 +99,8 @@ def main() -> int:
     print(f"minimal_smoke={json.dumps(smoke, ensure_ascii=False)}")
     print("external_api_called=false")
     print("sc2_executed=false")
-    print("uploaded=false")
+    print("source_repository_uploaded=true")
+    print("release_archives_uploaded=false")
     return 0
 
 

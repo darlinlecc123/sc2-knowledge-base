@@ -6,8 +6,8 @@
 - 范围：`storm-sc2kb-v1-raw`
 - 外部模型 API：**未调用**
 - StarCraft II：**未启动**
-- 外部账号：**未访问**
-- GitHub/远端仓库：**未上传**
+- 外部账号：**已访问（GitHub 凭据由 Git Credential Manager 处理）**
+- GitHub/远端仓库：**源码已上传至 `main`；ZIP 附件尚未创建 GitHub Release**
 - STORM 业务源码：**未修改**
 
 ## 1. 简明结论
@@ -17,7 +17,7 @@
 | 包 | 用途 | 包内文件数 | 大小 | SHA-256 |
 |---|---|---:|---:|---|
 | `storm-sc2kb-0.1.0-minimal.zip` | 无外部 API 的核心变量离线查询 | 27 | 243,000 bytes | `02a4920e6154660f88992f6780242827b6fd98c6f77688f593fd8e3347af3f2a` |
-| `storm-sc2kb-0.1.0-full.zip` | 维护、上下文生成、离线评测和复现 | 195 | 999,724 bytes | `6215fb25b127bfe0897c4f8230e1ff7105a3ff2634e3f445571844e5dc508626` |
+| `storm-sc2kb-0.1.0-full.zip` | 维护、上下文生成、离线评测和复现 | 195 | 999,930 bytes | `5c179afe811096aaf6751998c7ca4591191dbd1cb1eb521c13893ff293cdc371` |
 
 minimal 包已经实际解压，并用包内 CLI 查询“单位当前血量对应哪个字段”；返回 `status=found`，首项为 `raw_unit.health`。
 
@@ -131,7 +131,8 @@ packages=2
 minimal_smoke={"status": "found", "first": "raw_unit.health", "contains_raw_unit_health": true}
 external_api_called=false
 sc2_executed=false
-uploaded=false
+source_repository_uploaded=true
+release_archives_uploaded=false
 ```
 
 验收程序验证了：
@@ -154,9 +155,9 @@ DETERMINISM_OK
 
 ## 7. 主要发现
 
-1. 现有 `knowledge/README.md` 仍声称制作步骤和外部模型测试尚未执行，不能作为当前发布首页。
+1. GitHub 发布首页已切换为面向公开用户的 `knowledge/README.md`。
 2. 项目负责人已选择 Apache License 2.0，正式完整文本已写入根目录 `LICENSE`。
-3. 工作区当前无法提供 Git repository 元数据，因此本版以文件 SHA-256、包内 manifest 和冻结题集凭据保证可追溯性。
+3. `knowledge/` 已建立独立 Git 仓库；首次公开提交为 `a82c299`，同时继续使用文件 SHA-256、包内 manifest 和冻结题集凭据保证可追溯性。
 4. 发布包的核心事实规模为 135 个正式变量、1430 条关系和 11 个已知问题。
 
 ## 8. 未解决问题
@@ -164,8 +165,11 @@ DETERMINISM_OK
 - 正式许可证已确认为 Apache License 2.0；个人作者和版权主体展示信息仍可在后续版本补充。
 - 如未来改为代码与知识数据双许可证，需要另行完成兼容性审查和版本说明。
 - 需要真实 SC2 运行确认的记录仍保持 `needs_verification`，本步骤没有把它们提升为已验证事实。
-- 本步骤只准备本地候选包，没有创建 Git tag、GitHub Release、DOI 或永久下载链接。
+- 源码仓库已经公开，但尚未创建 Git tag、GitHub Release、DOI 或 ZIP 永久下载链接。
 
-## 9. 建议下一步
+## 9. 后续可选工作
 
-进入步骤 19 内部验收：由另一名维护者在干净目录中只使用发布 ZIP，复核安装、查询、引用、许可证状态、安全清单和 challenge 冻结凭据。许可证已经确认；公开发布仍需执行步骤 20 的路径白名单、安全扫描和 GitHub 暂存审计。
+1. 检查 GitHub Actions 首次运行结果；
+2. 创建版本 tag 和 GitHub Release，并按需上传 minimal/full ZIP；
+3. 补充 DOI、长期归档地址与更完整的作者/版权主体信息；
+4. 继续修复 full 包干净环境导入、Windows GBK 输出和检索召回问题。
