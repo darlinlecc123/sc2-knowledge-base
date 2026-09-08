@@ -238,6 +238,9 @@ python -m sc2kb.qa_agent "单位当前血量对应哪个字段" --dry-run --json
 | <code>context/sc2_raw_api_context_standard.md</code> | 一般变量解释和代码定位 |
 | <code>context/sc2_raw_api_context_full.md</code> | 全量审阅和离线分析 |
 | <code>context/sc2_raw_api_context_full_compact_v2.jsonl</code> | 机器读取和批量上下文构建 |
+或者直接将
+storm-sc2kb-0.1.0-full.zip
+storm-sc2kb-0.1.0-minimal.zip中的一个压缩包注入GPT等在线大模型中进行指令查询
 
 ### 方式二：推荐的 RAG 接入
 
