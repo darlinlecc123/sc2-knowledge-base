@@ -398,7 +398,6 @@ challenge v0.3 共 41 题，用于比较 DeepSeek v4 Flash 与第三方中转接
 ├── tests/              # 离线验证与回归测试
 ├── reports/            # 评测、验收和发布报告
 ├── docs/               # 变量目录、数据流、术语表和查询手册
-├── prompts/            # 步骤化知识库制作提示词
 ├── release/            # 发布 manifest
 ├── known_issues.yaml   # 已知实现差异与验证需求
 ├── CITATION.cff
